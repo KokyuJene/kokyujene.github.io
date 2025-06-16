@@ -43,11 +43,16 @@ header {
 }
 
 .visitor-counter {
-  font-family: 'Minecraft', 'Unifont' sans-serif;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
   font-size: 20px;
-  color: #ffaa00;
+  background-color: #ffe4b5;
   text-align: center;
+  padding: 10px;
+  margin-top: 10px;
+  color: #ffaa00;
+  border-radius: 10px;
 }
+
 
 
 .logo {
