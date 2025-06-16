@@ -236,14 +236,14 @@ border-radius:40px;
 </script>
 
 <script>
-  fetch('https://api.countapi.xyz/hit/kokyujene.github.io/visitor-count')
+  fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('count').innerText = data.value + ' 回';
+      document.getElementById('count').innerText = data.count + ' 回';
     })
-    .catch(error => {
+    .catch(err => {
       document.getElementById('count').innerText = '取得失敗';
-      console.error('カウント取得エラー:', error);
+      console.error(err);
     });
 </script>
 
