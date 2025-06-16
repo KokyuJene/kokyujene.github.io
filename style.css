@@ -12,6 +12,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Minecraft';
+  src: url('fonts/Minecraft.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: 'Unifont', sans-serif;
   font-size: 1.2rem;
@@ -33,6 +40,13 @@ header {
 .c1_h1, .c2_h1 {
   margin-top: 40px;
   margin-bottom: 16px;
+}
+
+.visitor-counter {
+  font-family: 'Minecraft', 'Unifont' sans-serif;
+  font-size: 20px;
+  color: #ffaa00;
+  text-align: center;
 }
 
 
