@@ -164,7 +164,7 @@ border-radius:40px;
   </div>
 <div class="visitor-counter">
 <div class="box1">
-  訪問数: <span id="count">読み込み中...</span>
+  総訪問回数:<span id="count">Loading...</span>
 </div>
 </div>
 
@@ -239,7 +239,7 @@ border-radius:40px;
   fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('count').innerText = data.count + ' 回';
+      document.getElementById('count').innerText = data.count + '';
     })
     .catch(err => {
       document.getElementById('count').innerText = '取得失敗';
