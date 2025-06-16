@@ -25,6 +25,7 @@ body {
   padding: 2em;
   line-height: 1.5;
   background-color: #fff9ee; 
+  cursor: url("images/mouse.cur"), auto;
 }
 
 /* ヘッダーのデザイン */
@@ -231,13 +232,29 @@ img {
     margin-top: 30px;
   }
 
-  .my-button:hover {
-    background-color: #ffb92c;
-  }
+.my-button:hover {
+  background-color: #ffb92c;
+  transform: scale(1.05);
+  cursor: url("images/mouse.cur"), pointer;
+}
 
-  .my-button2:hover {
-    background-color: #ffb92c;
-  }
+.my-button:active {
+  transform: scale(0.95) rotate(-1deg);
+}
+
+.my-button2:hover {
+  background-color: #ffb92c;
+  transform: scale(1.05);
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+a:hover {
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+.my-button2:active {
+  transform: scale(0.95) rotate(-1deg);
+}
 
 .header {
   background-color: white;
@@ -260,6 +277,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  cursor: url("images/mouse.cur"), auto;
 }
 
 h1 {
