@@ -10,7 +10,6 @@
 	  <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
-  <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="shortcut icon" href="favicon.ico">
@@ -136,12 +135,12 @@ border-radius:40px;
 <body>
 
 <header>
-  <a href="https://kokyujene.github.io" class="logo">
+  <a href="index.html" class="logo">
     <img src="images/logo.webp" alt="MySite ロゴ">
   </a>
   <nav>
     <ul class="nav-links">
-      <li><a href="https://kokyujene.github.io">ホーム</a></li>
+      <li><a href="index.html">ホーム</a></li>
       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScfUrPKC_zNraZR3FKNBgv8RNNilQs1sFwsAouC59C3-msRBg/viewform?usp=preview">お問い合わせ</a></li>
     </ul>
   </nav>
@@ -163,6 +162,12 @@ border-radius:40px;
 		<img src="images/back.webp" alt="サンプル画像" class="maru_img">
   </div>
   </div>
+<div class="visitor-counter">
+<div class="box1">
+  訪問数: <span id="count">読み込み中...</span>
+</div>
+</div>
+
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
@@ -230,6 +235,13 @@ border-radius:40px;
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
+<script>
+  fetch('https://api.countapi.xyz/hit/kokyujene.github.io/visits')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('count').innerText = data.value;
+    });
+</script>
 
 
 
