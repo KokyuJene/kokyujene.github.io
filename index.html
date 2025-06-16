@@ -236,15 +236,17 @@ border-radius:40px;
 </script>
 
 <script>
-  fetch('https://api.countapi.xyz/hit/kokyujene.github.io/visits')
+  fetch('https://api.countapi.xyz/hit/kokyujene.github.io/visitor-count')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('count').innerText = data.value;
+      document.getElementById('count').innerText = data.value + ' 回';
     })
     .catch(error => {
       document.getElementById('count').innerText = '取得失敗';
+      console.error('カウント取得エラー:', error);
     });
 </script>
+
 
 
 
