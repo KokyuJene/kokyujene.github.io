@@ -231,9 +231,7 @@ border-radius:40px;
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 
-<script>
   fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
     .then(res => res.json())
     .then(data => {
@@ -243,9 +241,40 @@ border-radius:40px;
       document.getElementById('count').innerText = '取得失敗';
       console.error(err);
     });
+
+window.addEventListener('load', () => {
+  if (window.innerWidth > 1024) { // PC画面のときだけ実行
+    const img = document.createElement('img');
+    img.src = 'images/hidden.webp'; // 隠し画像のパス
+    img.className = 'hidden-image';
+
+    // ランダムな位置を計算（画面端の余白付近）
+    const margin = 100;
+    const x = Math.random() * (window.innerWidth - margin * 2) + margin;
+    const y = Math.random() * (window.innerHeight - margin * 2) + margin;
+    img.style.left = `${x}px`;
+    img.style.top = `${y}px`;
+
+    document.body.appendChild(img);
+
+    // クリック時の演出
+    img.addEventListener('click', () => {
+      // 音を鳴らす
+      const sound = new Audio('sounds/success.ogg'); // 音のパス
+      sound.play();
+
+      // 簡単な豪華な演出
+      img.style.transition = 'all 1s ease';
+      img.style.transform = 'scale(3) rotate(720deg)';
+      img.style.opacity = 0;
+
+      setTimeout(() => {
+        img.remove();
+      }, 1000);
+
+    });
+  }
+});
 </script>
-
-
-
 
 </body>
