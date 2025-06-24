@@ -245,37 +245,48 @@ border-radius:40px;
     });
 
 window.addEventListener('load', () => {
-  if (window.innerWidth > 1024) { // PCのみ
-    const img = document.createElement('img');
-    img.src = 'images/hidden.webp';
-    img.className = 'hidden-image';
-    img.style.position = 'fixed';
-    img.style.zIndex = 9999;
+
+  const img = document.createElement('img');
+  img.src = 'images/hidden.webp';
+  img.className = 'hidden-image';
+  img.style.position = 'fixed';
+  img.style.zIndex = 9999;
+  img.style.cursor = 'pointer';
+
+  // 画面サイズに応じて画像サイズを変更
+  if (window.innerWidth > 1024) { 
     img.style.width = '25px';
     img.style.height = '25px';
-    img.style.cursor = 'pointer';
-
-    const side = Math.random() < 0.5 ? 'left' : 'right';
-    const y = Math.random() * (window.innerHeight - 60) + 30; // 上下に少し余裕
-
-    img.style.top = `${y}px`;
-    if (side === 'left') {
-      img.style.left = '10px';
-    } else {
-      img.style.right = '10px';
-    }
-
-    document.body.appendChild(img);
-
-    img.addEventListener('click', () => {
-      const sound = new Audio('sounds/success.ogg');
-      sound.play();
-      img.style.transition = 'all 1s ease';
-      img.style.transform = 'scale(3) rotate(720deg)';
-      img.style.opacity = 0;
-      setTimeout(() => img.remove(), 1000);
-    });
+  } else {
+    img.style.width = '10px';
+    img.style.height = '10px';
   }
+
+  // ランダムに左右どちらかを選ぶ
+  const side = Math.random() < 0.5 ? 'left' : 'right';
+  const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20; // 上下に少し余裕
+
+  img.style.top = `${y}px`;
+
+  if (side === 'left') {
+    img.style.left = '10px';
+    img.style.right = '';
+  } else {
+    img.style.right = '10px';
+    img.style.left = '';
+  }
+
+  document.body.appendChild(img);
+
+  // クリック時の演出
+  img.addEventListener('click', () => {
+    const sound = new Audio('sounds/success.ogg');
+    sound.play();
+    img.style.transition = 'all 1s ease';
+    img.style.transform = 'scale(3) rotate(720deg)';
+    img.style.opacity = 0;
+    setTimeout(() => img.remove(), 1000);
+  });
 });
 </script>
 
