@@ -20,22 +20,12 @@
 }
 
 body {
-  font-family: 'Unifont', sans-serif;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
   font-size: 1.2rem;
   padding: 2em;
   line-height: 1.5;
   background-color: #fff9ee; 
   cursor: url("images/mouse.cur"), auto;
-}
-
-/* ヘッダーのデザイン */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff; /* ← 白に変更 */
-  color: #333; /* テキストを濃いグレーに見やすく */
-  padding: 1em 2em;
 }
 
 .c1_h1, .c2_h1 {
@@ -126,12 +116,76 @@ header {
   top: 0;                 /* 画面の一番上に配置 */
   left: 0;
   width: 100%;            /* 横幅を画面いっぱいに */
-  background-color: #ffe7ba; /* 白背景（スクロール時の透明防止） */
+  background-color: #ffe7ba;
   color: #333;
   padding: 1em 2em;
   z-index: 1000;          /* 他の要素より前面に表示 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 少し影をつけると自然 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.c1_h1 {
+  	color: #ffaa00;			/* 見出しテキストの色を指定する */
+	padding-left:10px;		/* ボックス内左側の余白を指定する */
+	border-left: 10px solid #deb02c;	/* ボーダー左側のスタイルを指定する */
+	border-right: 10px solid #deb02c;	/* ボーダー左側のスタイルを指定する */
+  	border-bottom: 2px dashed #deb02c; 	/* ボーダー下部のスタイルを指定する */
+}
+
+.c2_h1 {
+  	color: #ffaa00;			/* 見出しテキストの色を指定する */
+	padding-left:10px;		/* ボックス内左側の余白を指定する */
+	border-left: 10px solid #deb02c;	/* ボーダー左側のスタイルを指定する */
+	border-right: 10px solid #deb02c;	/* ボーダー左側のスタイルを指定する */
+}
+
+ .maru_img{
+border-radius:40px;
+}
+
+
+
+  .button-wrapper {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+
+
+  .soft-box h2 {
+    margin-top: 0;
+  }
+
+  .soft-box h2 {
+    margin-top: 0;
+  }
+
+
+.text_c1 {
+  color: #858585;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 600px) {
+  .soft-box {
+    width: 95%;
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+.text_s1 {
+  font-size: 20px;
+}
+
 
 main {
   margin-top: 80px; /* ヘッダーの高さに応じて調整（例：80px） */
@@ -296,6 +350,7 @@ h1 {
   margin-bottom: 20px; /* 下との余白も保つ */
   font-size: 2em;
 }
+
 
 
 /* スマホ表示のとき（幅600px以下）だけ小さくする */
@@ -517,3 +572,62 @@ header {
 }
 
 /* フッター */
+.footer {
+  background-color: #ffe4b5;
+  padding: 10px 30px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* ←中央要素を絶対配置するために必要 */
+  height: 40px; /* 高さ固定（お好みで） */
+}
+
+.footer-left,
+.footer-right {
+  flex: 0 0 auto;
+  z-index: 1;
+}
+
+.footer-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.footer-icon {
+  height: 24px;
+  width: auto;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: inherit;
+  margin-left: 10px;
+}
+
+.text_c1 {
+  color: #858585;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 10px;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin: 5px 0;
+    justify-content: center;
+  }
+}
