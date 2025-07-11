@@ -33,6 +33,12 @@ body {
   margin-bottom: 16px;
 }
 
+.wrapper {
+  min-height: 100vh; /* ビューポートの高さに合わせる */
+  display: flex;
+  flex-direction: column;
+}
+
 .visitor-counter {
   font-family: 'Minecraft', 'Unifont', sans-serif;
   font-size: 60px;
@@ -86,6 +92,7 @@ body {
 /* メイン */
 main {
   padding: 2em;
+  flex: 1;
 }
 
 .center-image {
@@ -321,8 +328,7 @@ a:hover {
   transform: scale(0.95) rotate(-1deg);
 }
 
-.header {
-  background-color: white;
+header {
   padding: 20px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -366,6 +372,9 @@ h1 {
 
 .footer-left,
 .footer-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   flex: 1;
 }
 
@@ -631,3 +640,98 @@ header {
     justify-content: center;
   }
 }
+
+.footer-button {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.footer-separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.theme-toggle-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-icon:hover {
+  transform: scale(1.1);
+}
+
+
+
+.dark body {
+    background-color: #14120c;
+    color: #f5f5f5;
+  }
+
+.dark .member-card {
+    background-color: #333;
+    color: #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  }
+
+.dark .footer {
+    background-color: #222;
+    color: #ccc;
+  }
+
+.dark a {
+    color: #ffcc66;
+  }
+
+.dark .divider {
+    border-color: #666;
+  }
+
+.dark .box1 {
+  background-color: #362400;
+}
+
+.dark .visitor-counter {
+  background-color: #362400;
+  color: #f5f5f5;
+}
+
+.dark header {
+  background-color: #2c2317;
+  color: #f5f5f5;
+}
+
+.dark .nav-links a {
+  color: #f5f5f5; /* 黒または濃いグレーに */
+  text-decoration: none;
+}
+.dark .my-button:hover {
+  background-color: #ffb92c;
+  transform: scale(1.05);
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+.dark .my-button:active {
+  transform: scale(0.95) rotate(-1deg);
+}
+
+.dark .my-button2:hover {
+  background-color: #ffb92c;
+  transform: scale(1.05);
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+.dark .my-button {
+    background-color: rgb(255, 184, 41);
+    color: white;
+  }
+
+.dark .my-button2 {
+    background-color: rgb(255, 184, 41);
+    color: white;
+  }
