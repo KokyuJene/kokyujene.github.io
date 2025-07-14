@@ -24,8 +24,25 @@ body {
   font-size: 1.2rem;
   padding: 2em;
   line-height: 1.5;
-  background-color: #fff9ee; 
   cursor: url("images/mouse.cur"), auto;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background: url('images/shiny.svg') no-repeat center top;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .c1_h1, .c2_h1 {
@@ -33,11 +50,14 @@ body {
   margin-bottom: 16px;
 }
 
-.wrapper {
-  min-height: 100vh; /* ビューポートの高さに合わせる */
-  display: flex;
-  flex-direction: column;
+
+
+h2 {
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #884400;
 }
+
+
 
 .visitor-counter {
   font-family: 'Minecraft', 'Unifont', sans-serif;
