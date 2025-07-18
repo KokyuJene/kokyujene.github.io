@@ -39,10 +39,17 @@ html, body {
 }
 
 body {
-  background: url('images/shiny.svg') no-repeat center top;
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg') no-repeat center top;
   background-size: cover;
+  background-repeat: no-repeat;
   background-attachment: fixed;
+  transition: background-image 0.5s ease;
 }
+
+.dark body {
+  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
+}
+
 
 .c1_h1, .c2_h1 {
   margin-top: 40px;
