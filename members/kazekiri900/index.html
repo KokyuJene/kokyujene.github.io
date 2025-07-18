@@ -4,11 +4,20 @@
   <meta charset="UTF-8">
   <title>kazekiri900 | 新 高級ジェネ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="stylesheet" href="https://kokyujene.github.io/style.css">
+  <meta property="og:title" content="新 高級ジェネ 公式サイト" />
+  <meta property="og:description" content="Super Hiko14がホストを運営するマインクラフト(マイクラ)統合版サーバー「新 高級ジェネ」の公式サイト!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kokyujene.github.io/" />
+  <meta property="og:image" content="https://kokyujene.github.io/ogp.webp" /> <meta property="og:site_name" content="新 高級ジェネ 公式サイト" />
+  <meta property="og:locale" content="ja_JP" />
+  
+  <link rel="icon" href="https://kokyujene.github.io/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
+  <link rel="apple-touch-icon" href="https://kokyujene.github.io/favicon.png">
+  <link rel="stylesheet" href="https://kokyujene.github.io/style.css">
+  <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
 </head>
 
 <style>
@@ -221,7 +230,7 @@ a:hover {
 
 <header>
   <a href="https://kokyujene.github.io" class="logo">
-    <img src="images/logo.webp" alt="LOGO">
+    <img src="https://kokyujene.github.io/images/logo_icon.webp" alt="LOGO">
   </a>
   <nav>
     <ul class="nav-links">
@@ -245,7 +254,7 @@ a:hover {
   <div class="role">Deputy Owner</div>
   <div class="divider"></div>
   <div class="info-row">
-    <img src="images/member_3.webp" alt="Deputy Owner">
+    <img src="https://kokyujene.github.io/images/m_kazekiri.webp" alt="Deputy Owner">
     <span class="name">kazekiri900</span>
   </div>
   <p class="comment">高級ジェネサーバーホストになれる権限を持ってる中では一番高性能なパソコンを使ってます。</p>
@@ -257,7 +266,7 @@ a:hover {
   <div class="box1">
 
   <div class="profile-box">
-    <img src="images/member_kazekiri.webp" alt="Super Hiko14" class="profile-img">
+    <img src="https://kokyujene.github.io/images/member_kazekiri.webp" alt="bestimage" class="profile-img">
 
     <div class="profile-text">
       <h2>kazekiri900</h2>
@@ -281,9 +290,9 @@ a:hover {
 <footer class="footer">
 <div class="footer-left">
   <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
-    <img src="images/line-logo.webp" alt="LINE" class="footer-icon">
+    <img src="https://kokyujene.github.io/images/line-logo.webp" alt="LINE" class="footer-icon">
   </a>
-  <img id="theme-icon" src="images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
+  <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
 </div>
   <div class="footer-center">
     © <span id="year"></span> KoukyuuJene All rights reserved.
@@ -297,8 +306,10 @@ a:hover {
 
 
 <script>
+  //20XX
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  //総訪問回数
   fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
     .then(res => res.json())
     .then(data => {
@@ -308,11 +319,12 @@ a:hover {
       document.getElementById('count').innerText = '取得失敗';
       console.error(err);
     });
-
+    
+  //kento!
 window.addEventListener('load', () => {
 
   const img = document.createElement('img');
-  img.src = 'images/hidden.webp';
+  img.src = 'https://kokyujene.github.io/images/hidden.webp';
   img.className = 'hidden-image';
   img.style.position = 'fixed';
   img.style.zIndex = 9999;
@@ -345,7 +357,7 @@ window.addEventListener('load', () => {
 
   // クリック時の演出
   img.addEventListener('click', () => {
-    const sound = new Audio('sounds/success.ogg');
+    const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
     sound.play();
     img.style.transition = 'all 1s ease';
     img.style.transform = 'scale(3) rotate(720deg)';
@@ -359,7 +371,7 @@ window.addEventListener('load', () => {
 
   function applyTheme(isDark) {
     document.documentElement.classList.toggle('dark', isDark);
-    themeIcon.src = isDark ? 'images/sun.webp' : 'images/moon.webp';
+    themeIcon.src = isDark ? 'https://kokyujene.github.io/images/sun.webp' : 'https://kokyujene.github.io/images/moon.webp';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
