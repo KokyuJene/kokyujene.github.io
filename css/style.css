@@ -24,6 +24,25 @@ body {
   padding: 2em;
   line-height: 1.5;
   cursor: url("images/mouse.cur"), auto;
+  background-image: url('https://kokyujene.github.io/https://kokyujene.github.io/images/bg-light.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease;
+}
+
+body,
+html:not(.dark) body {
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease;
+}
+
+/* ダークモードの背景 */
+.dark body {
+  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
 }
 
 html, body {
@@ -37,19 +56,6 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-
-body {
-  background-image: url('https://kokyujene.github.io/images/bg-light.svg') no-repeat center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: background-image 0.5s ease;
-}
-
-.dark body {
-  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
-}
-
 
 .c1_h1, .c2_h1 {
   margin-top: 40px;
@@ -671,13 +677,6 @@ header {
 .theme-toggle-icon:hover {
   transform: scale(1.1);
 }
-
-
-
-.dark body {
-    background-color: #14120c;
-    color: #f5f5f5;
-  }
 
 .dark .member-card {
     background-color: #333;
