@@ -6,14 +6,14 @@
 
 @font-face {
   font-family: 'Unifont';
-  src: url('fonts/Unifont.otf') format('truetype');
+  src: url('https://kokyujene.github.io/fonts/Unifont.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Minecraft';
-  src: url('fonts/Minecraft.otf') format('opentype');
+  src: url('https://kokyujene.github.io/fonts/Minecraft.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
