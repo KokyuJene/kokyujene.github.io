@@ -24,7 +24,7 @@ body {
   padding: 2em;
   line-height: 1.5;
   cursor: url("images/mouse.cur"), auto;
-  background-image: url('https://kokyujene.github.io/https://kokyujene.github.io/images/bg-light.svg');
+  background-image: url('back.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -33,16 +33,11 @@ body {
 
 body,
 html:not(.dark) body {
-  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
+  background-image: url('back.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   transition: background-image 0.5s ease;
-}
-
-/* ダークモードの背景 */
-.dark body {
-  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
 }
 
 html, body {
@@ -155,8 +150,8 @@ header {
   top: 0;                 
   left: 0;
   width: 100%;            
-  background-color: #ffe7ba;
-  color: #333;
+  background-color: #000000;
+  color: #564564;
   padding: 1em 2em;
   z-index: 1000;          
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
@@ -166,18 +161,18 @@ header {
 }
 
 .c1_h1 {
-  	color: #ffaa00;
+  	color: #4d2600;
 	padding-left:10px;
-	border-left: 10px solid #deb02c;
-	border-right: 10px solid #deb02c;
-  	border-bottom: 2px dashed #deb02c;
+	border-left: 10px solid #1d1605;
+	border-right: 10px solid #1d1605;
+  	border-bottom: 2px dashed #1d1605;
 }
 
 .c2_h1 {
-  	color: #ffaa00;
+  	color: #4d2600;
 	padding-left:10px;
-	border-left: 10px solid #deb02c;
-	border-right: 10px solid #deb02c;
+	border-left: 10px solid #1d1605;
+	border-right: 10px solid #1d1605;
 }
 
  .maru_img{
@@ -306,8 +301,8 @@ img {
   line-height: 1.6;
 }
   .my-button {
-    background-color: #ffaa00;
-    color: white;
+    background-color: #1f0103;
+    color: #a00610;
     padding: 10px 25px;
     border: none;
     border-radius: 8px;
@@ -320,7 +315,7 @@ img {
   }
 
 .my-button:hover {
-  background-color: #ffb92c;
+  background-color: #1f0103;
   transform: scale(1.05);
   cursor: url("images/mouse.cur"), pointer;
 }
@@ -330,8 +325,8 @@ img {
 }
 
   .my-button2 {
-    background-color: #ffaa00;
-    color: white;
+    background-color: #1f0103;
+    color: #a00610;
     padding: 15px 125px;
     border: none;
     border-radius: 8px;
@@ -344,7 +339,7 @@ img {
   }
 
 .my-button2:hover {
-  background-color: #ffb92c;
+  background-color: #ff0011;
   transform: scale(1.05);
   cursor: url("images/mouse.cur"), pointer;
 }
@@ -355,6 +350,31 @@ img {
 
 a:hover {
   cursor: url("images/mouse.cur"), pointer;
+}
+
+  .my-button3 {
+    background-color: #fdf3e0;
+    color: #fdf3e0;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 4px;
+    font-size: 9px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+  }
+
+.my-button3:hover {
+  background-color: #360206;
+  color: #000000;
+  transform: scale(1.05);
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+.my-button3:active {
+  transform: scale(0.95) rotate(-1deg);
 }
 
 header {
@@ -470,7 +490,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #000000;
   padding: 16px 31px;
   font-size: 10px;
   flex-wrap: wrap;
@@ -572,11 +592,12 @@ header {
   width: 140%;
   margin-left: -20%;
   box-sizing: border-box;
-  background-color: #ffefcf;
+  background-image: url('images/glitch_animation.gif');
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(219, 219, 219, 0.05);
   text-align: center;
+  color: #fff;
 }
 
 .parent-container {
@@ -594,7 +615,7 @@ header {
 
 /* フッター */
 .footer {
-  background-color: #ffe4b5;
+  background-color: #000000;
   padding: 10px 30px;
   font-size: 14px;
   display: flex;
@@ -602,6 +623,7 @@ header {
   align-items: center;
   position: relative;
   height: 40px;
+  color: #ffbcbc;
 }
 
 .footer-left,
@@ -677,66 +699,3 @@ header {
 .theme-toggle-icon:hover {
   transform: scale(1.1);
 }
-
-.dark .member-card {
-    background-color: #333;
-    color: #eee;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-  }
-
-.dark .footer {
-    background-color: #222;
-    color: #ccc;
-  }
-
-.dark a {
-    color: #ffcc66;
-  }
-
-.dark .divider {
-    border-color: #666;
-  }
-
-.dark .box1 {
-  background-color: #362400;
-}
-
-.dark .visitor-counter {
-  background-color: #362400;
-  color: #f5f5f5;
-}
-
-.dark header {
-  background-color: #2c2317;
-  color: #f5f5f5;
-}
-
-.dark .nav-links a {
-  color: #f5f5f5;
-  text-decoration: none;
-}
-.dark .my-button:hover {
-  background-color: #ffb92c;
-  transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
-}
-
-.dark .my-button:active {
-  transform: scale(0.95) rotate(-1deg);
-}
-
-.dark .my-button2:hover {
-  background-color: #ffb92c;
-  transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
-}
-
-.dark .my-button {
-    background-color: rgb(255, 184, 41);
-    color: white;
-  }
-
-.dark .my-button2 {
-    background-color: rgb(255, 184, 41);
-    color: white;
-  }

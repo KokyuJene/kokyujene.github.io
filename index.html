@@ -19,7 +19,7 @@
   <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
   <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
   <link rel="apple-touch-icon" href="https://kokyujene.github.io/favicon.png">
-  <link rel="stylesheet" href="https://kokyujene.github.io/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
 </head>
 
@@ -46,6 +46,91 @@ body {
 .dark body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
+
+.glitch-button {
+  position: relative;
+  background-color: #fdf3e0;
+  color: #fdf3e0;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+}
+
+/* テキスト部分 */
+.glitch-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 背景GIF */
+.glitch-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('images/glitch_animation.gif'); /* ← あなたのGIFに変更 */
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* ホバー時に色＋背景GIF表示 */
+.glitch-button:hover {
+  background-color: #360206;
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+.glitch-button:hover .glitch-text {
+  color: #a8a8a8; /* ホバー時に文字が見えるように */
+}
+
+.glitch-button:hover .glitch-bg {
+  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
+}
+
+/* テキスト部分 */
+.glitch-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 背景GIF */
+.glitch-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('images/glitch_animation.gif'); /* ← あなたのGIFに変更 */
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* ホバー時に色＋背景GIF表示 */
+.glitch-button:hover {
+  background-color: #360206;
+  cursor: url("images/mouse.cur"), pointer;
+}
+
+.glitch-button:hover .glitch-text {
+  color: #a8a8a8; /* ホバー時に文字が見えるように */
+}
+
+.glitch-button:hover .glitch-bg {
+  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
+}
 
 </style>
 
@@ -131,12 +216,16 @@ body {
 </div>
 
 <div class="center-text">
-    <a href="https://komaca.app/newluxurygene/" class="my-button2" target="_blank">公認サイト</a>
+    <a href="https://www.youtube.com/channel/UCi_f14XmiLkd7S5liwxnU2g" class="my-button2" target="_blank">公式Youtube</a>
 </div>
 
 <div class="center-text">
-    <a href="https://www.youtube.com/channel/UCi_f14XmiLkd7S5liwxnU2g" class="my-button2" target="_blank">公式Youtube</a>
+  <a href="https://kokyujene.github.io/This_place_is･･･/" class="glitch-button">
+    <span class="glitch-text">縺翫°縺阪ｒ縺薙ｍ縺昴≧</span>
+    <div class="glitch-bg"></div>
+  </a>
 </div>
+
 
   </main>
 <footer class="footer">
@@ -239,8 +328,18 @@ window.addEventListener('load', () => {
     const isNowDark = !document.documentElement.classList.contains('dark');
     applyTheme(isNowDark);
   });
-</script>
 
+  const glitchImg = document.getElementById('glitchImage');
+
+  glitchImg.addEventListener('mouseenter', () => {
+    glitchImg.src = 'images/glitch_animation.gif'; // バグ風アニメGIFに切替
+  });
+
+  glitchImg.addEventListener('mouseleave', () => {
+    glitchImg.src = 'images/glitch_static.webp'; // 静止状態に戻す
+  });
+
+</script>
 
 </div>
 </body>
