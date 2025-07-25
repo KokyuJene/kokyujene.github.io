@@ -24,7 +24,7 @@ body {
   padding: 2em;
   line-height: 1.5;
   cursor: url("images/mouse.cur"), auto;
-  background-image: url('back.svg');
+  background-image: url('images/back.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -33,7 +33,7 @@ body {
 
 body,
 html:not(.dark) body {
-  background-image: url('back.svg');
+  background-image: url('images/back.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -510,8 +510,6 @@ h1 {
     max-width: 300px;
   }
     .my-button {
-    background-color: #ffaa00;
-    color: white;
     padding: 5px 12px;
     border: none;
     border-radius: 8px;
@@ -524,8 +522,6 @@ h1 {
   }
 
   .my-button2 {
-    background-color: #ffaa00;
-    color: white;
     padding: 5px 12px;
     border: none;
     border-radius: 8px;
@@ -542,8 +538,6 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffe7ba; 
-  color: #333;
   padding: 1em 2em;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

@@ -23,8 +23,8 @@ body {
   font-size: 1.2rem;
   padding: 2em;
   line-height: 1.5;
-  cursor: url("images/mouse.cur"), auto;
-  background-image: url('images/back.svg');
+  cursor: url("mouse.cur"), auto;
+  background-image: url('back.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -33,7 +33,7 @@ body {
 
 body,
 html:not(.dark) body {
-  background-image: url('images/back.svg');
+  background-image: url('back.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -317,7 +317,7 @@ img {
 .my-button:hover {
   background-color: #1f0103;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
+  cursor: url("mouse.cur"), pointer;
 }
 
 .my-button:active {
@@ -341,7 +341,7 @@ img {
 .my-button2:hover {
   background-color: #ff0011;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
+  cursor: url("mouse.cur"), pointer;
 }
 
 .my-button2:active {
@@ -349,7 +349,7 @@ img {
 }
 
 a:hover {
-  cursor: url("images/mouse.cur"), pointer;
+  cursor: url("mouse.cur"), pointer;
 }
 
   .my-button3 {
@@ -370,7 +370,7 @@ a:hover {
   background-color: #360206;
   color: #000000;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
+  cursor: url("mouse.cur"), pointer;
 }
 
 .my-button3:active {
@@ -397,7 +397,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  cursor: url("images/mouse.cur"), auto;
+  cursor: url("mouse.cur"), auto;
 }
 
 h1 {
@@ -510,8 +510,6 @@ h1 {
     max-width: 300px;
   }
     .my-button {
-    background-color: #ffaa00;
-    color: white;
     padding: 5px 12px;
     border: none;
     border-radius: 8px;
@@ -524,8 +522,6 @@ h1 {
   }
 
   .my-button2 {
-    background-color: #ffaa00;
-    color: white;
     padding: 5px 12px;
     border: none;
     border-radius: 8px;
@@ -542,8 +538,6 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffe7ba; 
-  color: #333;
   padding: 1em 2em;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -592,7 +586,7 @@ header {
   width: 140%;
   margin-left: -20%;
   box-sizing: border-box;
-  background-image: url('images/glitch_animation.gif');
+  background-image: url('glitch_animation.gif');
   padding: 20px;
   border-radius: 16px;
   box-shadow: 0 2px 6px rgba(219, 219, 219, 0.05);
