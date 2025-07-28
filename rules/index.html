@@ -2,8 +2,9 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>鬮倡ｴ壹ず繧ｧ繝</title>
+  <title>ルール | 新 高級ジェネ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://kokyujene.github.io/style.css">
   <meta property="og:title" content="新 高級ジェネ 公式サイト" />
   <meta property="og:description" content="Super Hiko14がホストを運営するマインクラフト(マイクラ)統合版サーバー「新 高級ジェネ」の公式サイト!" />
   <meta property="og:type" content="website" />
@@ -11,125 +12,46 @@
   <meta property="og:image" content="https://kokyujene.github.io/ogp.webp" /> <meta property="og:site_name" content="新 高級ジェネ 公式サイト" />
   <meta property="og:locale" content="ja_JP" />
   
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/favicon.png" type="image/png">
-  <link rel="shortcut icon" href="images/favicon.ico">
-  <link rel="apple-touch-icon" href="images/favicon.webp">
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" type="image/webp" href="images/favicon.webp">
+  <link rel="icon" href="https://kokyujene.github.io/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
+  <link rel="apple-touch-icon" href="https://kokyujene.github.io/favicon.png">
+  <link rel="stylesheet" href="https://kokyujene.github.io/css/style.css">
+  <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
 </head>
 
 <style>
+  .kokyujene_title {
+  height: 24px;
+  width: auto;
+  }
 
+  li {
+  display: flex;
+  justify-content: center;
+  }
+  
 body {
-  font-family: 'Minecraft', 'Unifont', sans-serif;
-  background-image: url("images/back.svg");
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   transition: background-image 0.5s ease;
 }
 
-.text_s2{
-font-size: 7px;
-color: #1b0000;  
-}
+.dark body {
+ background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
+ }
 
 a {
-  color: #1b0000;
+  color: #cc6600; 
+  text-decoration: none; 
 }
 
-a :hover {
-  color: #360206;
+a:hover {
+  color: #ff8800; 
+  text-decoration: underline; 
 }
-
-
-.glitch-button {
-  position: relative;
-  background-color: #000000;
-  color: #ffffff;
-  padding: 20px 80px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  text-decoration: none;
-  display: inline-block;
-  overflow: hidden;
-  margin-top: 30px;
-  transition: background-color 0.3s ease;
-  font-family: 'Minecraft', 'Unifont', sans-serif;
-}
-
-/* テキスト部分 */
-.glitch-text {
-  position: relative;
-  z-index: 2;
-  color: transparent;
-  transition: color 0.3s ease;
-}
-
-/* 背景GIF */
-.glitch-bg {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-image: url('images/glitch_animation.gif');
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-/* ホバー時に色＋背景GIF表示 */
-.glitch-button:hover {
-  background-color: #6e2a2a;
-  cursor: url("images/mouse.cur"), pointer;
-}
-
-.glitch-button:hover .glitch-text {
-  color: #6e2a2a; /* ホバー時に文字が見えるように */
-}
-
-.glitch-button:hover .glitch-bg {
-  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
-}
-
-/* テキスト部分 */
-.glitch-text {
-  position: relative;
-  z-index: 2;
-  color: transparent;
-  transition: color 0.3s ease;
-}
-
-/* 背景GIF */
-.glitch-bg {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-image: url('images/glitch_animation.gif'); /* ← あなたのGIFに変更 */
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-/* ホバー時に色＋背景GIF表示 */
-.glitch-button:hover {
-  background-color: #360206;
-  cursor: url("images/mouse.cur"), pointer;
-}
-
-.glitch-button:hover .glitch-text {
-  color: #a8a8a8; /* ホバー時に文字が見えるように */
-}
-
-.glitch-button:hover .glitch-bg {
-  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
-}
-
 
 </style>
 
@@ -137,15 +59,20 @@ a :hover {
 <div class="wrapper">
 
 <header>
-  <a href="https://kokyujene.github.io" class="logo">
+  <a href="https://kokyujene.github.io/" class="logo">
     <img src="https://kokyujene.github.io/images/logo_icon.webp" alt="LOGO">
   </a>
   <nav>
     <ul class="nav-links">
-      <!-- 縺翫≧縺｡ -->
-      <li><a href="https://kokyujene.github.io">縺翫ー縺｡</a></li> 
-      <!-- 莉ｲ縺ｾ -->
-      <li><a href="https://kokyujene.github.io/members/">莉ｲま</a></li>
+      <li>
+        <div class="section-title">
+        <a href="https://kokyujene.github.io">
+        <small class=sub-title>--Home--</small>
+        <h2 class="h2-header">ホーム</h2></a></li>
+        <a href="https://kokyujene.github.io/members/">
+        <small class=sub-title>--Members--</small>
+        <h2 class="h2-header">メンバー紹介</h2></a></li>
+      <li>
     </ul>
   </nav>
 </header>
@@ -155,51 +82,83 @@ a :hover {
 <div class="center-text">
   <div class="t_1">
     <div class="gyo_1">
-      <h2 class="c1_h1">???</h2>
+      <h2 class="c2_h1">
+      <small class=sub-title>--Rules--</small>ルール</h2>
     </div>
 	</div>
-</div>
-
-<!-- 再生ボタンを用意 -->
-<div class="center-text">
-<button onclick="startBGM()" class="glitch-button">Play???</button>
-
-<audio id="bgm" loop>
-  <source src="sounds/spooky_bgm.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-function startBGM() {
-  const bgm = document.getElementById('bgm');
-  bgm.volume = 0.05; // 音量（0〜1）でかなり小さめ
-  bgm.play();
-}
-</script>
-
 </div>
 
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
-    <p>...io/z_banned</p>
+    <h2>注意点</h2>
+    <p>本、高級ジェネではルールを破った際、即KickやBANをする可能性があります。ミスもあるのでその際はすみません。<br>
+    あと公式サイトということで、少し整理されているのと、詳細ルールは省いています。若干マイクラと見た目が違ったりするかもしれませんが、ご了承ください。</p>
+  </div>
+  </div>
+</div>
+
+<div class="content-box">
+    <div class="side-text">
+    <div class="box1">
+    <div class="center-text">
+    <h2>禁止行為</h2>
+    <h3><br>
+      周りに迷惑なことをしない</h3>
+    <li>
+      <p>チャット連呼(スパム) 禁止<br>
+        荒らし 禁止<br>
+        アイテムまき散らし 禁止<br>
+        悪口 禁止<br>
+        盗み 禁止<br>
+        その他諸々...
+      </p>
+    </li>
+
+    <h3><br>
+      チートクライアント、ツールを使わない</h3>
+    <p>OnixやFlarial,LatiteなどのPvPクライアントはセーフとみなします</p>
+    <h3><br>
+      PvP場以外で殴らない、殺さない</h3>
+    <p>喧嘩が起こっていても殴って止めずにチャットで注意するか、主に報告してください</p>
+    <h3><br>
+      その他非常識的なことはしない</h3>
+    <li>
+      <p>金銭に関わる事はしないこと<br>
+        運営の予測しない場所へ行かないこと<br>
+        オーバーエンチャントを作らない、持たないこと<br>
+        宣伝をしないこと<br>
+        連れワーをしないこと<br>
+        過度な4Dskinは使用しないこと<br>
+        その他諸々...</p>
+    </li>
+  </div>
+  </div>
+  </div>
+</div>
+
+<div class="content-box">
+    <div class="side-text">
+    <div class="box1">
+    <h2>商売について</h2>
+    <p>商売につきましては、条件付きでOKとされています</p>
+    <h3><br>
+      条件</h3>
+    <li>
+      <p>無謀なもの、ゲームバランスを壊すものなどの販売、取引は禁止<br>
+      宝くじ等を販売するのであれば、あたりを最低3つ用意すること<br>
+      怪しい取引、特定の人を陥れるような取引も禁止<br>
+      借金システムも禁止</p>
+    </li>
   </div>
   </div>
 </div>
 
 <div class="center-text">
-    <a href="https://kokyujene.github.io/rule" class="my-button2">ホー...ム....ヘ......?</a>
+    <a href="https://kokyujene.github.io/privacypolicy" class="my-button2">プライバシーポリシー</a>
 </div>
 
-<div class="text_s2">
-<div class="center-text">
-<h4>do you wanna have a bad time?<br>
-I want to kill pota202dayo, xxtu9330, okaki5013 and MintoriGameDaY0.<br>
-Let's kill them all together.<br>
-Those who were banned... All...</h4>
-</div>
-</div>
-
-</main>
+  </main>
 <footer class="footer">
 <div class="footer-left">
   <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
@@ -237,7 +196,7 @@ Those who were banned... All...</h4>
 window.addEventListener('load', () => {
 
   const img = document.createElement('img');
-  img.src = 'images/hidden.webp';
+  img.src = 'https://kokyujene.github.io/images/hidden.webp';
   img.className = 'hidden-image';
   img.style.position = 'fixed';
   img.style.zIndex = 9999;
@@ -259,10 +218,10 @@ window.addEventListener('load', () => {
   img.style.top = `${y}px`;
 
   if (side === 'left') {
-    img.style.left = '0.1px';
+    img.style.left = '10px';
     img.style.right = '';
   } else {
-    img.style.right = '0.1px';
+    img.style.right = '10px';
     img.style.left = '';
   }
 
@@ -270,7 +229,7 @@ window.addEventListener('load', () => {
 
   // クリック時の演出
   img.addEventListener('click', () => {
-    const sound = new Audio('sounds/success.mp3');
+    const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
     sound.play();
     img.style.transition = 'all 1s ease';
     img.style.transform = 'scale(3) rotate(720deg)';
@@ -284,7 +243,7 @@ window.addEventListener('load', () => {
 
   function applyTheme(isDark) {
     document.documentElement.classList.toggle('dark', isDark);
-    themeIcon.src = isDark ? 'https://kokyujene.github.io/images/moon.webp' : 'https://kokyujene.github.io/images/moon.webp';
+    themeIcon.src = isDark ? 'https://kokyujene.github.io/images/sun.webp' : 'https://kokyujene.github.io/images/moon.webp';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
