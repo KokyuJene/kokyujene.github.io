@@ -236,6 +236,86 @@ body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
 
+ @media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 180px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 10px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
+}
+
+}
+
 </style>
 <body>
 <div class="wrapper">
@@ -249,11 +329,11 @@ body {
       <li>
         <div class="section-title">
         <a href="https://kokyujene.github.io">
-        <small class=sub-title>--Home--</small>
-        <h2 class="h2-header">ホーム</h2></a></li>
+        <small class=sub-title>\-Home-/</small>
+        <h3 class="h2-header">ホーム</h3></a></li>
         <a href="https://kokyujene.github.io/members/">
-        <small class=sub-title>--Members--</small>
-        <h2 class="h2-header">メンバー紹介</h2></a></li>
+        <small class=sub-title>\-Members-/</small>
+        <h3 class="h2-header">メンバー紹介</h3></a></li>
       <li>
     </ul>
   </nav>
@@ -264,7 +344,7 @@ body {
   <div class="t_1">
     <div class="gyo_1">
       <h2 class="c2_h1">
-      <small class=sub-title>--Cooming soon--</small>制作中</h2>
+      <small class=sub-title>\-Cooming soon-/</small>制作中</h2>
     </div>
 	</div>
 </div>

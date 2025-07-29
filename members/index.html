@@ -164,6 +164,86 @@ body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
 
+ @media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 180px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 10px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
+}
+
+}
+
 </style>
 <body>
 <div class="wrapper">
@@ -177,11 +257,11 @@ body {
       <li>
         <div class="section-title">
         <a href="https://kokyujene.github.io">
-        <small class=sub-title>--Home--</small>
-        <h2 class="h2-header">ホーム</h2></a></li>
+        <small class=sub-title>\-Home-/</small>
+        <h3 class="h2-header">ホーム</h3></a></li>
         <a href="https://kokyujene.github.io/members/">
-        <small class=sub-title>--Members--</small>
-        <h2 class="h2-header">メンバー紹介</h2></a></li>
+        <small class=sub-title>\-Members-/</small>
+        <h3 class="h2-header">メンバー紹介</h3></a></li>
       <li>
     </ul>
   </nav>
@@ -192,7 +272,7 @@ body {
   <div class="t_1">
     <div class="gyo_1">
       <h2 class="c2_h1">
-      <small class=sub-title>--Menbers--</small>メンバー紹介</h2>
+      <small class=sub-title>\-Menbers-/</small>メンバー紹介</h2>
     </div>
 	</div>
 </div>
@@ -307,7 +387,7 @@ body {
   <div class="divider"></div>
   <div class="info-row">
     <img src="https://kokyujene.github.io/images/never_skins.webp" alt="op">
-    <span class="name">epicgame7777TK</span>
+    <span class="name">epicgame 7777TK</span>
   </div>
   <p class="comment">マイクラが好きな人。建築、コマンドはそこそこ。<br>
     pvpが好き</p>
@@ -320,7 +400,7 @@ body {
   <div class="divider"></div>
   <div class="info-row">
     <img src="https://kokyujene.github.io/images/m_banana.webp" alt="op">
-    <span class="name">KokoBanana1028</span>
+    <span class="name">KokoBanana 1028</span>
   </div>
   <p class="comment">バナナって呼んでね〜！♡13歳の男</p>
 </div>
@@ -331,7 +411,8 @@ body {
 <div class="center-text">
   <div class="t_1">
     <div class="gyo_1">
-      <h2 class="c1_h1">SPECIALThanks</h2>
+      <h2 class="c2_h1">
+      <small class=sub-title>\-Thank you for supporting us!-/</small>SPECIALThanks</h2>
     </div>
 	</div>
 </div>
@@ -354,7 +435,7 @@ body {
   <div class="divider"></div>
   <div class="info-row">
     <img src="https://kokyujene.github.io/images/never_skins.webp" alt="st">
-    <span class="name">OrangeCart60134</span>
+    <span class="name">Orange Cart60134</span>
   </div>
   <p class="comment"></p>
 </div>
@@ -378,7 +459,7 @@ body {
   <div class="divider"></div>
   <div class="info-row">
     <img src="https://kokyujene.github.io/images/never_skins.webp" alt="st">
-    <span class="name">reimu12251219</span>
+    <span class="name">reimu 12251219</span>
   </div>
   <p class="comment"></p>
 </div>
@@ -438,7 +519,7 @@ body {
   <div class="divider"></div>
   <div class="info-row">
     <img src="https://kokyujene.github.io/images/never_skins.webp" alt="st">
-    <span class="name">SoundFire029387</span>
+    <span class="name">Sound Fire029387</span>
   </div>
   <p class="comment">僕に寄付して [:</p>
 </div>

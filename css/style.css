@@ -43,6 +43,7 @@ html:not(.dark) body {
 /* ダークモードの背景 */
 .dark body {
   background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
+  color: #ffebc5;
 }
 
 html, body {
@@ -63,25 +64,16 @@ html, body {
   font-size: 75px;
 }
 
-.c1_h1-small, .c2_h1-small {
-  color: #ffaa00;
-  font-size: 10px;
-  color: #888;
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: 4px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-
-
 h2 {
   font-weight: bold;
   text-shadow: 1px 1px 2px #884400;
 }
 
-
+.dark h2 {
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #ffbd7c;
+  color: #fff7e9;
+}
 
 .visitor-counter {
   font-family: 'Minecraft', 'Unifont', sans-serif;
@@ -759,25 +751,27 @@ header {
 }
 
 .sub-title {
-  font-size: 10px;
+  font-size: 8px;
   color: #888;
   letter-spacing: 1px;
   display: block;
   margin-bottom: 4px;
   font-weight: bold;
   text-transform: uppercase;
+  text-shadow: 1px 1px 2px #884400;
 }
 
 .h2-header {
-  font-size: 28px;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px #884400;
 }
 
 @media screen and (max-width: 600px) {
  .h2-header {
-  font-size: 12px;
+  font-size: 10px;
  }
 
  .sub-title {
-  font-size: 8px;
+  font-size: 5px;
  }
 }

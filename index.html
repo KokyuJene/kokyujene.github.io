@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>新 高級ジェネ 公式サイト</title>
-  <meta name="description" content="Super Hiko14がホストを運営するマインクラフト(マイクラ)統合版サーバー「新 高級ジェネ」の公式サイト!">
+  <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー「新 高級ジェネ」の公式サイト! 高級ジェネの運営メンバーやルールが記述されているページもあり、お問い合わせやYoutube、オープンチャットなどのリンクも記載!">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
 
   <meta property="og:title" content="新 高級ジェネ 公式サイト" />
@@ -22,20 +22,6 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
 </head>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "新 高級ジェネ 公式サイト",
-  "url": "https://kokyujene.github.io",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://kokyujene.github.io/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
 
 <style>
 
@@ -146,13 +132,211 @@ body {
   opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
 }
 
+.dark .glitch-button {
+  background-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
 .text_s3 {
   color: #ffefcf;
 }
 
-.dark .glitch-button {
-  background-color: #1a1a1a;
-  color: #1a1a1a;
+.dark .text_s3 {
+  color: #362400;
+}
+
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 240px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 10px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.dark .member-card h3 {
+  color: #ffda95;
+}
+
+.dark .member-card p {
+  color: #c5c5c5;
+}
+
+.dark .member-card .role {
+  color: #ffebc5;
+}
+
+.dark .member-card .name {
+  color: #ffebc5;
+}
+
+@media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 180px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 10px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
+}
+
 }
 
 </style>
@@ -169,11 +353,11 @@ body {
       <li>
         <div class="section-title">
         <a href="https://kokyujene.github.io">
-        <small class=sub-title>--Home--</small>
-        <h2 class="h2-header">ホーム</h2></a></li>
+        <small class=sub-title>\-Home-/</small>
+        <h3 class="h2-header">ホーム</h3></a></li>
         <a href="https://kokyujene.github.io/members/">
-        <small class=sub-title>--Members--</small>
-        <h2 class="h2-header">メンバー紹介</h2></a></li>
+        <small class=sub-title>\-Members-/</small>
+        <h3 class="h2-header">メンバー紹介</h3></a></li>
       <li>
     </ul>
   </nav>
@@ -186,9 +370,9 @@ body {
   <div class="t_1">
     <div class="gyo_1">
       <h2 class="c2_h1">
-      <small class=sub-title>--Welcome to--</small>ようこそ!</h2>
-      <h2 class="c1_h1">
-      <small class=sub-title>--Kokyujene official site!--</small>新 高級ジェネ 公式サイトへ!</h2>
+      <small class=sub-title>\-Welcome to-/</small>ようこそ!</h2>
+      <h2 class="c2_h1">
+      <small class=sub-title>\-Kokyujene official site!-/</small>新 高級ジェネ 公式サイトへ!</h2>
     </div>
 	</div>
 </div>
@@ -207,7 +391,8 @@ body {
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
-    <h2> なにもかもが高級で溢れている世界</h2>
+    <small class=sub-title>\-Servers full of luxury-/</small>
+    <h2>高級感満載のサーバー</h2>
     <p> マインクラフト 統合版で「Super Hiko14」をフレンドに追加して、高級ジェネをプレイしよう!</p>
     <a href="https://launch.minecraft.net/profile/Super%20Hiko14" class="my-button" target="_blank">今すぐプレイ!</a>
   </div>
@@ -217,10 +402,11 @@ body {
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
+    <small class=sub-title>\-Server Advantages-/</small>
     <h2>このサーバーの長所</h2>
-    <p>やりこみ要素が豊富です。称号だけでも8個あります!(現在時点)</p>
-    <p>称号以外にも、実績やジェネの通貨、見栄えの良い建築などで、モチベーションがとてもあがります!</p>
-    <p>これはマイクラだけにとどまらず、オープンチャットを展開しています!下の方にスクロールするとリンクがあります。是非参加してみてください!</p>
+    <p>やりこみ要素が豊富です。称号だけでも8個あります!(現在時点)<br>
+    称号以外にも、実績やジェネの通貨、見栄えの良い建築などで、モチベーションがとてもあがります!<br>
+    これはマイクラだけにとどまらず、オープンチャットを展開しています!少し下にスクロールするとリンクがあります。是非参加してみてください!</p>
   </div>
   </div>
 </div>
@@ -228,10 +414,66 @@ body {
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
-    <h2>マインクラフト以外のサービス</h2>
+    <small class=sub-title>\-Main Members-/</small>
+    <h2>主なメンバー</h2>
+<section class="member-intro">
+  <div class="member-grid">
+  <div class="member-grid">
+<a href="https://kokyujene.github.io/members/Super_Hiko14/" class="member-card card-a">
+  <div class="role">Owner</div>
+  <div class="divider"></div>
+  <div class="info-row">
+    <img src="https://kokyujene.github.io/images/m_hiko.webp" alt="Owner">
+    <span class="name">Super Hiko14</span>
+  </div>
+  <p class="comment">kento教信者になりましょう(???)</p>
+</a>
+</div>
+
+  <div class="member-grid">
+<a href="https://kokyujene.github.io/members/kento7587/" class="member-card card-b">
+  <div class="role">Deputy Owner</div>
+  <div class="divider"></div>
+  <div class="info-row">
+    <img src="https://kokyujene.github.io/images/m_kento.webp" alt="Deputy Owner">
+    <span class="name">kento7587</span>
+  </div>
+  <p class="comment">こんにちは！kentoだよ～</p>
+</a>
+</div>
+    
+  <div class="member-grid">
+<a href="https://kokyujene.github.io/members/kazekiri900/" class="member-card card-c">
+  <div class="role">Deputy Owner</div>
+  <div class="divider"></div>
+  <div class="info-row">
+    <img src="https://kokyujene.github.io/images/m_kazekiri.webp" alt="Deputy Owner">
+    <span class="name">kazekiri900</span>
+  </div>
+  <p class="comment">高級ジェネサーバーホストになれる権限を持ってる中では一番高性能なパソコンを使ってます。</p>
+</a>
+</div>
+  </div>
+  </div>
+</div>
+
+<div class="content-box">
+    <div class="side-text">
+    <div class="box1">
+    <small class=sub-title>\-Other Services-/</small>
+    <h2>その他サービス</h2>
     <p>マインクラフト以外のサービスで例えばこのサイト。<br>
-    予定ではここでいつ開くか、開いているかなどの状態を書こうと思ってます!</p>
-    <p>オープンチャットではライブトークで、雑談したり、投票を行ったり、今日、いつ開くかや遅れるなどの知らせをあらかじめ見ることができます!</p>
+    予定ではここでいつ開くか、開いているかなどの状態を書こうと思ってます!<br>
+    オープンチャットではライブトークで、雑談したり、投票を行ったり、今日、いつ開くかや遅れるなどの知らせをあらかじめ見ることができます!<br>
+    <div class="center-text">
+    <a href="https://www.youtube.com/channel/UCi_f14XmiLkd7S5liwxnU2g" class="my-button" target="_blank">公式Youtube</a><br>
+    </div><br>
+    <div class="center-text">
+    <a href="https://www.youtube.com/@Kazekiri.pc.minecraft" class="my-button" target="_blank">kazekiri900のYoutube</a><br>
+    </div><br>
+    <div class="center-text">
+    <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" class="my-button" target="_blank">公式オープンチャット</a><br>
+</div></p>
     <p class="text_s3">okaki5013を許してはいけません...。</p>
   </div>
   </div>
@@ -240,22 +482,18 @@ body {
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
+    <small class=sub-title>\-Server rules-/</small>
     <h2>サーバーのルールなど</h2>
-    <p>このサイトには高級ジェネのルールがあります!内容はほとんど変わりません!!少し整理されているので多少は見やすいと思います。</p>
-    <a href="https://kokyujene.github.io/rules/" class="my-button">ルール</a>
-    <a href="https://kokyujene.github.io/privacypolicy/" class="my-button">プライバシーポリシー</a>
+    <p>このサイトには高級ジェネのルールがあります!内容はほとんど変わりません!!少し整理されているので多少は見やすいと思います。<br>
+    <a href="https://kokyujene.github.io/rules/" class="my-button">ルール</a><br>
+    <a href="https://kokyujene.github.io/privacypolicy/" class="my-button">プライバシーポリシー</a></p>
   </div>
   </div>
 </div>
 
-<div class="center-text">
-    <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" class="my-button2" target="_blank">公式オプチャ</a>
-</div>
 
-<div class="center-text">
-    <a href="https://www.youtube.com/channel/UCi_f14XmiLkd7S5liwxnU2g" class="my-button2" target="_blank">公式Youtube</a>
-</div>
 
+<div class="content-box">
 <div class="center-text">
   <div class="glitch-button">
     <span class="glitch-text">縺翫°縺阪ｒ縺薙ｍ縺昴≧</span>
@@ -263,6 +501,8 @@ body {
   </div>
 </div>
 
+</div>
+</div>
 
   </main>
 <footer class="footer">
