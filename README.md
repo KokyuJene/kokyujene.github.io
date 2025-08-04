@@ -4,7 +4,7 @@
 
 ようこそ!
 
-ここでは、[新 高級ジェネ 公式サイト](https://kokyujene.github.io/) の詳細が記述されています!
+ここでは、[新 高級ジェネ 公式サイト](https://kokyujene.github.io/) の詳細や、そのサーバーの関連リンクなどが記述されています!
 
 ## サーバーについて
 
@@ -29,7 +29,7 @@
 
 **[メンバー紹介 | 新 高級ジェネ](https://kokyujene.github.io/members/)**
 
-**[サーバールール | 新 高級ジェネ](https://kokyujene.github.io/rule/)**
+**[サーバールール | 新 高級ジェネ](https://kokyujene.github.io/rules/)**
 
 ## 運営メンバー(特設ページ)
 
@@ -39,10 +39,11 @@
 
 **[kazekiri900](https://kokyujene.github.io/members/kazekiri900/)** - Deputy Owner
 
-## 🔗 関連リンク
+## 関連リンク
 
-* **オープンチャット:** [LINEオプチャ](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)
-* **Super Hiko14のXboxアカウント:** [Super Hiko14のXbox](https://launch.minecraft.net/profile/Super%20Hiko14)
+* **オープンチャット:** [LINE OpenChat](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)
+* **公式Youtube:** [Youtube](https://www.youtube.com/@Kokyujene) 
+* **kazekiri900のYoutube:** [Youtube](https://www.youtube.com/@Kazekiri.pc.minecraft)
 
 ---
 
