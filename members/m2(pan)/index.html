@@ -355,109 +355,45 @@ body {
 
 </main>
 
-</body>
-</html>
-
 <footer class="footer">
-<div class="footer-left">
-  <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
-    <img src="https://kokyujene.github.io/images/line-logo.webp" alt="LINE" class="footer-icon">
-  </a>
-  <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
-</div>
-  <div class="footer-center">
-    © <span id="year"></span> KoukyuuJene All rights reserved.
+  <div class="footer-icons">
+    <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
+      <img src="https://kokyujene.github.io/images/line-logo.webp" alt="LINE" class="footer-icon">
+    </a>
+    <a href="https://x.com/Kokyujene" target="_blank">
+      <img src="https://kokyujene.github.io/images/x-logo.webp" alt="X" class="footer-icon">
+    </a>
+    <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
   </div>
-  <div class="footer-right">
-    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a>
-    <span class="footer-separator">｜</span>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScfUrPKC_zNraZR3FKNBgv8RNNilQs1sFwsAouC59C3-msRBg/viewform" class="footer-link">お問い合わせ</a>
+
+  <div class="footer-text">
+    © <span id="year"></span> KoukyuuJene All rights reserved. |
+    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> |
+    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> |
+    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a>
   </div>
 </footer>
 
+<script src="https://kokyujene.github.io/js/script.js"></script>
 
 <script>
-  //20XX
-  document.getElementById("year").textContent = new Date().getFullYear();
+const menuIcon = document.querySelector('.menu-icon');
+const closeIcon = document.querySelector('.close-icon');
+const mobileMenu = document.querySelector('.mobile-menu');
 
-  //総訪問回数
-  fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('count').innerText = data.count + '';
-    })
-    .catch(err => {
-      document.getElementById('count').innerText = '取得失敗';
-      console.error(err);
-    });
-    
-  //kento!
-window.addEventListener('load', () => {
-
-  const img = document.createElement('img');
-  img.src = 'https://kokyujene.github.io/images/hidden.webp';
-  img.className = 'hidden-image';
-  img.style.position = 'fixed';
-  img.style.zIndex = 9999;
-  img.style.cursor = 'pointer';
-
-  // 画面サイズに応じて画像サイズを変更
-  if (window.innerWidth > 1024) { 
-    img.style.width = '25px';
-    img.style.height = '25px';
-  } else {
-    img.style.width = '10px';
-    img.style.height = '10px';
-  }
-
-  // ランダムに左右どちらかを選ぶ
-  const side = Math.random() < 0.5 ? 'left' : 'right';
-  const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20; // 上下に少し余裕
-
-  img.style.top = `${y}px`;
-
-  if (side === 'left') {
-    img.style.left = '10px';
-    img.style.right = '';
-  } else {
-    img.style.right = '10px';
-    img.style.left = '';
-  }
-
-  document.body.appendChild(img);
-
-  // クリック時の演出
-  img.addEventListener('click', () => {
-    const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
-    sound.play();
-    img.style.transition = 'all 1s ease';
-    img.style.transform = 'scale(3) rotate(720deg)';
-    img.style.opacity = 0;
-    setTimeout(() => img.remove(), 1000);
-  });
+menuIcon.addEventListener('click', () => {
+  mobileMenu.classList.add('active');
+  menuIcon.style.display = 'none';
+  closeIcon.style.display = 'block';
 });
 
-  const themeIcon = document.getElementById('theme-icon');
-  const userTheme = localStorage.getItem('theme');
-
-  function applyTheme(isDark) {
-    document.documentElement.classList.toggle('dark', isDark);
-    themeIcon.src = isDark ? 'https://kokyujene.github.io/images/sun.webp' : 'https://kokyujene.github.io/images/moon.webp';
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
-
-  // 初期状態
-  if (userTheme === 'dark') {
-    applyTheme(true);
-  } else {
-    applyTheme(false);
-  }
-
-  // クリックで切り替え
-  themeIcon.addEventListener('click', () => {
-    const isNowDark = !document.documentElement.classList.contains('dark');
-    applyTheme(isNowDark);
-  });
+closeIcon.addEventListener('click', () => {
+  mobileMenu.classList.remove('active');
+  menuIcon.style.display = 'block';
+  closeIcon.style.display = 'none';
+});
 </script>
 
+</div>
+</body>
 </html>

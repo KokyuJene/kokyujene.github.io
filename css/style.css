@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 @font-face {
   font-family: 'Unifont';
   src: url('https://kokyujene.github.io/fonts/Unifont.otf') format('truetype');
@@ -19,11 +31,10 @@
 }
 
 body {
-  font-family: 'Minecraft', 'Unifont', sans-serif;
+  font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
   padding: 2em;
   line-height: 1.5;
-  cursor: url("images/mouse.cur"), auto;
   background-image: url('https://kokyujene.github.io/https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -75,9 +86,20 @@ h2 {
   color: #fff7e9;
 }
 
+h1 {
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #884400;
+}
+
+.dark h1 {
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #ffbd7c;
+  color: #fff7e9;
+}
+
 .visitor-counter {
   font-family: 'Minecraft', 'Unifont', sans-serif;
-  font-size: 60px;
+  font-size: 62px;
   background-color: #ffe4b5;
   text-align: center;
   padding: 10px;
@@ -100,7 +122,7 @@ h2 {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
 }
 
@@ -154,21 +176,6 @@ img {
   margin-left: -1000px; 
 }
 
-header {
-  position: fixed;       
-  top: 0;                 
-  left: 0;
-  width: 100%;            
-  background-color: #ffe7ba;
-  color: #333;
-  padding: 1em 2em;
-  z-index: 1000;          
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .c1_h1 {
   	color: #ffaa00;
 	padding-left:10px;
@@ -184,10 +191,9 @@ header {
 	border-right: 10px solid #deb02c;
 }
 
- .maru_img{
-border-radius:40px;
+.maru_img{
+  border-radius:28px;
 }
-
 
 .button-wrapper {
     text-align: center;
@@ -220,6 +226,10 @@ border-radius:40px;
     padding: 16px;
     font-size: 16px;
   }
+  
+.maru_img{
+  border-radius:24px;
+}
 }
 
 .text_s1 {
@@ -326,7 +336,6 @@ img {
 .my-button:hover {
   background-color: #ffb92c;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
 }
 
 .my-button:active {
@@ -350,15 +359,10 @@ img {
 .my-button2:hover {
   background-color: #ffb92c;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
 }
 
 .my-button2:active {
   transform: scale(0.95) rotate(-1deg);
-}
-
-a:hover {
-  cursor: url("images/mouse.cur"), pointer;
 }
 
 header {
@@ -381,7 +385,6 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  cursor: url("images/mouse.cur"), auto;
 }
 
 h1 {
@@ -394,73 +397,7 @@ h1 {
   color: #ffaa00;
 }
 
-.footer-left,
-.footer-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-}
 
-.footer-center {
-  flex: 2;
-  text-align: center;
-}
-
-.footer-link {
-  text-decoration: none;
-  color: #555;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
-}
-
-.footer-icon {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-}
-
-@media screen and (max-width: 600px) {
-  .footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    font-size: 12px;
-  }
-
-  .footer-left,
-  .footer-right,
-  .footer-center {
-    margin: 5px 0;
-    flex: none;
-  }
-}
-
-.footer {
-  padding: 15px 0;
-  box-sizing: border-box;
-}
-
-.footer-left,
-.footer-center,
-.footer-right {
-  padding: 0;
-  margin: 0;
-}
-
-.footer-right {
-  text-align: right;
-  padding-right: 0;
-  margin-right: 0;
-}
-
-.footer-link {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-}
 
 /*スマホ表示時*/
 @media screen and (max-width: 768px) {
@@ -469,16 +406,6 @@ h1 {
     align-items: center;
     text-align: center;
   }
-
-  .footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f5f5f5;
-  padding: 16px 31px;
-  font-size: 10px;
-  flex-wrap: wrap;
-}
 
 .visitor-counter {
   font-size: 30px;
@@ -531,7 +458,7 @@ header {
   padding: 1em 2em;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-size: 12px;
+  font-size: 14px;
  }
 
  .h2-header {
@@ -544,7 +471,7 @@ header {
 }
 
 .c1_h1, .c2_h1 {
-  font-size: 26px;
+  font-size: 28px;
 }
 
 }
@@ -586,8 +513,6 @@ header {
 
 @media screen and (max-width: 768px) {
   .box1 {
-    width: 100%;
-    margin-left: 0;
     box-sizing: border-box;
   }
 }
@@ -605,6 +530,67 @@ header {
   }
 }
 
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  color: #222;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+.footer-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-icons img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.footer-icons img:hover {
+  transform: scale(1.2);
+}
+
+.footer-text {
+  text-align: right;
+}
+
+.footer-link {
+  color: #ffa500;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== スマホ版 ===== */
+@media screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .footer-icons {
+    order: -1; /* 上に移動 */
+    justify-content: center;
+  }
+
+  .footer-text {
+    text-align: center;
+    font-size: 13px;
+  }
+}
+
 /* フッター */
 .footer {
   background-color: #ffe4b5;
@@ -614,7 +600,7 @@ header {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  height: 40px;
+  height: 55px;
 }
 
 .footer-left,
@@ -664,6 +650,20 @@ header {
     margin: 5px 0;
     justify-content: center;
   }
+
+  .footer-center {
+  font-size: 12px;
+}
+
+ .footer-link{
+  font-size: 12px;
+ }
+
+ .footer img{
+  width: 18px;
+  height: auto;
+ }
+
 }
 
 .footer-button {
@@ -731,7 +731,6 @@ header {
 .dark .my-button:hover {
   background-color: #ffb92c;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
 }
 
 .dark .my-button:active {
@@ -741,7 +740,6 @@ header {
 .dark .my-button2:hover {
   background-color: #ffb92c;
   transform: scale(1.05);
-  cursor: url("images/mouse.cur"), pointer;
 }
 
 .dark .my-button {
@@ -783,4 +781,625 @@ header {
  .sub-title {
   font-size: 5px;
  }
+}
+
+/* ロゴ */
+.logo img {
+  height: 40px;
+}
+
+/* PC用ナビ */
+.nav-links ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  text-align: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+}
+
+.sub-title {
+  font-size: 12px;
+  color: #888;
+  display: block;
+}
+
+.h2-header {
+  font-size: 18px;
+  margin: 4px 0 0;
+  color: #333;
+}
+
+.dark .h2-header {
+  color: #edd3a2;
+}
+
+/* ヘッダー固定 */
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  left: 0;
+  background-color: #ffe7ba;
+  color: #333;
+  padding: 1em 2em;
+  z-index: 1000;          
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ロゴ */
+.logo img {
+  height: 100px;
+}
+
+/* PC用ナビ */
+.nav-links ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  text-align: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+}
+
+.sub-title {
+  font-size: 12px;
+  color: #888;
+  display: block;
+  text-shadow: 1px 1px 2px #3f3f3f;
+}
+
+.h2-header {
+  font-size: 18px;
+  margin: 4px 0 0;
+  color: #333;
+}
+
+.sm-sub-title {
+  font-size: 14px;
+  color: #7a7a7a;
+  display: block;
+  text-shadow: 3px 3px 4px #575757;
+}
+
+.sm-header {
+  font-size: 20px;
+  color: #ffe3b0;
+  text-shadow: 3px 3px 4px #884400;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #ffe7ba;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+
+.sub-title {
+  display: block;
+  font-size: 12px;
+  color: #555;
+}
+
+.h2-header {
+  font-size: 16px;
+  margin: 0;
+}
+
+.menu-icon,
+.close-icon {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: none;
+}
+
+/* 閉じるボタン */
+.close-icon {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 2001;
+}
+
+/* モバイルメニュー */
+.mobile-menu {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.76);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: bottom 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 2000;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: white;
+}
+
+.mobile-menu.active {
+  bottom: 0;
+  opacity: 1;
+}
+
+/* スマホ用表示切替 */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .menu-icon {
+    display: block;
+  }
+  
+  .sub-title {
+  font-size: 8px;
+}
+}
+
+/* PCではメニューアイコン非表示 */
+@media screen and (min-width: 769px) {
+  .menu-icon,
+  .close-icon {
+    display: none !important;
+  }
+}
+
+  .logo img {
+  height: 100px;
+  width: auto;
+}
+
+/* スマホ専用 */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 1001;
+  }
+
+  .site-header {
+    justify-content: flex-start;
+  }
+
+  .logo img {
+  height: 40px;
+  width: auto;
+}
+}
+
+
+a {
+  color: #cc6600; 
+  text-decoration: none; 
+}
+
+a:hover {
+  color: #ff8800; 
+  text-decoration: underline; 
+}
+
+body {
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease;
+}
+
+.dark body {
+ background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
+ }
+
+.glitch-button {
+  position: relative;
+  background-color: #fdf3e0;
+  color: #fdf3e0;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+}
+
+/* テキスト部分 */
+.glitch-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 背景GIF */
+.glitch-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* ホバー時に色＋背景GIF表示 */
+.glitch-button:hover {
+  background-image: url('https://kokyujene.github.io/images/glitch_animation.gif');
+}
+
+.glitch-button:hover .glitch-text {
+  color: #a8a8a8; /* ホバー時に文字が見えるように */
+}
+
+.glitch-button:hover .glitch-bg {
+  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
+}
+
+/* テキスト部分 */
+.glitch-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 背景GIF */
+.glitch-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.glitch-button:hover .glitch-text {
+  color: #a8a8a8; /* ホバー時に文字が見えるように */
+}
+
+.glitch-button:hover .glitch-bg {
+  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
+}
+
+.dark .glitch-button {
+  background-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.text_s3 {
+  color: #ffefcf;
+}
+
+.dark .text_s3 {
+  color: #362400;
+}
+
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 240px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 10px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.dark .member-card h3 {
+  color: #ffda95;
+}
+
+.dark .member-card p {
+  color: #c5c5c5;
+}
+
+.dark .member-card .role {
+  color: #ffebc5;
+}
+
+.dark .member-card .name {
+  color: #ffebc5;
+}
+
+/* サーバーステータス全体 */
+.server-status-container {
+  text-align: center;
+  margin: 40px auto;
+  padding: 10px;
+}
+
+/* タイトル */
+.status-title {
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+/* ステータス表示ボックス */
+.status-box {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+/* 開いているとき */
+.status-open {
+  background-color: rgba(0, 180, 0, 0.2);
+  border-color: rgba(0, 180, 0, 0.4);
+  color: #00d000;
+}
+
+/* 光るアニメーション */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(0, 255, 0, 0);
+  }
+}
+
+.status-glow {
+  animation: glow 1.2s ease-out;
+}
+
+/* 閉じているとき */
+.status-closed {
+  background-color: rgba(180, 0, 0, 0.2);
+  border-color: rgba(180, 0, 0, 0.4);
+  color: #ff5555;
+}
+
+/* ダークモード対応（既存のテーマ変数がある場合） */
+html.dark .status-box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 150px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 10px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 8px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
+}
+
 }

@@ -90,19 +90,4 @@ window.addEventListener('load', () => {
     glitchImg.src = 'images/glitch_static.webp'; // 静止状態に戻す
   });
 
-
-const menuIcon = document.querySelector('.menu-icon');
-const closeIcon = document.querySelector('.close-icon');
-const mobileMenu = document.querySelector('.mobile-menu');
-
-menuIcon.addEventListener('click', () => {
-  mobileMenu.classList.add('active');
-  menuIcon.style.display = 'none';
-  closeIcon.style.display = 'block';
-});
-
-closeIcon.addEventListener('click', () => {
-  mobileMenu.classList.remove('active');
-  menuIcon.style.display = 'block';
-  closeIcon.style.display = 'none';
-});
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
