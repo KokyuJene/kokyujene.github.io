@@ -210,18 +210,11 @@ img {
 }
 
 .c1_h1 {
-  	color: #ffaa00;
-	padding-left:10px;
-	border-left: 10px solid #deb02c;
-	border-right: 10px solid #deb02c;
-  	border-bottom: 2px dashed #deb02c;
+  color: #ffaa00;
 }
 
 .c2_h1 {
-  	color: #ffaa00;
-	padding-left:10px;
-	border-left: 10px solid #deb02c;
-	border-right: 10px solid #deb02c;
+  color: #ffaa00;
 }
 
 .maru_img{
@@ -387,6 +380,7 @@ img {
     display: inline-block;
     transition: background-color 0.3s ease;
     margin-top: 30px;
+    font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
   }
 
 .my-button2:hover {
@@ -504,7 +498,7 @@ header {
 }
 
 .c1_h1, .c2_h1 {
-  font-size: 28px;
+  font-size: 18px;
 }
 
 }
@@ -1089,6 +1083,354 @@ body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
 
+.glitch-button {
+  position: relative;
+  background-color: #fdf3e0;
+  color: #fdf3e0;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+}
+
+/* テキスト部分 */
+.glitch-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 背景GIF */
+.glitch-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* ホバー時に色＋背景GIF表示 */
+.glitch-button:hover {
+  background-image: url('https://kokyujene.github.io/images/glitch_animation.gif');
+}
+
+.glitch-button:hover .glitch-text {
+  color: #a8a8a8; /* ホバー時に文字が見えるように */
+}
+
+.glitch-button:hover .glitch-bg {
+  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
+}
+
+/* テキスト部分 */
+.glitch-text {
+  position: relative;
+  z-index: 2;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* 背景GIF */
+.glitch-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.glitch-button:hover .glitch-text {
+  color: #a8a8a8; /* ホバー時に文字が見えるように */
+}
+
+.glitch-button:hover .glitch-bg {
+  opacity: 0.4; /* 透明度調整（必要なら変えてOK） */
+}
+
+.dark .glitch-button {
+  background-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.text_s3 {
+  color: #ffefcf;
+}
+
+.dark .text_s3 {
+  color: #362400;
+}
+
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 240px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 10px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.dark .member-card h3 {
+  color: #ffda95;
+}
+
+.dark .member-card p {
+  color: #c5c5c5;
+}
+
+.dark .member-card .role {
+  color: #ffebc5;
+}
+
+.dark .member-card .name {
+  color: #ffebc5;
+}
+
+/* サーバーステータス全体 */
+.server-status-container {
+  text-align: center;
+  margin: 40px auto;
+  padding: 10px;
+}
+
+/* タイトル */
+.status-title {
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+/* ステータス表示ボックス */
+.status-box {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+/* 開いているとき */
+.status-open {
+  background-color: rgba(0, 180, 0, 0.2);
+  border-color: rgba(0, 180, 0, 0.4);
+  color: #00d000;
+}
+
+/* 光るアニメーション */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(0, 255, 0, 0);
+  }
+}
+
+.status-glow {
+  animation: glow 1.2s ease-out;
+}
+
+/* 閉じているとき */
+.status-closed {
+  background-color: rgba(180, 0, 0, 0.2);
+  border-color: rgba(180, 0, 0, 0.4);
+  color: #ff5555;
+}
+
+/* ダークモード対応（既存のテーマ変数がある場合） */
+html.dark .status-box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 150px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 10px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 8px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
+}
+
+}
+
 </style>
 
 <body>
@@ -1155,6 +1497,7 @@ body {
 
   <main>
 
+<div class="fade-in">
 <div class="section-title">
 <div class="center-text">
   <div class="t_1">
@@ -1165,7 +1508,9 @@ body {
 	</div>
 </div>
 </div>
+</div>
 
+<div class="fade-in">
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
@@ -1173,33 +1518,37 @@ body {
   </div>
   </div>
 </div>
+</div>
 
+<div class="fade-in">
     <div class="center-text">
     <a href="https://kokyujene.github.io/" class="my-button2">ホームへ</a><br>
     </div>
+</div>
 
   </main>
 
 <footer class="footer">
   <div class="footer-icons">
     <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
-      <img src="images/line-logo.webp" alt="LINE" class="footer-icon">
+      <img src="https://kokyujene.github.io/images/line-logo.webp" alt="LINE" class="footer-icon">
     </a>
     <a href="https://x.com/Kokyujene" target="_blank">
-      <img src="images/x-logo.webp" alt="X" class="footer-icon">
+      <img src="https://kokyujene.github.io/images/x-logo.webp" alt="X" class="footer-icon">
     </a>
-    <img id="theme-icon" src="images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
+    <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
   </div>
 
   <div class="footer-text">
-    © <span id="year"></span> KoukyuuJene All rights reserved. |
-    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> |
-    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> |
-    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a>
+    © <span id="year"></span> KoukyuuJene All rights reserved. | 
+    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
+    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
+    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
+    <a href="https://kokyujene.github.io/contact" class="footer-link">お問い合わせ</a>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="https://kokyujene.github.io/js/script.js"></script>
 
 <script>
 const menuIcon = document.querySelector('.menu-icon');
@@ -1222,18 +1571,28 @@ closeIcon.addEventListener('click', () => {
   <script>
     const messages = [
       "ここは誰??私はどこ??",
-      "しかし誰も来なかった",
+      "＊ しかし誰も来なかった。",
       "ﾅﾝﾀﾞｺｺｫ!?",
       "高級すぎてページが消えました...。",
       "異世界転生に失敗しました。",
-      "ここのテキストは大喜利になっていますか?",
-      "404Errorなんかクソくらえ",
       "テレポートコマンドに重大なバグが発生しました。"
     ];
 
     // ランダムに 1 つ選択
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     document.getElementById("randomText").textContent = randomMessage;
+
+        const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show'); // 何度でも再実行
+      }
+    });
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 
 </body>

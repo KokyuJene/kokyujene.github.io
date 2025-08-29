@@ -423,6 +423,14 @@ body {
   </div>
   </div>
   </div>
+
+<div class="fade-in">
+<div class="content-box">
+    <div class="side-text">
+<button onclick="goBack()" class="my-button2">戻る</button>
+    </div>
+</div>
+</div>
 </main>
 
 <footer class="footer">
@@ -437,10 +445,11 @@ body {
   </div>
 
   <div class="footer-text">
-    © <span id="year"></span> KoukyuuJene All rights reserved. |
-    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> |
-    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> |
-    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a>
+    © <span id="year"></span> KoukyuuJene All rights reserved. | 
+    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
+    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
+    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
+    <a href="https://kokyujene.github.io/contact" class="footer-link">お問い合わせ</a>
   </div>
 </footer>
 
@@ -462,6 +471,18 @@ closeIcon.addEventListener('click', () => {
   menuIcon.style.display = 'block';
   closeIcon.style.display = 'none';
 });
+
+    const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show'); // 何度でも再実行
+      }
+    });
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>

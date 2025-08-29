@@ -331,6 +331,7 @@ img {
     display: inline-block;
     transition: background-color 0.3s ease;
     margin-top: 30px;
+    font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
   }
 
 .my-button:hover {
@@ -354,6 +355,7 @@ img {
     display: inline-block;
     transition: background-color 0.3s ease;
     margin-top: 30px;
+    font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
   }
 
 .my-button2:hover {
@@ -437,7 +439,7 @@ h1 {
   .my-button2 {
     background-color: #ffaa00;
     color: white;
-    padding: 5px 12px;
+    padding: 5px 32px;
     border: none;
     border-radius: 8px;
     font-size: 12px;

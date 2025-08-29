@@ -122,6 +122,7 @@
 </header>
 
   <main>
+<div class="fade-in">
   <div class="center-text">
   <div class="t_1">
   <div class="gyo_1">
@@ -130,7 +131,9 @@
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
@@ -157,6 +160,15 @@
     </div>
   </div>
 </div>
+</div>
+
+<div class="fade-in">
+<div class="content-box">
+    <div class="side-text">
+<button onclick="goBack()" class="my-button2">戻る</button>
+    </div>
+</div>
+</div>
   </main>
 
 <footer class="footer">
@@ -171,14 +183,15 @@
   </div>
 
   <div class="footer-text">
-    © <span id="year"></span> KoukyuuJene All rights reserved. |
-    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> |
-    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> |
-    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a>
+    © <span id="year"></span> KoukyuuJene All rights reserved. | 
+    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
+    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
+    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
+    <a href="https://kokyujene.github.io/contact" class="footer-link">お問い合わせ</a>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="https://kokyujene.github.io/js/script.js"></script>
 
 <script>
 const menuIcon = document.querySelector('.menu-icon');
@@ -198,33 +211,18 @@ closeIcon.addEventListener('click', () => {
 });
 </script>
 
-<script>
-// サーバー状態取得
-fetch('https://script.google.com/macros/s/AKfycbwvph3wE2SDcDjqbGyh4_OonhzcmbMUvLJ7ZpGfMyXM8-f23f6_U_dASyRMnBhp9punNw/exec')
-  .then(res => res.json())
-  .then(data => {
-    const statusEl = document.getElementById("server-status");
-
-    if (data.status == 1) {
-      statusEl.textContent = "サーバーは開いています";
-      statusEl.classList.add("status-open");
-
-      // 光る演出（クラスを一旦外して再追加）
-      statusEl.classList.remove("status-glow");
-      void statusEl.offsetWidth; // 再描画トリガー
-      statusEl.classList.add("status-glow");
-
-    } else {
-      statusEl.textContent = "サーバーは開いていません";
-      statusEl.classList.add("status-closed");
-    }
-  })
-  .catch(err => {
-    const statusEl = document.getElementById("server-status");
-    statusEl.textContent = "取得失敗";
-    statusEl.classList.add("status-closed");
-    console.error(err);
+<script>  
+      const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show'); // 何度でも再実行
+      }
+    });
   });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>

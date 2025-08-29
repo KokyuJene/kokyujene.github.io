@@ -19,6 +19,8 @@
 - サーバーの世界観や特徴の紹介
 - 運営やその他メンバーの紹介
 - 他サービスの紹介
+- サーバー状況
+- ロゴ画像まとめ
 - などなど...
 
 ## サイトを見る
@@ -27,9 +29,9 @@
 
 **[新 高級ジェネ 公式サイト](https://kokyujene.github.io/)**
 
-**[メンバー紹介 | 新 高級ジェネ](https://kokyujene.github.io/members/)**
+**[メンバー紹介 | 新 高級ジェネ 公式サイト](https://kokyujene.github.io/members/)**
 
-**[サーバールール | 新 高級ジェネ](https://kokyujene.github.io/rules/)**
+**[サーバールール | 新 高級ジェネ 公式サイト](https://kokyujene.github.io/rules/)**
 
 ## 運営メンバー(特設ページ)
 
@@ -41,9 +43,9 @@
 
 ## 関連リンク
 
-* **オープンチャット:** [LINE OpenChat](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)
-* **公式Youtube:** [Youtube](https://www.youtube.com/@Kokyujene) 
-* **kazekiri900のYoutube:** [Youtube](https://www.youtube.com/@Kazekiri.pc.minecraft)
+* **[LINE OpenChat](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)**
+* **[Youtube](https://www.youtube.com/@Kokyujene)**
+* **[X(Twitter)](https://x.com/Kokyujene)**
 
 ---
 

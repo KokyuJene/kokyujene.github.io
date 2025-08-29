@@ -16,7 +16,7 @@
   <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
   <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
   <link rel="apple-touch-icon" href="https://kokyujene.github.io/favicon.png">
-  <link rel="stylesheet" href="https://kokyujene.github.io/css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
 </head>
 
@@ -53,25 +53,66 @@ body {
 <div class="wrapper">
 
 <header>
+  <!-- 左のロゴ -->
   <a href="https://kokyujene.github.io/" class="logo">
     <img src="https://kokyujene.github.io/images/logo_icon.webp" alt="LOGO">
   </a>
-  <nav>
-    <ul class="nav-links">
+
+  <!-- PC用ナビゲーション -->
+  <nav class="nav-links">
+    <ul>
       <li>
-        <div class="section-title">
         <a href="https://kokyujene.github.io">
-        <small class=sub-title>\-Home-/</small>
-        <h3 class="h2-header">ホーム</h3></a></li>
-        <a href="https://kokyujene.github.io/members/">
-        <small class=sub-title>\-Members-/</small>
-        <h3 class="h2-header">メンバー紹介</h3></a></li>
+          <small class="sub-title">\-Home-/</small>
+          <h3 class="h2-header">ホーム</h3>
+        </a>
+      </li>
       <li>
+        <a href="https://kokyujene.github.io/members/">
+          <small class="sub-title">\-Member-/</small>
+          <h3 class="h2-header">メンバー紹介</h3>
+        </a>
+      </li>
+      <li>
+        <a href="https://kokyujene.github.io/rules/">
+          <small class="sub-title">\-Rules-/</small>
+          <h3 class="h2-header">ルール</h3>
+        </a>
+      </li>
     </ul>
   </nav>
+
+  <!-- スマホ用メニューアイコン（右寄せ） -->
+  <img src="https://kokyujene.github.io/images/menu.webp" alt="メニュー" class="menu-icon">
+  <img src="https://kokyujene.github.io/images/close.webp" alt="閉じる" class="close-icon">
+
+  <!-- モバイルメニュー -->
+  <div id="mobileMenu" class="mobile-menu">
+    <ul>
+      <li>
+        <a href="https://kokyujene.github.io">
+          <small class="sm-sub-title">\-Home-/</small>
+          <h3 class="sm-header">ホーム</h3>
+        </a>
+      </li>
+      <li>
+        <a href="https://kokyujene.github.io/members/">
+          <small class="sm-sub-title">\-Members-/</small>
+          <h3 class="sm-header">メンバー紹介</h3>
+        </a>
+      </li>
+      <li>
+        <a href="https://kokyujene.github.io/rules/">
+          <small class="sm-sub-title">\-Rules-/</small>
+          <h3 class="sm-header">ルール</h3>
+        </a>
+      </li>
+    </ul>
+  </div>
 </header>
 
 <main>
+<div class="fade-in">
   <div class="center-text">
   <div class="t_1">
   <div class="gyo_1">
@@ -80,6 +121,9 @@ body {
   </div>
   </div>
   </div>
+</div>
+
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -88,7 +132,9 @@ body {
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -98,7 +144,9 @@ body {
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -110,7 +158,9 @@ body {
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -121,7 +171,9 @@ body {
   </div>
   </div>
   </div>
-  
+</div>
+
+<div class="fade-in">  
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -134,7 +186,9 @@ body {
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -144,7 +198,9 @@ body {
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -154,7 +210,9 @@ body {
   </div>
   </div>
   </div>
+</div>
 
+<div class="fade-in">
   <div class="content-box">
   <div class="center-text">
   <div class="box1">
@@ -163,11 +221,23 @@ body {
   </div>
   </div>
   </div>
+</div>
+<div class="fade-in">
 <div class="center-text">
     <a href="https://kokyujene.github.io/rules/" class="my-button2">ルール</a>
 </div>
+</div>
+
+<div class="fade-in">
+<div class="content-box">
+    <div class="side-text">
+<button onclick="goBack()" class="my-button2">戻る</button>
+    </div>
+</div>
+</div>
 
 </div>
+
 
 </body>
 
@@ -185,10 +255,11 @@ body {
   </div>
 
   <div class="footer-text">
-    © <span id="year"></span> KoukyuuJene All rights reserved. |
-    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> |
-    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> |
-    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a>
+    © <span id="year"></span> KoukyuuJene All rights reserved. | 
+    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
+    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
+    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
+    <a href="https://kokyujene.github.io/contact" class="footer-link">お問い合わせ</a>
   </div>
 </footer>
 
@@ -210,6 +281,19 @@ closeIcon.addEventListener('click', () => {
   menuIcon.style.display = 'block';
   closeIcon.style.display = 'none';
 });
+
+    const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show'); // 何度でも再実行
+      }
+    });
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  
 </script>
 
 </body>

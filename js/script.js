@@ -91,3 +91,13 @@ window.addEventListener('load', () => {
   });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function goBack() {
+    // 前のページが同じドメインなら戻る
+    if (document.referrer.includes("kokyujene.github.io")) {
+      history.back();
+    } else {
+      // 外部サイトから来た場合はホームに戻す
+      window.location.href = "https://kokyujene.github.io/";
+    }
+  }
