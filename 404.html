@@ -31,10 +31,11 @@
 </head>
 
 <style>
-  * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .fade-in {
@@ -210,11 +211,18 @@ img {
 }
 
 .c1_h1 {
-  color: #ffaa00;
+  	color: #ffaa00;
+	padding-left:10px;
+	border-left: 10px solid #deb02c;
+	border-right: 10px solid #deb02c;
+  	border-bottom: 2px dashed #deb02c;
 }
 
 .c2_h1 {
-  color: #ffaa00;
+  	color: #ffaa00;
+	padding-left:10px;
+	border-left: 10px solid #deb02c;
+	border-right: 10px solid #deb02c;
 }
 
 .maru_img{
@@ -357,6 +365,7 @@ img {
     display: inline-block;
     transition: background-color 0.3s ease;
     margin-top: 30px;
+    font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
   }
 
 .my-button:hover {
@@ -464,7 +473,7 @@ h1 {
   .my-button2 {
     background-color: #ffaa00;
     color: white;
-    padding: 5px 12px;
+    padding: 5px 32px;
     border: none;
     border-radius: 8px;
     font-size: 12px;
@@ -498,7 +507,7 @@ header {
 }
 
 .c1_h1, .c2_h1 {
-  font-size: 18px;
+  font-size: 28px;
 }
 
 }
@@ -912,12 +921,14 @@ header {
   color: #7a7a7a;
   display: block;
   text-shadow: 3px 3px 4px #575757;
+  text-align: center;
 }
 
 .sm-header {
   font-size: 20px;
   color: #ffe3b0;
   text-shadow: 3px 3px 4px #884400;
+  text-align: center;
 }
 
 header {
@@ -930,6 +941,7 @@ header {
   width: 100%;
   background: #ffe7ba;
   z-index: 1000;
+  text-align: center;
 }
 
 .logo img {
@@ -991,6 +1003,7 @@ header {
   transition: bottom 0.4s ease, opacity 0.4s ease;
   opacity: 0;
   z-index: 2000;
+  text-align: center;
 }
 
 .mobile-menu ul {
@@ -1002,11 +1015,13 @@ header {
 .mobile-menu a {
   text-decoration: none;
   color: white;
+  text-align: center;
 }
 
 .mobile-menu.active {
   bottom: 0;
   opacity: 1;
+  text-align: center;
 }
 
 /* スマホ用表示切替 */
@@ -1431,6 +1446,140 @@ html.dark .status-box {
 
 }
 
+/* モバイルメニュー全体 */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* 半透明黒 */
+  backdrop-filter: blur(8px);     /* 背景ぼかし */
+  display: flex;
+  justify-content: flex-start; /* 左寄せ */
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+
+/* メニューが開いたとき */
+.mobile-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* リスト */
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;   /* 左揃え */
+  width: 100%;
+  padding-left: 20px; /* 左にスペース */
+}
+
+/* 各項目 */
+.mobile-menu li {
+  margin: 20px 0;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+}
+
+/* 開いたとき順番に出現 */
+.mobile-menu.active li {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-menu.active li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active li:nth-child(2) { transition-delay: 0.2s; }
+.mobile-menu.active li:nth-child(3) { transition-delay: 0.3s; }
+.mobile-menu.active li:nth-child(4) { transition-delay: 0.4s; }
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.mobile-menu a:hover {
+  transform: scale(1.05);
+}
+
+.mobile-menu .sm-sub-title {
+  font-size: 14px;
+  display: block;
+  opacity: 0.8;
+}
+
+.mobile-menu .sm-header {
+  font-size: 20px;
+  margin: 5px 0 0;
+}
+
+/* ------- intro hero (full->square->吸収) ------- */
+#introHero {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1200;
+  transform: translate(-50%, -50%) scale(1);
+  width: 100vmax; /* 初期は JS で上書きするが、念のため */
+  height: 100vmax;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  border-radius: 0; /* 正方形 */
+  transition: opacity 0.25s ease;
+}
+
+#introHero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 歓迎テキスト（初期は隠す） */
+#welcomeText {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(8px);
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #ffaa00; /* 好みに合わせて */
+  z-index: 800;
+  margin-top: 18px;
+}
+
+/* 完了後に表示 */
+#welcomeText.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* box1Logo をアニメ用に非表示にしておく（アニメ完了で表示） */
+#box1Logo {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* アニメーション中に body に付けるクラスでスクロール禁止 (追加セーフガード) */
+.body-locked {
+  overflow: hidden !important;
+  touch-action: none; /* モバイルのスクロール抑止に役立つ */
+}
 </style>
 
 <body>
@@ -1531,12 +1680,12 @@ html.dark .status-box {
 <footer class="footer">
   <div class="footer-icons">
     <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
-      <img src="https://kokyujene.github.io/images/line-logo.webp" alt="LINE" class="footer-icon">
+      <img src="images/line-logo.webp" alt="LINE" class="footer-icon">
     </a>
     <a href="https://x.com/Kokyujene" target="_blank">
-      <img src="https://kokyujene.github.io/images/x-logo.webp" alt="X" class="footer-icon">
+      <img src="images/x-logo.webp" alt="X" class="footer-icon">
     </a>
-    <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
+    <img id="theme-icon" src="images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
   </div>
 
   <div class="footer-text">
@@ -1575,7 +1724,8 @@ closeIcon.addEventListener('click', () => {
       "ﾅﾝﾀﾞｺｺｫ!?",
       "高級すぎてページが消えました...。",
       "異世界転生に失敗しました。",
-      "テレポートコマンドに重大なバグが発生しました。"
+      "テレポートコマンドに重大なバグが発生しました。",
+      "また俺、なんかやっちゃいました?"
     ];
 
     // ランダムに 1 つ選択
@@ -1594,6 +1744,112 @@ closeIcon.addEventListener('click', () => {
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
+
+<script>
+  //20XX
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  //総訪問回数
+  fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('count').innerText = data.count + '';
+    })
+    .catch(err => {
+      document.getElementById('count').innerText = '取得失敗';
+      console.error(err);
+    });
+    
+  //kento!
+window.addEventListener('load', () => {
+
+  const img = document.createElement('img');
+  img.src = 'https://kokyujene.github.io/images/hidden.webp';
+  img.className = 'hidden-image';
+  img.style.position = 'fixed';
+  img.style.zIndex = 9999;
+  img.style.cursor = 'pointer';
+
+  // 画面サイズに応じて画像サイズを変更
+  if (window.innerWidth > 1024) { 
+    img.style.width = '25px';
+    img.style.height = '25px';
+  } else {
+    img.style.width = '10px';
+    img.style.height = '10px';
+  }
+
+  // ランダムに左右どちらかを選ぶ
+  const side = Math.random() < 0.5 ? 'left' : 'right';
+  const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20; // 上下に少し余裕
+
+  img.style.top = `${y}px`;
+
+  if (side === 'left') {
+    img.style.left = '10px';
+    img.style.right = '';
+  } else {
+    img.style.right = '10px';
+    img.style.left = '';
+  }
+
+  document.body.appendChild(img);
+
+  // クリック時の演出
+  img.addEventListener('click', () => {
+    const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
+    sound.play();
+    img.style.transition = 'all 1s ease';
+    img.style.transform = 'scale(3) rotate(720deg)';
+    img.style.opacity = 0;
+    setTimeout(() => img.remove(), 1000);
+  });
+});
+
+  const themeIcon = document.getElementById('theme-icon');
+  const userTheme = localStorage.getItem('theme');
+
+  function applyTheme(isDark) {
+    document.documentElement.classList.toggle('dark', isDark);
+    themeIcon.src = isDark ? 'https://kokyujene.github.io/images/sun.webp' : 'https://kokyujene.github.io/images/moon.webp';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+
+  // 初期状態
+  if (userTheme === 'dark') {
+    applyTheme(true);
+  } else {
+    applyTheme(false);
+  }
+
+  // クリックで切り替え
+  themeIcon.addEventListener('click', () => {
+    const isNowDark = !document.documentElement.classList.contains('dark');
+    applyTheme(isNowDark);
+  });
+
+  const glitchImg = document.getElementById('glitchImage');
+
+  glitchImg.addEventListener('mouseenter', () => {
+    glitchImg.src = 'images/glitch_animation.gif'; // バグ風アニメGIFに切替
+  });
+
+  glitchImg.addEventListener('mouseleave', () => {
+    glitchImg.src = 'images/glitch_static.webp'; // 静止状態に戻す
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function goBack() {
+    // 前のページが同じドメインなら戻る
+    if (document.referrer.includes("kokyujene.github.io")) {
+      history.back();
+    } else {
+      // 外部サイトから来た場合はホームに戻す
+      window.location.href = "https://kokyujene.github.io/";
+    }
+  }
+</script>
 
 </body>
 </html>

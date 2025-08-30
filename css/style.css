@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .fade-in {
@@ -887,12 +888,14 @@ header {
   color: #7a7a7a;
   display: block;
   text-shadow: 3px 3px 4px #575757;
+  text-align: center;
 }
 
 .sm-header {
   font-size: 20px;
   color: #ffe3b0;
   text-shadow: 3px 3px 4px #884400;
+  text-align: center;
 }
 
 header {
@@ -905,6 +908,7 @@ header {
   width: 100%;
   background: #ffe7ba;
   z-index: 1000;
+  text-align: center;
 }
 
 .logo img {
@@ -966,6 +970,7 @@ header {
   transition: bottom 0.4s ease, opacity 0.4s ease;
   opacity: 0;
   z-index: 2000;
+  text-align: center;
 }
 
 .mobile-menu ul {
@@ -977,11 +982,13 @@ header {
 .mobile-menu a {
   text-decoration: none;
   color: white;
+  text-align: center;
 }
 
 .mobile-menu.active {
   bottom: 0;
   opacity: 1;
+  text-align: center;
 }
 
 /* スマホ用表示切替 */
@@ -1404,4 +1411,139 @@ html.dark .status-box {
   font-size: 12px;
 }
 
+}
+
+/* モバイルメニュー全体 */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* 半透明黒 */
+  backdrop-filter: blur(8px);     /* 背景ぼかし */
+  display: flex;
+  justify-content: flex-start; /* 左寄せ */
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+
+/* メニューが開いたとき */
+.mobile-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* リスト */
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;   /* 左揃え */
+  width: 100%;
+  padding-left: 20px; /* 左にスペース */
+}
+
+/* 各項目 */
+.mobile-menu li {
+  margin: 20px 0;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+}
+
+/* 開いたとき順番に出現 */
+.mobile-menu.active li {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-menu.active li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active li:nth-child(2) { transition-delay: 0.2s; }
+.mobile-menu.active li:nth-child(3) { transition-delay: 0.3s; }
+.mobile-menu.active li:nth-child(4) { transition-delay: 0.4s; }
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.mobile-menu a:hover {
+  transform: scale(1.05);
+}
+
+.mobile-menu .sm-sub-title {
+  font-size: 14px;
+  display: block;
+  opacity: 0.8;
+}
+
+.mobile-menu .sm-header {
+  font-size: 20px;
+  margin: 5px 0 0;
+}
+
+/* ------- intro hero (full->square->吸収) ------- */
+#introHero {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1200;
+  transform: translate(-50%, -50%) scale(1);
+  width: 100vmax; /* 初期は JS で上書きするが、念のため */
+  height: 100vmax;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  border-radius: 0; /* 正方形 */
+  transition: opacity 0.25s ease;
+}
+
+#introHero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 歓迎テキスト（初期は隠す） */
+#welcomeText {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(8px);
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #ffaa00; /* 好みに合わせて */
+  z-index: 800;
+  margin-top: 18px;
+}
+
+/* 完了後に表示 */
+#welcomeText.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* box1Logo をアニメ用に非表示にしておく（アニメ完了で表示） */
+#box1Logo {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* アニメーション中に body に付けるクラスでスクロール禁止 (追加セーフガード) */
+.body-locked {
+  overflow: hidden !important;
+  touch-action: none; /* モバイルのスクロール抑止に役立つ */
 }

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ルール | 新 高級ジェネ</title>
+  <title>kento7587 | 新 高級ジェネ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://kokyujene.github.io/style.css">
   <meta property="og:title" content="新 高級ジェネ 公式サイト" />
@@ -21,16 +21,209 @@
 </head>
 
 <style>
-  .kokyujene_title {
-  height: 24px;
-  width: auto;
-  }
 
-  li {
+body {
+      text-align: center;
+}
+
+a {
+  color: #cc6600; /* 暗めのオレンジ */
+  text-decoration: none; /* 下線を消す場合 */
+}
+
+a:hover {
+  color: #ff8800; /* ホバー時は少し明るめ */
+  text-decoration: underline; /* ホバー時に下線を出す場合（好みで） */
+}
+
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  }
-  
+  gap: 40px;
+}
+
+.member-card {
+  width: 240px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 10px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.profile-main {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.member-name-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #5c3c00;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.profile-img {
+  width: 768px;
+  height: 432px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+}
+
+.profile-text {
+  max-width: 400px;
+  text-align: left;
+}
+
+.profile-text h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #3b2a00;
+}
+
+.profile-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+@media screen and (max-width: 600px) {
+.profile-img {
+  width: 384px;
+  height: 216px;
+}
+}
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.dark .member-card h3 {
+  color: #ffda95;
+}
+
+.dark .member-card p {
+  color: #c5c5c5;
+}
+
+.dark .member-card .role {
+  color: #ffebc5;
+}
+
+.dark .member-card .name {
+  color: #ffebc5;
+}
+
+.dark .profile-text h2 {
+  color: #ffe5a4;
+}
+
+.dark .profile-text p {
+  color: #c9c9c9;
+}
+
 body {
   background-image: url('https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
@@ -43,31 +236,87 @@ body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
 
-a {
-  color: #cc6600; 
-  text-decoration: none; 
+ @media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
 }
 
-a:hover {
-  color: #ff8800; 
-  text-decoration: underline; 
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
 }
 
-.skin_image {
-    width: 200px;
-    height: auto;
+.member-card {
+  width: 180px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
 }
 
-@media screen and (max-width: 600px) {
-.skin_image {
-    width: 140px;
-    height: auto;
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 10px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
 }
 
 }
 
 </style>
-
 <body>
 <div class="wrapper">
 
@@ -143,119 +392,63 @@ a:hover {
 </div>
 </header>
 
-  <main>
-
+<main class="profile-main">
 <div class="fade-in">
 <div class="center-text">
   <div class="t_1">
     <div class="gyo_1">
       <h2 class="c2_h1">
-      <small class=sub-title>\-Rules-/</small>ルール</h2>
+      <small class=sub-title>\-Deputy Owner-/</small>KenNova758</h2>
     </div>
 	</div>
 </div>
 </div>
-
 <div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>注意点</h2>
-    <p>本、高級ジェネではルールを破った際、即KickやBANをする可能性があります。ミスもあるのでその際はすみません。<br>
-    あと公式サイトということで、少し整理されているのと、詳細ルールは省いています。若干マイクラと見た目が違ったりするかもしれませんが、ご了承ください。</p>
+<section class="member-intro">
+  <div class="member-grid">
+  <div class="member-grid">
+<div class="member-card card-a">
+  <div class="role">Deputy Owner</div>
+  <div class="divider"></div>
+  <div class="info-row">
+    <img src="https://kokyujene.github.io/images/m_kento.webp" alt="Deputy Owner">
+    <span class="name">kento7587</span>
   </div>
-  </div>
+  <p class="comment">こんにちは！kentoだよ～</p>
 </div>
 </div>
-
+</section>
 <div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <div class="center-text">
-    <h2>禁止行為</h2>
-    <h3><br>
-      周りに迷惑なことをしない</h3>
-    <li>
-      <p>チャット連呼(スパム) 禁止<br>
-        荒らし 禁止<br>
-        アイテムまき散らし 禁止<br>
-        悪口 禁止<br>
-        盗み 禁止<br>
-        その他諸々...
+</div>
+  <div class="content-box">
+  <div class="center-text">
+  <div class="box1">
+
+  <div class="profile-box">
+    <img src="https://kokyujene.github.io/images/member_kento.webp" alt="bestimage" class="profile-img">
+
+    <div class="profile-text">
+      <h2>kento7587</h2>
+      <p>
+        こんにちは！kentoだよ～<br>
+        好きなゲームはマイクラとスマブラとフォトナ<br>
+        趣味はpvp<br>
+        ぜひフレンド追加してね！
       </p>
-    </li>
-
-    <h3><br>
-      チートクライアント、ツールを使わない</h3>
-    <p>OnixやFlarial,LatiteなどのPvPクライアントはセーフとみなします</p>
-    <h3><br>
-      PvP場以外で殴らない、殺さない</h3>
-    <p>喧嘩が起こっていても殴って止めずにチャットで注意するか、主に報告してください</p>
-    <h3><br>
-      その他非常識的なことはしない</h3>
-    <li>
-      <p>金銭に関わる事はしないこと<br>
-        運営の予測しない場所へ行かないこと<br>
-        オーバーエンチャントを作らない、持たないこと<br>
-        宣伝をしないこと<br>
-        連れワーをしないこと<br>
-        過度な4Dskinは使用しないこと<br>
-        その他諸々...</p>
-    </li>
-  </div>
-  </div>
-  </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>商売について</h2>
-    <p>商売につきましては、条件付きでOKとされています</p>
-    <h3><br>
-      条件</h3>
-    <li>
-      <p>無謀なもの、ゲームバランスを壊すものなどの販売、取引は禁止<br>
-      宝くじ等を販売するのであれば、あたりを最低3つ用意すること<br>
-      怪しい取引、特定の人を陥れるような取引も禁止<br>
-      借金システムも禁止</p>
-    </li>
-  </div>
-  </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>4Dskin</h2>
-    <p>4Dskinは過度なもの(PvPに支障をきたすようなスキン、荒らしを目的をしたスキン)でなければ良いものとします。<br>帽子やちょっとした飾りなどの4Dskinはセーフです。</p>
-  <div class="image-container">
-  <div class="center-image-left">
-    <div class="skin_image">
-		<img src="out_skin.png" alt="logo_back" class="maru_img">
     </div>
   </div>
   </div>
-  <p>ダメな4Dskinの例</p>
-  <div class="image-container">
-  <div class="center-image-left">
-    <div class="skin_image">
-		<img src="safe_skin.png" alt="logo_back" class="maru_img">
-    </div>
   </div>
   </div>
-  <p>セーフ4Dskinの例</p>
-  </div>
-  </div>
-</div>
 </div>
 
-  </main>
+<div class="fade-in">
+    <div class="center-text">
+    <a onclick="goBack()" class="my-button2" target="_blank">戻る</a><br>
+    </div>
+</div>
+</main>
+
 <footer class="footer">
   <div class="footer-icons">
     <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
@@ -307,6 +500,7 @@ closeIcon.addEventListener('click', () => {
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
+
 </div>
 </body>
 </html>
