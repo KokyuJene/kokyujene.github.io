@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-align: center;
 }
 
 .fade-in {
@@ -698,6 +697,7 @@ header {
     background-color: #333;
     color: #eee;
     box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    text-align: center;
   }
 
 .dark .footer {
@@ -1142,8 +1142,8 @@ body {
 }
 
 .dark .glitch-button {
-  background-color: #1a1a1a;
-  color: #1a1a1a;
+  background-color: #0e0e0e;
+  color: #0e0e0e;
 }
 
 .text_s3 {
@@ -1164,6 +1164,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
+  text-align: center;
 }
 
 .member-card {
@@ -1174,7 +1175,7 @@ body {
   padding: 16px;
   font-family: 'Minecraft', sans-serif;
   transition: transform 0.3s ease;
-  text-align: left;
+  text-align: center;
 }
 
 /* 不規則な角度（例） */
@@ -1188,6 +1189,7 @@ body {
   font-size: 16px;
   color: #5c3c00;
   margin-bottom: 6px;
+  text-align: center;
   font-family: 'Minecraft', 'Unifont', sans-serif;
 }
 
@@ -1354,7 +1356,7 @@ html.dark .status-box {
   padding: 16px;
   font-family: 'Minecraft', sans-serif;
   transition: transform 0.3s ease;
-  text-align: left;
+  text-align: center;
 }
 
 /* 不規則な角度（例） */
