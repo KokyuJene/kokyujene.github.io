@@ -102,6 +102,7 @@ window.addEventListener('load', () => {
     }
   }
 
+
 function addClickEffect(e, size=60) {
   const effect = document.createElement("span");
   effect.className = "click-effect";
@@ -133,7 +134,7 @@ document.body.addEventListener("click", e => {
 const box1 = document.querySelector(".box1");
 if (box1) {
   box1.addEventListener("click", e => {
-    addClickEffect(e, 80); // box1 は中サイズ
+    addClickEffect(e, 120); // box1 は中サイズ
   });
 }
 
@@ -141,6 +142,6 @@ if (box1) {
 const header = document.querySelector("header");
 if (header) {
   header.addEventListener("click", e => {
-    addClickEffect(e, 100); // header は大きめ
+    addClickEffect(e, 400); // header は大きめ
   });
 }
