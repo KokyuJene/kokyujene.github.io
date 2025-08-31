@@ -835,6 +835,13 @@ fetch("/news/news.json")
 
 })();
 
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".hero-animation");
+
+  hero.addEventListener("animationend", () => {
+    hero.classList.add("finished");
+  });
+});
 </script>
 
 <script>
@@ -859,4 +866,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 </body>
+
 </html>
