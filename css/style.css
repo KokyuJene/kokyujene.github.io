@@ -146,6 +146,23 @@ h1 {
   width: auto;
 }
 
+/* ピコッと出るエフェクト用 */
+.click-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  transform: scale(0);
+  animation: clickPop 0.4s ease-out forwards;
+  pointer-events: none;
+  z-index: 2000; /* コンテンツの上に出す */
+}
+
+@keyframes clickPop {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 
 /* メイン */
 main {

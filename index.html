@@ -32,6 +32,11 @@
 </head>
 
 <style>
+
+html, body {
+  overflow-x: hidden;
+}
+
 .Warning {
   color: #800400;
 }
@@ -280,15 +285,126 @@ li {display: flex;}
   }
 }
 
+/* ===== hero 全画面 ===== */
+#heroWrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 1000;
+  overflow: hidden;
+  transition: opacity 0.25s ease;
+}
+
+#heroWrapper img#heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== PCの最終ロゴ（四角形） ===== */
+.logo-slot {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+}
+.logo-slot img#slotImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ===== Welcome Text ===== */
+.welcome-text {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+/* スクロールロック */
+.scroll-locked {
+  overflow: hidden !important;
+  touch-action: none !important;
+}
+
+/* ===== スマホ専用: 丸ロゴ ===== */
+@media (max-width: 768px) {
+  .logo-slot {
+    border-radius: 50%; /* 丸に */
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+  .box1-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* ===== hero wrapper (全画面を覆う) ===== */
+#heroWrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 1200;
+  pointer-events: all;
+}
+
+/* heroInner は JS で幅・高さを px 指定して正方形にします */
+#heroInner {
+  width: 100vmin;    /* 初期値のフォールバック（必ず JS で上書きされます） */
+  height: 100vmin;
+  max-width: 100%;
+  max-height: 100%;
+  background-image: url('/images/wall_back.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 0;   /* PC: 四角、SPでは JS で変える */
+  will-change: transform, border-radius, opacity;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* slot の画像（最終表示） */
+.logo-slot { width: 120px; height: 120px; overflow: hidden; border-radius: 8px; }
+.logo-slot img#slotImage { width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .3s ease; }
+
+/* welcome text */
+.welcome-text { opacity:0; transform:translateY(8px); transition: opacity .45s ease, transform .45s ease; }
+
+/* スクロールロック用 */
+.scroll-locked { overflow:hidden !important; touch-action:none !important; }
+
+/* モバイルでは最終に丸くなる／位置は box1 の slot に合わせる（slot の CSS も調整） */
+@media (max-width: 768px) {
+  .logo-slot { width:140px; height:140px; border-radius:50%; }
+  .box1-inner { display:flex; flex-direction:column; align-items:center; text-align:center; }
+}
+
 
 </style>
 
 <body>
 <div class="wrapper">
 
-  <div class="hero-animation">
-    <img src="images/wall_back.webp" alt="" class="hero-img">
+<section aria-hidden="true" id="hero">
+  <div id="heroWrapper" aria-hidden="true">
+    <!-- アニメーション用の正方形コンテナ。背景画像で表示するので縦横比が保たれる -->
+    <div id="heroInner" aria-hidden="true"></div>
   </div>
+</section>
 
 <header>
   <!-- 左のロゴ -->
@@ -364,16 +480,17 @@ li {display: flex;}
 
   <main>
 
-<!-- ここはサイト内の普通のコンテンツ。四角が収まる場所に .logo-slot を置く -->
-    <section class="box2">
-      <div class="box2-content">
-        <img src="images/logo_icon.webp" alt="ロゴ" class="box2-logo">
-        <div class="box2-text">
-          <h2>ようこそ、新 高級ジェネへ</h2>
-          <p>高級感あふれるサーバー。</p>
-        </div>
-      </div>
-    </section>
+<section class="box1">
+  <div class="box1-inner">
+    <div class="logo-slot" id="logoSlot" aria-hidden="true">
+      <img id="slotImage" src="/images/wall_back.webp" alt="ロゴ">
+    </div>
+
+    <div class="box1-text">
+      <h2 id="welcomeText" class="welcome-text">ようこそ、新 高級ジェネへ</h2>
+    </div>
+  </div>
+</section>
 
   <div class="fade-in">
 <div class="visitor-counter">
@@ -419,7 +536,9 @@ li {display: flex;}
       <br>2.ホストのユーザー名が、「Super Hiko14」もしくは、「KenNova758」(KenNova758はkento7587を同一人物で、名前が変更されました。)、「kazekiri900」のどれかになっているか
       <br>以上のことに注意して、マインクラフト「高級ジェネ」ライフを楽しんでください!<br>
       <br><h3>お願い</h3>
-      <br>見かけ次第、新 高級ジェネ™の運営に報告し、そのパクったホストをできるのであれば通報することです。あと、興味本位で入らないようにしましょう。</p>
+      <br>見かけ次第、新 高級ジェネ™の運営に報告し、そのパクったホストをできるのであれば通報することです。あと、興味本位で入らないようにしましょう。<br></p>
+      <a href="https://kokyujene.github.io/news/002/" class="my-button2">
+      これに関連するニュースを見る</a>
   </div>
   </div>
 </div>
@@ -711,166 +830,210 @@ fetch("/news/news.json")
 
 <script>
 (function(){
+  // 要素取得（なければ処理を安全に抜ける）
   const heroWrapper = document.getElementById('heroWrapper');
-  const heroImage = document.getElementById('heroImage');
-  const logoSlot = document.getElementById('logoSlot');
-  const slotImage = document.getElementById('slotImage');
+  const heroInner   = document.getElementById('heroInner');
+  const logoSlot    = document.getElementById('logoSlot');
+  const slotImage   = document.getElementById('slotImage');
   const welcomeText = document.getElementById('welcomeText');
 
-  // パラメータ（必要に応じて調整）
-  const ANIM_DURATION = 950; // ms：縮小＋移動アニメの長さ
-  const WELCOME_DELAY  = 230; // ms：アニメ完了後、welcome を出す遅延
-
-  // ユーザーが 「動き少なめ」を好む場合はアニメをスキップ
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // スクロール禁止用ユーティリティ
-  function lockScroll() {
-    document.documentElement.classList.add('scroll-locked');
-    document.body.classList.add('scroll-locked');
-  }
-  function unlockScroll() {
+  // 安全ガード：必須要素がないときは早めに復帰（スクロール解除も保障）
+  function safeUnlock(){
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     document.documentElement.classList.remove('scroll-locked');
     document.body.classList.remove('scroll-locked');
   }
 
-  // image のロード待ち helper
-  function imageLoaded(img) {
+  // ロック／アンロック
+  function lockScroll(){
+    document.documentElement.classList.add('scroll-locked');
+    document.body.classList.add('scroll-locked');
+    // 並列で inline style もセット（確実性向上）
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function unlockScroll(){
+    document.documentElement.classList.remove('scroll-locked');
+    document.body.classList.remove('scroll-locked');
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  }
+
+  // 画像プリロード（背景も）
+  function ensureImage(url){
     return new Promise(resolve => {
-      if (img.complete) return resolve();
-      img.addEventListener('load', resolve);
-      img.addEventListener('error', resolve); // エラーでも先に進む（フォールバック）
+      if(!url){ resolve(); return; }
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+      img.src = url;
     });
   }
 
-  // 中心 → スロット に移動させるアニメ
-  async function runHeroAnimation() {
-    // 画像を確実に読み込む（サイズ計測のため）
-    await imageLoaded(heroImage);
-    await imageLoaded(slotImage); // slotImage は同じファイルだが念のため
+  // 安全なランタイム（例外が起きても unlock を呼ぶ）
+  async function run() {
+    try {
+      // 画像があれば待つ
+      const bgUrl = '/images/wall_back.webp';
+      await ensureImage(bgUrl);
+      if (slotImage && slotImage.src) await ensureImage(slotImage.src);
 
-    // prefers-reduced-motion の場合はアニメを行わずに即座に配置
-    if (reduceMotion) {
-      // hide hero and reveal slot immediately
-      heroWrapper.style.opacity = '0';
-      slotImage.style.opacity = '1';
-      welcomeText.style.opacity = '1';
-      return;
-    }
-
-    // 1) スクロールロック
-    lockScroll();
-
-    // 2) 初期（全画面）サイズと位置
-    const vw = Math.max(window.innerWidth, 0);
-    const vh = Math.max(window.innerHeight, 0);
-    // 初期の基準サイズは画面の短辺を正方形基準にする（1:1へ縮小）
-    const startSize = Math.min(vw, vh);
-
-    // 3) 目的地（logoSlot）の位置とサイズ（ビューポート基準）
-    const slotRect = logoSlot.getBoundingClientRect();
-    const targetSize = Math.min(slotRect.width, slotRect.height);
-    const targetCenterX = slotRect.left + slotRect.width / 2;
-    const targetCenterY = slotRect.top  + slotRect.height / 2;
-
-    // 4) ヒーローの現在の中心（ビューポート中心）
-    const startCenterX = vw / 2;
-    const startCenterY = vh / 2;
-
-    // 5) 計算：移動差分（px）とスケール
-    const dx = targetCenterX - startCenterX;
-    const dy = targetCenterY - startCenterY;
-    const scale = (targetSize / startSize) || 0.12; // 最小scaleのガード
-
-    // 6) アニメーションのため css transition を使う方法
-    // transform の基点は translate(-50%,-50%) を想定
-    // まず heroWrapper を中央に保持する設定（既に CSS で中央）
-    heroWrapper.style.transition = `transform ${ANIM_DURATION}ms cubic-bezier(.2,.9,.3,1), opacity 220ms linear`;
-    // apply transform: 1) 移動 -> translate(dx, dy)  2) 縮小 -> scale(scale)
-    // 注意：既存 transform がない前提。transform の元値は translate(0,0) scale(1)
-    // We use translate(-50%, -50%) in CSS if needed; here we compute delta in px and apply translate + scale.
-
-    // set transform origin center to ensure good visual
-    heroWrapper.style.transformOrigin = 'center center';
-
-    // trigger reflow to ensure transition applied
-    void heroWrapper.offsetWidth;
-
-    // apply transform
-    heroWrapper.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
-
-    // 7) 終了後に hero をフェードアウトして slotImage を表示
-    const onEnd = () => {
-      // remove event
-      heroWrapper.removeEventListener('transitionend', onEnd);
-
-      // フェードアウト処理（短く）
-      heroWrapper.style.opacity = '0';
-
-      // slot 内イメージを表示（少し遅らせて滑らかに）
-      setTimeout(() => {
-        slotImage.style.opacity = '1';
-        // スロットに image を移動させる（必要なら DOM 書き換えでも可）
-        // 既に slotImage は同じファイルを指しているため、表示するだけでOK
-      }, 120);
-
-      // welcome テキストを少し遅らせてフェードイン
-      setTimeout(() => {
-        welcomeText.style.opacity = '1';
-        welcomeText.style.transform = 'translateY(0)';
-      }, ANIM_DURATION + WELCOME_DELAY);
-
-      // スクロール許可
-      setTimeout(() => {
-        unlockScroll();
-        // Optional: remove heroWrapper from DOM so it won't intercept interactions
-        try { heroWrapper.parentNode && heroWrapper.parentNode.removeChild(heroWrapper); } catch(e){}
-      }, ANIM_DURATION + 260);
-    };
-
-    heroWrapper.addEventListener('transitionend', onEnd);
-
-    // safety: if transitionend doesn't fire, fallback timer
-    setTimeout(() => {
-      // if heroWrapper still in DOM and visible, call onEnd manually
-      if (document.body.contains(heroWrapper) && parseFloat(getComputedStyle(heroWrapper).opacity) > 0) {
-        onEnd();
+      // 既に heroWrapper が無ければ何もしないが clear はする
+      if (!heroWrapper || !heroInner || !logoSlot) {
+        safeUnlock();
+        // 諸表示を即時出す（スキップ状態）
+        if (slotImage) slotImage.style.opacity = '1';
+        if (welcomeText) { welcomeText.style.opacity='1'; welcomeText.style.transform='translateY(0)'; }
+        return;
       }
-    }, ANIM_DURATION + 1000);
+
+      // 縮小アニメを行う。まずスクロールロック
+      lockScroll();
+
+      const ANIM_DURATION = 900;
+      const WELCOME_DELAY  = 200;
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+      // heroInner を「正方形」にする（短辺基準）
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const startSize = Math.min(vw, vh);
+      heroInner.style.width = startSize + 'px';
+      heroInner.style.height = startSize + 'px';
+
+      // 目的地（slot）の位置
+      const slotRect = logoSlot.getBoundingClientRect();
+      const targetSize = Math.min(slotRect.width, slotRect.height);
+      const targetCenterX = slotRect.left + slotRect.width/2;
+      const targetCenterY = slotRect.top  + slotRect.height/2;
+
+      const startCenterX = vw / 2;
+      const startCenterY = vh / 2;
+
+      const scale = (targetSize / startSize) || 0.12;
+      const dx = targetCenterX - startCenterX;
+      const dy = targetCenterY - startCenterY;
+
+      // トランジション設定（確実に適用するため一度スタイルをリセット）
+      heroInner.style.transition = `transform ${ANIM_DURATION}ms cubic-bezier(.2,.9,.3,1), border-radius ${ANIM_DURATION/2}ms ease, opacity 220ms linear`;
+      heroWrapper.style.transition = `opacity 220ms linear`;
+
+      // 最終の角丸（モバイルは丸）
+      const finalBorderRadius = isMobile ? '50%' : '8px';
+
+      // reflow -> apply
+      void heroInner.offsetWidth;
+      heroInner.style.transformOrigin = 'center center';
+      heroInner.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+      heroInner.style.borderRadius = finalBorderRadius;
+
+      // 終了判定（transform の transitionend を待つ）
+      let finished = false;
+      function finish(){
+        if (finished) return;
+        finished = true;
+
+        // フェードアウト heroWrapper（見た目消す）
+        try { heroWrapper.style.opacity = '0'; } catch(e){}
+
+        // slot の画像を表示
+        setTimeout(()=>{ if(slotImage) slotImage.style.opacity = '1'; }, 120);
+
+        // welcome 表示
+        setTimeout(()=>{
+          if (welcomeText) { welcomeText.style.opacity='1'; welcomeText.style.transform='translateY(0)'; }
+        }, WELCOME_DELAY + 120);
+
+        // 確実にスクロール解放して DOM から削除
+        setTimeout(()=> {
+          unlockScroll();
+          try { heroWrapper.parentNode && heroWrapper.parentNode.removeChild(heroWrapper); } catch(e){}
+        }, Math.max(ANIM_DURATION,300) + 300);
+      }
+
+      // transitionend を安全に待つ（transform を監視）
+      const onTransEnd = (e) => {
+        if (e.propertyName && e.propertyName.toLowerCase() === 'transform') {
+          heroInner.removeEventListener('transitionend', onTransEnd);
+          finish();
+        }
+      };
+      heroInner.addEventListener('transitionend', onTransEnd);
+
+      // フォールバック（万が一 transitionend 発火しないブラウザ向け）
+      setTimeout(()=>{ finish(); }, ANIM_DURATION + 1500);
+
+    } catch (err) {
+      console.error('ヒーローアニメ実行中にエラー:', err);
+      // 例外が出てもスクロールは必ず解除する
+      safeUnlock();
+      // そして該当要素を消す（冪等）
+      try { heroWrapper && heroWrapper.parentNode && heroWrapper.parentNode.removeChild(heroWrapper); } catch(e){}
+    }
+  } // run()
+
+  // 実行：load を待つ（画像やレイアウト確定のため）
+  if (document.readyState === 'loading') {
+    window.addEventListener('load', run, { once: true });
+  } else {
+    run();
   }
 
-  // 初期化：DOM読み込み完了後に実行（script を body 末尾に置いても安全）
-  if (document.readyState === 'loading') {
-    window.addEventListener('load', runHeroAnimation, { once: true });
-  } else {
-    // already loaded
-    runHeroAnimation();
-  }
+  // さらに：万が一ロック解除されてない時にコンソールから手動解除用
+  window.__unlockHeroScroll = function(){
+    console.warn('手動でスクロール解除を実行します');
+    unlockScroll();
+    try { heroWrapper && heroWrapper.parentNode && heroWrapper.parentNode.removeChild(heroWrapper); } catch(e){};
+  };
 
 })();
-
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.querySelector(".hero-animation");
-  const heroImg = document.querySelector(".hero-img");
-  const box1 = document.querySelector(".box1");
+function addClickEffect(e, size=60) {
+  const effect = document.createElement("span");
+  effect.className = "click-effect";
 
-  // スクロール禁止
-  document.body.style.overflow = "hidden";
+  const diameter = size;
+  effect.style.width = effect.style.height = diameter + "px";
 
-  // アニメーション終了後
-  heroImg.addEventListener("animationend", () => {
-    hero.remove(); // 背景画像を削除（Safariプレビュー対策）
-    document.body.style.overflow = "auto"; // スクロール解禁
+  // ページ全体基準で配置
+  const x = e.clientX;
+  const y = e.clientY;
+  effect.style.left = (x - diameter/2) + "px";
+  effect.style.top  = (y - diameter/2) + "px";
 
-    // box1をふわっと表示
-    setTimeout(() => {
-      box1.classList.add("show");
-    }, 300);
+  document.body.appendChild(effect);
+
+  // アニメ終了後に削除
+  effect.addEventListener("animationend", () => {
+    effect.remove();
   });
+}
+
+// 背景クリック（body 全体）
+document.body.addEventListener("click", e => {
+  // body全体は少し小さめ
+  addClickEffect(e, 40);
 });
+
+// box1 クリック
+const box1 = document.querySelector(".box1");
+if (box1) {
+  box1.addEventListener("click", e => {
+    addClickEffect(e, 80); // box1 は中サイズ
+  });
+}
+
+// header クリック
+const header = document.querySelector("header");
+if (header) {
+  header.addEventListener("click", e => {
+    addClickEffect(e, 100); // header は大きめ
+  });
+}
 </script>
+
 </body>
 </html>
