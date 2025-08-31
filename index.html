@@ -183,10 +183,98 @@ li {display: flex;}
   .logo-slot img#slotImage { transition: none; }
 }
 
+/* ====== ヒーローアニメーション ====== */
+.hero-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 9999;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: shrinkMask 2.5s ease forwards;
+}
+
+@keyframes shrinkMask {
+  0% {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  100% {
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+  }
+}
+
+/* ====== box2 ====== */
+.box2 {
+  padding: 80px 5%;
+  background: #ffefcf;
+}
+
+.box2-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.box2.show .box2-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.box2-logo {
+  width: 150px;
+  height: auto;
+}
+
+.box2-text h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.box2-text p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ====== スマホ対応 ====== */
+@media (max-width: 768px) {
+  .box2-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .box2-logo {
+    width: 120px;
+  }
+}
+
+* {
+  text-align: center;
+}
+
 </style>
 
 <body>
 <div class="wrapper">
+
+  <div class="hero-animation">
+    <img src="images/wall_back.webp" alt="" class="hero-img">
+  </div>
 
 <header>
   <!-- 左のロゴ -->
@@ -261,28 +349,17 @@ li {display: flex;}
 </header>
 
   <main>
-<!-- ===== HERO: 画面読み込み時に全画面で表示される要素 ===== -->
-<section aria-hidden="true" id="hero">
-  <div id="heroWrapper">
-    <img id="heroImage" src="/images/wall_back.webp" alt="" />
-  </div>
-</section>
 
 <!-- ここはサイト内の普通のコンテンツ。四角が収まる場所に .logo-slot を置く -->
-<section class="box1">
-  <div class="box1-inner">
-    <!-- 他の要素はそのまま。ここに小さな正方形ロゴが最終的に置かれます -->
-    <div class="logo-slot" id="logoSlot" aria-hidden="true">
-      <!-- 最終表示用の小さな画像（JS完了まで隠れている） -->
-      <img id="slotImage" src="/images/wall_back.webp" alt="ロゴ">
-    </div>
-
-    <div class="box1-text">
-      <h1 id="welcomeText" class="welcome-text">ようこそ、新 高級ジェネへ</h1>
-      <!-- welcomeText はアニメーション後に出す（最初は非表示） -->
+    <section class="box2">
+      <div class="box2-content">
+        <img src="images/logo_icon.webp" alt="ロゴ" class="box2-logo">
+        <div class="box2-text">
+          <h2>ようこそ、新 高級ジェネへ</h2>
+          <p>あああ</p>
+        </div>
       </div>
-  </div>
-</section>
+    </section>
 
   <div class="fade-in">
 <div class="visitor-counter">
@@ -438,7 +515,7 @@ li {display: flex;}
     <img src="images/m_kento.webp" alt="Deputy Owner">
     <span class="name">KenNova758</span>
   </div>
-  <p class="comment">こんにちは！kentoだよ～</p>
+  <p class="comment">こんにちは！KenNovaだよ～</p>
 </a>
 </div>
     
@@ -758,6 +835,28 @@ fetch("/news/news.json")
 
 })();
 
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".hero-animation");
+  const heroImg = document.querySelector(".hero-img");
+  const box1 = document.querySelector(".box1");
+
+  // スクロール禁止
+  document.body.style.overflow = "hidden";
+
+  // アニメーション終了後
+  heroImg.addEventListener("animationend", () => {
+    hero.remove(); // 背景画像を削除（Safariプレビュー対策）
+    document.body.style.overflow = "auto"; // スクロール解禁
+
+    // box1をふわっと表示
+    setTimeout(() => {
+      box1.classList.add("show");
+    }, 300);
+  });
+});
 </script>
 </body>
 </html>
