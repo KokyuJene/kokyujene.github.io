@@ -461,7 +461,7 @@ body {
   </div>
 
   <div class="footer-text">
-    © <span id="year"></span> KoukyuuJene All rights reserved. | 
+    © <span id="year"></span> KokyuJene™ All rights reserved. | 
     <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
     <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
     <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
@@ -499,51 +499,6 @@ closeIcon.addEventListener('click', () => {
   });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
-
-<script>
-function addClickEffect(e, size=60) {
-  const effect = document.createElement("span");
-  effect.className = "click-effect";
-
-  const diameter = size;
-  effect.style.width = effect.style.height = diameter + "px";
-
-  // ページ全体基準で配置
-  const x = e.clientX;
-  const y = e.clientY;
-  effect.style.left = (x - diameter/2) + "px";
-  effect.style.top  = (y - diameter/2) + "px";
-
-  document.body.appendChild(effect);
-
-  // アニメ終了後に削除
-  effect.addEventListener("animationend", () => {
-    effect.remove();
-  });
-}
-
-// 背景クリック（body 全体）
-document.body.addEventListener("click", e => {
-  // body全体は少し小さめ
-  addClickEffect(e, 40);
-});
-
-// box1 クリック
-const box1 = document.querySelector(".box1");
-if (box1) {
-  box1.addEventListener("click", e => {
-    addClickEffect(e, 120); // box1 は中サイズ
-  });
-}
-
-// header クリック
-const header = document.querySelector("header");
-if (header) {
-  header.addEventListener("click", e => {
-    addClickEffect(e, 400); // header は大きめ
-  });
-}
 </script>
 
 </div>

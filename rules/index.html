@@ -155,9 +155,8 @@ a:hover {
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
-    <h2>注意点</h2>
-    <p>本、高級ジェネではルールを破った際、即KickやBANをする可能性があります。ミスもあるのでその際はすみません。<br>
-    あと公式サイトということで、少し整理されているのと、詳細ルールは省いています。若干マイクラと見た目が違ったりするかもしれませんが、ご了承ください。</p>
+    <h2>注意</h2>
+    <p>ルール違反は即BAN対象となる場合があります</p>
   </div>
   </div>
 </div>
@@ -168,32 +167,9 @@ a:hover {
     <div class="side-text">
     <div class="box1">
     <div class="center-text">
-    <h2>禁止行為</h2>
-    <h3><br>
-      周りに迷惑なことをしない</h3>
-      <p>チャット連呼(スパム) 禁止<br>
-        荒らし 禁止<br>
-        アイテムまき散らし 禁止<br>
-        悪口 禁止<br>
-        盗み 禁止<br>
-        その他諸々...
+    <h2>新 高級ジェネ™ルール</h2>
+      <p><br><h3>1. 迷惑行為の禁止</h3><br>･ チャットスパム･連続投稿<br>･ 他プレイヤーへの暴言･誹謗中傷<br>･ アイテムの窃盗･無断使用<br>･ 意図的なラグ発生行為<br>･ その他、他プレイヤーの妨害行為<br><br><h3>2. 不正ツールの使用禁止</h3><br>･ 禁止: チート･ハック･連打ツール･マクロ<br>･ 許可: Onix, Flarial, Latite等のPvPクライアント<br><br><h3>3. PvPルール</h3><br>･ PvP指定エリア以外での戦闘禁止<br>･ トラブル発生時は運営に報告(私闘禁止)<br><br><h3>4. サーバー利用規約</h3><br>･ 現金取引(RMT)の禁止<br>･ 不適切なスキン･名前の使用禁止<br>･ バグ･グリッチの悪用禁止(発見時は要報告)<br>･ オーバーエンチャント品の作成･使用禁止<br>･ 他サーバー･コンテンツの宣伝禁止<br>･ 複数アカウントでの不正行為禁止
       </p>
-
-    <h3><br>
-      チートクライアント、ツールを使わない</h3>
-    <p>OnixやFlarial,LatiteなどのPvPクライアントはセーフとみなします</p>
-    <h3><br>
-      PvP場以外で殴らない、殺さない</h3>
-    <p>喧嘩が起こっていても殴って止めずにチャットで注意するか、主に報告してください</p>
-    <h3><br>
-      その他非常識的なことはしない</h3>
-      <p>金銭に関わる事はしないこと<br>
-        運営の予測しない場所へ行かないこと<br>
-        オーバーエンチャントを作らない、持たないこと<br>
-        宣伝をしないこと<br>
-        連れワーをしないこと<br>
-        過度な4Dskinは使用しないこと<br>
-        その他諸々...</p>
   </div>
   </div>
   </div>
@@ -257,7 +233,7 @@ a:hover {
   </div>
 
   <div class="footer-text">
-    © <span id="year"></span> KoukyuuJene All rights reserved. | 
+    © <span id="year"></span> KokyuJene™ All rights reserved. | 
     <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
     <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
     <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
@@ -295,51 +271,6 @@ closeIcon.addEventListener('click', () => {
   });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
-
-<script>
-function addClickEffect(e, size=60) {
-  const effect = document.createElement("span");
-  effect.className = "click-effect";
-
-  const diameter = size;
-  effect.style.width = effect.style.height = diameter + "px";
-
-  // ページ全体基準で配置
-  const x = e.clientX;
-  const y = e.clientY;
-  effect.style.left = (x - diameter/2) + "px";
-  effect.style.top  = (y - diameter/2) + "px";
-
-  document.body.appendChild(effect);
-
-  // アニメ終了後に削除
-  effect.addEventListener("animationend", () => {
-    effect.remove();
-  });
-}
-
-// 背景クリック（body 全体）
-document.body.addEventListener("click", e => {
-  // body全体は少し小さめ
-  addClickEffect(e, 40);
-});
-
-// box1 クリック
-const box1 = document.querySelector(".box1");
-if (box1) {
-  box1.addEventListener("click", e => {
-    addClickEffect(e, 120); // box1 は中サイズ
-  });
-}
-
-// header クリック
-const header = document.querySelector("header");
-if (header) {
-  header.addEventListener("click", e => {
-    addClickEffect(e, 400); // header は大きめ
-  });
-}
 </script>
 
 </div>
