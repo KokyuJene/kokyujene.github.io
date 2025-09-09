@@ -35,7 +35,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-align: center;
 }
 
 .fade-in {
@@ -180,6 +179,23 @@ h1 {
   width: auto;
 }
 
+/* ピコッと出るエフェクト用 */
+.click-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  transform: scale(0);
+  animation: clickPop 0.4s ease-out forwards;
+  pointer-events: none;
+  z-index: 2000; /* コンテンツの上に出す */
+}
+
+@keyframes clickPop {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 
 /* メイン */
 main {
@@ -219,7 +235,7 @@ img {
 }
 
 .c2_h1 {
-  	color: #ffaa00;
+  color: #ffaa00;
 	padding-left:10px;
 	border-left: 10px solid #deb02c;
 	border-right: 10px solid #deb02c;
@@ -507,7 +523,7 @@ header {
 }
 
 .c1_h1, .c2_h1 {
-  font-size: 28px;
+  font-size: 22px;
 }
 
 }
@@ -731,6 +747,7 @@ header {
     background-color: #333;
     color: #eee;
     box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    text-align: center;
   }
 
 .dark .footer {
@@ -1003,25 +1020,25 @@ header {
   transition: bottom 0.4s ease, opacity 0.4s ease;
   opacity: 0;
   z-index: 2000;
-  text-align: center;
+  text-align: left;
 }
 
 .mobile-menu ul {
   list-style: none;
   padding: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .mobile-menu a {
   text-decoration: none;
   color: white;
-  text-align: center;
+  text-align: left;
 }
 
 .mobile-menu.active {
   bottom: 0;
   opacity: 1;
-  text-align: center;
+  text-align: left;
 }
 
 /* スマホ用表示切替 */
@@ -1175,8 +1192,8 @@ body {
 }
 
 .dark .glitch-button {
-  background-color: #1a1a1a;
-  color: #1a1a1a;
+  background-color: #0e0e0e;
+  color: #0e0e0e;
 }
 
 .text_s3 {
@@ -1197,6 +1214,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
+  text-align: center;
 }
 
 .member-card {
@@ -1207,7 +1225,7 @@ body {
   padding: 16px;
   font-family: 'Minecraft', sans-serif;
   transition: transform 0.3s ease;
-  text-align: left;
+  text-align: center;
 }
 
 /* 不規則な角度（例） */
@@ -1221,6 +1239,7 @@ body {
   font-size: 16px;
   color: #5c3c00;
   margin-bottom: 6px;
+  text-align: center;
   font-family: 'Minecraft', 'Unifont', sans-serif;
 }
 
@@ -1387,7 +1406,7 @@ html.dark .status-box {
   padding: 16px;
   font-family: 'Minecraft', sans-serif;
   transition: transform 0.3s ease;
-  text-align: left;
+  text-align: center;
 }
 
 /* 不規則な角度（例） */
@@ -1580,6 +1599,41 @@ html.dark .status-box {
   overflow: hidden !important;
   touch-action: none; /* モバイルのスクロール抑止に役立つ */
 }
+
+.hero-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000; /* 背景色（演出用） */
+  z-index: 9999;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: shrinkMask 2s ease forwards;
+}
+
+/* 画像を縮小して四角にするアニメーション */
+@keyframes shrinkMask {
+  0% {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+  }
+}
+
 </style>
 
 <body>
@@ -1676,7 +1730,7 @@ html.dark .status-box {
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
-      <p class="random-message" id="randomText">Loading...</p>
+    <p class="random-message" id="randomText">Loading...</p>
   </div>
   </div>
 </div>
