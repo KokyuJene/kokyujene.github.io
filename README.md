@@ -2,17 +2,17 @@
 
 ![image](https://kokyujene.github.io/ogp.webp)
 
-ようこそ!
+# ようこそ!
 
-ここでは、[新 高級ジェネ 公式サイト](https://kokyujene.github.io/) の詳細や、そのサーバーの関連リンクなどが記述されています!
+ここでは、**[新 高級ジェネ 公式サイト](https://kokyujene.github.io/) の詳細**や、その**サーバーの関連リンクなどが記述されています!**
 
 ## サーバーについて
 
-「新 高級ジェネ」は、[Super Hiko14](https://kokyujene.github.io/members/Super_Hiko14/) がホストを運営する、すべてが高級で特別な体験ができるマインクラフト統合版サーバーです。
+**『新 高級ジェネ』**は、**[Super Hiko14](https://kokyujene.github.io/members/Super_Hiko14/) がホストを運営する、すべてが高級で特別な体験ができるマインクラフト統合版サーバーです。**
 
 ## サイトの概要
 
-この公式サイトでは、以下の情報を提供しています。
+この公式サイトでは、**以下の情報を提供しています。**
 - サーバーの最新情報やイベント案内
 - サーバーへの参加方法
 - サーバーのルールとマナー
@@ -25,7 +25,7 @@
 
 ## サイトを見る
 
-以下のURLから公式サイトにアクセスできます。
+以下の**URLから公式サイトにアクセスできます。**
 
 **[新 高級ジェネ 公式サイト](https://kokyujene.github.io/)**
 
@@ -41,6 +41,12 @@
 
 **[kazekiri900](https://kokyujene.github.io/members/kazekiri900/)** - Deputy Owner
 
+## 最近のニュース
+
+**[ちょっとしたデザイン変更 | ニュース](https://kokyujene.github.io/news/001/)** - 08/30
+
+**[パクリについて - 注意 | ニュース](https://kokyujene.github.io/news/002/)** - 08/31
+
 ## 関連リンク
 
 * **[LINE OpenChat](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)**
@@ -48,5 +54,4 @@
 * **[X(Twitter)](https://x.com/Kokyujene)**
 
 ---
-
-© 2025 KoukyuuJene All rights reserved.
+© 2025 KokyuJene™ All rights reserved.
