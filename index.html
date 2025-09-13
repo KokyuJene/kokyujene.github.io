@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>新 高級ジェネ 公式サイト</title>
+  <title>新 高級ジェネ™ 公式サイト</title>
   <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! マイクラで是非プレイしてみてね! 高級ジェネの運営メンバーやルールが記述されているページもあり、お問い合わせやYoutube、オープンチャットなどのリンクも記載!">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
 
@@ -54,21 +54,140 @@ html, body {
 }
 
 .dark .Warningbox1 {
-  box-sizing: border-box;
   background-color: #410000;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  align-items: center;  
-  width: 140%;
-  margin-left: -20%;
 }
 
 @media screen and (max-width: 768px) {
-  .box1 {
-    box-sizing: border-box;
+/* ===============================
+   Layout reset for images & body
+   =============================== */
+
+/* 全画像は幅可変、はみ出し防止 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* もし他で固定幅を指定している場合に備えて強めに上書き */
+.center-image-left img,
+.center-image img,
+.image-container img {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* body / main の余白整理
+   ヘッダーが fixed の場合、コンテンツが被らないよう上部余白を確保 */
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: #ffefcf; /* ご希望の背景色 */
+}
+
+/* ヘッダー高さに応じて main の余白を調整 (ヘッダー高さを合わせてください) */
+.site-header, header {
+  height: 72px; /* 実際のヘッダー高さに合わせて調整 */
+  line-height: 72px;
+}
+main {
+  padding-top: calc(72px + 24px); /* ヘッダー + 少し余白 */
+}
+
+/* ===============================
+   box1 の安全な中央寄せ & 幅制御
+   =============================== */
+
+.Warningbox1 {
+  box-sizing: border-box;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+  align-items: center;
+
+  /* 幅調整：PCは最大幅で止め、常に中央寄せ */
+  width: calc(100% - 40px); /* 画面端にほんの少しスペースを残す */
+  max-width: 1600px;        /* 指定どおり1600pxで上限 */
+  margin: 20px auto;        /* 中央寄せ */
+}
+
+  .Warningbox1 {
+    width: 95%;
+    max-width: 95%;
+    margin: 12px auto;
+    padding: 18px;
   }
+
+/* もし他ルールにより左右にずれている場合の保険（最終手段） */
+.Warningbox1 {
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+/* ===============================
+   親コンテナと content-box 周りの整理
+   =============================== */
+
+.content-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  width: calc(100% - 40px);
+  max-width: 1600px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+  .content-box {
+    padding: 20px;
+    gap: 16px;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+
+/* 親の左右余白が原因なら、wrapper にも中央寄せを強制 */
+.wrapper, .parent-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ===============================
+   ヘッダーと fixed 要素の衝突対策
+   =============================== */
+
+/* 固定ヘッダーがある場合はコンテンツ先頭がヘッダー下に来るように調整済み（main padding-top）。 */
+
+/* ===============================
+   最終的な強制上書き（必要なら有効化）
+   =============================== */
+
+/* ※ 以下は最終手段：既存の誤ったルールをどうしても消せないときは有効化してください。
+   まずは上のルールだけを試し、まだ直らない場合に下２行のコメントを外してください. */
+
+/*
+img, .center-image-left img, .center-image img, .image-container img {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+}
+
+.Warningbox1 {
+  width: calc(100% - 40px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+*/
+
 }
 
 li {display: flex;}
@@ -281,7 +400,7 @@ li {display: flex;}
     </div>
   </section>
 
-  <div class="fade-in">
+<div class="fade-in">
 <div class="visitor-counter">
   <h3 class="text_s1">総訪問回数</h3>
   <span id="count">Loading...</span>
@@ -318,7 +437,7 @@ li {display: flex;}
   <div class="center-image-left">
 		<img src="images/pakuri.webp" alt="example_pakuri" class="maru_img">
   </div>
-</div>
+</div><br>
 <div class="image-container">
   <div class="center-image-left">
 		<img src="news/002/images/pakuri3.webp" alt="example_pakuri" class="maru_img">
@@ -327,10 +446,10 @@ li {display: flex;}
 <p>実際のパクリワールド</p>
       <br><h3>入る前に確認してほしいこと</h3>
       <br>1.ワールド名が「新 高級ジェネ™」になっているか
-      <br>2.ホストのユーザー名が、「Super Hiko14」もしくは、「KenNova758」(KenNova758はkento7587と同一人物です。)、「kazekiri900」のどれかになっているか
+      <br>2.ホストのユーザー名が、「Super Hiko14」もしくは、<br>「KenNova758」(KenNova758はkento7587と同一人物です。)、<br>「kazekiri900」のどれかになっているか
       <br>以上のことに注意してください。<br>
       <br><h3>お願い</h3>
-      <br>見かけ次第、新 高級ジェネ™の運営に報告し、そのパクったホストをできるのであれば通報することです。あと、興味本位で入らないようにしましょう。<br></p>
+      <br>見かけ次第、新 高級ジェネ™の運営に報告し、<br>そのパクったホストをできるのであれば通報することです。<br>あと、興味本位で入らないようにしましょう。<br></p>
       <a href="https://kokyujene.github.io/news/002/" class="my-button2">
       これに関連するニュースを見る</a>
   </div>
@@ -344,6 +463,7 @@ li {display: flex;}
     <div class="box1">
     <small class=sub-title>\-Official Discord Server-/</small>
     <h2>公式Discord</h2>
+    <p>公式Discordサーバーを作成しました!!ぜひ参加してみてください!!</p>
 <a href="https://discord.gg/ukFH4NtDG6" target="_blank" class="my-button2">
   公式Discordサーバーに参加
 </a>
@@ -358,6 +478,7 @@ li {display: flex;}
     <div class="box1">
   <h2 class="sub-title">\-X(formerly Twitter)-/</h2>
   <h2>X(旧Twitter)</h2>
+  <p>公式X(旧Twitter)を開始しました!!<br>意味不明なポストやお知らせなどを発信していくのでフォローお願いします!</p>
 <a class="twitter-timeline" 
    href="https://twitter.com/Kokyujene?ref_src=twsrc%5Etfw" target="_blank">
    Tweets by Kokyujene
@@ -422,6 +543,7 @@ li {display: flex;}
     <h2>主なメンバー</h2>
 <section class="member-intro">
   <div class="member-grid">
+  <div class="fade-in">
   <div class="member-grid">
 <a href="https://kokyujene.github.io/members/Super_Hiko14/" class="member-card card-a">
   <div class="role">Owner</div>
@@ -433,7 +555,9 @@ li {display: flex;}
   <p class="comment">kento教信者になりましょう(???)</p>
 </a>
 </div>
+</div>
 
+<div class="fade-in">
   <div class="member-grid">
 <a href="https://kokyujene.github.io/members/KenNova758/" class="member-card card-b">
   <div class="role">Deputy Owner</div>
@@ -445,7 +569,9 @@ li {display: flex;}
   <p class="comment">こんにちは！KenNovaだよ～</p>
 </a>
 </div>
-    
+</div>
+
+<div class="fade-in">    
   <div class="member-grid">
 <a href="https://kokyujene.github.io/members/kazekiri900/" class="member-card card-c">
   <div class="role">Deputy Owner</div>
@@ -456,6 +582,7 @@ li {display: flex;}
   </div>
   <p class="comment">高級ジェネサーバーホストになれる権限を持ってる中では一番高性能なパソコンを使ってます。</p>
 </a>
+</div>
 </div>
 </div>
 
@@ -501,7 +628,6 @@ li {display: flex;}
     <h2>サーバーのルールなど</h2>
     <p>このサイトには高級ジェネのルールがあります!内容はほとんど変わりません!!少し整理されているので多少は見やすいと思います。<br>
     <a href="https://kokyujene.github.io/rules/" class="my-button">ルール</a><br>
-    <a href="https://kokyujene.github.io/privacypolicy/" class="my-button">プライバシーポリシー</a></p>
   </div>
   </div>
 </div>

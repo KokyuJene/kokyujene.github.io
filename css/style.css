@@ -185,7 +185,7 @@ img {
 }
 
 .center-image-left {
-    display: flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -237,7 +237,7 @@ img {
 }
 
 /* スマホ対応 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .soft-box {
     width: 95%;
     padding: 16px;
@@ -333,7 +333,7 @@ img {
 }
 
 .side-text {
-  max-width: 500px;
+  max-width: 1600px;
   line-height: 1.6;
 }
   .my-button {
@@ -416,7 +416,17 @@ h1 {
   color: #ffaa00;
 }
 
+/* 通常のテキスト選択 */
+::selection {
+  background: #ffe4b5;   /* オレンジ */
+  color: #ffb23e;        /* オレンジ寄りの白 */
+}
 
+/* Firefox 用（互換性のため） */
+::-moz-selection {
+  background: #ffe4b5;
+  color: #ffb23e;
+}
 
 /*スマホ表示時*/
 @media screen and (max-width: 768px) {
@@ -526,8 +536,10 @@ header {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: center;
   align-items: center;  
-  width: 140%;
-  margin-left: -20%;
+  /* 横幅調整 */
+  width: 100%;        /* 強引に140%にせず自然に広げる */
+  max-width: 1600px;  /* 必要なら上限を設定（大画面用） */
+  margin: 20px auto;  /* 自動で中央寄せ */
 }
 
 @media screen and (max-width: 768px) {
@@ -652,7 +664,7 @@ header {
 }
 
 /* スマホ対応 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .footer {
     flex-direction: column;
     height: auto;
@@ -793,7 +805,7 @@ header {
   text-shadow: 1px 1px 2px #884400;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
  .h2-header {
   font-size: 10px;
  }
@@ -859,9 +871,6 @@ header {
   padding: 1em 2em;
   z-index: 1000;          
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* ロゴ */
@@ -1023,7 +1032,7 @@ header {
 }
 
 /* PCではメニューアイコン非表示 */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
   .menu-icon,
   .close-icon {
     display: none !important;
@@ -1352,7 +1361,7 @@ html.dark .status-box {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
 .member-intro {
   text-align: center;
   padding: 40px 20px;
@@ -1599,4 +1608,138 @@ html.dark .status-box {
     height: 200px;
     border-radius: 10px;
   }
+}
+
+@media screen and (max-width: 768px) {
+/* ===============================
+   Layout reset for images & body
+   =============================== */
+
+/* 全画像は幅可変、はみ出し防止 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* もし他で固定幅を指定している場合に備えて強めに上書き */
+.center-image-left img,
+.center-image img,
+.image-container img {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* body / main の余白整理
+   ヘッダーが fixed の場合、コンテンツが被らないよう上部余白を確保 */
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: #ffefcf; /* ご希望の背景色 */
+}
+
+/* ヘッダー高さに応じて main の余白を調整 (ヘッダー高さを合わせてください) */
+.site-header, header {
+  height: 72px; /* 実際のヘッダー高さに合わせて調整 */
+  line-height: 72px;
+}
+main {
+  padding-top: calc(72px + 24px); /* ヘッダー + 少し余白 */
+}
+
+/* ===============================
+   box1 の安全な中央寄せ & 幅制御
+   =============================== */
+
+.box1 {
+  box-sizing: border-box;
+  background-color: #ffefcf;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+  align-items: center;
+
+  /* 幅調整：PCは最大幅で止め、常に中央寄せ */
+  width: calc(100% - 40px); /* 画面端にほんの少しスペースを残す */
+  max-width: 1600px;        /* 指定どおり1600pxで上限 */
+  margin: 20px auto;        /* 中央寄せ */
+}
+
+  .box1 {
+    width: 95%;
+    max-width: 95%;
+    margin: 12px auto;
+    padding: 18px;
+  }
+
+/* もし他ルールにより左右にずれている場合の保険（最終手段） */
+.box1 {
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+/* ===============================
+   親コンテナと content-box 周りの整理
+   =============================== */
+
+.content-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  width: calc(100% - 40px);
+  max-width: 1600px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+  .content-box {
+    padding: 20px;
+    gap: 16px;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+
+/* 親の左右余白が原因なら、wrapper にも中央寄せを強制 */
+.wrapper, .parent-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ===============================
+   ヘッダーと fixed 要素の衝突対策
+   =============================== */
+
+/* 固定ヘッダーがある場合はコンテンツ先頭がヘッダー下に来るように調整済み（main padding-top）。 */
+
+/* ===============================
+   最終的な強制上書き（必要なら有効化）
+   =============================== */
+
+/* ※ 以下は最終手段：既存の誤ったルールをどうしても消せないときは有効化してください。
+   まずは上のルールだけを試し、まだ直らない場合に下２行のコメントを外してください. */
+
+/*
+img, .center-image-left img, .center-image img, .image-container img {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+}
+
+.box1 {
+  width: calc(100% - 40px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+*/
+
 }
