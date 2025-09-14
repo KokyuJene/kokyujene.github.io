@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>新 高級ジェネ™ 公式サイト</title>
-  <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! マイクラで是非プレイしてみてね! 高級ジェネの運営メンバーやルールが記述されているページもあり、お問い合わせやYoutube、オープンチャットなどのリンクも記載!">
+  <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
 
 <!-- OGP (Open Graph Protocol) -->
   <meta property="og:title" content="新 高級ジェネ 公式サイト">
-  <meta property="og:description" content="Super Hiko14が運営するマインクラフト統合版サーバー『新 高級ジェネ』公式サイト!">
+  <meta property="og:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta property="og:image" content="https://kokyujene.github.io/images/ogp.webp">
   <meta property="og:url" content="https://kokyujene.github.io">
   <meta property="og:type" content="website">
@@ -19,16 +19,27 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Kokyujene">
   <meta name="twitter:title" content="新 高級ジェネ 公式サイト">
-  <meta name="twitter:description" content="Super Hiko14が運営するマインクラフト統合版サーバー『新 高級ジェネ』公式サイト!">
+  <meta name="twitter:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta name="twitter:image" content="https://kokyujene.github.io/images/ogp.webp">
 
 <!-- ico, etc... -->
   <link rel="icon" href="https://kokyujene.github.io/favicon.ico" type="image/x-icon">
   <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
   <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
-  <link rel="apple-touch-icon" href="https://kokyujene.github.io/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://kokyujene.github.io/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://kokyujene.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="https://kokyujene.github.io/favicon-48x48.png">
+
+<!-- iOS Safari 用 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://kokyujene.github.io/apple-touch-icon.png">
+
+<!-- Android / Chrome PWA 用 -->
+  <link rel="manifest" href="https://kokyujene.github.io/site.webmanifest">
+
+<!-- レガシー互換 -->
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
 </head>
 
 <style>
@@ -192,9 +203,17 @@ img, .center-image-left img, .center-image img, .image-container img {
 
 li {display: flex;}
 
-.news-box{
-  padding:14px; border-radius:8px; background:#fff6e5; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px; font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
+.dark .news-box{
+  padding:14px; border-radius:8px; background:#81580b; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px; font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
 }
+
+.news-box{
+  padding:14px; border-radius:8px; background:#ffaa00; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px; font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
+}
+
+.news-box:hover { color: #ffdc96; background-color: #ffb41e; }
+
+.dark .news-box:hover { background-color: #e7ae44; color: #fff8ec; }
 
     .news-item { border-bottom: 1px solid #ccc; padding: 10px 0; }
     .news-category { font-size: 0.8em; padding: 2px 6px; border-radius: 4px; margin-right: 8px; }
@@ -212,6 +231,10 @@ li {display: flex;}
   z-index: 9999;
   justify-content: center;
   align-items: center;
+}
+
+.news-box:hover {
+  transform: scale(1.05);
 }
 
 /* 拡大画像 */
@@ -501,7 +524,7 @@ li {display: flex;}
   <h2>最新ニュース</h2>
   <section id="latest-news">
   <ul id="news-list"></ul>
-  <div class="more-link"><a href="https://kokyujene.github.io/news/">→ ニュース一覧へ</a></div>
+  <div class="more-link"><a href="https://kokyujene.github.io/news/" class="my-button">» ニュース一覧へ</a></div>
 </section>
     </div>
     </div>
@@ -735,15 +758,17 @@ fetch("/news/news.json")
   .then(res => res.json())
   .then(data => {
     const list = document.getElementById("news-list");
+    list.innerHTML = ""; // 既存をクリア
     data.slice(0, 3).forEach(item => {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="${item.link}">
-        <span class="tag">»${item.tag}«</span> ${item.title}
-      </a>`;
+      li.innerHTML = `
+        <a href="${item.link}" class="news-box">
+          <span class="tag">»${item.category}«</span> ${item.title}
+        </a>`;
       list.appendChild(li);
     });
-  });
-
+  })
+  .catch(err => console.error("ニュース読み込みエラー:", err));
 </script>
 
 <script>

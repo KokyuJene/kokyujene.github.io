@@ -20,7 +20,6 @@
 - 運営やその他メンバーの紹介
 - 他サービスの紹介
 - サーバー状況
-- ロゴ画像まとめ
 - などなど...
 
 ## サイトを見る
@@ -33,11 +32,15 @@
 
 **[サーバールール | 新 高級ジェネ 公式サイト](https://kokyujene.github.io/rules/)**
 
+**[ニュース | 新 高級ジェネ 公式サイト](https://kokyujene.github.io/news/)**
+
+**[お問い合わせ | 新 高級ジェネ 公式サイト](https://kokyujene.github.io/contact/)**
+
 ## 運営メンバー(特設ページ)
 
 **[Super Hiko14](https://kokyujene.github.io/members/Super_Hiko14/)** - Owner
 
-**[kento7587](https://kokyujene.github.io/members/kento7587/)** - Deputy Owner
+**[KenNova758](https://kokyujene.github.io/members/KenNova758/)** - Deputy Owner
 
 **[kazekiri900](https://kokyujene.github.io/members/kazekiri900/)** - Deputy Owner
 
@@ -47,11 +50,14 @@
 
 **[パクリについて - 注意 | ニュース](https://kokyujene.github.io/news/002/)** - 08/31
 
+**[新 高級ジェネ™ 3 作った方がいい? - 投票 | ニュース](https://kokyujene.github.io/news/003/)** - 09/14
+
 ## 関連リンク
 
-* **[LINE OpenChat](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)**
+* **[OpenChat](https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw)**
 * **[Youtube](https://www.youtube.com/@Kokyujene)**
 * **[X(Twitter)](https://x.com/Kokyujene)**
+* **[Discord](https://discord.com/invite/ukFH4NtDG6)**
 
 ---
 © 2025 KokyuJene™ All rights reserved.

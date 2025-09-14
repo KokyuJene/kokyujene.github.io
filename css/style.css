@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+a {
+  color: #cc6600; 
+  text-decoration: none; 
+}
+
+a:hover {
+  color: #ff8800; 
+  text-decoration: underline; 
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -352,7 +362,8 @@ img {
   }
 
 .my-button:hover {
-  background-color: #ffb92c;
+  color: #ffdc96;
+  background-color: #ffb41e;
   transform: scale(1.05);
 }
 
@@ -376,7 +387,8 @@ img {
   }
 
 .my-button2:hover {
-  background-color: #ffb92c;
+  color: #ffdc96;
+  background-color: #ffb41e;
   transform: scale(1.05);
 }
 
@@ -757,11 +769,11 @@ header {
 }
 
 .dark .nav-links a {
-  color: #f5f5f5;
+  color: #e7ae44;
   text-decoration: none;
 }
 .dark .my-button:hover {
-  background-color: #ffb92c;
+  background-color: #e7ae44;
   transform: scale(1.05);
 }
 
@@ -770,18 +782,18 @@ header {
 }
 
 .dark .my-button2:hover {
-  background-color: #ffb92c;
+  background-color: #e7ae44;
   transform: scale(1.05);
 }
 
 .dark .my-button {
-    background-color: rgb(255, 184, 41);
-    color: white;
+    background-color: #81580b;
+    color: #fff8ec;
   }
 
 .dark .my-button2 {
-    background-color: rgb(255, 184, 41);
-    color: white;
+    background-color: #81580b;
+    color: #fff8ec;
   }
 
 .section-title {
@@ -999,22 +1011,36 @@ header {
   text-align: left;
 }
 
+/* モバイルメニューのリストを詰める */
 .mobile-menu ul {
-  list-style: none;
   padding: 0;
-  text-align: left;
+  margin: 0;
+  list-style: none;
+}
+
+.mobile-menu li {
+  margin: 8px 0; /* 必要なら調整、デフォはもっと大きくなっている可能性あり */
 }
 
 .mobile-menu a {
+  display: inline-block; /* block化を解除して文字間隔を詰める */
+  line-height: 1.4;      /* 行間を狭めて読みやすく */
   text-decoration: none;
-  color: white;
-  text-align: left;
 }
 
 .mobile-menu.active {
   bottom: 0;
   opacity: 1;
   text-align: left;
+}
+
+/* 全体の img をリセット → ✗ ではなく、本文や記事部分だけ */
+main img,
+.article img,
+.content-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* スマホ用表示切替 */
@@ -1066,17 +1092,6 @@ header {
   height: 40px;
   width: auto;
 }
-}
-
-
-a {
-  color: #cc6600; 
-  text-decoration: none; 
-}
-
-a:hover {
-  color: #ff8800; 
-  text-decoration: underline; 
 }
 
 body {
