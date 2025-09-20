@@ -63,14 +63,6 @@ body {
   transition: background-image 0.5s ease;
 }
 
-body,
-html:not(.dark) body {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: background-image 0.5s ease;
-}
-
 .dark body {
   color: #ffebc5;
 }
