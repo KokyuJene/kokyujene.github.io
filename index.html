@@ -303,6 +303,7 @@ li {display: flex;}
   display: inline-block;
   position: relative;
 }
+
 .logo-slot img#slotImage {
   width: 100%;
   height: 100%;
@@ -318,10 +319,82 @@ li {display: flex;}
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* スクロールロック */
-.scroll-locked {
-  overflow: hidden !important;
-  touch-action: none !important;
+/* 仕切り：シンプルな横線イメージの代替 */
+.divider_1 {
+  height: 15px;
+  background-color: #ffdca6;
+}
+
+.dark .divider_1 {
+  height: 15px;
+  background-color: #362400;
+}
+
+/* ループ背景セクション */
+.loop-bg {
+  position: relative;
+  background-image: url('../images/pc_nomal.webp');
+  background-repeat: repeat-y;
+  background-position: center 0px;
+  background-size: auto;
+  padding: 40px 20px;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+@media screen and (max-width: 768px) {
+/* ループ背景セクション */
+.loop-bg {
+  background-image: url('../images/phone_nomal.webp');
+}
+}
+
+.loop-bg .loop-content {
+  box-sizing: border-box;
+  background-color: #ffefcf3a;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  align-items: center;  
+  width: 100%;        
+  max-width: 1600px;  
+  margin: 20px auto;  
+}
+
+.dark .loop-bg .loop-content {
+  background-color: #3624003a;
+  color: #ffebc5;
+}
+
+.youtube {
+  width: 672px;
+  height: 378px;
+}
+
+/* モバイル対策：背景画像を低負荷に */
+@media (max-width: 768px) {
+  .loop-bg {
+    background-attachment: scroll;
+  }
+
+.h2_yokoku {
+  font-size: 30px;
+}
+
+.youtube {
+  width: 256px;
+  height: 144px;
+}
+}
+
+.h2_yokoku {
+  font-size: 50px;
+}
+
+.x-embed-center {
+  display: flex;
+  justify-content: center;
 }
 
 </style>
@@ -331,18 +404,15 @@ li {display: flex;}
 
 <section aria-hidden="true" id="hero">
   <div id="heroWrapper">
-    <!-- 背景画像を正方形コンテナとして扱う -->
     <div id="heroInner"></div>
   </div>
 </section>
 
 <header>
-  <!-- 左のロゴ -->
   <a href="https://kokyujene.github.io/" class="logo">
     <img src="https://kokyujene.github.io/images/logo_icon.webp" alt="LOGO">
   </a>
 
-  <!-- PC用ナビゲーション -->
   <nav class="nav-links">
     <ul>
       <li>
@@ -372,12 +442,9 @@ li {display: flex;}
     </ul>
   </nav>
 
-  <!-- スマホ用メニューアイコン（右寄せ） -->
   <img src="https://kokyujene.github.io/images/menu.webp" alt="メニュー" class="menu-icon">
   <img src="https://kokyujene.github.io/images/close.webp" alt="閉じる" class="close-icon">
 
-  <!-- モバイルメニュー -->
-<!-- モバイルメニュー -->
 <div id="mobileMenu" class="mobile-menu">
   <ul>
     <li>
@@ -412,7 +479,6 @@ li {display: flex;}
 
   <section class="box1">
     <div class="box1-inner">
-      <!-- 最終的にここに収まる -->
       <div class="logo-slot" id="logoSlot">
         <img id="slotImage" src="/images/wall_back.webp" alt="ロゴ">
       </div>
@@ -448,36 +514,30 @@ li {display: flex;}
 </div>
 
 <div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="Warningbox1">
-    <div class="Warning">
-    <small class=sub-title>\-! Warning !-/</small>
-    <h2>! 注意 !</h2>
+<section class="divider_1"></section>
+
+<section class="loop-bg" id="loopSection">
+  <div class="loop-content">
+  <h2 class="sub-title">\-About New Kokyujene™ 3-/</h2>
+  <h2>新 高級ジェネ™ 3について</h2>
+  <p><br></p>
+    <h2 class="h2_yokoku">予告</h2>
+    <p><br></p>
+    <p>新 高級ジェネ™ 3を製作中です!!<br>
+    <p><br><iframe src="https://www.youtube.com/embed/yOMIaIu6s9w?si=htH7XFiri9p-OrxP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="youtube"></iframe></p>
+    <div class="x-embed-center">
+    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今のジェネレーターの様子(※モザイク有) <a href="https://t.co/nrTUtJiZIm">pic.twitter.com/nrTUtJiZIm</a></p>&mdash; 高級ジェネ (@Kokyujene) <a href="https://twitter.com/Kokyujene/status/1968683584568340548?ref_src=twsrc%5Etfw">September 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
-    <p>最近、新 高級ジェネ™のパクリワールドが出ています。<br>あくまで、画像は例(例と言っても、実際にあるもの)です。<br><br>
 <div class="image-container">
   <div class="center-image-left">
-		<img src="images/pakuri.webp" alt="example_pakuri" class="maru_img">
-  </div>
-</div><br>
-<div class="image-container">
-  <div class="center-image-left">
-		<img src="news/002/images/pakuri3.webp" alt="example_pakuri" class="maru_img">
+		<img src="news/004/images/gen6_1.webp" alt="memory" class="maru_img">
   </div>
 </div>
-<p>実際のパクリワールド</p>
-      <br><h3>入る前に確認してほしいこと</h3>
-      <br>1.ワールド名が「新 高級ジェネ™」になっているか
-      <br>2.ホストのユーザー名が、「Super Hiko14」もしくは、<br>「KenNova758」(KenNova758はkento7587と同一人物です。)、<br>「kazekiri900」のどれかになっているか
-      <br>以上のことに注意してください。<br>
-      <br><h3>お願い</h3>
-      <br>見かけ次第、新 高級ジェネ™の運営に報告し、<br>そのパクったホストをできるのであれば通報することです。<br>あと、興味本位で入らないようにしましょう。<br></p>
-      <a href="https://kokyujene.github.io/news/002/" class="my-button2">
-      これに関連するニュースを見る</a>
+    <div style="height:100px"></div>
   </div>
-  </div>
-</div>
+</section>
+
+<section class="divider_1"></section>
 </div>
 
 <div class="fade-in">
@@ -521,6 +581,7 @@ li {display: flex;}
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
+  <h2 class="sub-title">\-Latest News-/</h2>
   <h2>最新ニュース</h2>
   <section id="latest-news">
   <ul id="news-list"></ul>
@@ -854,6 +915,128 @@ fetch("/news/news.json")
   }
 
   window.addEventListener("load", runHero, { once:true });
+})();
+</script>
+
+<script>
+(function(){
+  // 対象セレクタ
+  const selector = '#loopSection'; // なければ '.loop-bg' に変更可
+  // 背景の動く速さ (1 = 同速, 0.5 = 半速, -1 = 逆方向)
+  const speed = 1.0;
+
+  // 取得
+  let el = document.querySelector(selector) || document.querySelector('.loop-bg');
+  if (!el) {
+    console.warn('loopSection が見つかりません: ', selector, '. 既存のクラス .loop-bg を探します...');
+    el = document.querySelector('.loop-bg');
+  }
+  if (!el) {
+    console.error('loopSection / .loop-bg が見つかりません。HTML に id="loopSection" を付けるか、class を確認してください。');
+    return;
+  }
+
+  // スクロールを発生させている要素を探す（document.scrollingElement を優先）
+  function detectScrollElement() {
+    // 通常は document.scrollingElement でOK（Chrome, Firefox, Edge, Safari）
+    const se = document.scrollingElement || document.documentElement;
+    // ただし body に overflow:auto 等でスクロールしているケースを追加検出
+    // 候補: body, html, document.scrollingElement, closest overflow:auto ancestor
+    const candidates = [se, document.body, document.documentElement];
+    // 近傍で overflow が scroll/auto になっていて高さが溢れている ancestor を探す
+    let ancestor = el.parentElement;
+    while (ancestor) {
+      const cs = getComputedStyle(ancestor);
+      if ((cs.overflowY === 'auto' || cs.overflowY === 'scroll') && ancestor.scrollHeight > ancestor.clientHeight) {
+        candidates.unshift(ancestor);
+        break;
+      }
+      ancestor = ancestor.parentElement;
+    }
+    // 使える最初の要素を返す
+    for (const c of candidates) {
+      if (!c) continue;
+      try {
+        // scrollTop が使えるか確認
+        const s = typeof c.scrollTop === 'number';
+        if (s) return c;
+      } catch(e){ continue; }
+    }
+    return window;
+  }
+
+  let scrollEl = detectScrollElement();
+
+  // 初期 top を計測（ドキュメントトップ相対）
+  function calcInitialTop() {
+    const rect = el.getBoundingClientRect();
+    const scrollTop = (scrollEl === window) ? (window.pageYOffset || document.documentElement.scrollTop || 0) : scrollEl.scrollTop;
+    return rect.top + scrollTop;
+  }
+
+  let initialTop = calcInitialTop();
+
+  // 再検出 / 再計算（リサイズ時やレイアウト変化時）
+  function recompute() {
+    // 再検出（もしスクロールを行うコンテナが動的に変わっていたら対応）
+    scrollEl = detectScrollElement();
+    initialTop = calcInitialTop();
+  }
+
+  // rAF 用
+  let latestScroll = (scrollEl === window) ? (window.pageYOffset || document.documentElement.scrollTop || 0) : (scrollEl.scrollTop || 0);
+  let ticking = false;
+
+  function onScrollEvent() {
+    latestScroll = (scrollEl === window) ? (window.pageYOffset || document.documentElement.scrollTop || 0) : (scrollEl.scrollTop || 0);
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  function update() {
+    ticking = false;
+    // 差分を使って Y を計算
+    const y = Math.round((latestScroll - initialTop) * speed);
+    // 背景位置を更新（正の y は下方向に移動）
+    el.style.backgroundPosition = `center ${y}px`;
+  }
+
+  // 初期実行
+  recompute();
+  update();
+
+  // イベント登録
+  // scrollEl が window 以外の element の場合はその要素に scroll を監視
+  try {
+    if (scrollEl === window) {
+      window.addEventListener('scroll', onScrollEvent, { passive: true });
+    } else {
+      scrollEl.addEventListener('scroll', onScrollEvent, { passive: true });
+      // まだ window のスクロールも検出したい場合は両方に登録してもOK
+      window.addEventListener('scroll', onScrollEvent, { passive: true });
+    }
+  } catch(e) {
+    // fallback
+    window.addEventListener('scroll', onScrollEvent, { passive: true });
+  }
+
+  window.addEventListener('resize', () => {
+    // resize 時は初期 top を再計算しておく
+    recompute();
+    onScrollEvent();
+  }, { passive: true });
+
+  // DOM が後で変わる可能性があるなら短時間 MutationObserver で見張る
+  const mo = new MutationObserver((mutations, obs) => {
+    // もし offsetHeight が 0 などで正しくないときに再計算したいケースをカバー
+    if (el && (el.getBoundingClientRect().height === 0 || initialTop === 0)) {
+      recompute();
+    }
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+
 })();
 </script>
 

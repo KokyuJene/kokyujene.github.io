@@ -25,5 +25,14 @@
     "category": "投票",
     "description": "投票お願いします...。",
     "link": "/news/003"
+  },
+
+  {
+    "id": "004",
+    "title": "予告 | ニュース",
+    "date": "2025-09-20",
+    "category": "特大お知らせ",
+    "description": "一体何が...?",
+    "link": "/news/004"
   }
 ]

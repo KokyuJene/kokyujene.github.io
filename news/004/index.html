@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ルール | 新 高級ジェネ™ 公式サイト</title>
+  <title>ちょっとしたデザイン変更 | ニュース | 新 高級ジェネ™ 公式サイト</title>
   <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
 
@@ -42,50 +42,86 @@
   <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
 </head>
 
-<style>
-  .kokyujene_title {
-  height: 24px;
-  width: auto;
-  }
-  
-body {
-  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: background-image 0.5s ease;
+  <style>
+    .news-item { border-bottom: 1px solid #ccc; padding: 10px 0; }
+    .news-category { font-size: 0.8em; padding: 2px 6px; border-radius: 4px; margin-right: 8px; }
+    .cat-緊急 { background: red; color: white; }
+    .cat-特大お知らせ { background: orange; color: white; }
+    .cat-ちょっとしたお知らせ { background: green; color: white; }
+
+    /* オーバーレイ */
+#imgOverlay {
+  display: none; /* 非表示デフォルト */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
 }
 
-.dark body {
- background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
- }
-
-a {
-  color: #cc6600; 
-  text-decoration: none; 
+/* 拡大画像 */
+#imgOverlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  animation: zoomIn 0.3s ease;
 }
 
-a:hover {
-  color: #ff8800; 
-  text-decoration: underline; 
+/* 閉じるボタン */
+#closeOverlay {
+  position: absolute;
+  top: 20px; right: 30px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
 }
 
-.skin_image {
-    width: 200px;
-    height: auto;
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
-@media screen and (max-width: 600px) {
-.skin_image {
-    width: 140px;
-    height: auto;
+/* サムネイルにカーソルを置いたとき */
+.news-img {
+  cursor: zoom-in;
+  transition: opacity 0.3s;
+  border-radius:18px;
+}
+.news-img:hover {
+  opacity: 0.8;
+  border-radius:28px;
 }
 
+.x-embed-center {
+  display: flex;
+  justify-content: center;
 }
 
-</style>
+.youtube {
+  width: 672px;
+  height: 378px;
+}
+
+/* モバイル対策：背景画像を低負荷に */
+@media (max-width: 768px) {
+.youtube {
+  width: 256px;
+  height: 144px;
+}
+}
+  </style>
 
 <body>
+<!-- 画像拡大表示用のオーバーレイ -->
+<div id="imgOverlay">
+  <span id="closeOverlay">&times;</span>
+  <img id="overlayImg" src="" alt="">
+</div>
+
 <div class="wrapper">
 
 <header>
@@ -124,12 +160,9 @@ a:hover {
     </ul>
   </nav>
 
-  <!-- スマホ用メニューアイコン（右寄せ） -->
   <img src="https://kokyujene.github.io/images/menu.webp" alt="メニュー" class="menu-icon">
   <img src="https://kokyujene.github.io/images/close.webp" alt="閉じる" class="close-icon">
 
-  <!-- モバイルメニュー -->
-<!-- モバイルメニュー -->
 <div id="mobileMenu" class="mobile-menu">
   <ul>
     <li>
@@ -161,90 +194,55 @@ a:hover {
 </header>
 
   <main>
+      <h1 class="c2_h1">
+      <small class=sub-title>\-Notice | News-/</small>予告 | ニュース</h1>
 
 <div class="fade-in">
-<div class="center-text">
-  <div class="t_1">
-    <div class="gyo_1">
-      <h2 class="c2_h1">
-      <small class=sub-title>\-Rules-/</small>ルール</h2>
+<div class="content-box">
+    <div class="side-text">
+    <div class="box1">
+    <small class=sub-title>\-About Kokyujene™ 3-/</small>
+    <h2>新 高級ジェネ™ 3について</h2>
+    <p>基本的なところはほとんど完成しました!!<br>リリース日は未定ですが、是非お楽しみに!</p>
+
+    <h3><br>予告動画</h3>
+    <iframe src="https://www.youtube.com/embed/yOMIaIu6s9w?si=htH7XFiri9p-OrxP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="youtube"></iframe>
+  </div>
+  </div>
+</div>
+</div>
+<div class="fade-in">
+<div class="content-box">
+    <div class="side-text">
+    <div class="box1">
+    <small class=sub-title>\-Image Collection-/</small>
+    <h2>画像集</h2>
+    <div class="x-embed-center">
+    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今のジェネレーターの様子(※モザイク有) <a href="https://t.co/nrTUtJiZIm">pic.twitter.com/nrTUtJiZIm</a></p>&mdash; 高級ジェネ (@Kokyujene) <a href="https://twitter.com/Kokyujene/status/1968683584568340548?ref_src=twsrc%5Etfw">September 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
-	</div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>注意</h2>
-    <p>ルール違反は即BAN対象となる場合があります</p>
+<div class="image-container">
+  <div class="center-image-left">
+		<img src="images/gen6_1.webp" alt="memory" class="news-img">
   </div>
+</div>
+<br>
+<div class="image-container">
+  <div class="center-image-left">
+		<img src="images/lobby_1.webp" alt="memory" class="news-img">
   </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
 
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
     <div class="center-text">
-    <h2>新 高級ジェネ™ルール</h2>
-      <p><br><h3>1. 迷惑行為の禁止</h3><br>･ チャットスパム･連続投稿<br>･ 他プレイヤーへの暴言･誹謗中傷<br>･ アイテムの窃盗･無断使用<br>･ 意図的なラグ発生行為<br>･ その他、他プレイヤーの妨害行為<br><br><h3>2. 不正ツールの使用禁止</h3><br>･ 禁止: チート･ハック･連打ツール･マクロ<br>･ 許可: Onix, Flarial, Latite等のPvPクライアント<br><br><h3>3. PvPルール</h3><br>･ PvP指定エリア以外での戦闘禁止<br>･ トラブル発生時は運営に報告(私闘禁止)<br><br><h3>4. サーバー利用規約</h3><br>･ 現金取引(RMT)の禁止<br>･ 不適切なスキン･名前の使用禁止<br>･ バグ･グリッチの悪用禁止(発見時は要報告)<br>･ オーバーエンチャント品の作成･使用禁止<br>･ 他サーバー･コンテンツの宣伝禁止<br>･ 複数アカウントでの不正行為禁止
-      </p>
-  </div>
-  </div>
-  </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>商売について</h2>
-    <p>商売につきましては、条件付きでOKとされています</p>
-    <h3><br>
-      条件</h3>
-      <p>無謀なもの、ゲームバランスを壊すものなどの販売、取引は禁止<br>
-      宝くじ等を販売するのであれば、あたりを最低3つ用意すること<br>
-      怪しい取引、特定の人を陥れるような取引も禁止<br>
-      借金システムも禁止</p>
-  </div>
-  </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>4Dskin</h2>
-    <p>4Dskinは過度なもの(PvPに支障をきたすようなスキン、荒らしを目的をしたスキン)でなければ良いものとします。<br>帽子やちょっとした飾りなどの4Dskinはセーフです。</p>
-  <div class="image-container">
-  <div class="center-image-left">
-    <div class="skin_image">
-		<img src="out_skin.png" alt="logo_back" class="maru_img">
+    <a href="https://kokyujene.github.io/news/" class="my-button2">記事一覧へ</a><br><br><br><br><br><br>
     </div>
-  </div>
-  </div>
-  <p>ダメな4Dskinの例</p>
-  <div class="image-container">
-  <div class="center-image-left">
-    <div class="skin_image">
-		<img src="safe_skin.png" alt="logo_back" class="maru_img">
-    </div>
-  </div>
-  </div>
-  <p>セーフ4Dskinの例</p>
-  </div>
-  </div>
-</div>
-</div>
-
-</div>
 
   </main>
+
 <footer class="footer">
   <div class="footer-icons">
     <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
@@ -283,18 +281,69 @@ closeIcon.addEventListener('click', () => {
   menuIcon.style.display = 'block';
   closeIcon.style.display = 'none';
 });
+</script>
 
+<script>
     const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
       } else {
-        entry.target.classList.remove('show'); // 何度でも再実行
+        entry.target.classList.remove('show');
       }
     });
   });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+  <script>
+    fetch("news.json")
+      .then(res => res.json())
+      .then(data => {
+        // 新しい順にソート
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const container = document.getElementById("news-list");
+        container.innerHTML = "";
+        data.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "news-item";
+          div.innerHTML = `
+            <span class="news-category cat-${item.category}">»${item.category}«</span>
+            <a href="./${item.id}/">${item.title}</a>
+            <br><small>${item.date}</small><br>
+            <p>${item.description}</p>
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(err => {
+        document.getElementById("news-list").textContent = "読み込みに失敗しました。";
+        console.error(err);
+      });
+  </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const imgs = document.querySelectorAll(".news-img");
+  const overlay = document.getElementById("imgOverlay");
+  const overlayImg = document.getElementById("overlayImg");
+  const closeBtn = document.getElementById("closeOverlay");
+
+  imgs.forEach(img => {
+    img.addEventListener("click", () => {
+      overlay.style.display = "flex";
+      overlayImg.src = img.src;
+    });
+  });
+
+  // 閉じる処理（×ボタン or オーバーレイクリック）
+  closeBtn.addEventListener("click", () => overlay.style.display = "none");
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) overlay.style.display = "none";
+  });
+});
 </script>
 
 </body>

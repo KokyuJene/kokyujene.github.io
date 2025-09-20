@@ -25,6 +25,18 @@ a:hover {
   transform: translateY(0);
 }
 
+.youtube {
+  width: 672px;
+  height: 378px;
+}
+
+/* モバイル対策：背景画像を低負荷に */
+@media (max-width: 768px) {
+.youtube {
+  width: 256px;
+  height: 144px;
+}
+}
 
 @font-face {
   font-family: 'Unifont';
@@ -45,7 +57,6 @@ body {
   font-size: 1.2rem;
   padding: 2em;
   line-height: 1.5;
-  background-image: url('https://kokyujene.github.io/https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -54,16 +65,13 @@ body {
 
 body,
 html:not(.dark) body {
-  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   transition: background-image 0.5s ease;
 }
 
-/* ダークモードの背景 */
 .dark body {
-  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
   color: #ffebc5;
 }
 
@@ -1105,6 +1113,33 @@ body {
 .dark body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
+
+/* 仕切り画像 */
+.divider img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ループ背景セクション */
+.loop-bg {
+  background: url("../images/loop-bg.webp") repeat-y center top;
+  background-size: cover;
+  /* 背景は通常スクロール */
+  background-attachment: scroll;
+  padding: 80px 20px;
+  text-align: center;
+  color: #332200;
+}
+
+/* 中身（お好みで装飾） */
+.loop-bg .loop-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 239, 207, 0.85); /* 少し透過背景で読みやすく */
+  padding: 40px;
+  border-radius: 12px;
+}
 
 .glitch-button {
   position: relative;
