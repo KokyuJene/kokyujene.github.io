@@ -397,6 +397,31 @@ li {display: flex;}
   justify-content: center;
 }
 
+@font-face {
+  font-family: 'Zen Kaku Gothic New';
+  src: url('https://kokyujene.github.io/fonts/ZenKakuGothicNew-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.black {
+  font-family: 'Zen Kaku Gothic New', 'Meiryo', Arial, Helvetica, sans-serif;
+  color:#fff;
+  background-color: #000;
+  width: 100%;        /* 強引に140%にせず自然に広げる */
+  max-width: 1600px;  /* 必要なら上限を設定（大画面用） */
+  margin: 20px auto;  /* 自動で中央寄せ */
+  padding: 30px;
+  border-radius: 24px;
+  font-size: 30px;
+}
+
+@media (max-width: 768px) {
+.black {
+  font-size: 15px
+}
+}
+
 </style>
 
 <body>
@@ -514,33 +539,19 @@ li {display: flex;}
 </div>
 
 <div class="fade-in">
-<section class="divider_1"></section>
-
-<section class="loop-bg" id="loopSection">
-  <div class="loop-content">
-  <h2 class="sub-title">\-About New Kokyujene™ 3-/</h2>
-  <h2>新 高級ジェネ™ 3について</h2>
-  <p><br></p>
-    <h2 class="h2_yokoku">予告</h2>
-    <p><br></p>
-    <p>新 高級ジェネ™ 3を製作中です!!<br>
-<a href="news/004/" class="my-button2">
-  関連記事を見る
-</a>
-    <div style="height:50px"></div>
-    </div>
-    <p><br><iframe src="https://www.youtube.com/embed/yOMIaIu6s9w?si=htH7XFiri9p-OrxP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="youtube"></iframe></p>
-    <div class="x-embed-center">
-    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今のジェネレーターの様子(※モザイク有) <a href="https://t.co/nrTUtJiZIm">pic.twitter.com/nrTUtJiZIm</a></p>&mdash; 高級ジェネ (@Kokyujene) <a href="https://twitter.com/Kokyujene/status/1968683584568340548?ref_src=twsrc%5Etfw">September 18, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
+<div class="content-box">
+    <div class="side-text">
+    <div class="box1">
+    <small class=sub-title>\-I hate plagiarism!!!-/</small>
+    <h2>あああパクリ嫌い!!!</h2>
 <div class="image-container">
   <div class="center-image-left">
-		<img src="news/004/images/gen6_1.webp" alt="memory" class="maru_img">
+		<img src="/images/by_kikka_Thanks!.webp" alt="memory" class="maru_img">
   </div>
 </div>
-</section>
-
-<section class="divider_1"></section>
+    </div>
+    </div>
+</div>
 </div>
 
 <div class="fade-in">
@@ -596,11 +607,15 @@ li {display: flex;}
 </div>
 
 <div class="fade-in">
-<div class="side-text">
+<div class="black">
 <div class="center-text">
-<a href="https://kokyujene.github.io/about/" class="my-button2">高級ジェネとは</a>
+<a href="https://kokyujene.github.io/about/">高級ジェネとは</a>
 </div>
 </div>
+</div>
+
+<div class="center-text">
+<a data-ofuse-widget-button href="https://ofuse.me/o?uid=121628" data-ofuse-id="121628" data-ofuse-size="large" data-ofuse-color="dark" data-ofuse-text="制作過程" data-ofuse-style="rectangle">制作過程</a><script async src="https://ofuse.me/assets/platform/widget.js" charset="utf-8"></script>
 </div>
 
 <div class="fade-in">

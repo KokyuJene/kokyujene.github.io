@@ -8,7 +8,7 @@
 
 ## サーバーについて
 
-**『新 高級ジェネ』**は、**[Super Hiko14](https://kokyujene.github.io/members/Super_Hiko14/) がホストを運営する、すべてが高級で特別な体験ができるマインクラフト統合版サーバーです。**
+**『新 高級ジェネ』**は、**[Super Hiko14](https://kokyujene.github.io/members/super-hiko14/) がホストを運営する、すべてが高級で特別な体験ができるマインクラフト統合版サーバーです。**
 
 ## サイトの概要
 
@@ -38,19 +38,19 @@
 
 ## 運営メンバー(特設ページ)
 
-**[Super Hiko14](https://kokyujene.github.io/members/Super_Hiko14/)** - Owner
+**[Super Hiko14](https://kokyujene.github.io/members/super-hiko14/)** - Owner
 
-**[KenNova758](https://kokyujene.github.io/members/KenNova758/)** - Deputy Owner
+**[KenNova758](https://kokyujene.github.io/members/kennova758/)** - Deputy Owner
 
 **[kazekiri900](https://kokyujene.github.io/members/kazekiri900/)** - Deputy Owner
 
 ## 最近のニュース
 
-**[ちょっとしたデザイン変更 | ニュース](https://kokyujene.github.io/news/001/)** - 08/30
-
 **[パクリについて - 注意 | ニュース](https://kokyujene.github.io/news/002/)** - 08/31
 
 **[新 高級ジェネ™ 3 作った方がいい? - 投票 | ニュース](https://kokyujene.github.io/news/003/)** - 09/14
+
+**[予告 | ニュース](https://kokyujene.github.io/news/004/)** - 09/20
 
 ## 関連リンク
 

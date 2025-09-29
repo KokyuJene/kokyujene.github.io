@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ルール | 新 高級ジェネ™ 公式サイト</title>
+  <title>Super Hiko14 | 新 高級ジェネ™ 公式サイト</title>
   <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
 
 <!-- OGP (Open Graph Protocol) -->
   <meta property="og:title" content="新 高級ジェネ™ 公式サイト">
   <meta property="og:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
-  <meta property="og:image" content="https://kokyujene.github.io/ogp.webp">
+  <meta property="og:image" content="https://kokyujene.github.io/images/ogp.webp">
   <meta property="og:url" content="https://kokyujene.github.io">
   <meta property="og:type" content="website">
 
 <!-- X(Twitter)用 -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Kokyujene">
-  <meta name="twitter:title" content="新 高級ジェネ 公式サイト">
+  <meta name="twitter:title" content="新 高級ジェネ™ 公式サイト">
   <meta name="twitter:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
-  <meta name="twitter:image" content="https://kokyujene.github.io/ogp.webp">
+  <meta name="twitter:image" content="https://kokyujene.github.io/images/ogp.webp">
 
 <!-- ico, etc... -->
   <link rel="icon" href="https://kokyujene.github.io/favicon.ico" type="image/x-icon">
@@ -43,11 +43,199 @@
 </head>
 
 <style>
-  .kokyujene_title {
-  height: 24px;
-  width: auto;
-  }
-  
+
+body {
+      text-align: center;
+}
+
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 240px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 10px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.profile-main {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.member-name-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #5c3c00;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.profile-img {
+  width: 768px;
+  height: 432px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+}
+
+.profile-text {
+  max-width: 400px;
+  text-align: left;
+}
+
+.profile-text h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #3b2a00;
+}
+
+.profile-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+@media screen and (max-width: 600px) {
+.profile-img {
+  width: 384px;
+  height: 216px;
+}
+}
+
+.member-card h3 {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  color: #5c3c00;
+}
+
+.member-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.dark .member-card h3 {
+  color: #ffda95;
+}
+
+.dark .member-card p {
+  color: #c5c5c5;
+}
+
+.dark .member-card .role {
+  color: #ffebc5;
+}
+
+.dark .member-card .name {
+  color: #ffebc5;
+}
+
+.dark .profile-text h2 {
+  color: #ffe5a4;
+}
+
+.dark .profile-text p {
+  color: #c9c9c9;
+}
+
 body {
   background-image: url('https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
@@ -60,15 +248,82 @@ body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
 
-.skin_image {
-    width: 200px;
-    height: auto;
+ @media screen and (max-width: 600px) {
+.member-intro {
+  text-align: center;
+  padding: 40px 20px;
 }
 
-@media screen and (max-width: 600px) {
-.skin_image {
-    width: 140px;
-    height: auto;
+.member-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.member-card {
+  width: 180px;
+  background-color: #ffe5b4; /* ふんわり付箋色 */
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Minecraft', sans-serif;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+/* 不規則な角度（例） */
+.card-a { transform: rotate(-2deg); }
+.card-b { transform: rotate(3deg); }
+.card-c { transform: rotate(-1.5deg); }
+
+/* 上の役職 */
+.member-card .role {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5c3c00;
+  margin-bottom: 6px;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* 区切り線 */
+.member-card .divider {
+  border-top: 2px dashed #9b6700;
+  margin-bottom: 5px;
+}
+
+/* 画像＋名前の横並び */
+.member-card .info-row {
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.member-card img {
+  width: 26px;
+  height: 26px;
+}
+
+.member-card .name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b2a00;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+/* コメント */
+.member-card .comment {
+  font-size: 10px;
+  color: #333;
+  font-family: 'Minecraft', 'Unifont', sans-serif;
+}
+
+.member-card:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.member-card h3 {
+  margin: 6px 0 4px;
+  font-size: 12px;
 }
 
 }
@@ -110,7 +365,6 @@ a {
 }
 
 </style>
-
 <body>
 <div class="wrapper">
 
@@ -186,91 +440,58 @@ a {
 </div>
 </header>
 
-  <main>
-
-<div class="fade-in">
+<main class="profile-main">
 <div class="center-text">
   <div class="t_1">
     <div class="gyo_1">
       <h2 class="c2_h1">
-      <small class=sub-title>\-Rules-/</small>ルール</h2>
+      <small class=sub-title>\-Owner-/</small>Super Hiko14</h2>
     </div>
 	</div>
 </div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>注意</h2>
-    <p>ルール違反は即BAN対象となる場合があります</p>
+<section class="member-intro">
+  <div class="member-grid">
+  <div class="member-grid">
+<div class="member-card card-a">
+  <div class="role">Owner</div>
+  <div class="divider"></div>
+  <div class="info-row">
+    <img src="https://kokyujene.github.io/images/m_hiko.webp" alt="Owner">
+    <span class="name">Super Hiko14</span>
   </div>
-  </div>
+  <p class="comment">kento教信者になりましょう(???)</p>
 </div>
 </div>
+</section>
+  <div class="content-box">
+  <div class="center-text">
+  <div class="box1">
 
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <div class="center-text">
-    <h2>新 高級ジェネ™ルール</h2>
-      <p><br><h3>1. 迷惑行為の禁止</h3><br>･ チャットスパム･連続投稿<br>･ 他プレイヤーへの暴言･誹謗中傷<br>･ アイテムの窃盗･無断使用<br>･ 意図的なラグ発生行為<br>･ その他、他プレイヤーの妨害行為<br><br><h3>2. 不正ツールの使用禁止</h3><br>･ 禁止: チート･ハック･連打ツール･マクロ<br>･ 許可: Onix, Flarial, Latite等のPvPクライアント<br><br><h3>3. PvPルール</h3><br>･ PvP指定エリア以外での戦闘禁止<br>･ トラブル発生時は運営に報告(私闘禁止)<br><br><h3>4. サーバー利用規約</h3><br>･ 現金取引(RMT)の禁止<br>･ 不適切なスキン･名前の使用禁止<br>･ バグ･グリッチの悪用禁止(発見時は要報告)<br>･ オーバーエンチャント品の作成･使用禁止<br>･ 他サーバー･コンテンツの宣伝禁止<br>･ 複数アカウントでの不正行為禁止
+  <div class="profile-box">
+    <img src="https://kokyujene.github.io/images/member_superhiko.webp" alt="bestimage" class="profile-img">
+
+    <div class="profile-text">
+      <h2>Super Hiko14</h2>
+      <p>
+        「新 高級ジェネ」サーバーの創設者。<br>
+        アドオンとかこのサイトとかマイクラの<br>
+        コマンドとかいろいろなことに挑戦してるよ!<br>
+        kento教信者になりましょう。<br>
+        2012年生まれ!
       </p>
-  </div>
-  </div>
-  </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>商売について</h2>
-    <p>商売につきましては、条件付きでOKとされています</p>
-    <h3><br>
-      条件</h3>
-      <p>無謀なもの、ゲームバランスを壊すものなどの販売、取引は禁止<br>
-      宝くじ等を販売するのであれば、あたりを最低3つ用意すること<br>
-      怪しい取引、特定の人を陥れるような取引も禁止<br>
-      借金システムも禁止</p>
-  </div>
-  </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <h2>4Dskin</h2>
-    <p>4Dskinは過度なもの(PvPに支障をきたすようなスキン、荒らしを目的をしたスキン)でなければ良いものとします。<br>帽子やちょっとした飾りなどの4Dskinはセーフです。</p>
-  <div class="image-container">
-  <div class="center-image-left">
-    <div class="skin_image">
-		<img src="out_skin.png" alt="logo_back" class="maru_img">
     </div>
   </div>
   </div>
-  <p>ダメな4Dskinの例</p>
-  <div class="image-container">
-  <div class="center-image-left">
-    <div class="skin_image">
-		<img src="safe_skin.png" alt="logo_back" class="maru_img">
+  </div>
+  </div>
+
+<div class="fade-in">
+    <div class="center-text">
+    <a onclick="goBack()" class="my-button2" target="_blank">戻る</a><br>
     </div>
-  </div>
-  </div>
-  <p>セーフ4Dskinの例</p>
-  </div>
-  </div>
 </div>
-</div>
+</main>
 
-</div>
-
-  </main>
 <footer class="footer">
   <div class="footer-icons">
     <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
