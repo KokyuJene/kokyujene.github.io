@@ -49,6 +49,22 @@
   box-sizing: border-box;
 }
 
+.my-button a {
+  color: #cc6600; 
+}
+
+.my-button a:hover {
+  color: #ff8800; 
+}
+
+.my-button2 a {
+  color: #cc6600; 
+}
+
+.my-button a:hover {
+  color: #ff8800; 
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -60,6 +76,18 @@
   transform: translateY(0);
 }
 
+.youtube {
+  width: 672px;
+  height: 378px;
+}
+
+/* モバイル対策：背景画像を低負荷に */
+@media (max-width: 768px) {
+.youtube {
+  width: 256px;
+  height: 144px;
+}
+}
 
 @font-face {
   font-family: 'Unifont';
@@ -80,25 +108,13 @@ body {
   font-size: 1.2rem;
   padding: 2em;
   line-height: 1.5;
-  background-image: url('https://kokyujene.github.io/https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   transition: background-image 0.5s ease;
 }
 
-body,
-html:not(.dark) body {
-  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  transition: background-image 0.5s ease;
-}
-
-/* ダークモードの背景 */
 .dark body {
-  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
   color: #ffebc5;
 }
 
@@ -118,6 +134,8 @@ html, body {
   margin-top: 40px;
   margin-bottom: 16px;
   font-size: 75px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 h2 {
@@ -182,10 +200,6 @@ h1 {
   text-decoration: none;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
-}
-
 .logo img {
   height: 100px;
   width: auto;
@@ -230,7 +244,7 @@ img {
 }
 
 .center-image-left {
-    display: flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -282,7 +296,7 @@ img {
 }
 
 /* スマホ対応 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .soft-box {
     width: 95%;
     padding: 16px;
@@ -378,7 +392,7 @@ img {
 }
 
 .side-text {
-  max-width: 500px;
+  max-width: 1600px;
   line-height: 1.6;
 }
   .my-button {
@@ -397,7 +411,8 @@ img {
   }
 
 .my-button:hover {
-  background-color: #ffb92c;
+  color: #ffdc96;
+  background-color: #ffb41e;
   transform: scale(1.05);
 }
 
@@ -421,7 +436,8 @@ img {
   }
 
 .my-button2:hover {
-  background-color: #ffb92c;
+  color: #ffdc96;
+  background-color: #ffb41e;
   transform: scale(1.05);
 }
 
@@ -461,7 +477,17 @@ h1 {
   color: #ffaa00;
 }
 
+/* 通常のテキスト選択 */
+::selection {
+  background: #ffe4b5;   /* オレンジ */
+  color: #ffb23e;        /* オレンジ寄りの白 */
+}
 
+/* Firefox 用（互換性のため） */
+::-moz-selection {
+  background: #ffe4b5;
+  color: #ffb23e;
+}
 
 /*スマホ表示時*/
 @media screen and (max-width: 768px) {
@@ -571,8 +597,10 @@ header {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: center;
   align-items: center;  
-  width: 140%;
-  margin-left: -20%;
+  /* 横幅調整 */
+  width: 100%;        /* 強引に140%にせず自然に広げる */
+  max-width: 1600px;  /* 必要なら上限を設定（大画面用） */
+  margin: 20px auto;  /* 自動で中央寄せ */
 }
 
 @media screen and (max-width: 768px) {
@@ -629,10 +657,6 @@ header {
   color: #ffa500;
   text-decoration: none;
   margin-left: 5px;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
 }
 
 /* ===== スマホ版 ===== */
@@ -697,7 +721,7 @@ header {
 }
 
 /* スマホ対応 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .footer {
     flex-direction: column;
     height: auto;
@@ -790,11 +814,11 @@ header {
 }
 
 .dark .nav-links a {
-  color: #f5f5f5;
+  color: #e7ae44;
   text-decoration: none;
 }
 .dark .my-button:hover {
-  background-color: #ffb92c;
+  background-color: #e7ae44;
   transform: scale(1.05);
 }
 
@@ -803,18 +827,18 @@ header {
 }
 
 .dark .my-button2:hover {
-  background-color: #ffb92c;
+  background-color: #e7ae44;
   transform: scale(1.05);
 }
 
 .dark .my-button {
-    background-color: rgb(255, 184, 41);
-    color: white;
+    background-color: #81580b;
+    color: #fff8ec;
   }
 
 .dark .my-button2 {
-    background-color: rgb(255, 184, 41);
-    color: white;
+    background-color: #81580b;
+    color: #fff8ec;
   }
 
 .section-title {
@@ -838,7 +862,7 @@ header {
   text-shadow: 1px 1px 2px #884400;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
  .h2-header {
   font-size: 10px;
  }
@@ -904,9 +928,6 @@ header {
   padding: 1em 2em;
   z-index: 1000;          
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* ロゴ */
@@ -971,6 +992,7 @@ header {
   background: #ffe7ba;
   z-index: 1000;
   text-align: center;
+  text-decoration: none;
 }
 
 .logo img {
@@ -1035,22 +1057,36 @@ header {
   text-align: left;
 }
 
+/* モバイルメニューのリストを詰める */
 .mobile-menu ul {
-  list-style: none;
   padding: 0;
-  text-align: left;
+  margin: 0;
+  list-style: none;
+}
+
+.mobile-menu li {
+  margin: 8px 0; /* 必要なら調整、デフォはもっと大きくなっている可能性あり */
 }
 
 .mobile-menu a {
+  display: inline-block; /* block化を解除して文字間隔を詰める */
+  line-height: 1.4;      /* 行間を狭めて読みやすく */
   text-decoration: none;
-  color: white;
-  text-align: left;
 }
 
 .mobile-menu.active {
   bottom: 0;
   opacity: 1;
   text-align: left;
+}
+
+/* 全体の img をリセット → ✗ ではなく、本文や記事部分だけ */
+main img,
+.article img,
+.content-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* スマホ用表示切替 */
@@ -1068,7 +1104,7 @@ header {
 }
 
 /* PCではメニューアイコン非表示 */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
   .menu-icon,
   .close-icon {
     display: none !important;
@@ -1104,17 +1140,6 @@ header {
 }
 }
 
-
-a {
-  color: #cc6600; 
-  text-decoration: none; 
-}
-
-a:hover {
-  color: #ff8800; 
-  text-decoration: underline; 
-}
-
 body {
   background-image: url('https://kokyujene.github.io/images/bg-light.svg');
   background-size: cover;
@@ -1126,6 +1151,33 @@ body {
 .dark body {
  background-image: url('https://kokyujene.github.io/images/bg-dark.svg');
  }
+
+/* 仕切り画像 */
+.divider img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ループ背景セクション */
+.loop-bg {
+  background: url("../images/loop-bg.webp") repeat-y center top;
+  background-size: cover;
+  /* 背景は通常スクロール */
+  background-attachment: scroll;
+  padding: 80px 20px;
+  text-align: center;
+  color: #332200;
+}
+
+/* 中身（お好みで装飾） */
+.loop-bg .loop-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 239, 207, 0.85); /* 少し透過背景で読みやすく */
+  padding: 40px;
+  border-radius: 12px;
+}
 
 .glitch-button {
   position: relative;
@@ -1397,7 +1449,7 @@ html.dark .status-box {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
 .member-intro {
   text-align: center;
   padding: 40px 20px;
@@ -1646,6 +1698,177 @@ html.dark .status-box {
   }
 }
 
+@media screen and (max-width: 768px) {
+/* ===============================
+   Layout reset for images & body
+   =============================== */
+
+/* 全画像は幅可変、はみ出し防止 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* もし他で固定幅を指定している場合に備えて強めに上書き */
+.center-image-left img,
+.center-image img,
+.image-container img {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* body / main の余白整理
+   ヘッダーが fixed の場合、コンテンツが被らないよう上部余白を確保 */
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: #ffefcf; /* ご希望の背景色 */
+}
+
+/* ヘッダー高さに応じて main の余白を調整 (ヘッダー高さを合わせてください) */
+.site-header, header {
+  height: 72px; /* 実際のヘッダー高さに合わせて調整 */
+  line-height: 72px;
+}
+main {
+  padding-top: calc(72px + 24px); /* ヘッダー + 少し余白 */
+}
+
+/* ===============================
+   box1 の安全な中央寄せ & 幅制御
+   =============================== */
+
+.box1 {
+  box-sizing: border-box;
+  background-color: #ffefcf;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+  align-items: center;
+
+  /* 幅調整：PCは最大幅で止め、常に中央寄せ */
+  width: calc(100% - 40px); /* 画面端にほんの少しスペースを残す */
+  max-width: 1600px;        /* 指定どおり1600pxで上限 */
+  margin: 20px auto;        /* 中央寄せ */
+}
+
+  .box1 {
+    width: 95%;
+    max-width: 95%;
+    margin: 12px auto;
+    padding: 18px;
+  }
+
+/* もし他ルールにより左右にずれている場合の保険（最終手段） */
+.box1 {
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+/* ===============================
+   親コンテナと content-box 周りの整理
+   =============================== */
+
+.content-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+  width: calc(100% - 40px);
+  max-width: 1600px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+  .content-box {
+    padding: 20px;
+    gap: 16px;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+
+/* 親の左右余白が原因なら、wrapper にも中央寄せを強制 */
+.wrapper, .parent-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ===============================
+   ヘッダーと fixed 要素の衝突対策
+   =============================== */
+
+/* 固定ヘッダーがある場合はコンテンツ先頭がヘッダー下に来るように調整済み（main padding-top）。 */
+
+/* ===============================
+   最終的な強制上書き（必要なら有効化）
+   =============================== */
+
+/* ※ 以下は最終手段：既存の誤ったルールをどうしても消せないときは有効化してください。
+   まずは上のルールだけを試し、まだ直らない場合に下２行のコメントを外してください. */
+
+/*
+img, .center-image-left img, .center-image img, .image-container img {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+}
+
+.box1 {
+  width: calc(100% - 40px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+*/
+
+}
+/* ====== 全ての a に中央起点のアンダーラインを適用 ====== */
+
+/* ベース（全ての a に適用） */
+a {
+  color: inherit;
+  text-decoration: none;
+  /* 背景線用の設定（高さ2pxの線を currentColor で作る） */
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: center bottom; /* 中央を起点にしたいので center */
+  background-size: 0% 2px;            /* 初期は幅0%（見えない）・高さ2px */
+  transition: background-size 280ms cubic-bezier(.2,.8,.2,1), 
+              color 160ms linear;
+  /* ブロック要素の a でも効くように display を変えない（元のまま） */
+  -webkit-tap-highlight-color: transparent; /* iOSのハイライト抑制（任意） */
+}
+
+/* ホバーとキーボードフォーカスで中央→両端に広げる */
+a:hover,
+a:focus,
+a:focus-visible {
+  background-size: 100% 2px;  /* 幅100%に伸ばす（中央が起点） */
+  outline: none;              /* フォーカスの外観は別に管理する場合は外す */
+}
+
+/* アクセシビリティ：キーボードで focus されたとき目立たせる */
+a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255,170,0,0.12); /* 任意で focus の見た目 */
+}
+
+/* モーション制御への配慮（ユーザーが減速指定している場合はアニメを止める） */
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+}
+
+a {
+  background-image: linear-gradient(#ff9f00, #ff9f00);
+}
 </style>
 
 <body>
@@ -1731,7 +1954,7 @@ html.dark .status-box {
   <div class="t_1">
     <div class="gyo_1">
       <h1 class="c2_h1">
-      <small class=sub-title>\-404 Error-/</small>404:ページが見つかりません</h1>
+      <small class=sub-title>\-404 Error-/</small>ページが見つかりません</h1>
     </div>
 	</div>
 </div>
