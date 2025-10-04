@@ -335,7 +335,7 @@ img {
   align-items: center;
   gap: 40px;
   padding: 40px;
-  max-width: 1000px;
+  max-width: 1700px;
   margin: 0 auto;
   flex-wrap: wrap;
 }
@@ -347,8 +347,8 @@ img {
 }
 
 .side-text {
-  max-width: 1600px;
-  line-height: 1.6;
+  max-width: 1700px;
+  line-height: 1.9;
 }
   .my-button {
     background-color: #ffaa00;
@@ -457,7 +457,7 @@ h1 {
 }
 
   .side-text {
-    max-width: 150%;
+    max-width: 170%;
     font-size: 12px;
   }
 
@@ -540,7 +540,7 @@ header {
   }
 
   .side-text {
-    max-width: 500%;
+    max-width: 100%;
   }
 }
 
@@ -1706,16 +1706,16 @@ main {
   align-items: center;
 
   /* 幅調整：PCは最大幅で止め、常に中央寄せ */
-  width: calc(100% - 40px); /* 画面端にほんの少しスペースを残す */
+  width: calc(100% - 10px); /* 画面端にほんの少しスペースを残す */
   max-width: 1600px;        /* 指定どおり1600pxで上限 */
-  margin: 20px auto;        /* 中央寄せ */
+  margin: 10px auto;        /* 中央寄せ */
 }
 
   .box1 {
-    width: 95%;
-    max-width: 95%;
-    margin: 12px auto;
-    padding: 18px;
+    width: 98%;
+    max-width: 98%;
+    margin: 10px auto;
+    padding: 16px;
   }
 
 /* もし他ルールにより左右にずれている場合の保険（最終手段） */
