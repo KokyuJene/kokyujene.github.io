@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | 新 高級ジェネ™ 公式サイト</title>
+  <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
+  <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
+
+<!-- OGP (Open Graph Protocol) -->
+  <meta property="og:title" content="新 高級ジェネ™ 公式サイト">
+  <meta property="og:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
+  <meta property="og:image" content="https://kokyujene.github.io/ogp.webp">
+  <meta property="og:url" content="https://kokyujene.github.io">
+  <meta property="og:type" content="website">
+
+<!-- X(Twitter)用 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Kokyujene">
+  <meta name="twitter:title" content="新 高級ジェネ 公式サイト">
+  <meta name="twitter:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
+  <meta name="twitter:image" content="https://kokyujene.github.io/ogp.webp">
+
+<!-- ico, etc... -->
+  <link rel="icon" href="https://kokyujene.github.io/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
+  <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://kokyujene.github.io/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://kokyujene.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="https://kokyujene.github.io/favicon-48x48.png">
+
+<!-- iOS Safari 用 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://kokyujene.github.io/apple-touch-icon.png">
+
+<!-- Android / Chrome PWA 用 -->
+  <link rel="manifest" href="https://kokyujene.github.io/site.webmanifest">
+
+<!-- レガシー互換 -->
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
+</head>
+
+<style>
+
+  @font-face {
+  font-family: 'Zen Kaku Gothic New';
+  src: url('https://kokyujene.github.io/fonts/ZenKakuGothicNew-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+    font-family: 'Zen Kaku Gothic New', 'Meiryo', Arial, Helvetica, sans-serif;
+    background: black;
+    color:white;
+}
+
+  body {
+    margin: 0;
+    height: 100vh;
+    cursor: pointer;
+    position: relative; /* これ重要 */
+    font-family: sans-serif;
+    text-align: center;
+  }
+
+  a.delayed-link {
+    position: absolute;
+    padding: 15px 25px;
+    font-size: 1.5em;
+    color: rgba(163, 163, 163, 0.055);
+    background: #4949493f;
+    border-radius: 10px;
+    text-decoration: none;
+    opacity: 0.2; /* 半透明 */
+    transition: opacity 0.3s ease;
+    pointer-events: auto; /* クリック可能 */
+  }
+
+  a.delayed-link:hover {
+    opacity: 1; /* ホバーで不透明 */
+  }
+
+  p {
+    text-align: center;
+    margin-top: 40vh;
+  }
+
+  h1 {
+    font-size: 80px;
+  }
+
+  .fake {
+    color:grey;
+    font-size: 40px;
+  }
+</style>
+
+<body>
+
+<h1>このサイトに、意味はある?</h1>
+
+  <a href="what/index.html" class="fake">次に?</a>
+
+
+<script>
+  const links = document.querySelectorAll('.container a');
+
+  function updateSelection() {
+    const centerY = window.innerHeight / 2;
+    let closest = null;
+    let closestDist = Infinity;
+
+    links.forEach(link => {
+      const rect = link.getBoundingClientRect();
+      const linkCenter = rect.top + rect.height / 2;
+      const dist = Math.abs(centerY - linkCenter);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closest = link;
+      }
+    });
+
+    links.forEach(link => link.classList.remove('selected'));
+    if (closest) closest.classList.add('selected');
+  }
+
+  window.addEventListener('scroll', updateSelection);
+  window.addEventListener('resize', updateSelection);
+  updateSelection();
+</script>
+
+  <script>
+    document.addEventListener('click', () => {
+      // 5秒後にリンクを作成
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = "../10aaaaa/index.html";
+        link.className = "delayed-link";
+        link.textContent = "次へ";
+
+        // ランダムな位置に表示
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const x = Math.random() * (width - 200); // 横幅余裕
+        const y = Math.random() * (height - 50); // 高さ余裕
+        link.style.left = `${x}px`;
+        link.style.top = `${y}px`;
+
+        document.body.appendChild(link);
+      }, 5000); // 5秒後
+    }, { once: true }); // 1回だけ発動
+  </script>
+
+</body>
+</html>

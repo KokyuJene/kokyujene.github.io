@@ -1,0 +1,24 @@
+* {
+    text-align: center;
+}
+
+h1 {
+    color: #ff9f00;
+    font-size: 50px;
+}
+
+a {
+    font-size: 20px;
+    color: #570000;
+}
+
+a :hover {
+    font-size: 20px;
+    color: #000c3f;
+    text-decoration: none;
+}
+
+p {
+    font-size: 20px;
+    color: #000000;
+}

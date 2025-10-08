@@ -1,0 +1,48 @@
+<head>
+    <title>隠されたページsuperhiko14</title>
+    <link rel="stylesheet" href="../lv1.css">
+</head>
+
+<style>
+body {
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease;
+}
+
+#message {
+  margin-top: 40px;
+  color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+  height: 1.5em;
+}
+
+</style>
+
+<body>
+<h1>lv3</h1>
+
+<a href="../4/index.html">左クリック禁止な!</a>
+
+  <div id="message"></div>
+</body>
+
+  <script>
+    // 左クリック禁止処理
+    document.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", e => {
+        if (e.button === 0) { // 左クリック
+          e.preventDefault();
+          const msg = document.getElementById("message");
+          msg.textContent = "右クリック以外できないよ?";
+          msg.style.opacity = 1;
+
+          // 2秒でメッセージを消す
+          setTimeout(() => msg.textContent = "", 2000);
+        }
+      });
+    });
+  </script>

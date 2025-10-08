@@ -1,0 +1,69 @@
+<head>
+    <title>隠されたページsuperhiko14</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<style>
+body {
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease;
+  user-select: none;
+}
+
+  #message {
+    margin-top: 40px;
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 1.5em;
+  }
+
+</style>
+
+<body>
+<h1>lv4</h1>
+
+<p>全部封じてやるのさ!</p>
+
+  <div id="message"></div>
+
+  <script>
+    const msg = document.getElementById("message");
+
+    // 汎用メッセージ表示関数
+    function showMessage(text) {
+      msg.textContent = text;
+      msg.style.opacity = 1;
+      clearTimeout(msg._timeout);
+      msg._timeout = setTimeout(() => msg.style.opacity = 0, 1500);
+    }
+
+    // === クリック類すべて禁止 ===
+    document.addEventListener("mousedown", e => {
+      e.preventDefault();
+      showMessage("操作できません!(url?)");
+    });
+
+    document.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      showMessage("操作できません!(url?)");
+    });
+
+    // === キーボード操作すべて禁止 ===
+    document.addEventListener("keydown", e => {
+      e.preventDefault();
+      showMessage("操作できません!(url?)");
+    });
+
+    // === タブ移動禁止 ===
+    document.addEventListener("focusin", e => {
+      e.target.blur();
+      showMessage("操作できません!(url?)");
+    });
+  </script>
+</body>

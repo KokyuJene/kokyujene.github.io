@@ -1,0 +1,129 @@
+<head>
+    <title>隠されたページsuperhiko14</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<style>
+body {
+  background-image: url('https://kokyujene.github.io/images/bg-light.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease;
+}
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+  a {
+    position: absolute;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 1.4em;
+    color: white;
+    background: #0078ff;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.05s linear;
+  }
+
+  a:focus {
+    outline: 3px solid #fff;
+    background: #0055aa;
+  }
+
+  #message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: red;
+    font-weight: bold;
+    font-size: 1.3em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+</style>
+
+<body>
+  <h1>lv8</h1>
+  <a href="../huhuhu_kokomadekitaka9/index.html" id="link">次へ</a>
+  <div id="message">どうする?</div>
+
+
+  <script>
+    const link = document.getElementById("link");
+    const message = document.getElementById("message");
+    const margin = 320; // マウスからの距離しきい値
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    // 初期位置（画面中央）
+    let rect = link.getBoundingClientRect();
+    let x = width / 2 - rect.width / 2;
+    let y = height / 2 - rect.height / 2;
+    link.style.left = `${x}px`;
+    link.style.top = `${y}px`;
+
+    window.addEventListener("resize", () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+    });
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.opacity = 1;
+      clearTimeout(message._timeout);
+      message._timeout = setTimeout(() => message.style.opacity = 0, 1000);
+    }
+
+    document.addEventListener("mousemove", e => {
+      const rect = link.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const distance = Math.sqrt(dx*dx + dy*dy);
+
+      if (distance < margin) {
+        const angle = Math.atan2(dy, dx);
+
+        // 円を書くように角を避けるため、移動量を斜め方向に調整
+        let moveX = -Math.cos(angle) * (margin - distance);
+        let moveY = -Math.sin(angle) * (margin - distance);
+
+        let newX = rect.left + moveX;
+        let newY = rect.top + moveY;
+
+        // 画面端には入らないように制限（余白50px）
+        newX = Math.min(Math.max(newX, 50), width - rect.width - 50);
+        newY = Math.min(Math.max(newY, 50), height - rect.height - 50);
+
+        // 移動
+        link.style.left = `${newX}px`;
+        link.style.top = `${newY}px`;
+
+        // 角度をランダムで少し変えて円っぽく避ける
+        link.style.transform = `rotate(${Math.random()*30-15}deg)`;
+
+        // 重なった場合はランダムテレポート
+        if (Math.abs(e.clientX - (newX + rect.width/2)) < rect.width/2 &&
+            Math.abs(e.clientY - (newY + rect.height/2)) < rect.height/2) {
+          const randX = Math.random() * (width - rect.width - 100) + 50;
+          const randY = Math.random() * (height - rect.height - 100) + 50;
+          link.style.left = `${randX}px`;
+          link.style.top = `${randY}px`;
+        }
+
+        showMessage("どうしていた?");
+      }
+    });
+
+  </script>
+</body>
