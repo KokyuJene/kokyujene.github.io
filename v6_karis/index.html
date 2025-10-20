@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新 高級ジェネ™ 公式サイト</title>
+  <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
+  <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
+
+<!-- OGP (Open Graph Protocol) -->
+  <meta property="og:title" content="新 高級ジェネ™ 公式サイト">
+  <meta property="og:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
+  <meta property="og:image" content="https://kokyujene.github.io/ogp.webp">
+  <meta property="og:url" content="https://kokyujene.github.io">
+  <meta property="og:type" content="website">
+
+<!-- X(Twitter)用 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Kokyujene">
+  <meta name="twitter:title" content="新 高級ジェネ 公式サイト">
+  <meta name="twitter:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
+  <meta name="twitter:image" content="https://kokyujene.github.io/ogp.webp">
+
+<!-- ico, etc... -->
+  <link rel="icon" href="https://kokyujene.github.io/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://kokyujene.github.io/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" type="image/webp" href="https://kokyujene.github.io/favicon.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://kokyujene.github.io/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://kokyujene.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="https://kokyujene.github.io/favicon-48x48.png">
+
+<!-- iOS Safari 用 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://kokyujene.github.io/apple-touch-icon.png">
+
+<!-- Android / Chrome PWA 用 -->
+  <link rel="manifest" href="https://kokyujene.github.io/site.webmanifest">
+
+<!-- レガシー互換 -->
+  <link rel="shortcut icon" href="https://kokyujene.github.io/favicon.ico">
+</head>
+
+<style>
+#heroWrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 2000;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* 最初は全画面いっぱい */
+#heroInner {
+  width: 100vw;
+  height: 100vh;
+  background: url("images/wall_back.webp") center/cover no-repeat;
+  border-radius: 0;
+  will-change: transform, border-radius, width, height;
+}
+
+/* 最終的に収まる場所 */
+.logo-slot {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%; /* 丸に */
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  margin-right: 50px;
+}
+
+.logo-slot img#slotImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Welcome テキスト */
+.welcome-text {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+</style>
+
+<body>
+
+<div class="center">
+<section aria-hidden="true" id="hero">
+  <div id="heroWrapper">
+    <div id="heroInner"></div>
+  </div>
+</section>
+</div>
+
+<header id="mainHeader" class="hidden">
+
+    <div class="logo">
+        <img src="images/icon.png">
+    </div>
+
+    <div class="list">
+    <ul>
+      <li><a href="">home</a></li>
+      <li><a href="">members</a></li>
+      <li><a href="">rules</a></li>
+      <li><a href="">news</a></li>
+    </ul>
+    </div>
+
+</header>
+
+<div class="top-box">
+  <div class="child">
+    <div class="menu-wrapper"> 
+        
+  <section class="box1">
+    <div class="box1-inner">
+      <div class="logo-slot" id="logoSlot">
+        <img id="slotImage" src="images/wall_back.webp" alt="バグってるねぇ">
+      </div>
+  </section>
+
+        <ul class="body-header" id="targetElement">
+            <li><a href="">home</a></li>
+            <li><a href="">members</a></li>
+            <li><a href="">rules</a></li>
+            <li><a href="">news</a></li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<h1>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br>aaaaa<br></h1>
+
+<script>
+// 1. 監視対象となる要素と、表示/非表示を切り替えるヘッダー要素を取得
+const target = document.getElementById('targetElement');
+const header = document.getElementById('mainHeader');
+
+// 2. Intersection Observerのオプションを設定
+// threshold: ターゲット要素が何%見えたらコールバックを実行するか (0でOK)
+// rootMargin: ビューポートの範囲を広げたり狭めたりする (ここではデフォルトの0px)
+const options = {
+  rootMargin: '0px',
+  threshold: 0
+};
+
+// 3. コールバック関数の定義
+const callback = (entries, observer) => {
+  entries.forEach(entry => {
+    // isIntersecting: ターゲット要素がビューポートと交差しているか (見えているか)
+    if (entry.isIntersecting) {
+      // ターゲット要素が「見えている」場合
+      header.classList.add('hidden');
+      header.classList.remove('visible');
+    } else {
+      // ターゲット要素が「見えなくなった」場合
+      header.classList.remove('hidden');
+      header.classList.add('visible');
+    }
+  });
+};
+
+// 4. Observerインスタンスを作成し、監視を開始
+const observer = new IntersectionObserver(callback, options);
+observer.observe(target);
+</script>
+
+<script>
+(function(){
+  const heroWrapper = document.getElementById('heroWrapper');
+  const heroInner   = document.getElementById('heroInner');
+  const logoSlot    = document.getElementById('logoSlot');
+  const slotImage   = document.getElementById('slotImage');
+  const welcomeText = document.getElementById('welcomeText');
+
+  const ANIM_DURATION = 1200;
+  const WELCOME_DELAY = 300;
+
+  function lockScroll(){ document.body.classList.add("scroll-locked"); }
+  function unlockScroll(){ document.body.classList.remove("scroll-locked"); }
+
+  function ensureImage(url){
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = resolve;
+      img.src = url;
+    });
+  }
+
+  async function runHero(){
+    await ensureImage("images/wall_back.webp");
+    lockScroll();
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // スロットの位置情報
+    const slotRect = logoSlot.getBoundingClientRect();
+    const targetSize = Math.min(slotRect.width, slotRect.height);
+    const targetX = slotRect.left + slotRect.width/2;
+    const targetY = slotRect.top  + slotRect.height/2;
+
+    // 中央座標
+    const centerX = vw / 2;
+    const centerY = vh / 2;
+
+    // 差分とスケール
+    const dx = targetX - centerX;
+    const dy = targetY - centerY;
+    const scale = targetSize / Math.min(vw, vh);
+
+    // 初期は全画面 (CSSで100vw,100vh)
+    heroInner.style.transition = `transform ${ANIM_DURATION}ms cubic-bezier(.2,.9,.3,1), 
+                                   border-radius ${ANIM_DURATION}ms ease, 
+                                   width ${ANIM_DURATION}ms ease, 
+                                   height ${ANIM_DURATION}ms ease`;
+
+    // 強制リフロー
+    void heroInner.offsetWidth;
+
+    // → 正方形に縮小しながら移動 & 丸に変化
+    heroInner.style.width = Math.min(vw, vh) + "px";
+    heroInner.style.height = Math.min(vw, vh) + "px";
+    heroInner.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+    heroInner.style.borderRadius = "50%";
+
+    // 終了処理
+    heroInner.addEventListener("transitionend", function onEnd(e){
+      if (e.propertyName === "transform") {
+        heroInner.removeEventListener("transitionend", onEnd);
+
+        // 背景を消す
+        heroWrapper.style.opacity = "0";
+
+        setTimeout(() => { slotImage.style.opacity = "1"; }, 150);
+        setTimeout(() => {
+          welcomeText.style.opacity = "1";
+          welcomeText.style.transform = "translateY(0)";
+        }, WELCOME_DELAY);
+
+        setTimeout(() => {
+          unlockScroll();
+          heroWrapper.remove();
+        }, 600);
+      }
+    });
+  }
+
+  window.addEventListener("load", runHero, { once:true });
+})();
+</script>
+
+
+
+</body>
+</html>

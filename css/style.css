@@ -1824,3 +1824,7 @@ a:focus-visible {
 a {
   background-image: linear-gradient(#ff9f00, #ff9f00);
 }
+
+[id] {
+  scroll-margin-top: 200px; /* ヘッダーの高さに合わせて調整 */
+}

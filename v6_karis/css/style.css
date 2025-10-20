@@ -1,0 +1,300 @@
+/* ヘッダーの初期状態 */
+#mainHeader {
+    position: fixed; /* 画面に固定 */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: opacity 0.3s, transform 0.3s; /* スムーズなアニメーションのため */
+    /* ページの初期デザインに合わせて調整してください */
+}
+
+/* 非表示状態 */
+.hidden {
+    opacity: 0;
+    pointer-events: none; /* 非表示中はクリック操作を無効化 */
+    transform: translateY(-100%); /* 上に隠すアニメーション用 */
+}
+
+/* 表示状態 */
+.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 0% 2px;
+  transition: background-size 280ms cubic-bezier(.2,.8,.2,1), 
+              color 160ms linear;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:hover,
+a:focus,
+a:focus-visible {
+  background-size: 100% 2px;
+  outline: none;
+}
+
+a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255,170,0,0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+}
+
+@font-face {
+  font-family: 'jost';
+  src: url('../fonts/Jost.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'zenkaku';
+  src: url('../fonts/zenkakugothicnew.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    font-family: 'Jost', 'zenkaku', sans-serif;
+    background-color: #fff8eb;
+    margin: 0;
+    padding: 0px 0px;
+}
+
+header {
+    height: 100px;
+    background-color: #ffe6b3;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size:20px
+}
+
+.center {
+    text-align: center;
+}
+
+.top-box {
+    position: relative; /* 疑似要素の基準にする */
+    background-image: url(../images/pc_nomal.png);
+    background-size: cover;
+    background-position: center center;
+    /* その他のスタイル */
+    padding-top: 180px;
+    padding-bottom: 400px;
+}
+
+.top-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* ★ オーバーレイの色と透明度を設定 ★ */
+    /* white（白）を使い、透明度 0.6 にすることで、画像を薄くする */
+    background-color: #fff8eb3a; 
+    
+    /* 重要なコンテンツ（テキストなど）が上にくるようにする */
+    z-index: 1; 
+}
+
+a {
+    display:inline-block;
+}
+
+/* コンテンツはオーバーレイより上にする */
+.top-box * {
+    position: relative;
+    z-index: 2; 
+}
+
+.title h1{
+    font-size: 70px;
+}
+
+.list li{
+    list-style: none;
+    float:left;
+    padding:10px 20px;
+    font-size:25px;
+}
+
+.logo img{
+    height: 100px;
+    width: auto;
+    float:left;
+    padding:0px 40px;
+}
+
+.parent {
+    display: grid;
+    place-items: center;
+    height: 300px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.child {
+    padding: 20px;
+}
+
+.center-icon {
+    align-self: unset; 
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 15px; 
+    font-size: 20px;
+    color: #ffaa00;
+    left: 0; 
+}
+
+.body-header {
+    list-style: none;
+    margin: 0; 
+    width: fit-content;
+    border-left: 12px solid #ffaa00; 
+    padding-right: 140px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 45px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.body-header li{
+    margin-bottom: 20px;
+    margin-right: -250px;
+}
+
+.body-header li:last-child {
+    margin-bottom: 0;
+}
+
+.menu-wrapper {
+    width: fit-content;
+    margin: 20px auto; 
+    display: grid;
+    grid-template-columns: auto auto; 
+    align-items: center;
+}
+
+/* ---------------------------------------------------- */
+/* スマホ用 */
+/* ---------------------------------------------------- */
+
+@media screen and (max-width: 767px) {
+header {
+    height: 80px;
+    background-color: #ffe6b3;
+    padding: 20px;
+    text-transform: uppercase;
+}
+
+.center {
+    text-align: center;
+}
+
+.top-box {
+    position: relative; /* 疑似要素の基準にする */
+    background-image: url(../images/pc_nomal.png);
+    background-size: cover;
+    background-position: center center;
+    /* その他のスタイル */
+    padding-top: 180px;
+    padding-bottom: 400px;
+}
+
+.top-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* ★ オーバーレイの色と透明度を設定 ★ */
+    /* white（白）を使い、透明度 0.6 にすることで、画像を薄くする */
+    background-color: #fff8eb3a; 
+    
+    /* 重要なコンテンツ（テキストなど）が上にくるようにする */
+    z-index: 1; 
+}
+
+/* コンテンツはオーバーレイより上にする */
+.top-box * {
+    position: relative;
+    z-index: 2; 
+}
+
+.title h1{
+    font-size: 70px;
+}
+
+.list li{
+    list-style: none;
+    float:left;
+    padding:10px 20px;
+    font-size:25px;
+    display: none;
+}
+
+.logo img{
+    height: 80px;
+    width: auto;
+    float:left;
+    padding:0px 5px;
+}
+
+.parent {
+    display: grid;
+    place-items: center;
+    height: 300px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.child {
+    padding: 20px;
+}
+
+.center-icon {
+    align-self: unset; 
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 15px; 
+    font-size: 20px;
+    color: #ffaa00;
+    left: 0; 
+}
+
+.body-header {
+    list-style: none;
+    margin: 0; 
+    width: fit-content;
+    border-left: 12px solid #ffaa00; 
+    padding-right: 140px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 45px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.body-header li{
+    margin-bottom: 20px;
+    margin-right: -250px;
+    font-size: 30px;
+}
+}

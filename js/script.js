@@ -101,3 +101,4 @@ window.addEventListener('load', () => {
       window.location.href = "https://kokyujene.github.io/";
     }
   }
+
