@@ -1,21 +1,23 @@
-/* ヘッダーの初期状態 */
 #mainHeader {
-    position: fixed; /* 画面に固定 */
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    transition: opacity 0.3s, transform 0.3s; /* スムーズなアニメーションのため */
-    /* ページの初期デザインに合わせて調整してください */
+    transition: opacity 0.3s, transform 0.3s;
 }
 
-/* 非表示状態 */
+body {
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 .hidden {
     opacity: 0;
-    pointer-events: none; /* 非表示中はクリック操作を無効化 */
-    transform: translateY(-100%); /* 上に隠すアニメーション用 */
+    pointer-events: none;
+    transform: translateY(-100%);
 }
 
-/* 表示状態 */
 .visible {
     opacity: 1;
     pointer-events: auto;
@@ -82,44 +84,34 @@ header {
     text-align: center;
 }
 
-.top-box {
-    position: relative; /* 疑似要素の基準にする */
+.top-wall {
+    position: relative;
     background-image: url(../images/pc_nomal.png);
     background-size: cover;
     background-position: center center;
-    /* その他のスタイル */
+    background-attachment: fixed; 
     padding-top: 180px;
     padding-bottom: 400px;
 }
 
-.top-box::before {
+.top-wall::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* ★ オーバーレイの色と透明度を設定 ★ */
-    /* white（白）を使い、透明度 0.6 にすることで、画像を薄くする */
     background-color: #fff8eb3a; 
-    
-    /* 重要なコンテンツ（テキストなど）が上にくるようにする */
     z-index: 1; 
 }
 
-a {
-    display:inline-block;
-}
-
-/* コンテンツはオーバーレイより上にする */
-.top-box * {
+.top-wall * {
     position: relative;
     z-index: 2; 
 }
 
-.title h1{
-    font-size: 70px;
+a {
+    display:inline-block;
 }
 
 .list li{
@@ -199,46 +191,41 @@ header {
     background-color: #ffe6b3;
     padding: 20px;
     text-transform: uppercase;
+    font-size:10px
 }
 
 .center {
     text-align: center;
 }
 
-.top-box {
-    position: relative; /* 疑似要素の基準にする */
+.top-wall {
+    position: relative;
     background-image: url(../images/pc_nomal.png);
     background-size: cover;
     background-position: center center;
-    /* その他のスタイル */
+    background-attachment: fixed; 
     padding-top: 180px;
     padding-bottom: 400px;
 }
 
-.top-box::before {
+.top-wall::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* ★ オーバーレイの色と透明度を設定 ★ */
-    /* white（白）を使い、透明度 0.6 にすることで、画像を薄くする */
     background-color: #fff8eb3a; 
-    
-    /* 重要なコンテンツ（テキストなど）が上にくるようにする */
     z-index: 1; 
 }
 
-/* コンテンツはオーバーレイより上にする */
-.top-box * {
+.top-wall * {
     position: relative;
     z-index: 2; 
 }
 
-.title h1{
-    font-size: 70px;
+a {
+    display:inline-block;
 }
 
 .list li{
@@ -246,14 +233,13 @@ header {
     float:left;
     padding:10px 20px;
     font-size:25px;
-    display: none;
 }
 
 .logo img{
     height: 80px;
     width: auto;
     float:left;
-    padding:0px 5px;
+    padding:0px 40px;
 }
 
 .parent {
@@ -297,4 +283,17 @@ header {
     margin-right: -250px;
     font-size: 30px;
 }
+
+.body-header li:last-child {
+    margin-bottom: 0;
+}
+
+.menu-wrapper {
+    width: fit-content;
+    margin: 20px auto; 
+    display: grid;
+    grid-template-columns: auto auto; 
+    align-items: center;
+}
+
 }
