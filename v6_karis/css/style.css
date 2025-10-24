@@ -6,6 +6,10 @@
     transition: opacity 0.3s, transform 0.3s;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: hidden;
     overflow-wrap: break-word;
@@ -73,10 +77,84 @@ a:focus-visible {
 
 header {
     height: 100px;
-    background-color: #ffe6b3;
+    background: rgba(255, 255, 255, 0.075);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     padding: 20px;
     text-transform: uppercase;
     font-size: 20px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.logo a {
+    display: block;
+}
+
+.header-icon-menu {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  z-index: 12050;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.header-icon-menu .menu-icon,
+.header-icon-menu .close-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: opacity .22s ease, transform .18s ease;
+  pointer-events: auto;
+}
+
+.header-icon-menu img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.header-icon-menu .menu-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+.header-icon-menu .close-icon {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+body.menu-open .header-icon-menu .menu-icon {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+body.menu-open .header-icon-menu .close-icon {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+body.menu-open .header-icon-menu {
+  z-index: 13000;
+}
+
+@media screen and (min-width: 580px) {
+  .header-icon-menu { display: none; }
 }
 
 main {
@@ -85,43 +163,71 @@ main {
 
 .mobile-menu {
   position: fixed;
-  bottom: -100%;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 5, 5, 0.76);
-  color: white;
+  background: rgba(8, 7, 3, 0.699);
+  backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: bottom 0.4s ease, opacity 0.4s ease;
+
   opacity: 0;
-  z-index: 2000;
-  text-align: left;
-}
-
-/* モバイルメニューのリストを詰める */
-.mobile-menu ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.mobile-menu li {
-  margin: 8px 0; /* 必要なら調整、デフォはもっと大きくなっている可能性あり */
-}
-
-.mobile-menu a {
-  display: inline-block; /* block化を解除して文字間隔を詰める */
-  line-height: 1.4;      /* 行間を狭めて読みやすく */
-  text-decoration: none;
+  visibility: hidden;
+  transform: scale(1.02);
+  transition: 
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s ease;
+  z-index: 3999;
 }
 
 .mobile-menu.active {
-  bottom: 0;
   opacity: 1;
-  text-align: left;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.mobile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.mobile-menu li {
+  margin: 18px 0;
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.mobile-menu.active a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu a:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu a:nth-child(2) { transition-delay: 0.1s; }
+.mobile-menu a:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu a:nth-child(4) { transition-delay: 0.2s; }
+
+body.menu-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+@media screen and (min-width: 769px) {
+  .mobile-menu { display: none !important; }
 }
 
 .fade-in {
@@ -307,6 +413,7 @@ html.dark .status-box {
 h2 {
     font-size: 40px;
     color: #351a00;
+    text-shadow: 3px 3px 5px #884400;
 }
 
 .sub-title {
@@ -320,6 +427,10 @@ h2 {
     max-width: 500px;
     display: inline-block;
     text-align: center;
+}
+
+p {
+    font-size: 20px;
 }
 
 .mybox {
@@ -340,6 +451,41 @@ h2 {
     height: auto;
     text-align: left;
     align-items: unset;
+}
+
+footer {
+    height: auto;
+    width: auto;
+    background-color: #ffe6b5;
+    padding: 10px; 
+    align-items: flex-start;
+    margin: 0 auto;
+}
+
+footer p {
+    font-size: 15px;
+}
+
+footer img {
+    float: left;
+    width: 400px;
+    height: auto;
+
+}
+
+footer li {
+    float: none;
+    text-align: right;
+    padding:20px;
+    list-style: none;
+    display: block;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: inherit;
+  margin-left: 10px;
+  text-align: right;
 }
 
 @media screen and (max-width: 867px) {
@@ -387,6 +533,23 @@ h2 {
         background-position: center center;
         background-attachment: scroll;
     }
+
+    h2 {
+        font-size: 30px;
+        color: #351a00;
+    }
+
+    .sub-title {
+        font-size: 15px;
+    }
+    
+    p {
+        font-size: 15px;
+    }
+
+    .status-box {
+        font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -420,6 +583,7 @@ h2 {
     
     header {
         height: 50px;
+        display: none;
     }
 
     .logo img{
@@ -427,70 +591,57 @@ h2 {
         width: 50px;
     }
     
-}
+    h2 {
+        font-size: 25px;
+        color: #351a00;
+    }
 
-/* ---------- モバイルアイコンの基本位置（共通） ---------- */
-.menu-icon,
-.close-icon {
-  display: none;           /* デスクトップでは非表示 */
-  position: fixed;
-  right: 14px;
-  top: 12px;
-  width: 44px;
-  height: 44px;
-  padding: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 4000;           /* ベースの z-index（変更可） */
-  transition: opacity .18s ease;
-}
+    .sub-title {
+        font-size: 15px;
+    }
 
-/* モバイル時は両方見えるようにする（JSで制御） */
-@media screen and (max-width: 768px) {
-  .menu-icon,
-  .close-icon {
-    display: block;
-  }
+    p {
+        font-size: 12px;
+    }
 
-  /* 初期はハンバーガーが有効、×は背面・クリック不可にする */
-  .close-icon {
-    opacity: 0.85;           /* 見せたいなら0.85など */
-    pointer-events: none;    /* 通常はクリック無効 */
-    z-index: 3999;           /* ハンバーガーより下に配置 */
-  }
+    .status-box {
+        font-size: 12px;
+    }
 
-  .menu-icon {
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 4000;
-  }
+    footer {
+        height: auto;
+        width: auto;
+        background-color: #ffe6b5;
+        padding: 10px; 
+        align-items: flex-start;
+        margin: 0 auto;
+    }
 
-  /* モバイルメニュー自体 */
-  .mobile-menu {
-    position: fixed;
-    inset: 0;
-    background: rgba(10,10,12,0.96);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    box-sizing: border-box;
-    flex-direction: column;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(6%);
-    transition: opacity .32s ease, transform .32s cubic-bezier(.22,.9,.3,1);
-    z-index: 3998; /* アイコンより下 */
-    backdrop-filter: blur(6px);
-  }
+    footer p {
+        font-size: 10px;
+    }
 
-  .mobile-menu.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
+    footer img {
+        align-items: center;
+        text-align: center;
+        display: grid;
+        width: 200px;
+        height: auto;
+    }
 
-  /* もし × を左に寄せたい場合（オプション） */
-  /* .close-icon { right: 14px; } */
+    footer li {
+        float: none;
+        align-items: center;
+        text-align: center;
+        padding:20px;
+        list-style: none;
+        display: block;
+    }
+
+    .footer-link {
+        text-decoration: none;
+        color: inherit;
+        margin-left: 10px;
+        font-size: 10px;
+    }
 }
