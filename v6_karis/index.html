@@ -87,7 +87,7 @@
   font-size: 50px;
 }
 
-@media screen and (max-width: 7867px) {
+@media screen and (max-width: 580px) {
 .logo-slot {
   width: 100px;
   height: 100px;
@@ -96,6 +96,14 @@
 .welcome-text {
   font-size: 40px;
 }
+}
+
+.dark .news-box {
+  padding:14px; border-radius:8px; background:#81580b; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px;
+}
+
+.news-box {
+  padding:14px; border-radius:8px; background:#ffaa00; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px;
 }
 </style>
 
@@ -193,12 +201,14 @@
   <p class="sub-title">\-Latest News-/</p>
 <section id="latest-news">
   <ul id="news-list"></ul>
-  <div class="more-link"><a href="https://kokyujene.github.io/news/" class="my-button">» ニュース一覧へ</a></div>
+  <div class="more-link"><a href="https://kokyujene.github.io/news/" class="my-button"> » ニュース一覧へ</a></div>
 </section>
 </div>
 
 <div class="center">
+  <div class="kari_bt">
   <a href="">[更 新]</a>
+  </div>
 </div>
 
 <footer>
@@ -366,41 +376,31 @@ fetch('https://script.google.com/macros/s/AKfycbwvph3wE2SDcDjqbGyh4_OonhzcmbMUvL
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn  = document.querySelector(".header-icon-menu .menu-icon");
-  const closeBtn = document.querySelector(".header-icon-menu .close-icon");
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
   const mobileMenu = document.getElementById("mobileMenu");
-
-  if (!menuBtn || !closeBtn || !mobileMenu) {
-    console.warn("menu/close/mobileMenu not found");
-    return;
-  }
+  const headerIconMenu = document.querySelector(".header-icon-menu");
 
   function openMenu() {
     mobileMenu.classList.add("active");
     document.body.classList.add("menu-open");
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    closeBtn.focus();
+    menuIcon.classList.add("hidden");
+    closeIcon.classList.add("show");
+    menuIcon.setAttribute("aria-hidden", "true");
+    closeIcon.setAttribute("aria-hidden", "false");
   }
 
   function closeMenu() {
     mobileMenu.classList.remove("active");
     document.body.classList.remove("menu-open");
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
-    menuBtn.focus();
+    menuIcon.classList.remove("hidden");
+    closeIcon.classList.remove("show");
+    menuIcon.setAttribute("aria-hidden", "false");
+    closeIcon.setAttribute("aria-hidden", "true");
   }
 
-  // イベント
-  menuBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    openMenu();
-  });
-
-  closeBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    closeMenu();
-  });
+  menuIcon.addEventListener("click", openMenu);
+  closeIcon.addEventListener("click", closeMenu);
 
   mobileMenu.addEventListener("click", (e) => {
     if (e.target === mobileMenu) closeMenu();
@@ -408,12 +408,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && mobileMenu.classList.contains("active")) {
-      closeMenu();
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768 && mobileMenu.classList.contains("active")) {
       closeMenu();
     }
   });
@@ -427,15 +421,17 @@ fetch("/news/news.json")
     const list = document.getElementById("news-list");
     list.innerHTML = "";
 
-    // ▼新しい順に並べ替えてから先頭3件だけ取得
     const latest = data.slice().reverse().slice(0, 3);
 
     latest.forEach(item => {
       const li = document.createElement("li");
       li.innerHTML = `
+      <div class="fade-in center">
         <a href="${item.link}" class="news-box">
-          <span class="tag">»${item.category}«</span> ${item.title}
-        </a>`;
+          <span class="tag"> » ${item.category} « </span> ${item.title}
+        </a>
+      </div>
+        `;
       list.appendChild(li);
     });
   })

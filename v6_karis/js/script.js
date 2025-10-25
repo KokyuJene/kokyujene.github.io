@@ -1,7 +1,5 @@
-  //20XX
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  //総訪問回数
   fetch('https://script.google.com/macros/s/AKfycbydDLtlQTxlvrm2t9eH0jqs01awiKKPn23kOknQ44eF095C2rm1ZjABGZG-2obDKW1T/exec')
     .then(res => res.json())
     .then(data => {
@@ -12,7 +10,7 @@
       console.error(err);
     });
     
-  //kento!
+// kento!
 window.addEventListener('load', () => {
 
   const img = document.createElement('img');
@@ -22,7 +20,6 @@ window.addEventListener('load', () => {
   img.style.zIndex = 9999;
   img.style.cursor = 'pointer';
 
-  // 画面サイズに応じて画像サイズを変更
   if (window.innerWidth > 1024) { 
     img.style.width = '25px';
     img.style.height = '25px';
@@ -31,9 +28,8 @@ window.addEventListener('load', () => {
     img.style.height = '10px';
   }
 
-  // ランダムに左右どちらかを選ぶ
   const side = Math.random() < 0.5 ? 'left' : 'right';
-  const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20; // 上下に少し余裕
+  const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20;
 
   img.style.top = `${y}px`;
 
@@ -47,7 +43,6 @@ window.addEventListener('load', () => {
 
   document.body.appendChild(img);
 
-  // クリック時の演出
   img.addEventListener('click', () => {
     const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
     sound.play();
@@ -67,14 +62,12 @@ window.addEventListener('load', () => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
-  // 初期状態
   if (userTheme === 'dark') {
     applyTheme(true);
   } else {
     applyTheme(false);
   }
 
-  // クリックで切り替え
   themeIcon.addEventListener('click', () => {
     const isNowDark = !document.documentElement.classList.contains('dark');
     applyTheme(isNowDark);
@@ -83,33 +76,29 @@ window.addEventListener('load', () => {
   const glitchImg = document.getElementById('glitchImage');
 
   glitchImg.addEventListener('mouseenter', () => {
-    glitchImg.src = 'images/glitch_animation.gif'; // バグ風アニメGIFに切替
+    glitchImg.src = '../images/glitch_animation.gif';
   });
 
   glitchImg.addEventListener('mouseleave', () => {
-    glitchImg.src = 'images/glitch_static.webp'; // 静止状態に戻す
+    glitchImg.src = '../images/glitch_static.webp';
   });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   function goBack() {
-    // 前のページが同じドメインなら戻る
     if (document.referrer.includes("kokyujene.github.io")) {
       history.back();
     } else {
-      // 外部サイトから来た場合はホームに戻す
       window.location.href = "https://kokyujene.github.io/";
     }
   }
 
 document.getElementById('scrollTopButton').addEventListener('click', function(e) {
-    // ページ遷移（ジャンプ）を防ぐ
     e.preventDefault(); 
-    
-    // ウィンドウをページの最上部 (Y座標: 0) へ滑らかにスクロール
+
     window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'smooth' /* ★ アニメーションを有効にするオプション ★ */
+        behavior: 'smooth'
     });
 });
