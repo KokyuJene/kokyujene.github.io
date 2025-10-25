@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 
   function applyTheme(isDark) {
     document.documentElement.classList.toggle('dark', isDark);
-    themeIcon.src = isDark ? 'https://kokyujene.github.io/images/sun.webp' : 'https://kokyujene.github.io/images/moon.webp';
+    themeIcon.src = isDark ? 'https://kokyujene.github.io/v6_karis/images/sun.webp' : 'https://kokyujene.github.io/v6_karis/images/moon.webp';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
@@ -101,4 +101,14 @@ document.getElementById('scrollTopButton').addEventListener('click', function(e)
         left: 0,
         behavior: 'smooth'
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const links = document.querySelectorAll('a');
+
+  links.forEach(link => {
+    link.addEventListener('click', function() {
+      this.blur(); 
+    });
+  });
 });
