@@ -99,11 +99,26 @@
 }
 
 .dark .news-box {
-  padding:14px; border-radius:8px; background:#81580b; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px;
+  padding: 15px 20px;
+  border-radius:8px;
+  background:#81580b;
+  color: #fff8ec;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom:12px;
+  font-family: 'Jost', 'zenkaku', sans-serif;
+  font-size: 18px;
 }
 
 .news-box {
-  padding:14px; border-radius:8px; background:#ffaa00; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px;
+  padding: 15px 20px;
+  margin: 12px;
+  border-radius:8px;
+  background:#ffd071;
+  color: #fff4ea;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom:12px;
+  font-family: 'Jost', 'zenkaku', sans-serif;
+  font-size: 18px;
 }
 </style>
 
@@ -182,6 +197,7 @@
 <h2 id="welcomeText" class="welcome-text">ようこそ!<br>新 高級ジェネへ!</h2>
 </div>
 
+<div class="fade-in">
 <div class="center">
 <div class="mybox">
 <div class="server-status-container">
@@ -196,19 +212,17 @@
 </div>
 </div>
 
+
+<div class="fade-in">
 <div class="center">
   <h2>最新のニュース</h2>
   <p class="sub-title">\-Latest News-/</p>
 <section id="latest-news">
+  <a class="news-box" href=""> » test « TEST TEST</a>
   <ul id="news-list"></ul>
   <div class="more-link"><a href="https://kokyujene.github.io/news/" class="my-button"> » ニュース一覧へ</a></div>
 </section>
 </div>
-
-<div class="center">
-  <div class="kari_bt">
-  <a href="">[更 新]</a>
-  </div>
 </div>
 
 <footer>
@@ -426,11 +440,9 @@ fetch("/news/news.json")
     latest.forEach(item => {
       const li = document.createElement("li");
       li.innerHTML = `
-      <div class="fade-in center">
         <a href="${item.link}" class="news-box">
           <span class="tag"> » ${item.category} « </span> ${item.title}
         </a>
-      </div>
         `;
       list.appendChild(li);
     });
