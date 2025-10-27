@@ -13,44 +13,58 @@
 // kento!
 window.addEventListener('load', () => {
 
-  const img = document.createElement('img');
-  img.src = 'https://kokyujene.github.io/images/hidden.webp';
-  img.className = 'hidden-image';
-  img.style.position = 'fixed';
-  img.style.zIndex = 9999;
-  img.style.cursor = 'pointer';
-
-  if (window.innerWidth > 1024) { 
-    img.style.width = '25px';
-    img.style.height = '25px';
-  } else {
-    img.style.width = '10px';
-    img.style.height = '10px';
-  }
-
-  const side = Math.random() < 0.5 ? 'left' : 'right';
-  const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20;
-
-  img.style.top = `${y}px`;
-
-  if (side === 'left') {
-    img.style.left = '10px';
-    img.style.right = '';
-  } else {
-    img.style.right = '10px';
-    img.style.left = '';
-  }
-
-  document.body.appendChild(img);
-
-  img.addEventListener('click', () => {
-    const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
-    sound.play();
+  function spawnHiddenImage() {
+    const img = document.createElement('img');
+    img.src = 'https://kokyujene.github.io/images/hidden.webp';
+    img.className = 'hidden-image';
+    img.style.position = 'fixed';
+    img.style.zIndex = 9999;
+    img.style.cursor = 'pointer';
     img.style.transition = 'all 1s ease';
-    img.style.transform = 'scale(3) rotate(720deg)';
-    img.style.opacity = 0;
-    setTimeout(() => img.remove(), 1000);
-  });
+
+    // 画面サイズに応じて大きさを調整
+    if (window.innerWidth > 1024) { 
+      img.style.width = '25px';
+      img.style.height = '25px';
+    } else {
+      img.style.width = '10px';
+      img.style.height = '10px';
+    }
+
+    // ランダムな左右配置と高さ
+    const side = Math.random() < 0.5 ? 'left' : 'right';
+    const y = Math.random() * (window.innerHeight - parseInt(img.style.height) - 40) + 20;
+
+    img.style.top = `${y}px`;
+    if (side === 'left') {
+      img.style.left = '10px';
+      img.style.right = '';
+    } else {
+      img.style.right = '10px';
+      img.style.left = '';
+    }
+
+    document.body.appendChild(img);
+
+    // クリック時の処理
+    img.addEventListener('click', () => {
+      const sound = new Audio('https://kokyujene.github.io/sounds/success.ogg');
+      sound.play();
+
+      // アニメーション
+      img.style.transform = 'scale(3) rotate(720deg)';
+      img.style.opacity = 0;
+
+      // 削除して10秒後に再出現
+      setTimeout(() => {
+        img.remove();
+        setTimeout(spawnHiddenImage, 10000); // 10秒後に新たに出現
+      }, 1000);
+    });
+  }
+
+  // 最初の1回生成
+  spawnHiddenImage();
 });
 
   const themeIcon = document.getElementById('theme-icon');
