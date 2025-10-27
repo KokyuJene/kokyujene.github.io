@@ -510,7 +510,7 @@ body.menu-open {
     background-color: #110c023a; 
 }
 
-.top-wall-members * {
+.top-wall * {
     position: relative;
     z-index: 2; 
 }
