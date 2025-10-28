@@ -725,12 +725,40 @@ footer li {
   text-align: right;
 }
 
-.main-member {
-    padding: 20px;
+.members .my-button {
+    margin-top: 30px;
+}
+
+.members {
+    padding: 30px 0px;
     text-align: center;
     font-size: 14px;
-    color: #ffbb32;
+    background-color: #fff1d6;
     margin: 15px auto;
+    margin-top: 20px;
+}
+
+.name {
+    font-size: 40px;
+    text-shadow: #ffc880 2px 2px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0px auto;
+    justify-content: center;
+}
+
+.name img {
+    margin: auto 15px;
+}
+
+.dark .name p{
+    text-shadow: #693c00 2px 2px;
+}
+
+.comment {
+    margin: 0% 0%;
+    font-size: 20px;
 }
 
 @media screen and (max-width: 867px) {
@@ -801,6 +829,10 @@ footer li {
 
     .link-buttons .my-button {
         width: 350px;
+    }
+
+    .title {
+        font-size: 45px;
     }
 }
 
@@ -912,5 +944,9 @@ footer li {
     .footer-icon {
         width: 16px;
         height: 16px;
+    }
+
+    .title {
+        font-size: 35px;
     }
 }
