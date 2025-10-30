@@ -738,6 +738,10 @@ footer li {
     margin-top: 20px;
 }
 
+.dark .members {
+    background-color: #362400;
+}
+
 .name {
     font-size: 40px;
     text-shadow: #ffc880 2px 2px;
@@ -750,6 +754,8 @@ footer li {
 
 .name img {
     margin: auto 15px;
+    width: 48px;
+    height: auto;
 }
 
 .dark .name p{
@@ -833,6 +839,14 @@ footer li {
 
     .title {
         font-size: 45px;
+    }
+
+    .name {
+        font-size: 30px;
+    }
+
+    .name img {
+        margin: auto 12px;
     }
 }
 
@@ -947,6 +961,14 @@ footer li {
     }
 
     .title {
-        font-size: 35px;
+        font-size: 30px;
+    }
+
+    .name {
+        font-size: 25px;
+    }
+
+    .name img {
+        margin: auto 10px;
     }
 }
