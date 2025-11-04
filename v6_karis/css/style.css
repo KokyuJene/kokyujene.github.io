@@ -91,8 +91,8 @@ a:focus-visible {
 @font-face {
     font-family: 'jost';
     src: url('../fonts/Jost-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: bold;
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
@@ -110,10 +110,10 @@ a:focus-visible {
 }
 
 @font-face {
-    font-family: 'zenkaku-bold';
+    font-family: 'zenkaku';
     src: url('../fonts/zenkaku-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: Bold;
+    font-weight: bold;
+    font-style: normal;
 }
 
 header {

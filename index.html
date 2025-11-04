@@ -208,11 +208,11 @@ img, .center-image-left img, .center-image img, .image-container img {
 li {display: flex;}
 
 .dark .news-box{
-  padding:14px; border-radius:8px; background:#81580b; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px; font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
+  padding:14px; border-radius:8px; background:#81580b; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px;
 }
 
 .news-box{
-  padding:14px; border-radius:8px; background:#ffaa00; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px; font-family: 'Minecraft', 'Unifont', 'Meiryo', Arial, Helvetica, sans-serif;
+  padding:14px; border-radius:8px; background:#ffaa00; color: #fff8ec; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:12px;
 }
 
 .news-box:hover { color: #ffdc96; background-color: #ffb41e; }
@@ -426,6 +426,66 @@ li {display: flex;}
 }
 }
 
+@font-face {
+    font-family: 'jost';
+    src: url('../fonts/Jost-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'jost';
+    src: url('../fonts/Jost.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'zenkaku';
+    src: url('../fonts/zenkaku.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'zenkaku';
+    src: url('../fonts/zenkaku-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.my-button-beta {
+    display: inline-block;
+    padding: 15px 20px;
+    margin: 12px;
+    background-color: #ffbb32;
+    color : #fff4ea;
+    font-size: 18px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    border-radius:8px;
+    font-family: 'Jost', 'zenkaku', sans-serif;
+}
+
+.dark .my-button-beta {
+    background-color: #81580b;
+    color : #fff8eb;
+}
+
+.my-box {
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #fff1d6;
+    border-radius: 16px;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    font-family: 'Jost', 'zenkaku', sans-serif;
+}
+
+.dark .my-box {
+    background-color: #362400;
+}
+
 </style>
 
 <body>
@@ -526,6 +586,17 @@ li {display: flex;}
 </div>
 
 <div class="fade-in">
+    <div class="my-box">
+    <small class=sub-title>\-v6-BetaSites-/</small>
+    <h2>v6-Betaサイト</h2>
+    <p>今、Super Hiko14は製作中のページ、公式サイト[v6]を作成しています!!<br>気になったらぜひ行ってみてねー</p>
+<a href="https://kokyujene.github.io/v6_karis/" class="my-button-beta">
+  新 高級ジェネ™ (v6-"Beta") へ移動
+</a>
+  </div>
+</div>
+
+<div class="fade-in">
 <div class="content-box">
     <div class="side-text">
     <div class="box1">
@@ -539,22 +610,6 @@ li {display: flex;}
 <p>時々、更新が遅れたり、サーバーを開かないこともあります。<br>その際はすみません。どうかご了承ください。</p>
   </div>
   </div>
-</div>
-</div>
-
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-    <small class=sub-title>\-I hate plagiarism!!!-/</small>
-    <h2>あああパクリ嫌い!!!</h2>
-<div class="image-container">
-  <div class="center-image-left">
-		<img src="/images/by_kikka_Thanks!.webp" alt="memory" class="maru_img">
-  </div>
-</div>
-    </div>
-    </div>
 </div>
 </div>
 
@@ -601,7 +656,7 @@ li {display: flex;}
     <div class="box1">
   <h2 class="sub-title">\-Latest News-/</h2>
   <h2 id="latest-news">最新ニュース</h2>
-  <section id="latest-news">
+<section id="latest-news">
   <ul id="news-list"></ul>
   <div class="more-link"><a href="https://kokyujene.github.io/news/" class="my-button">» ニュース一覧へ</a></div>
 </section>

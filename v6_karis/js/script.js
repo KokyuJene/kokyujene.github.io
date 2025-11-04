@@ -126,3 +126,78 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+const target = document.getElementById('targetElement');
+const header = document.getElementById('mainHeader');
+
+const headerOptions = {
+  rootMargin: '0px',
+  threshold: 0
+};
+
+const headerCallback = (entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      header.classList.add('hidden');
+      header.classList.remove('visible');
+    } else {
+      header.classList.remove('hidden');
+      header.classList.add('visible');
+    }
+  });
+};
+
+const headerObserver = new IntersectionObserver(headerCallback, headerOptions);
+if (target) {
+  headerObserver.observe(target);
+}
+
+const fadeInObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
+});
+
+document.querySelectorAll('.fade-in').forEach(el => fadeInObserver.observe(el));
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const headerIconMenu = document.querySelector(".header-icon-menu");
+
+  function openMenu() {
+    mobileMenu.classList.add("active");
+    document.body.classList.add("menu-open");
+    menuIcon.classList.add("hidden");
+    closeIcon.classList.add("show");
+    menuIcon.setAttribute("aria-hidden", "true");
+    closeIcon.setAttribute("aria-hidden", "false");
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+    menuIcon.classList.remove("hidden");
+    closeIcon.classList.remove("show");
+    menuIcon.setAttribute("aria-hidden", "false");
+    closeIcon.setAttribute("aria-hidden", "true");
+  }
+
+  menuIcon.addEventListener("click", openMenu);
+  closeIcon.addEventListener("click", closeMenu);
+
+  mobileMenu.addEventListener("click", (e) => {
+    if (e.target === mobileMenu) closeMenu();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu.classList.contains("active")) {
+      closeMenu();
+    }
+  });
+});
