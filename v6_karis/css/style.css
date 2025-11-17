@@ -378,7 +378,7 @@ body.menu-open {
   display: inline-block;
   padding: 12px 24px;
   font-size: 18px;
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.3);
   color: var(--text-color);
@@ -415,14 +415,14 @@ body.menu-open {
 }
 
 .status-closed {
-  background-color: rgba(180, 0, 0, 0.5);
-  border-color: rgba(180, 0, 0, 0.5);
-  color: #ff5555;
+  background-color: rgba(179, 18, 18, 0.600);
+  border-color: rgba(109, 3, 3, 0.850);
+  color: #ffcbcb;
 }
 
-.status-closed {
-  background-color: rgba(94, 0, 0, 0.5);
-  border-color: rgba(112, 0, 0, 0.5);
+.dark .status-closed {
+  background-color: rgba(94, 0, 0);
+  border-color: rgba(112, 0, 0);
   color: #ffc3c3;
 }
 
@@ -443,7 +443,7 @@ body.menu-open {
     color : #fff4ea;
     font-size: 18px;
     box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    border-radius:8px;
+    border-radius: 16px;
 }
 
 .dark .my-button {
@@ -453,6 +453,10 @@ body.menu-open {
 
 .link-buttons .my-button {
     width: 400px;
+}
+
+.my-button:hover {
+    opacity: 0.8;
 }
 
 .top-wall {
@@ -732,7 +736,7 @@ footer li {
 .members {
     padding: 30px 0px;
     text-align: center;
-    font-size: 14px;
+    font-size: 22px;
     background-color: #fff1d6;
     margin: 15px auto;
     margin-top: 20px;
@@ -825,6 +829,10 @@ footer li {
         font-size: 18px;
     }
 
+    .members {
+        font-size: 20px;
+    }
+
     .mini-text {
         font-size: 10px;
     }
@@ -902,7 +910,7 @@ footer li {
     }
 
     .mini-text {
-        font-size: 10px;
+        font-size: 16px;
     }
 
     .status-box {

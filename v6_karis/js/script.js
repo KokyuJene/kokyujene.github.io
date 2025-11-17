@@ -82,19 +82,10 @@ window.addEventListener('load', () => {
     applyTheme(false);
   }
 
+  // クリックで切り替え
   themeIcon.addEventListener('click', () => {
     const isNowDark = !document.documentElement.classList.contains('dark');
     applyTheme(isNowDark);
-  });
-
-  const glitchImg = document.getElementById('glitchImage');
-
-  glitchImg.addEventListener('mouseenter', () => {
-    glitchImg.src = '../images/glitch_animation.gif';
-  });
-
-  glitchImg.addEventListener('mouseleave', () => {
-    glitchImg.src = '../images/glitch_static.webp';
   });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
@@ -106,63 +97,6 @@ window.addEventListener('load', () => {
       window.location.href = "https://kokyujene.github.io/";
     }
   }
-
-document.getElementById('scrollTopButton').addEventListener('click', function(e) {
-    e.preventDefault(); 
-
-    window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const links = document.querySelectorAll('a');
-
-  links.forEach(link => {
-    link.addEventListener('click', function() {
-      this.blur(); 
-    });
-  });
-});
-
-const target = document.getElementById('targetElement');
-const header = document.getElementById('mainHeader');
-
-const headerOptions = {
-  rootMargin: '0px',
-  threshold: 0
-};
-
-const headerCallback = (entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      header.classList.add('hidden');
-      header.classList.remove('visible');
-    } else {
-      header.classList.remove('hidden');
-      header.classList.add('visible');
-    }
-  });
-};
-
-const headerObserver = new IntersectionObserver(headerCallback, headerOptions);
-if (target) {
-  headerObserver.observe(target);
-}
-
-const fadeInObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show');
-    }
-  });
-});
-
-document.querySelectorAll('.fade-in').forEach(el => fadeInObserver.observe(el));
 
 document.addEventListener("DOMContentLoaded", () => {
   const menuIcon = document.querySelector(".menu-icon");
