@@ -325,6 +325,8 @@ main {
 .mobile-menu a {
   color: #fff8eb;
   text-decoration: none;
+  font-weight: normal;
+  font-style: normal;
   font-size: 30px;
   letter-spacing: 1px;
   opacity: 0;
