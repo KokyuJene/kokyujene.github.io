@@ -90,7 +90,7 @@
 .news-box {
   padding: 15px 20px;
   margin: 12px auto;
-  border-radius:8px;
+  border-radius:16px;
   background:#ffbb32;
   color: #fff4ea;
   box-shadow:0 2px 8px rgba(0,0,0,0.06);
@@ -99,11 +99,32 @@
   font-size: 18px;
   text-align: center;
   align-items: center;
+  width: 600px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dark .news-box {
   background:#81580b;
   color: #fff8eb;
+}
+
+.news-box:hover {
+  opacity: 0.8;
+}
+
+.news-title {
+  flex-grow: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.catego, .date {
+  font-size: 60%;
 }
 
 #news-list {
@@ -116,7 +137,9 @@
 }
 
 #news-list li {
-    width: 100%; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 #news-list li p,
@@ -124,6 +147,10 @@
     text-align: center;
     margin-left: 0;
     margin-right: 0;
+}
+
+.catego {
+  float: left;
 }
 
 .scroll-container {
@@ -168,26 +195,38 @@ transform: translateX(-50%);
     .scroll-text span {
         margin: 0 20px;
     }
+
+    .news-box {
+      width: 500px;
+    }
 }
 
 @media screen and (max-width: 580px) {
-.logo-slot {
-  width: 100px;
-  height: 100px;
-}
+    .logo-slot {
+      width: 100px;
+      height: 100px;
+    }
 
-.welcome-text {
-  font-size: 40px;
-}
+    .welcome-text {
+      font-size: 40px;
+    }
 
-.news-box {
-  font-size: 12px;
-  padding: 10px 15px;
-}
+    .news-box {
+      font-size: 12px;
+      padding: 10px 15px;
+    }
 
-.scroll-text {
-    font-size: 8px;
-}
+    .scroll-text {
+        font-size: 8px;
+    }
+
+    .news-box {
+      width: 250px;
+    }
+
+    .news-box {
+      border-radius:12px;
+    }
 }
 </style>
 
@@ -269,7 +308,7 @@ transform: translateX(-50%);
 
 <div class="center">
 <h2 id="welcomeText" class="welcome-text">ようこそ<br>新 高級ジェネへ!</h2>
-<h2 id="welcomeText" class="sub-title">Welcome<br>to KokyueJene!</h2>
+<p id="welcomeText" class="sub-title">Welcome<br>to KokyueJene!</p>
 </div>
 
 <section id="sarver-status">
@@ -297,40 +336,41 @@ transform: translateX(-50%);
   <h2>最新のニュース</h2>
   <p class="sub-title">\-Latest News-/</p>
   </div>
+  <div class="fade-in">
 <section id="latest-news">
   <ul id="news-list"></ul>
-  <div class="more-link"><a href="https://kokyujene.github.io/v6_karis/news/" class="my-button">ニュース一覧へ</a></div>
+  <div class="fade-in"><div class="more-link"><a href="https://kokyujene.github.io/v6_karis/news/" class="my-button">ニュース一覧へ</a></div></div>
 </section>
 </div>
 </section>
 
 <section id="join">
-<div class="fade-in">
 <div class="center">
+<div class="fade-in">
 <div class="my-box">
   <h2>参加方法</h2>
   <p class="sub-title">\-How to Participate-/</p>
   <p>参加するにはSuper Hiko14をフレンドに追加しましょう!<br>大体開いている時間:18:00-19:00~20:00-0:00</p>
   <p class="mini-text">(??:??-??:??の間にある-はその時間の間のどこかということになるます。19時に閉じるとかではありません。??:??~??:??の~はその時間は開いているということです。紛らわしくてすみません)</p>
-  <a href="https://launch.minecraft.net/profile/Super%20Hiko14" class="my-button" target="_blank">XboxAccount</a>
+  <div class="fade-in"><a href="https://launch.minecraft.net/profile/Super%20Hiko14" class="my-button" target="_blank">XboxAccount</a></div>
 </div>
 </div>
 </div>
 </section>
 
 <section id="links">
-<div class="fade-in">
 <div class="center">
+  <div class="fade-in">
   <h2>その他のリンク</h2>
   <p class="sub-title">\-Other Links-/</p><br>
+  </div>
   <div class="link-buttons">
-  <a href="https://launch.minecraft.net/profile/Super%20Hiko14" class="my-button" target="_blank">Xbox</a><br>
-  <a href="https://www.youtube.com/@KokyuJene" class="my-button" target="_blank">Youtube</a><br>
-  <a href="https://x.com/KokyuJene" class="my-button" target="_blank">X (Twitter)</a><br>
-  <a href="https://line.me/R/ti/g2/HS6j5kY1e5" class="my-button" target="_blank">OpenChat</a><br>
-  <a href="https://discord.gg/ukFH4NtDG6" class="my-button" target="_blank">Discord</a><br>
-  <a href="https://potofu.me/super-hiko14" class="my-button" target="_blank">Link</a>
-</div>
+  <div class="fade-in"><a href="https://launch.minecraft.net/profile/Super%20Hiko14" class="my-button" target="_blank">Xbox</a><br></div>
+  <div class="fade-in"><a href="https://www.youtube.com/@KokyuJene" class="my-button" target="_blank">Youtube</a><br></div>
+  <div class="fade-in"><a href="https://x.com/KokyuJene" class="my-button" target="_blank">X (Twitter)</a><br></div>
+  <div class="fade-in"><a href="https://line.me/R/ti/g2/HS6j5kY1e5" class="my-button" target="_blank">OpenChat</a><br></div>
+  <div class="fade-in"><a href="https://discord.gg/ukFH4NtDG6" class="my-button" target="_blank">Discord</a><br></div>
+  <div class="fade-in"><a href="https://potofu.me/super-hiko14" class="my-button" target="_blank">Link</a></div>
 </div>
 </div>
 </section>
@@ -472,6 +512,7 @@ document.querySelectorAll('.fade-in').forEach(el => fadeInObserver.observe(el));
 </script>
 
 <script src="js/script.js">
+
 </script>
 
 <script>
@@ -543,7 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-fetch("/news/news.json")
+fetch("news/news.json")
   .then(res => res.json())
   .then(data => {
     const list = document.getElementById("news-list");
@@ -555,7 +596,7 @@ fetch("/news/news.json")
       const li = document.createElement("li");
       li.innerHTML = `
         <a href="${item.link}" class="news-box">
-          <span class="tag"> » ${item.category} « </span> ${item.title}
+          <div class=catego><span class="tag"> » ${item.category} « </span></div><div class=news-title> ${item.title} </div><div class=date>${item.date}</div>
         </a>
         `;
       list.appendChild(li);

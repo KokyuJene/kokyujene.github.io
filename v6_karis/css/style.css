@@ -461,7 +461,7 @@ body.menu-open {
 
 .top-wall {
     position: relative;
-    background-image: url(../images/pc_nomal.png);
+    background-image: url(../images/pc_normal.webp);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -482,6 +482,11 @@ body.menu-open {
 
 .dark .top-wall::before {
     background-color: #110c023a; 
+}
+
+.top-wall * {
+    position: relative;
+    z-index: 2; 
 }
 
 .top-wall-members * {
@@ -512,11 +517,6 @@ body.menu-open {
 
 .dark .top-wall-members::before {
     background-color: #110c023a; 
-}
-
-.top-wall * {
-    position: relative;
-    z-index: 2; 
 }
 
 .title {
@@ -910,7 +910,7 @@ footer li {
     }
 
     .mini-text {
-        font-size: 16px;
+        font-size: 8px;
     }
 
     .status-box {
@@ -957,6 +957,7 @@ footer li {
     .my-button {
         font-size: 12px;
         padding: 10px 15px;
+        border-radius:12px;
     }
 
     .link-buttons .my-button {
