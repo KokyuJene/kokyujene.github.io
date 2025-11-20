@@ -831,7 +831,7 @@ footer li {
     }
 
     .members {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .mini-text {
@@ -907,6 +907,10 @@ footer li {
     }
 
     p {
+        font-size: 14px;
+    }
+
+    .members {
         font-size: 14px;
     }
 
