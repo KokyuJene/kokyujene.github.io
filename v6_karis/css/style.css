@@ -857,7 +857,10 @@ footer li {
     .name img {
         margin: auto 12px;
     }
-}
+
+    .comment {
+        font-size: 18px;
+    }
 
 @media screen and (max-width: 580px) {
     .list li {
@@ -984,5 +987,9 @@ footer li {
 
     .name img {
         margin: auto 10px;
+    }
+
+    .comment {
+        font-size: 14px;
     }
 }
