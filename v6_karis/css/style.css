@@ -711,7 +711,6 @@ footer img {
     float: left;
     width: 400px;
     height: auto;
-
 }
 
 footer li {
@@ -722,11 +721,31 @@ footer li {
     display: block;
 }
 
+.footer-link-container {
+  margin: 20px 0;
+}
+
 .footer-link {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.footer-link a {
+  padding: 0 15px;
   text-decoration: none;
   color: inherit;
-  margin-left: 10px;
-  text-align: right;
+  border-right: 1px solid currentColor;
+}
+
+.footer-link a:last-child {
+  border-right: none;
+}
+
+.theme-toggle-icon {
+    float: left;
 }
 
 .members .my-button {
@@ -931,10 +950,13 @@ footer li {
     }
 
     footer img {
-        align-items: center;
-        text-align: center;
-        display: grid;
+        float: left;
         width: 200px;
+        height: auto;
+    }
+
+    .footer-icon img {
+        width: 15px;
         height: auto;
     }
 
