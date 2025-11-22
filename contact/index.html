@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ | 新 高級ジェネ™ 公式サイト</title>
+  <title>CONTACT | 新 高級ジェネ™ 公式サイト</title>
   <meta name="description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta name="google-site-verification" content="9_dxQw3tiC3vs0ur8X4JLnf7vINwHN3m_qnyZO_3PDM" />
 
@@ -17,7 +17,7 @@
 
 <!-- X(Twitter)用 -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@Kokyujene">
+  <meta name="twitter:site" content="@KokyuJene">
   <meta name="twitter:title" content="新 高級ジェネ 公式サイト">
   <meta name="twitter:description" content="Super Hiko14がホストを運営するマインクラフト統合版サーバー『新 高級ジェネ』の公式サイト! 高級ジェネの運営メンバーやルールなどが記述されているページもあり、最新情報をお届けするニュースや、お問い合わせページ、Youtube、X、オープンチャット、Discordなどのリンクも記載!">
   <meta name="twitter:image" content="https://kokyujene.github.io/ogp.webp">
@@ -43,265 +43,223 @@
 </head>
 
 <style>
-  /* お問い合わせページ */
-.contact-section {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 20px;
-  text-align: left;
+.top-wall-contact * {
+    position: relative;
+    z-index: 2; 
 }
 
-.page-title {
-  font-size: 2em;
-  text-align: center;
-  margin-bottom: 20px;
+.top-wall-contact {
+    position: relative;
+    background-image: url(../images/contact_web.webp);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding-top: 180px;
+    padding-bottom: 300px;
 }
 
-.contact-intro {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 1.1em;
-  line-height: 1.6;
+.top-wall-contact::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff8eb3a; 
+    z-index: 1; 
 }
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.dark .top-wall-contact::before {
+    background-color: #110c023a; 
 }
 
-.contact-form label {
-  font-weight: bold;
+.color-7 span {
+  color: #aaaaaa;
 }
 
-.contact-form input,
-.contact-form textarea {
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.color-c span{
+  color: #ff5353;
 }
 
-.contact-form button {
-  align-self: flex-start;
+b {
+  font-size: 125%;
 }
 
-.contact-mail {
-  margin-top: 30px;
-  text-align: center;
-}
-
-/* Googleフォームを中央寄せ */
 .google-form-wrapper {
   max-width: 800px;
   margin: 0 auto;
   padding: 10px;
 }
 
-/* メール直送部分 */
-.contact-mail {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 1.1em;
+@media (max-width: 768px) {
+    .me-box {
+        width: 500px;
+    }
+
+    .big {
+      font-size: 160%;
+    }
+
+    .top-wall {
+        padding-top: 120px;
+        padding-bottom: 280px;
+        background-position: center center;
+        background-attachment: scroll;
+    }
 }
 
-.box1 {
-  width: 100%;
-  margin-left: 0%;
-}
+@media screen and (max-width: 580px) {
+    .me-box {
+        width: 300px;
+    }
 
-@media screen and (max-width: 768px) {
+    .big {
+      font-size: 120%;
+    }
 
-.google-form-wrapper {
-  margin: 0 auto;
-  padding: 0px;
-}
+    .top-wall {
+        padding-bottom: 220px;
+        background-position: center center;
+    }
 }
 </style>
 
 <body>
-<div class="wrapper">
 
-<header>
-  <!-- 左のロゴ -->
-  <a href="https://kokyujene.github.io/" class="logo">
-    <img src="https://kokyujene.github.io/images/logo_icon.webp" alt="LOGO">
-  </a>
+<div class="center">
+<section aria-hidden="true" id="hero">
+  <div id="heroWrapper">
+    <div id="heroInner"></div>
+  </div>
+</section>
+</div>
 
-  <!-- PC用ナビゲーション -->
-  <nav class="nav-links">
+<header id="mainHeader">
+  <div class="logo">
+    <a href="https://kokyujene.github.io">
+    <img src="https://kokyujene.github.io/images/icon.png" alt="LOGO">
+    </a>
+  </div>
+
+  <div class="list">
     <ul>
-      <li>
-        <a href="https://kokyujene.github.io">
-          <small class="sub-title">\-Home-/</small>
-          <h3 class="h2-header">ホーム</h3>
-        </a>
-      </li>
-      <li>
-        <a href="https://kokyujene.github.io/members/">
-          <small class="sub-title">\-Member-/</small>
-          <h3 class="h2-header">メンバー紹介</h3>
-        </a>
-      </li>
-      <li>
-        <a href="https://kokyujene.github.io/rules/">
-          <small class="sub-title">\-Rules-/</small>
-          <h3 class="h2-header">ルール</h3>
-        </a>
-      </li>
-      <li>
-        <a href="https://kokyujene.github.io/rules/">
-          <small class="sub-title">\-News-/</small>
-          <h3 class="h2-header">ニュース</h3>
-        </a>
-      </li>
+      <li><a href="https://kokyujene.github.io/">home</a></li>
+      <li><a href="https://kokyujene.github.io/members/">members</a></li>
+      <li><a href="https://kokyujene.github.io/rules/">rules</a></li>
+      <li><a href="https://kokyujene.github.io/news/">news</a></li>
+    </ul>
+  </div>
+
+</header>
+
+<div class="header-icon-menu" aria-hidden="false">
+  <button class="menu-icon" aria-label="メニューを開く" type="button">
+    <img src="https://kokyujene.github.io/images/menu.webp" alt="menu" />
+  </button>
+  <button class="close-icon" aria-label="メニューを閉じる" type="button">
+    <img src="https://kokyujene.github.io/images/close.webp" alt="close" />
+  </button>
+</div>
+
+  <nav id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="https://kokyujene.github.io/">home</a></li>
+      <li><a href="https://kokyujene.github.io/members/">members</a></li>
+      <li><a href="https://kokyujene.github.io/rules/">rules</a></li>
+      <li><a href="https://kokyujene.github.io/news/">news</a></li>
     </ul>
   </nav>
 
-  <!-- スマホ用メニューアイコン（右寄せ） -->
-  <img src="https://kokyujene.github.io/images/menu.webp" alt="メニュー" class="menu-icon">
-  <img src="https://kokyujene.github.io/images/close.webp" alt="閉じる" class="close-icon">
-
-  <!-- モバイルメニュー -->
-<!-- モバイルメニュー -->
-<div id="mobileMenu" class="mobile-menu">
-  <ul>
-    <li>
-      <a href="https://kokyujene.github.io">
-        <small class="sm-sub-title">\-Home-/</small>
-        <h3 class="sm-header">ホーム</h3>
-      </a>
-    </li>
-    <li>
-      <a href="https://kokyujene.github.io/members/">
-        <small class="sm-sub-title">\-Members-/</small>
-        <h3 class="sm-header">メンバー紹介</h3>
-      </a>
-    </li>
-    <li>
-      <a href="https://kokyujene.github.io/rules/">
-        <small class="sm-sub-title">\-Rules-/</small>
-        <h3 class="sm-header">ルール</h3>
-      </a>
-    </li>
-    <li>
-      <a href="https://kokyujene.github.io/news/">
-        <small class="sm-sub-title">\-News-/</small>
-        <h3 class="sm-header">ニュース</h3>
-      </a>
-    </li>
-  </ul>
-</div>
-</header>
-
 <main>
 
-<div class="fade-in">
-<div class="section-title">
-<div class="center-text">
-  <div class="t_1">
-    <div class="gyo_1">
-      <h1 class="c2_h1">
-      <small class=sub-title>\-Contact-/</small>お問い合わせ</h1>
+<div class="top-wall-contact">
+<div class="top-box">
+  <div class="child">
+    <div class="title">
+    <h1>CONTACT</h1>
     </div>
-	</div>
-</div>
+  </div>
 </div>
 </div>
 
-<div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
-    <div class="box1">
-  <section class="contact-section">
-    <h2 class="page-title">お問い合わせ内容</h2>
-    <p class="contact-intro">
-      ご意見･ご質問･コラボ依頼などは以下のフォームまたはメールアドレスからお気軽にお問い合わせください。
-    </p>
-    </div>
-    </div>
-</div>
-</div>
-
-    <div class="fade-in">
-<div class="content-box">
-    <div class="side-text">
+<div class="center">
 
     <!-- Googleフォーム埋め込み -->
+    <div class="google-contact">
     <div class="google-form-wrapper">
       <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScfUrPKC_zNraZR3FKNBgv8RNNilQs1sFwsAouC59C3-msRBg/viewform?embedded=true" 
               width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">
         読み込んでいます…
       </iframe>
     </div>
+    </div>
 
     <!-- メール直送の案内 -->
     <div class="contact-mail">
       <p>または、直接メールで: <a href="mailto:kokyujene.contact@gmail.com">kokyujene.contact@gmail.com</a></p>
-    </div>
-  </section>
-    </div>
-    </div>
+  </div>
 </div>
-<div class="fade-in">
-    <div class="center-text">
-    <a onclick="goBack()" class="my-button2" target="_blank">戻る</a><br>
-    </div>
-</div>
+
 </main>
 
-<footer class="footer">
-  <div class="footer-icons">
-    <a href="https://line.me/ti/g2/NUmh2HQ_JhLH9x7VNaR1XAYqIePaEeziz5HClw" target="_blank">
-      <img src="https://kokyujene.github.io/images/line-logo.webp" alt="LINE" class="footer-icon">
-    </a>
-    <a href="https://x.com/Kokyujene" target="_blank">
-      <img src="https://kokyujene.github.io/images/x-logo.webp" alt="X" class="footer-icon">
-    </a>
-    <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
+<footer>
+  <a href="#top" id="scrollTopButton">
+  <img src="https://kokyujene.github.io/images/title.webp">
+  </a>
+  <div class="footer-icon">
+  <img id="theme-icon" src="https://kokyujene.github.io/images/moon.webp" alt="テーマ切替" class="theme-toggle-icon">
   </div>
 
-  <div class="footer-text">
-    © <span id="year"></span> KokyuJene™ All rights reserved. | 
-    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a> | 
-    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a> | 
-    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a> | 
+  <div class="footer-link">
+    <p>© <span id="year"></span> KokyuJene™ All rights reserved.</p>
+    <a href="https://kokyujene.github.io/privacypolicy" class="footer-link">プライバシーポリシー</a>
+    <a href="https://kokyujene.github.io/terms" class="footer-link">利用規約</a>
+    <a href="https://kokyujene.github.io/license" class="footer-link">ライセンス</a>
     <a href="https://kokyujene.github.io/contact" class="footer-link">お問い合わせ</a>
   </div>
 </footer>
 
-<script src="https://kokyujene.github.io/js/script.js"></script>
-
-<script>
-const menuIcon = document.querySelector('.menu-icon');
-const closeIcon = document.querySelector('.close-icon');
-const mobileMenu = document.querySelector('.mobile-menu');
-
-menuIcon.addEventListener('click', () => {
-  mobileMenu.classList.add('active');
-  menuIcon.style.display = 'none';
-  closeIcon.style.display = 'block';
-});
-
-closeIcon.addEventListener('click', () => {
-  mobileMenu.classList.remove('active');
-  menuIcon.style.display = 'block';
-  closeIcon.style.display = 'none';
-});
+<script src="https://kokyujene.github.io/js/script.js">
 </script>
 
 <script>
-    const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show');
-      }
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const headerIconMenu = document.querySelector(".header-icon-menu");
+
+  function openMenu() {
+    mobileMenu.classList.add("active");
+    document.body.classList.add("menu-open");
+    menuIcon.classList.add("hidden");
+    closeIcon.classList.add("show");
+    menuIcon.setAttribute("aria-hidden", "true");
+    closeIcon.setAttribute("aria-hidden", "false");
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+    menuIcon.classList.remove("hidden");
+    closeIcon.classList.remove("show");
+    menuIcon.setAttribute("aria-hidden", "false");
+    closeIcon.setAttribute("aria-hidden", "true");
+  }
+
+  menuIcon.addEventListener("click", openMenu);
+  closeIcon.addEventListener("click", closeMenu);
+
+  mobileMenu.addEventListener("click", (e) => {
+    if (e.target === mobileMenu) closeMenu();
   });
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu.classList.contains("active")) {
+      closeMenu();
+    }
+  });
+});
 </script>
 
 </body>
