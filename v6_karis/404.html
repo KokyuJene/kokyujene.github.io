@@ -85,6 +85,45 @@ b {
   font-size: 125%;
 }
 
+@font-face {
+    font-family: 'ut';
+    src: url('https://kokyujene.github.io/v6_karis/fonts/ut.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'fm';
+    src: url('https://kokyujene.github.io/v6_karis/fonts/fm.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'mc';
+    src: url('https://kokyujene.github.io/v6_karis/fonts/mc.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ut {
+  font-family: 'ut', 'jost', 'zenkaku', sans-serif;
+}
+
+.fm {
+  font-family: 'fm', 'jost', 'zenkaku', sans-serif;
+  background-color: #000;
+  color: #f7e97f;
+}
+
+.mc {
+  font-family: 'mc', 'jost', 'zenkaku', sans-serif;
+}
+
+.ut,.fm span {
+  color: #740606;
+}
+
 @media (max-width: 768px) {
     .me-box {
         width: 500px;
@@ -244,30 +283,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
     const messages = [
-      "ここは誰??私はどこ??",
-      "＊ しかし誰も来なかった。",
-      "ﾅﾝﾀﾞｺｺｫ!?",
-      "高級すぎてページが消えました...。",
-      "異世界転生に失敗しました。",
-      "テレポートコマンドに重大なバグが発生しました。",
-      "ある昼のような夜、時計の針が横向きに回る日、Hiko14 は冷蔵庫の中でオンライン授業を受けていた。しかし講師の声はいつも通り聞こえない。なぜなら講師は鳩語しか話せなくて、しかも鳩ではなかったからだ。その頃、Ken758 は道端で「未来のカレー割引券」を売っていた。未来のカレーは存在しないし、割引券はただの白紙である。それでも彼は得意げだった。「今は誰も買わないけど、2078年には僕の勝ちだから」と言いながら、ポケットからサボテンを取り出してハムスターに説教していた。そこへ Kaze900 が逆さまの自転車に乗って登場。自転車は宙に浮き、本人だけが地面に刺さって走っている。「風になりたい」と呟くたびに、周りの空気が小さく拍手した。その拍手を聞きつけて m2 が空から降ってきた。正確には降りてきたというより、上に向かって落ちてきた。スーパーマーケットの袋を抱えながら、「買い物行ったら店ごと消えたから袋だけ持って帰ってきた」と、存在しない商品を並べていた。4人は目を合わせた。そして同時に「こんにちは」と言った瞬間、天井が地面になり、地面がカメラになり、カメラはなぜかスープの味になった。Hiko14 が冷蔵庫から出ると、冷蔵庫の中の授業はすでに卒業式を迎えていた。Ken758 は未来のカレー売りをやめ、過去のコーヒーをレンタルしはじめた。Kaze900 は風になるどころか、風が彼になり始め、季節予報に名前が載った。m2 は無い商品を詰め込んだ袋を抱えたまま、何も買っていないレシートを丁寧に折り紙にした。最後に4人は揃って言った。「今日は平凡な一日だったね。」"
+      'ここは誰??私はどこ??',
+      '<div class="ut">＊ しかし誰も来なかった。</div>',
+      'ﾅﾝﾀﾞｺｺｫ!?',
+      '高級すぎてページが消えました...。',
+      '異世界転生に失敗しました。',
+      '<div class="mc">テレポートコマンドに重大なバグが発生しました。</div>',
+      '<div class="fm">ある昼のような夜、時計の針が横向きに回る日、Hiko14 は冷蔵庫の中でオンライン授業を受けていた。しかし講師の声はいつも通り聞こえない。なぜなら講師は鳩語しか話せなくて、しかも鳩ではなかったからだ。その頃、Ken758 は道端で「未来のカレー割引券」を売っていた。未来のカレーは存在しないし、割引券はただの白紙である。それでも彼は得意げだった。「今は誰も買わないけど、2078年には僕の勝ちだから」と言いながら、ポケットからサボテンを取り出してハムスターに説教していた。そこへ Kaze900 が逆さまの自転車に乗って登場。自転車は宙に浮き、本人だけが地面に刺さって走っている。「風になりたい」と呟くたびに、周りの空気が小さく拍手した。その拍手を聞きつけて m2 が空から降ってきた。正確には降りてきたというより、上に向かって落ちてきた。スーパーマーケットの袋を抱えながら、「買い物行ったら店ごと消えたから袋だけ持って帰ってきた」と、存在しない商品を並べていた。4人は目を合わせた。そして同時に「こんにちは」と言った瞬間、天井が地面になり、地面がカメラになり、カメラはなぜかスープの味になった。Hiko14 が冷蔵庫から出ると、冷蔵庫の中の授業はすでに卒業式を迎えていた。Ken758 は未来のカレー売りをやめ、過去のコーヒーをレンタルしはじめた。Kaze900 は風になるどころか、風が彼になり始め、季節予報に名前が載った。m2 は無い商品を詰め込んだ袋を抱えたまま、何も買っていないレシートを丁寧に折り紙にした。最後に4人は揃って言った。「今日は平凡な一日だったね。」</div>'
     ];
 
-    // ランダムに 1 つ選択
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    document.getElementById("randomText").textContent = randomMessage;
-
-        const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show'); // 何度でも再実行
-      }
-    });
-  });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.getElementById("randomText").innerHTML = randomMessage;
 </script>
 
 </body>
