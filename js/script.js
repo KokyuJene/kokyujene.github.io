@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function applyTheme(isDark) {
       document.documentElement.classList.toggle('dark', isDark);
       themeIcon.src = isDark 
-        ? 'https://kokyujene.github.io/v6_karis/images/sun.webp' 
-        : 'https://kokyujene.github.io/v6_karis/images/moon.webp';
+        ? 'https://kokyujene.github.io/images/sun.webp' 
+        : 'https://kokyujene.github.io/images/moon.webp';
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 
