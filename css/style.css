@@ -66,19 +66,31 @@ body {
 a {
     color: inherit;
     text-decoration: none;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 0% 2px;
-    transition: background-size 280ms cubic-bezier(.2,.8,.2,1), 
-                color 160ms linear;
     -webkit-tap-highlight-color: transparent;
     display: inline-block;
+    position: relative;
+    outline: none;
 }
 
-a:hover {
-    background-size: 100% 2px;
-    outline: none;
+/* 下線は擬似要素で作り、中央から左右に伸ばすアニメーションにする */
+a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 280ms cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+}
+
+a:hover::after,
+a:focus::after,
+a:focus-visible::after {
+    transform: scaleX(1);
 }
 
 a:focus,
@@ -329,7 +341,6 @@ main {
   color: #fff8eb;
   text-decoration: none;
   font-size: 30px;
-  font-weight: 700;
   letter-spacing: 1px;
   opacity: 0;
   transform: translateY(10px);
@@ -456,10 +467,6 @@ body.menu-open {
 
 .link-buttons .my-button {
     width: 400px;
-}
-
-.my-button:hover {
-    opacity: 0.8;
 }
 
 .top-wall {
@@ -793,7 +800,7 @@ footer li {
     height: auto;
 }
 
-.dark .name p{
+.dark .name {
     text-shadow: #693c00 2px 2px;
 }
 
