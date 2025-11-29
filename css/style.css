@@ -450,24 +450,50 @@ body.menu-open {
 }
 
 .my-button {
+    position: relative;           /* ← 矢印を絶対配置するために必要 */
     display: inline-block;
     padding: 15px 20px;
     margin: 12px;
     background-color: #ffbb32;
-    color : #fff4ea;
+    color: #fff4ea;
     font-size: 18px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     border-radius: 16px;
+    text-align: center;           /* ← テキストを中央揃え */
 }
 
 .dark .my-button {
     background-color: #81580b;
-    color : #fff8eb;
+    color: #fff8eb;
 }
 
 .link-buttons .my-button {
     width: 400px;
 }
+
+.my-button:hover {
+    opacity: 0.9;
+}
+
+/* --- 矢印 --- */
+.arrow {
+    position: absolute;
+    right: 18px;       /* ボタン右端からの距離（調整可） */
+    top: 50%;
+    transform: translateY(-50%); /* 縦の中央揃え */
+    transition: transform 0.25s ease;
+}
+
+.arrow img {
+    width: 24px;
+    height: 24px;
+}
+
+/* ホバー時の移動 */
+.my-button:hover .arrow {
+    transform: translate(8px, -8px); /* ← 元の動作 */
+}
+
 
 .top-wall {
     position: relative;
