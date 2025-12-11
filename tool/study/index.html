@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>勉強時間管理</title>
-    <link rel="icon" href="favicon.webp" type="image/x-icon">
-    <link rel="icon" href="favicon.webp" type="image/png">
-    <link rel="shortcut icon" href="favicon.webp">
-    <link rel="stylesheet" href="favicon.webp">
-    <link rel="shortcut icon" type="image/webp" href="favicon.webp">
-    <link rel="apple-touch-icon" sizes="48x48" href="favicon.webp">
     <style>
         * {
             margin: 0;
@@ -607,6 +601,264 @@
             border-color: #4a4d5a;
         }
 
+        .settings-section {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .settings-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .light .toggle-item {
+            background-color: #e8e8e2;
+        }
+
+        .dark .toggle-item {
+            background-color: #3a3d4a;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background-color: #ccc;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-switch.active {
+            background-color: var(--primary-color);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(24px);
+        }
+
+        .music-player {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .music-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .music-controls input[type="file"] {
+            display: none;
+        }
+
+        .music-controls label {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .light .music-controls label {
+            background-color: #e8e8e2;
+            color: #3a3a3a;
+        }
+
+        .dark .music-controls label {
+            background-color: #3a3d4a;
+            color: #e8e8e8;
+        }
+
+        .music-controls label:hover {
+            opacity: 0.8;
+        }
+
+        .music-controls button {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .player-controls button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .player-controls .control-icon {
+            font-size: 1.2rem;
+        }
+
+        .playlist {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .playlist-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            gap: 10px;
+        }
+
+        .light .playlist-item {
+            background-color: #e8e8e2;
+        }
+
+        .dark .playlist-item {
+            background-color: #3a3d4a;
+        }
+
+        .playlist-item:hover {
+            opacity: 0.8;
+        }
+
+        .playlist-item.playing {
+            border: 2px solid var(--primary-color);
+        }
+
+        .playlist-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .playlist-item-title {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .playlist-item-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .playlist-item button {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .todo-list {
+            text-align: left;
+        }
+
+        .todo-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .light .todo-input input {
+            background-color: #e8e8e2;
+            color: #3a3a3a;
+        }
+
+        .dark .todo-input input {
+            background-color: #3a3d4a;
+            color: #e8e8e8;
+        }
+
+        .todo-items {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .light .todo-item {
+            background-color: #e8e8e2;
+        }
+
+        .dark .todo-item {
+            background-color: #3a3d4a;
+        }
+
+        .todo-item.completed {
+            opacity: 0.5;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+        }
+
+        .todo-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .todo-text {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .todo-delete {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            background-color: #d66;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .todo-delete:hover {
+            background-color: #c55;
+        }
+
         @media (min-width: 769px) {
             .move-group-container {
                 position: static;
@@ -722,7 +974,6 @@
             }
         }
 
-        /* テーマカラー設定 */
         :root {
             --primary-color: #6b7b8c;
             --primary-hover: #5a6a7b;
@@ -791,24 +1042,18 @@
     <div class="container">
         <h1>勉強時間管理</h1>
         
-        <div class="menu">
+        <div class="menu" id="mainMenu">
             <button class="active" onclick="showPage('timer')">タイマー</button>
             <button onclick="showPage('stats')">統計</button>
             <button onclick="showPage('list')">リスト</button>
         </div>
 
-        <!-- タイマーページ -->
         <div id="timerPage" class="page active">
             <div class="timer" id="timer">00:00:00</div>
-            
             <div class="group-input">
                 <input type="text" id="groupInput" placeholder="グループ名(任意)">
             </div>
-            
-            <div class="session-info" id="sessionInfo">
-                開始ボタンを押して学習を始めましょう
-            </div>
-            
+            <div class="session-info" id="sessionInfo">開始ボタンを押して学習を始めましょう</div>
             <div class="controls">
                 <button id="startBtn" class="primary" onclick="startStudy()">勉強開始</button>
                 <button id="pauseBtn" class="secondary hidden" onclick="pauseStudy()">一時停止</button>
@@ -816,14 +1061,12 @@
             </div>
         </div>
 
-        <!-- 統計ページ -->
         <div id="statsPage" class="page">
             <div class="stats-container" id="statsContainer"></div>
             <div class="group-selector" id="groupStatsSelector"></div>
             <div id="groupStats"></div>
         </div>
 
-        <!-- リストページ -->
         <div id="listPage" class="page">
             <div class="group-selector">
                 <select id="groupFilter" onchange="loadHistory()">
@@ -848,545 +1091,915 @@
             <button class="secondary clear-history" onclick="clearHistory()">すべての履歴をクリア</button>
         </div>
 
-        <!-- 設定ページ -->
-        <div id="settingsPage" class="page">
-            <div class="theme-selector">
-                <h2 style="font-size: 1.3rem; margin-bottom: 15px; font-weight: 500;">テーマカラー</h2>
-                <div class="theme-options">
-                    <div class="theme-option selected" data-theme="blue" onclick="changeTheme('blue')">
-                        <div class="theme-option-preview" style="background-color: #e8e8e2;">
-                            <div style="background-color: #6b7b8c;"></div>
-                            <div style="background-color: #5a6a7b;"></div>
-                            <div style="background-color: #4a5a6b;"></div>
-                        </div>
-                        <div class="theme-option-name">ブルー</div>
-                    </div>
-                    <div class="theme-option" data-theme="green" onclick="changeTheme('green')">
-                        <div class="theme-option-preview" style="background-color: #e8e8e2;">
-                            <div style="background-color: #6b8c6b;"></div>
-                            <div style="background-color: #5a7b5a;"></div>
-                            <div style="background-color: #4a6a4a;"></div>
-                        </div>
-                        <div class="theme-option-name">グリーン</div>
-                    </div>
-                    <div class="theme-option" data-theme="purple" onclick="changeTheme('purple')">
-                        <div class="theme-option-preview" style="background-color: #e8e8e2;">
-                            <div style="background-color: #7b6b8c;"></div>
-                            <div style="background-color: #6a5a7b;"></div>
-                            <div style="background-color: #5a4a6a;"></div>
-                        </div>
-                        <div class="theme-option-name">パープル</div>
-                    </div>
-                    <div class="theme-option" data-theme="orange" onclick="changeTheme('orange')">
-                        <div class="theme-option-preview" style="background-color: #e8e8e2;">
-                            <div style="background-color: #c97c5d;"></div>
-                            <div style="background-color: #b86c4d;"></div>
-                            <div style="background-color: #a85c3d;"></div>
-                        </div>
-                        <div class="theme-option-name">オレンジ</div>
-                    </div>
-                    <div class="theme-option" data-theme="pink" onclick="changeTheme('pink')">
-                        <div class="theme-option-preview" style="background-color: #e8e8e2;">
-                            <div style="background-color: #c77d88;"></div>
-                            <div style="background-color: #b66d78;"></div>
-                            <div style="background-color: #a65d68;"></div>
-                        </div>
-                        <div class="theme-option-name">ピンク</div>
-                    </div>
-                    <div class="theme-option" data-theme="teal" onclick="changeTheme('teal')">
-                        <div class="theme-option-preview" style="background-color: #e8e8e2;">
-                            <div style="background-color: #5d9d9d;"></div>
-                            <div style="background-color: #4d8d8d;"></div>
-                            <div style="background-color: #3d7d7d;"></div>
-                        </div>
-                        <div class="theme-option-name">ティール</div>
-                    </div>
-                </div>
-            </div>
+        <div id="musicPage" class="page">
+            <div class="music-player">
+                <h2 style="font-size: 1.3rem; margin-bottom: 20px; font-weight: 500;">音楽プレイヤー</h2>
+                <div class="music-controls">
+                    <label for="musicFileInput">ファイルを選択</label>
+<input type="file" id="musicFileInput" accept="audio/*" onchange="addMusicFile(event)" multiple>
+</div>
+<!-- カスタムプレイヤー: ネイティブコントロールは非表示にして独自UIを使う -->
+<audio id="audioPlayer" style="display:none;"></audio>
+<div class="custom-player" style="width:100%; margin-bottom:12px;">
+    <div style="display:flex; align-items:center; gap:12px;">
+        <div id="timeDisplay" style="min-width:110px; font-size:0.95rem;">0:00 / 0:00</div>
+        <div id="progressContainer" style="flex:1; height:10px; background:#ddd; border-radius:6px; position:relative; cursor:pointer;">
+            <div id="progressBar" style="position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--primary-color); border-radius:6px;"></div>
+            <div id="progressHandle" style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%); width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 0 2px rgba(0,0,0,0.2); display:none;"></div>
+        </div>
+        <div style="width:36px; text-align:right;">
+            <button class="secondary" id="volumeBtn" style="background:transparent;border:none;cursor:pointer;padding:4px;">
+                <img id="volumeBtnImg" src="volume.webp" alt="音量" style="width:20px;height:20px;">
+            </button>
+        </div>
+    </div>
+    <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" style="width:100%; margin-top:8px; display:none;">
+</div>
 
-            <div class="copyright">
-                © KokyuJene™ All rights reserved.
+<div class="player-controls">
+    <button class="secondary" onclick="playPrevious()" aria-label="前へ">
+        <img id="prevBtnImg" src="prev.webp" alt="前へ" style="width:24px;height:24px;">
+    </button>
+    <button class="secondary" onclick="togglePlay()" aria-label="再生/一時停止">
+        <img id="playIconImg" src="play.webp" alt="再生" style="width:24px;height:24px;">
+    </button>
+    <button class="secondary" onclick="playNext()" aria-label="次へ">
+        <img id="nextBtnImg" src="next.webp" alt="次へ" style="width:24px;height:24px;">
+    </button>
+    <button class="secondary" onclick="toggleLoop()" id="loopBtn" aria-label="ループ">
+        <img id="loopBtnImg" src="loop_off.webp" alt="ループオフ" style="width:24px;height:24px;">
+    </button>
+    <button class="secondary" onclick="toggleShuffle()" id="shuffleBtn" aria-label="シャッフル">
+        <img id="shuffleBtnImg" src="shuffle_off.webp" alt="シャッフルオフ" style="width:24px;height:24px;">
+    </button>
+</div>
+<div class="playlist" id="playlist"></div>
+</div>
+</div>
+<div id="todoPage" class="page">
+        <div class="todo-list">
+            <h2 style="font-size: 1.3rem; margin-bottom: 20px; font-weight: 500;">ToDo リスト</h2>
+            <div class="todo-input">
+                <input type="text" id="todoInput" placeholder="新しいタスクを入力" onkeypress="if(event.key==='Enter') addTodo()">
+                <button class="primary" onclick="addTodo()">追加</button>
             </div>
+            <div class="todo-items" id="todoItems"></div>
         </div>
     </div>
 
-    <script>
-        let startTime = null;
-        let pausedTime = 0;
-        let timerInterval = null;
-        let isPaused = false;
-        let selectedItems = new Set();
-        let allHistoryItems = [];
+    <div id="settingsPage" class="page">
+        <div class="settings-section">
+            <h2>表示設定</h2>
+            <div class="toggle-item">
+                <span>音楽プレイヤー</span>
+                <div class="toggle-switch" id="toggleMusic" onclick="toggleFeature('music')">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="toggle-item">
+                <span>ToDoリスト</span>
+                <div class="toggle-switch" id="toggleTodo" onclick="toggleFeature('todo')">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+        <div class="theme-selector">
+            <h2>テーマカラー</h2>
+            <div class="theme-options">
+                <div class="theme-option selected" data-theme="blue" onclick="changeTheme('blue')">
+                    <div class="theme-option-preview" style="background-color: #e8e8e2;">
+                        <div style="background-color: #6b7b8c;"></div>
+                        <div style="background-color: #5a6a7b;"></div>
+                        <div style="background-color: #4a5a6b;"></div>
+                    </div>
+                    <div class="theme-option-name">ブルー</div>
+                </div>
+                <div class="theme-option" data-theme="green" onclick="changeTheme('green')">
+                    <div class="theme-option-preview" style="background-color: #e8e8e2;">
+                        <div style="background-color: #6b8c6b;"></div>
+                        <div style="background-color: #5a7b5a;"></div>
+                        <div style="background-color: #4a6a4a;"></div>
+                    </div>
+                    <div class="theme-option-name">グリーン</div>
+                </div>
+                <div class="theme-option" data-theme="purple" onclick="changeTheme('purple')">
+                    <div class="theme-option-preview" style="background-color: #e8e8e2;">
+                        <div style="background-color: #7b6b8c;"></div>
+                        <div style="background-color: #6a5a7b;"></div>
+                        <div style="background-color: #5a4a6a;"></div>
+                    </div>
+                    <div class="theme-option-name">パープル</div>
+                </div>
+                <div class="theme-option" data-theme="orange" onclick="changeTheme('orange')">
+                    <div class="theme-option-preview" style="background-color: #e8e8e2;">
+                        <div style="background-color: #c97c5d;"></div>
+                        <div style="background-color: #b86c4d;"></div>
+                        <div style="background-color: #a85c3d;"></div>
+                    </div>
+                    <div class="theme-option-name">オレンジ</div>
+                </div>
+                <div class="theme-option" data-theme="pink" onclick="changeTheme('pink')">
+                    <div class="theme-option-preview" style="background-color: #e8e8e2;">
+                        <div style="background-color: #c77d88;"></div>
+                        <div style="background-color: #b66d78;"></div>
+                        <div style="background-color: #a65d68;"></div>
+                    </div>
+                    <div class="theme-option-name">ピンク</div>
+                </div>
+                <div class="theme-option" data-theme="teal" onclick="changeTheme('teal')">
+                    <div class="theme-option-preview" style="background-color: #e8e8e2;">
+                        <div style="background-color: #5d9d9d;"></div>
+                        <div style="background-color: #4d8d8d;"></div>
+                        <div style="background-color: #3d7d7d;"></div>
+                    </div>
+                    <div class="theme-option-name">ティール</div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">© KokyuJene™ All rights reserved.</div>
+    </div>
+</div>
 
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            return null;
+<script>
+    let startTime = null;
+    let pausedTime = 0;
+    let timerInterval = null;
+    let isPaused = false;
+    let selectedItems = new Set();
+    let allHistoryItems = [];
+    let currentMusicIndex = -1;
+    let musicFiles = [];
+    let isLoop = false;
+    let isShuffle = false;
+    // IndexedDB for persistent storage of uploaded music files
+    let _musicDB = null;
+    function openMusicDB() {
+        return new Promise((resolve, reject) => {
+            if (_musicDB) return resolve(_musicDB);
+            const req = indexedDB.open('study_music_db', 1);
+            req.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('files')) {
+                    db.createObjectStore('files', { keyPath: 'id' });
+                }
+            };
+            req.onsuccess = (e) => {
+                _musicDB = e.target.result;
+                resolve(_musicDB);
+            };
+            req.onerror = (e) => reject(e);
+        });
+    }
+
+    async function saveFileBlobToDB(id, title, file) {
+        const db = await openMusicDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction('files', 'readwrite');
+            const store = tx.objectStore('files');
+            const req = store.put({ id: id, title: title, blob: file });
+            req.onsuccess = () => resolve();
+            req.onerror = (e) => reject(e);
+        });
+    }
+
+    async function getFileBlobFromDB(id) {
+        const db = await openMusicDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction('files', 'readonly');
+            const store = tx.objectStore('files');
+            const req = store.get(id);
+            req.onsuccess = () => {
+                if (req.result) resolve(req.result.blob);
+                else resolve(null);
+            };
+            req.onerror = (e) => reject(e);
+        });
+    }
+
+    async function deleteFileBlobFromDB(id) {
+        const db = await openMusicDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction('files', 'readwrite');
+            const store = tx.objectStore('files');
+            const req = store.delete(id);
+            req.onsuccess = () => resolve();
+            req.onerror = (e) => reject(e);
+        });
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    function setCookie(name, value, days = 365) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+    }
+
+    function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.getElementById('themeIcon');
+        if (body.classList.contains('light')) {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            themeIcon.src = 'sun.webp';
+            themeIcon.alt = 'ライトモードに切り替え';
+            setCookie('mode', 'dark');
+        } else {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            themeIcon.src = 'moon.webp';
+            themeIcon.alt = 'ダークモードに切り替え';
+            setCookie('mode', 'light');
         }
+    }
 
-        function setCookie(name, value, days = 365) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+    function changeTheme(themeName) {
+        document.body.setAttribute('data-theme', themeName);
+        setCookie('theme', themeName);
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
+    }
+
+    function toggleFeature(feature) {
+        const toggle = document.getElementById(`toggle${feature.charAt(0).toUpperCase() + feature.slice(1)}`);
+        const isActive = toggle.classList.contains('active');
+        if (isActive) {
+            toggle.classList.remove('active');
+            removeMenuButton(feature);
+            setCookie(`feature_${feature}`, 'false');
+        } else {
+            toggle.classList.add('active');
+            addMenuButton(feature);
+            setCookie(`feature_${feature}`, 'true');
         }
+    }
 
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('themeIcon');
-            
-            if (body.classList.contains('light')) {
-                body.classList.remove('light');
-                body.classList.add('dark');
-                themeIcon.src = 'sun.webp';
-                themeIcon.alt = 'ライトモードに切り替え';
-                setCookie('mode', 'dark');
-            } else {
-                body.classList.remove('dark');
-                body.classList.add('light');
-                themeIcon.src = 'moon.webp';
-                themeIcon.alt = 'ダークモードに切り替え';
-                setCookie('mode', 'light');
-            }
+    function addMenuButton(feature) {
+        const menu = document.getElementById('mainMenu');
+        const btnText = feature === 'music' ? '音楽' : 'ToDo';
+        const existingBtn = Array.from(menu.children).find(btn => btn.textContent === btnText);
+        if (!existingBtn) {
+            const btn = document.createElement('button');
+            btn.textContent = btnText;
+            btn.onclick = () => showPage(feature);
+            btn.setAttribute('data-feature', feature);
+            menu.appendChild(btn);
         }
+    }
 
-        function changeTheme(themeName) {
-            document.body.setAttribute('data-theme', themeName);
-            setCookie('theme', themeName);
-            
-            // 選択状態を更新
-            document.querySelectorAll('.theme-option').forEach(option => {
-                option.classList.remove('selected');
+    function removeMenuButton(feature) {
+        const menu = document.getElementById('mainMenu');
+        const btn = menu.querySelector(`[data-feature="${feature}"]`);
+        if (btn) btn.remove();
+    }
+
+    function showPage(pageName) {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+        const pages = {'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'music': 'musicPage', 'todo': 'todoPage', 'settings': 'settingsPage'};
+        if (pages[pageName]) {
+            document.getElementById(pages[pageName]).classList.add('active');
+            const menuButtons = Array.from(document.querySelectorAll('.menu button'));
+            const activeBtn = menuButtons.find(btn => {
+                const btnText = btn.textContent;
+                return (pageName === 'timer' && btnText === 'タイマー') || (pageName === 'stats' && btnText === '統計') || (pageName === 'list' && btnText === 'リスト') || (pageName === 'music' && btnText === '音楽') || (pageName === 'todo' && btnText === 'ToDo');
             });
-            document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
+            if (activeBtn) activeBtn.classList.add('active');
+            if (pageName === 'stats') loadStats();
+            if (pageName === 'list') { updateGroupFilter(); loadHistory(); }
+            if (pageName === 'music') loadPlaylist();
+            if (pageName === 'todo') loadTodos();
         }
+    }
 
-        function showPage(pageName) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
-            
-            if (pageName === 'timer') {
-                document.getElementById('timerPage').classList.add('active');
-                document.querySelector('.menu button:nth-child(1)').classList.add('active');
-            } else if (pageName === 'stats') {
-                document.getElementById('statsPage').classList.add('active');
-                document.querySelector('.menu button:nth-child(2)').classList.add('active');
-                loadStats();
-            } else if (pageName === 'list') {
-                document.getElementById('listPage').classList.add('active');
-                document.querySelector('.menu button:nth-child(3)').classList.add('active');
-                updateGroupFilter();
-                loadHistory();
-            } else if (pageName === 'settings') {
-                document.getElementById('settingsPage').classList.add('active');
-                // メニューボタンの選択を解除
-            }
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function formatDateTime(date) {
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}年${month}月${day}日`;
+    }
+
+    function updateTimer() {
+        if (!isPaused && startTime) {
+            const elapsed = Date.now() - startTime + pausedTime;
+            const timeStr = formatTime(elapsed);
+            document.getElementById('timer').textContent = timeStr;
+            document.title = `${timeStr} - 勉強時間管理`;
         }
+    }
 
-        function formatTime(ms) {
-            const totalSeconds = Math.floor(ms / 1000);
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
+    function startStudy() {
+        startTime = Date.now();
+        pausedTime = 0;
+        isPaused = false;
+        const startTimeStr = new Date().toISOString();
+        setCookie('studyStartTime', startTimeStr);
+        document.getElementById('startBtn').classList.add('hidden');
+        document.getElementById('pauseBtn').classList.remove('hidden');
+        document.getElementById('endBtn').classList.remove('hidden');
+        document.getElementById('sessionInfo').textContent = `開始時刻: ${formatDateTime(new Date())}`;
+        timerInterval = setInterval(updateTimer, 100);
+    }
 
-        function formatDateTime(date) {
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            return `${hours}:${minutes}`;
-        }
-
-        function formatDate(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}年${month}月${day}日`;
-        }
-
-        function updateTimer() {
-            if (!isPaused && startTime) {
-                const elapsed = Date.now() - startTime + pausedTime;
-                document.getElementById('timer').textContent = formatTime(elapsed);
-            }
-        }
-
-        function startStudy() {
+    function pauseStudy() {
+        if (isPaused) {
             startTime = Date.now();
-            pausedTime = 0;
             isPaused = false;
-            
-            const startTimeStr = new Date().toISOString();
-            setCookie('studyStartTime', startTimeStr);
-            
-            document.getElementById('startBtn').classList.add('hidden');
-            document.getElementById('pauseBtn').classList.remove('hidden');
-            document.getElementById('endBtn').classList.remove('hidden');
-            
-            document.getElementById('sessionInfo').textContent = 
-                `開始時刻: ${formatDateTime(new Date())}`;
-            
-            timerInterval = setInterval(updateTimer, 100);
-        }
-
-        function pauseStudy() {
-            if (isPaused) {
-                startTime = Date.now();
-                isPaused = false;
-                document.getElementById('pauseBtn').textContent = '一時停止';
-            } else {
-                pausedTime += Date.now() - startTime;
-                isPaused = true;
-                document.getElementById('pauseBtn').textContent = '再開';
-            }
-        }
-
-        function endStudy() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            
-            const endTime = new Date();
-            const startCookie = getCookie('studyStartTime');
-            const groupInput = document.getElementById('groupInput');
-            const groupName = groupInput.value.trim() || '';
-            
-            if (startCookie) {
-                const start = new Date(startCookie);
-                const actualStudyTime = isPaused ? pausedTime : (Date.now() - startTime + pausedTime);
-                
-                let history = getCookie('studyHistory');
-                history = history ? JSON.parse(history) : [];
-                history.unshift({
-                    start: start.toISOString(),
-                    end: endTime.toISOString(),
-                    duration: actualStudyTime,
-                    group: groupName
-                });
-                setCookie('studyHistory', JSON.stringify(history));
-                
-                document.getElementById('sessionInfo').innerHTML = 
-                    `開始時刻: ${formatDateTime(start)}<br>終了時刻: ${formatDateTime(endTime)}<br>学習時間: ${formatTime(actualStudyTime)}${groupName ? '<br>グループ: ' + groupName : ''}`;
-            }
-            
-            document.getElementById('startBtn').classList.remove('hidden');
-            document.getElementById('pauseBtn').classList.add('hidden');
-            document.getElementById('endBtn').classList.add('hidden');
             document.getElementById('pauseBtn').textContent = '一時停止';
-            groupInput.value = '';
-            
-            startTime = null;
-            pausedTime = 0;
-            isPaused = false;
+        } else {
+            pausedTime += Date.now() - startTime;
+            isPaused = true;
+            document.getElementById('pauseBtn').textContent = '再開';
         }
+    }
 
-        function loadHistory() {
-            const historyList = document.getElementById('historyList');
-            const searchInput = document.getElementById('searchInput');
-            const groupFilter = document.getElementById('groupFilter');
-            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-            const selectedGroup = groupFilter ? groupFilter.value : '';
-            
+    function endStudy() {
+        if (timerInterval) clearInterval(timerInterval);
+        document.title = '勉強時間管理';
+        const endTime = new Date();
+        const startCookie = getCookie('studyStartTime');
+        const groupInput = document.getElementById('groupInput');
+        const groupName = groupInput.value.trim() || '';
+        if (startCookie) {
+            const start = new Date(startCookie);
+            const actualStudyTime = isPaused ? pausedTime : (Date.now() - startTime + pausedTime);
             let history = getCookie('studyHistory');
             history = history ? JSON.parse(history) : [];
-            allHistoryItems = [...history];
-            
-            if (selectedGroup) {
-                history = history.filter(item => item.group === selectedGroup);
+            history.unshift({start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName});
+            setCookie('studyHistory', JSON.stringify(history));
+            document.getElementById('sessionInfo').innerHTML = `開始時刻: ${formatDateTime(start)}<br>終了時刻: ${formatDateTime(endTime)}<br>学習時間: ${formatTime(actualStudyTime)}${groupName ? '<br>グループ: ' + groupName : ''}`;
+        }
+        document.getElementById('startBtn').classList.remove('hidden');
+        document.getElementById('pauseBtn').classList.add('hidden');
+        document.getElementById('endBtn').classList.add('hidden');
+        document.getElementById('pauseBtn').textContent = '一時停止';
+        groupInput.value = '';
+        startTime = null;
+        pausedTime = 0;
+        isPaused = false;
+    }
+
+    async function addMusicFile(event) {
+        const files = event.target.files;
+        for (let file of files) {
+            const id = Date.now() + Math.random();
+            try {
+                await saveFileBlobToDB(id, file.name, file);
+                const blob = await getFileBlobFromDB(id);
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    musicFiles.push({ url: url, title: file.name, id: id });
+                } else {
+                    // fallback
+                    const url = URL.createObjectURL(file);
+                    musicFiles.push({ url: url, title: file.name, id: id });
+                }
+            } catch (e) {
+                console.error('Failed to persist file to DB, using in-memory URL', e);
+                const url = URL.createObjectURL(file);
+                musicFiles.push({ url: url, title: file.name, id: id });
             }
-            
-            if (searchTerm) {
-                history = history.filter(item => {
-                    const start = new Date(item.start);
-                    const end = new Date(item.end);
-                    const dateStr = formatDate(start).toLowerCase();
-                    const startTimeStr = formatDateTime(start).toLowerCase();
-                    const endTimeStr = formatDateTime(end).toLowerCase();
-                    
-                    return dateStr.includes(searchTerm) || 
-                           startTimeStr.includes(searchTerm) || 
-                           endTimeStr.includes(searchTerm);
-                });
+        }
+        savePlaylist();
+        loadPlaylist();
+    }
+
+    function savePlaylist() {
+        const playlistData = musicFiles.map(m => ({title: m.title, id: m.id}));
+        setCookie('musicPlaylist', JSON.stringify(playlistData));
+    }
+
+    function loadPlaylist() {
+        const playlistDiv = document.getElementById('playlist');
+        if (musicFiles.length === 0) {
+            playlistDiv.innerHTML = '<div class="empty-state">ファイルを追加してください</div>';
+            return;
+        }
+        playlistDiv.innerHTML = musicFiles.map((item, index) => `
+            <div class="playlist-item ${currentMusicIndex === index ? 'playing' : ''}" onclick="playMusic(${index})">
+                <div class="playlist-item-info">
+                    <div class="playlist-item-title">${item.title}</div>
+                </div>
+                <div class="playlist-item-buttons">
+                    <button class="secondary" onclick="event.stopPropagation(); renameMusic(${index})">名前変更</button>
+                    <button class="secondary" onclick="event.stopPropagation(); deleteMusic(${index})">削除</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function playMusic(index) {
+        if (musicFiles[index]) {
+            const audio = document.getElementById('audioPlayer');
+            audio.src = musicFiles[index].url;
+            audio.play();
+            currentMusicIndex = index;
+            const playImg = document.getElementById('playIconImg');
+            if (playImg) { playImg.src = 'pause.webp'; playImg.alt = '一時停止'; }
+            loadPlaylist();
+        }
+    }
+
+    function togglePlay() {
+        const audio = document.getElementById('audioPlayer');
+        if (audio.paused) {
+            if (currentMusicIndex === -1 && musicFiles.length > 0) {
+                playMusic(0);
+            } else {
+                audio.play();
+                const playImg = document.getElementById('playIconImg');
+                if (playImg) { playImg.src = 'pause.webp'; playImg.alt = '一時停止'; }
             }
-            
-            if (history.length === 0) {
-                historyList.innerHTML = '<div class="empty-state">学習記録がありません</div>';
-                updateActionButtons();
-                return;
+        } else {
+            audio.pause();
+            const playImg = document.getElementById('playIconImg');
+            if (playImg) { playImg.src = 'play.webp'; playImg.alt = '再生'; }
+        }
+    }
+
+    function playNext() {
+        if (musicFiles.length === 0) return;
+        if (isShuffle) {
+            if (musicFiles.length === 1) {
+                currentMusicIndex = 0;
+            } else {
+                let nextIndex = currentMusicIndex;
+                // pick a different random index when possible
+                while (nextIndex === currentMusicIndex) {
+                    nextIndex = Math.floor(Math.random() * musicFiles.length);
+                }
+                currentMusicIndex = nextIndex;
             }
-            
-            historyList.innerHTML = history.map((item, index) => {
-                const actualIndex = allHistoryItems.findIndex(h => 
-                    h.start === item.start && h.end === item.end && h.duration === item.duration
-                );
+        } else {
+            currentMusicIndex = (currentMusicIndex + 1) % musicFiles.length;
+        }
+        playMusic(currentMusicIndex);
+    }
+
+    function playPrevious() {
+        if (musicFiles.length === 0) return;
+        currentMusicIndex = (currentMusicIndex - 1 + musicFiles.length) % musicFiles.length;
+        playMusic(currentMusicIndex);
+    }
+
+    function toggleLoop() {
+        isLoop = !isLoop;
+        const audio = document.getElementById('audioPlayer');
+        audio.loop = isLoop;
+        document.getElementById('loopBtn').style.opacity = isLoop ? '1' : '0.5';
+        const loopImg = document.getElementById('loopBtnImg');
+        if (loopImg) {
+            loopImg.src = isLoop ? 'loop_on.webp' : 'loop_off.webp';
+            loopImg.alt = isLoop ? 'ループオン' : 'ループオフ';
+        }
+    }
+
+    function toggleShuffle() {
+        isShuffle = !isShuffle;
+        document.getElementById('shuffleBtn').style.opacity = isShuffle ? '1' : '0.5';
+        const shImg = document.getElementById('shuffleBtnImg');
+        if (shImg) {
+            shImg.src = isShuffle ? 'shuffle_on.webp' : 'shuffle_off.webp';
+            shImg.alt = isShuffle ? 'シャッフルオン' : 'シャッフルオフ';
+        }
+    }
+
+    function renameMusic(index) {
+        const newName = prompt('新しい名前を入力してください', musicFiles[index].title);
+        if (newName && newName.trim()) {
+            musicFiles[index].title = newName.trim();
+            savePlaylist();
+            loadPlaylist();
+        }
+    }
+
+    async function deleteMusic(index) {
+        if (confirm('この曲を削除しますか?')) {
+            const removed = musicFiles[index];
+            if (currentMusicIndex === index) {
+                const audio = document.getElementById('audioPlayer');
+                if (audio) {
+                    audio.pause();
+                    audio.src = '';
+                }
+                currentMusicIndex = -1;
+            } else if (currentMusicIndex > index) {
+                currentMusicIndex--;
+            }
+            // try to remove blob from DB
+            try {
+                if (removed && removed.id != null) await deleteFileBlobFromDB(removed.id);
+            } catch (e) {
+                console.warn('Failed to delete blob from DB', e);
+            }
+            musicFiles.splice(index, 1);
+            savePlaylist();
+            loadPlaylist();
+        }
+    }
+
+    document.getElementById('audioPlayer').addEventListener('ended', function() {
+        if (!isLoop) playNext();
+    });
+
+    // Custom player integration: time/progress/volume
+    const audioEl = document.getElementById('audioPlayer');
+    // update play icon when audio plays/pauses
+    audioEl.addEventListener('play', () => {
+        const playImg = document.getElementById('playIconImg');
+        if (playImg) { playImg.src = 'pause.webp'; playImg.alt = '一時停止'; }
+    });
+    audioEl.addEventListener('pause', () => {
+        const playImg = document.getElementById('playIconImg');
+        if (playImg) { playImg.src = 'play.webp'; playImg.alt = '再生'; }
+    });
+
+    // timeupdate -> update progress bar and time display
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const progressHandle = document.getElementById('progressHandle');
+    const volumeBtn = document.getElementById('volumeBtn');
+    const volumeBtnImg = document.getElementById('volumeBtnImg');
+    const volumeSlider = document.getElementById('volumeSlider');
+
+    function formatTimeShort(msOrSec) {
+        // accept seconds or ms
+        let totalSeconds = Math.floor(msOrSec);
+        if (msOrSec > 1000) totalSeconds = Math.floor(msOrSec / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${String(seconds).padStart(2,'0')}`;
+    }
+
+    audioEl.addEventListener('timeupdate', () => {
+        const cur = audioEl.currentTime;
+        const dur = audioEl.duration || 0;
+        const pct = dur ? (cur / dur) * 100 : 0;
+        if (progressBar) progressBar.style.width = `${pct}%`;
+        if (timeDisplay) timeDisplay.textContent = `${formatTimeShort(cur)} / ${formatTimeShort(dur)}`;
+    });
+
+    // seek when clicking progress container
+    if (progressContainer) {
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const pct = Math.max(0, Math.min(1, x / rect.width));
+            if (audioEl.duration) audioEl.currentTime = pct * audioEl.duration;
+        });
+    }
+
+    // volume toggle / slider
+    if (volumeBtn) {
+        volumeBtn.addEventListener('click', () => {
+            if (volumeSlider.style.display === 'none') volumeSlider.style.display = 'block';
+            else volumeSlider.style.display = 'none';
+        });
+    }
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            audioEl.volume = parseFloat(e.target.value);
+            if (audioEl.volume === 0) volumeBtnImg.src = 'volume_mute.webp';
+            else if (audioEl.volume < 0.5) volumeBtnImg.src = 'volume_low.webp';
+            else volumeBtnImg.src = 'volume.webp';
+        });
+    }
+
+    // When a new track is played via playMusic, ensure UI resets will be done in playMusic
+
+    function addTodo() {
+        const input = document.getElementById('todoInput');
+        const text = input.value.trim();
+        if (!text) return;
+        let todos = getCookie('todos');
+        todos = todos ? JSON.parse(todos) : [];
+        todos.push({text: text, completed: false, id: Date.now()});
+        setCookie('todos', JSON.stringify(todos));
+        input.value = '';
+        loadTodos();
+    }
+
+    function loadTodos() {
+        let todos = getCookie('todos');
+        todos = todos ? JSON.parse(todos) : [];
+        const todosDiv = document.getElementById('todoItems');
+        if (todos.length === 0) {
+            todosDiv.innerHTML = '<div class="empty-state">タスクがありません</div>';
+            return;
+        }
+        todosDiv.innerHTML = todos.map((todo, index) => `
+            <div class="todo-item ${todo.completed ? 'completed' : ''}">
+                <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">
+                <span class="todo-text">${todo.text}</span>
+                <button class="todo-delete" onclick="deleteTodo(${index})">削除</button>
+            </div>
+        `).join('');
+    }
+
+    function toggleTodo(index) {
+        let todos = getCookie('todos');
+        todos = todos ? JSON.parse(todos) : [];
+        todos[index].completed = !todos[index].completed;
+        setCookie('todos', JSON.stringify(todos));
+        loadTodos();
+    }
+
+    function deleteTodo(index) {
+        let todos = getCookie('todos');
+        todos = todos ? JSON.parse(todos) : [];
+        todos.splice(index, 1);
+        setCookie('todos', JSON.stringify(todos));
+        loadTodos();
+    }
+
+    function loadHistory() {
+        const historyList = document.getElementById('historyList');
+        const searchInput = document.getElementById('searchInput');
+        const groupFilter = document.getElementById('groupFilter');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const selectedGroup = groupFilter ? groupFilter.value : '';
+        let history = getCookie('studyHistory');
+        history = history ? JSON.parse(history) : [];
+        allHistoryItems = [...history];
+        if (selectedGroup) history = history.filter(item => item.group === selectedGroup);
+        if (searchTerm) {
+            history = history.filter(item => {
                 const start = new Date(item.start);
                 const end = new Date(item.end);
-                const groupBadge = item.group ? `<div class="group-badge">${item.group}</div>` : '';
-                const isSelected = selectedItems.has(actualIndex);
-                return `
-                    <div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})">
-                        <input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})">
-                        <div class="history-item-date">${formatDate(start)}</div>
-                        <div class="history-item-time">
-                            開始: ${formatDateTime(start)}<br>
-                            終了: ${formatDateTime(end)}
-                        </div>
-                        <div class="history-item-duration">学習時間: ${formatTime(item.duration)}</div>
-                        ${groupBadge}
-                    </div>
-                `;
-            }).join('');
-            
+                const dateStr = formatDate(start).toLowerCase();
+                const startTimeStr = formatDateTime(start).toLowerCase();
+                const endTimeStr = formatDateTime(end).toLowerCase();
+                return dateStr.includes(searchTerm) || startTimeStr.includes(searchTerm) || endTimeStr.includes(searchTerm);
+            });
+        }
+        if (history.length === 0) {
+            historyList.innerHTML = '<div class="empty-state">学習記録がありません</div>';
             updateActionButtons();
+            return;
         }
+        historyList.innerHTML = history.map((item, index) => {
+            const actualIndex = allHistoryItems.findIndex(h => h.start === item.start && h.end === item.end && h.duration === item.duration);
+            const start = new Date(item.start);
+            const end = new Date(item.end);
+            const groupBadge = item.group ? `<div class="group-badge">${item.group}</div>` : '';
+            const isSelected = selectedItems.has(actualIndex);
+            return `<div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})"><input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})"><div class="history-item-date">${formatDate(start)}</div><div class="history-item-time">開始: ${formatDateTime(start)}<br>終了: ${formatDateTime(end)}</div><div class="history-item-duration">学習時間: ${formatTime(item.duration)}</div>${groupBadge}</div>`;
+        }).join('');
+        updateActionButtons();
+    }
 
-        function toggleSelection(event, index) {
-            event.stopPropagation();
-            if (selectedItems.has(index)) {
-                selectedItems.delete(index);
-            } else {
-                selectedItems.add(index);
-            }
-            loadHistory();
+    function toggleSelection(event, index) {
+        event.stopPropagation();
+        if (selectedItems.has(index)) selectedItems.delete(index);
+        else selectedItems.add(index);
+        loadHistory();
+    }
+
+    function toggleSelectAll() {
+        const searchInput = document.getElementById('searchInput');
+        const groupFilter = document.getElementById('groupFilter');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const selectedGroup = groupFilter ? groupFilter.value : '';
+        let history = [...allHistoryItems];
+        if (selectedGroup) history = history.filter(item => item.group === selectedGroup);
+        if (searchTerm) {
+            history = history.filter(item => {
+                const start = new Date(item.start);
+                const end = new Date(item.end);
+                const dateStr = formatDate(start).toLowerCase();
+                const startTimeStr = formatDateTime(start).toLowerCase();
+                const endTimeStr = formatDateTime(end).toLowerCase();
+                return dateStr.includes(searchTerm) || startTimeStr.includes(searchTerm) || endTimeStr.includes(searchTerm);
+            });
         }
+        const visibleIndices = history.map(item => allHistoryItems.findIndex(h => h.start === item.start && h.end === item.end && h.duration === item.duration));
+        const allSelected = visibleIndices.every(i => selectedItems.has(i));
+        if (allSelected) visibleIndices.forEach(i => selectedItems.delete(i));
+        else visibleIndices.forEach(i => selectedItems.add(i));
+        loadHistory();
+    }
 
-        function toggleSelectAll() {
-            const searchInput = document.getElementById('searchInput');
-            const groupFilter = document.getElementById('groupFilter');
-            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-            const selectedGroup = groupFilter ? groupFilter.value : '';
-            
-            let history = [...allHistoryItems];
-            
-            if (selectedGroup) {
-                history = history.filter(item => item.group === selectedGroup);
-            }
-            
-            if (searchTerm) {
-                history = history.filter(item => {
-                    const start = new Date(item.start);
-                    const end = new Date(item.end);
-                    const dateStr = formatDate(start).toLowerCase();
-                    const startTimeStr = formatDateTime(start).toLowerCase();
-                    const endTimeStr = formatDateTime(end).toLowerCase();
-                    
-                    return dateStr.includes(searchTerm) || 
-                           startTimeStr.includes(searchTerm) || 
-                           endTimeStr.includes(searchTerm);
-                });
-            }
-            
-            const visibleIndices = history.map(item => 
-                allHistoryItems.findIndex(h => 
-                    h.start === item.start && h.end === item.end && h.duration === item.duration
-                )
-            );
-            
-            const allSelected = visibleIndices.every(i => selectedItems.has(i));
-            
-            if (allSelected) {
-                visibleIndices.forEach(i => selectedItems.delete(i));
-            } else {
-                visibleIndices.forEach(i => selectedItems.add(i));
-            }
-            
-            loadHistory();
+    function updateActionButtons() {
+        const moveContainer = document.getElementById('moveGroupContainer');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const hasSelection = selectedItems.size > 0;
+        if (moveContainer) {
+            if (hasSelection) moveContainer.classList.add('active');
+            else moveContainer.classList.remove('active');
         }
+        if (deleteBtn) deleteBtn.disabled = !hasSelection;
+    }
 
-        function updateActionButtons() {
-            const moveContainer = document.getElementById('moveGroupContainer');
-            const deleteBtn = document.getElementById('deleteBtn');
-            const hasSelection = selectedItems.size > 0;
-            
-            if (moveContainer) {
-                if (hasSelection) {
-                    moveContainer.classList.add('active');
-                } else {
-                    moveContainer.classList.remove('active');
-                }
-            }
-            if (deleteBtn) deleteBtn.disabled = !hasSelection;
-        }
-
-        function deleteSelected() {
-            if (selectedItems.size === 0) return;
-            
-            if (confirm(`選択した${selectedItems.size}件の記録を削除しますか?`)) {
-                let history = getCookie('studyHistory');
-                history = history ? JSON.parse(history) : [];
-                
-                const indicesToDelete = Array.from(selectedItems).sort((a, b) => b - a);
-                indicesToDelete.forEach(index => {
-                    history.splice(index, 1);
-                });
-                
-                setCookie('studyHistory', JSON.stringify(history));
-                selectedItems.clear();
-                updateGroupFilter();
-                loadHistory();
-            }
-        }
-
-        function hideMoveGroup() {
-            selectedItems.clear();
-            document.getElementById('moveGroupInput').value = '';
-            loadHistory();
-        }
-
-        function moveSelectedToGroup() {
-            const newGroup = document.getElementById('moveGroupInput').value.trim();
-            
-            if (selectedItems.size === 0) {
-                return;
-            }
-            
+    function deleteSelected() {
+        if (selectedItems.size === 0) return;
+        if (confirm(`選択した${selectedItems.size}件の記録を削除しますか?`)) {
             let history = getCookie('studyHistory');
             history = history ? JSON.parse(history) : [];
-            
-            Array.from(selectedItems).forEach(index => {
-                if (history[index]) {
-                    history[index].group = newGroup;
-                }
-            });
-            
+            const indicesToDelete = Array.from(selectedItems).sort((a, b) => b - a);
+            indicesToDelete.forEach(index => { history.splice(index, 1); });
             setCookie('studyHistory', JSON.stringify(history));
             selectedItems.clear();
-            document.getElementById('moveGroupInput').value = '';
             updateGroupFilter();
             loadHistory();
         }
+    }
 
-        function updateGroupFilter() {
-            let history = getCookie('studyHistory');
-            history = history ? JSON.parse(history) : [];
-            
-            const groups = [...new Set(history.map(item => item.group).filter(g => g))];
-            const groupFilter = document.getElementById('groupFilter');
-            
-            groupFilter.innerHTML = '<option value="">すべてのグループ</option>';
-            groups.forEach(group => {
-                groupFilter.innerHTML += `<option value="${group}">${group}</option>`;
-            });
+    function hideMoveGroup() {
+        selectedItems.clear();
+        document.getElementById('moveGroupInput').value = '';
+        loadHistory();
+    }
+
+    function moveSelectedToGroup() {
+        const newGroup = document.getElementById('moveGroupInput').value.trim();
+        if (selectedItems.size === 0) return;
+        let history = getCookie('studyHistory');
+        history = history ? JSON.parse(history) : [];
+        Array.from(selectedItems).forEach(index => {
+            if (history[index]) history[index].group = newGroup;
+        });
+        setCookie('studyHistory', JSON.stringify(history));
+        selectedItems.clear();
+        document.getElementById('moveGroupInput').value = '';
+        updateGroupFilter();
+        loadHistory();
+    }
+
+    function updateGroupFilter() {
+        let history = getCookie('studyHistory');
+        history = history ? JSON.parse(history) : [];
+        const groups = [...new Set(history.map(item => item.group).filter(g => g))];
+        const groupFilter = document.getElementById('groupFilter');
+        groupFilter.innerHTML = '<option value="">すべてのグループ</option>';
+        groups.forEach(group => {
+            groupFilter.innerHTML += `<option value="${group}">${group}</option>`;
+        });
+    }
+
+    function calculateStreak() {
+        let history = getCookie('studyHistory');
+        history = history ? JSON.parse(history) : [];
+        if (history.length === 0) return 0;
+        const dates = [...new Set(history.map(item => {
+            const date = new Date(item.start);
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }))].sort().reverse();
+        let streak = 0;
+        const today = new Date();
+        for (let i = 0; i < dates.length; i++) {
+            const expectedDate = new Date(today);
+            expectedDate.setDate(today.getDate() - i);
+            const expectedStr = `${expectedDate.getFullYear()}-${String(expectedDate.getMonth() + 1).padStart(2, '0')}-${String(expectedDate.getDate()).padStart(2, '0')}`;
+            if (dates[i] === expectedStr) streak++;
+            else break;
+        }
+        return streak;
+    }
+
+    function loadStats() {
+        let history = getCookie('studyHistory');
+        history = history ? JSON.parse(history) : [];
+        const totalTime = history.reduce((sum, item) => sum + item.duration, 0);
+        const streak = calculateStreak();
+        const totalSessions = history.length;
+        const statsContainer = document.getElementById('statsContainer');
+        statsContainer.innerHTML = `<div class="stat-card"><div class="stat-label">トータル勉強時間</div><div class="stat-value">${formatTime(totalTime)}</div></div><div class="stat-card"><div class="stat-label">連続日数</div><div class="stat-value">${streak}日</div></div><div class="stat-card"><div class="stat-label">総セッション数</div><div class="stat-value">${totalSessions}</div></div>`;
+        const groups = {};
+        history.forEach(item => {
+            const group = item.group || '未分類';
+            if (!groups[group]) groups[group] = 0;
+            groups[group] += item.duration;
+        });
+        const groupStatsSelector = document.getElementById('groupStatsSelector');
+        const groupStats = document.getElementById('groupStats');
+        if (Object.keys(groups).length > 0) {
+            groupStatsSelector.innerHTML = '<h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 500;">グループ別統計</h2>';
+            groupStats.innerHTML = Object.entries(groups).sort((a, b) => b[1] - a[1]).map(([group, duration]) => `<div class="stat-card" style="margin-bottom: 15px;"><div class="stat-label">${group}</div><div class="stat-value">${formatTime(duration)}</div></div>`).join('');
+        }
+    }
+
+    function clearHistory() {
+        if (confirm('すべての学習記録を削除しますか?')) {
+            setCookie('studyHistory', JSON.stringify([]));
+            selectedItems.clear();
+            loadHistory();
+        }
+    }
+
+    window.onload = function() {
+        const mode = getCookie('mode');
+        const theme = getCookie('theme');
+        const themeIcon = document.getElementById('themeIcon');
+        if (mode === 'dark') {
+            document.body.classList.remove('light');
+            document.body.classList.add('dark');
+            themeIcon.src = 'sun.webp';
+            themeIcon.alt = 'ライトモードに切り替え';
+        }
+        if (theme) {
+            document.body.setAttribute('data-theme', theme);
+            document.querySelectorAll('.theme-option').forEach(option => { option.classList.remove('selected'); });
+            document.querySelector(`[data-theme="${theme}"]`)?.classList.add('selected');
+        }
+        const musicEnabled = getCookie('feature_music') === 'true';
+        const todoEnabled = getCookie('feature_todo') === 'true';
+        if (musicEnabled) {
+            document.getElementById('toggleMusic').classList.add('active');
+            addMenuButton('music');
+        }
+        if (todoEnabled) {
+            document.getElementById('toggleTodo').classList.add('active');
+            addMenuButton('todo');
+        }
+        
+        let history = getCookie('studyHistory');
+        history = history ? JSON.parse(history) : [];
+        if (history.length > 0) {
+            const last = history[0];
+            const start = new Date(last.start);
+            const end = new Date(last.end);
+            document.getElementById('sessionInfo').innerHTML = 
+                `前回の学習<br>開始: ${formatDateTime(start)} / 終了: ${formatDateTime(end)}<br>学習時間: ${formatTime(last.duration)}`;
         }
 
-        function calculateStreak() {
-            let history = getCookie('studyHistory');
-            history = history ? JSON.parse(history) : [];
-            
-            if (history.length === 0) return 0;
-            
-            const dates = [...new Set(history.map(item => {
-                const date = new Date(item.start);
-                return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-            }))].sort().reverse();
-            
-            let streak = 0;
-            const today = new Date();
-            const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-            
-            for (let i = 0; i < dates.length; i++) {
-                const expectedDate = new Date(today);
-                expectedDate.setDate(today.getDate() - i);
-                const expectedStr = `${expectedDate.getFullYear()}-${String(expectedDate.getMonth() + 1).padStart(2, '0')}-${String(expectedDate.getDate()).padStart(2, '0')}`;
-                
-                if (dates[i] === expectedStr) {
-                    streak++;
-                } else {
-                    break;
+        // Initialize control icons state
+        const loopImg = document.getElementById('loopBtnImg');
+        if (loopImg) {
+            loopImg.src = isLoop ? 'loop_on.webp' : 'loop_off.webp';
+            loopImg.alt = isLoop ? 'ループオン' : 'ループオフ';
+            document.getElementById('loopBtn').style.opacity = isLoop ? '1' : '0.5';
+        }
+        const shImg = document.getElementById('shuffleBtnImg');
+        if (shImg) {
+            shImg.src = isShuffle ? 'shuffle_on.webp' : 'shuffle_off.webp';
+            shImg.alt = isShuffle ? 'シャッフルオン' : 'シャッフルオフ';
+            document.getElementById('shuffleBtn').style.opacity = isShuffle ? '1' : '0.5';
+        }
+        const playImg = document.getElementById('playIconImg');
+        if (playImg) {
+            playImg.src = 'play.webp';
+            playImg.alt = '再生';
+        }
+
+        // set initial audio volume and volume slider
+        const audioEl = document.getElementById('audioPlayer');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeBtnImg = document.getElementById('volumeBtnImg');
+        if (audioEl) {
+            audioEl.volume = 1;
+            if (volumeSlider) {
+                volumeSlider.value = audioEl.volume;
+                volumeSlider.style.display = 'none';
+            }
+            if (volumeBtnImg) volumeBtnImg.src = 'volume.webp';
+        }
+        // Restore persisted playlist from IndexedDB if available
+        (async () => {
+            try {
+                const playlistCookie = getCookie('musicPlaylist');
+                if (playlistCookie) {
+                    const list = JSON.parse(playlistCookie);
+                    for (const item of list) {
+                        try {
+                            const blob = await getFileBlobFromDB(item.id);
+                            if (blob) {
+                                const url = URL.createObjectURL(blob);
+                                musicFiles.push({ url: url, title: item.title, id: item.id });
+                            }
+                        } catch (e) {
+                            console.warn('Error loading blob for', item, e);
+                        }
+                    }
+                    // if we loaded any files, refresh playlist UI
+                    if (musicFiles.length > 0) loadPlaylist();
                 }
+            } catch (e) {
+                console.error('Failed to restore playlist from DB', e);
             }
-            
-            return streak;
-        }
-
-        function loadStats() {
-            let history = getCookie('studyHistory');
-            history = history ? JSON.parse(history) : [];
-            
-            const totalTime = history.reduce((sum, item) => sum + item.duration, 0);
-            const streak = calculateStreak();
-            const totalSessions = history.length;
-            
-            const statsContainer = document.getElementById('statsContainer');
-            statsContainer.innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-label">トータル勉強時間</div>
-                    <div class="stat-value">${formatTime(totalTime)}</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">連続日数</div>
-                    <div class="stat-value">${streak}日</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">総セッション数</div>
-                    <div class="stat-value">${totalSessions}</div>
-                </div>
-            `;
-            
-            const groups = {};
-            history.forEach(item => {
-                const group = item.group || '未分類';
-                if (!groups[group]) {
-                    groups[group] = 0;
-                }
-                groups[group] += item.duration;
-            });
-            
-            const groupStatsSelector = document.getElementById('groupStatsSelector');
-            const groupStats = document.getElementById('groupStats');
-            
-            if (Object.keys(groups).length > 0) {
-                groupStatsSelector.innerHTML = '<h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 500;">グループ別統計</h2>';
-                groupStats.innerHTML = Object.entries(groups)
-                    .sort((a, b) => b[1] - a[1])
-                    .map(([group, duration]) => `
-                        <div class="stat-card" style="margin-bottom: 15px;">
-                            <div class="stat-label">${group}</div>
-                            <div class="stat-value">${formatTime(duration)}</div>
-                        </div>
-                    `).join('');
-            }
-        }
-
-        function clearHistory() {
-            if (confirm('すべての学習記録を削除しますか?')) {
-                setCookie('studyHistory', JSON.stringify([]));
-                selectedItems.clear();
-                loadHistory();
-            }
-        }
-
-        // 初期化
-        window.onload = function() {
-            const mode = getCookie('mode');
-            const theme = getCookie('theme');
-            const themeIcon = document.getElementById('themeIcon');
-            
-            if (mode === 'dark') {
-                document.body.classList.remove('light');
-                document.body.classList.add('dark');
-                themeIcon.src = 'sun.webp';
-                themeIcon.alt = 'ライトモードに切り替え';
-            }
-
-            if (theme) {
-                document.body.setAttribute('data-theme', theme);
-                document.querySelectorAll('.theme-option').forEach(option => {
-                    option.classList.remove('selected');
-                });
-                document.querySelector(`[data-theme="${theme}"]`)?.classList.add('selected');
-            }
-            
-            let history = getCookie('studyHistory');
-            history = history ? JSON.parse(history) : [];
-            if (history.length > 0) {
-                const last = history[0];
-                const start = new Date(last.start);
-                const end = new Date(last.end);
-                document.getElementById('sessionInfo').innerHTML = 
-                    `前回の学習<br>開始: ${formatDateTime(start)} / 終了: ${formatDateTime(end)}<br>学習時間: ${formatTime(last.duration)}`;
-            }
-        };
-    </script>
+        })();
+    };
+</script>
 </body>
 </html>
