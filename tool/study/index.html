@@ -658,18 +658,76 @@
             flex-wrap: wrap;
         }
 
-        .music-controls input[type="file"] {
-            display: none;
+
+        .file-select-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            width: 100%;
         }
 
-        .music-controls label {
+        /* file label contains left arrow + text */
+        .file-select-label {
+            display: block;
+            position: relative;
             flex: 1;
             padding: 12px 15px;
+            padding-right: 44px; /* space for right arrow */
             border-radius: 8px;
             font-size: 0.95rem;
             cursor: pointer;
-            text-align: center;
             transition: all 0.2s;
+            user-select: none;
+            text-align: center;
+            background: var(--panel-light);
+        }
+
+        /* place arrow at fixed right inside the label, text stays centered */
+        .file-select-label .file-select-arrow {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .file-select-label .file-select-text {
+            display: inline-block;
+            width: 100%;
+            pointer-events: none; /* allow label to receive clicks */
+            text-align: center;
+        }
+
+        .file-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 160px;
+            background: var(--panel-light);
+            color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            z-index: 60;
+            display: none;
+            overflow: hidden;
+        }
+
+        .file-dropdown-menu .dropdown-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .file-dropdown-menu .dropdown-item:hover {
+            background: var(--panel-light-hover);
+        }
+
+        .music-controls input[type="file"] {
+            display: none;
         }
 
         .light .music-controls label {
@@ -1114,8 +1172,21 @@
             <div class="music-player">
                 <h2 style="font-size: 1.3rem; margin-bottom: 20px; font-weight: 500;">音楽プレイヤー</h2>
                     <div class="music-controls">
-                        <label for="musicFileInput">ファイルを選択</label>
-                        <input type="file" id="musicFileInput" accept=".mp3,.wav,.flac,.m4a,.aac,.ogg,.webm,audio/*" onchange="addMusicFile(event)" multiple>
+                        <div class="file-select-group">
+                            <label class="file-select-label" id="musicFileLabel" tabindex="0" role="button" aria-haspopup="true">
+                                <img id="musicDropdownArrow" class="file-select-arrow" src="arrow_down.webp" alt="メニュー">
+                                <span class="file-select-text">ファイルを選択</span>
+                            </label>
+                            <input type="file" id="musicFileInput" accept=".mp3,.wav,.flac,.m4a,.aac,.ogg,.webm,audio/*" onchange="addMusicFile(event)" multiple style="display:none;">
+
+                            <div class="file-dropdown-menu" id="musicDropdownMenu" role="menu" aria-hidden="true">
+                                <div class="dropdown-item" id="chooseFolderItem">フォルダを選択</div>
+                                <!-- 将来的に他のオプションを追加できます -->
+                            </div>
+
+                            <!-- hidden folder input (webkitdirectory for folder pick) -->
+                            <input type="file" id="musicFolderInput" webkitdirectory directory multiple style="display:none;" onchange="addMusicFile(event)">
+                        </div>
                     </div>
 <!-- カスタムプレイヤー: ネイティブコントロールは非表示にして独自UIを使う -->
 <audio id="audioPlayer" style="display:none;"></audio>
@@ -1480,8 +1551,18 @@
     }
 
     async function addMusicFile(event) {
-        const files = event.target.files;
-        for (let file of files) {
+        const allFiles = Array.from(event.target.files || []);
+        // filter audio files by MIME or extension
+        const audioFiles = allFiles.filter(f => {
+            if (!f) return false;
+            if (f.type && f.type.startsWith('audio/')) return true;
+            return /\.(mp3|wav|flac|m4a|aac|ogg|webm|opus)$/i.test(f.name);
+        });
+        if (audioFiles.length === 0) {
+            // nothing to add
+            return;
+        }
+        for (let file of audioFiles) {
             const id = Date.now() + Math.random();
             try {
                 await saveFileBlobToDB(id, file.name, file);
@@ -2036,6 +2117,65 @@
                 });
             }
         } catch (e) { console.warn('Failed to attach todo input handler', e); }
+
+        // Music dropdown behaviour
+        (function() {
+            const dropdownArrow = document.getElementById('musicDropdownArrow');
+            const dropdownMenu = document.getElementById('musicDropdownMenu');
+            const chooseFolder = document.getElementById('chooseFolderItem');
+            const folderInput = document.getElementById('musicFolderInput');
+            const fileLabel = document.querySelector('.file-select-label');
+
+            function closeMenu() {
+                if (dropdownMenu) { dropdownMenu.style.display = 'none'; dropdownMenu.setAttribute('aria-hidden','true'); }
+                if (dropdownArrow) dropdownArrow.setAttribute('aria-expanded','false');
+            }
+
+            function openMenu() {
+                if (dropdownMenu) { dropdownMenu.style.display = 'block'; dropdownMenu.setAttribute('aria-hidden','false'); }
+                if (dropdownArrow) dropdownArrow.setAttribute('aria-expanded','true');
+            }
+
+            if (dropdownArrow) {
+                // clicking arrow toggles menu
+                dropdownArrow.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!dropdownMenu) return;
+                    if (dropdownMenu.style.display === 'block') closeMenu();
+                    else openMenu();
+                });
+                // prevent arrow clicks/touches from bubbling to the label
+                dropdownArrow.addEventListener('mousedown', (e) => e.stopPropagation());
+                dropdownArrow.addEventListener('pointerdown', (e) => e.stopPropagation());
+                dropdownArrow.addEventListener('touchstart', (e) => e.stopPropagation());
+            }
+
+            // clicking the label (except arrow) should open native file picker
+            if (fileLabel) {
+                fileLabel.addEventListener('click', (e) => {
+                    // if the click originated on the arrow, don't open file picker
+                    if (e.target && e.target.closest && e.target.closest('.file-select-arrow')) return;
+                    const fileInput = document.getElementById('musicFileInput');
+                    if (fileInput) fileInput.click();
+                    closeMenu();
+                });
+            }
+
+            if (chooseFolder && folderInput) {
+                chooseFolder.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    folderInput.click();
+                    closeMenu();
+                });
+            }
+
+            // close on outside click
+            document.addEventListener('click', (e) => {
+                const target = e.target;
+                if (!dropdownMenu) return;
+                if (!dropdownMenu.contains(target) && target !== dropdownArrow) closeMenu();
+            });
+        })();
     };
 </script>
 </body>
