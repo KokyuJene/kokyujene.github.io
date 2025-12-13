@@ -589,17 +589,6 @@
             border-color: var(--panel-dark-2);
         }
 
-        .settings-section {
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .settings-section h2 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
         .toggle-item {
             display: flex;
             justify-content: space-between;
@@ -1020,90 +1009,235 @@
             }
         }
 
-        :root {
-            --primary-color: #6b7b8c;
-            --primary-hover: #5a6a7b;
-            --primary-color-dark: #5a6b7c;
-            --primary-hover-dark: #4a5b6c;
-            --bg-light: #f0f2f5;
-            --bg-dark: #2a2d3a;
-            /* Panel colors - soft/pale defaults */
-            --panel-dark: #1f242b; /* darker default for panels (blue-gray for good contrast) */
-            --panel-dark-2: #3b4150; /* secondary panel tone for accents/hover in dark mode */
-            --panel-light: #e8e9fc; /* gentle light panel color */
-            /* Light-mode helpers (theme-aware) */
-            --panel-light-hover: #cfcfc9; /* hover for light panels */
-            --panel-light-2: #d8d8d2; /* secondary light panel tone (selected etc) */
-            --panel-light-border: #d0d0ca; /* borders in light mode */
-            --panel-light-focus: #deded8; /* focus background in light mode */
-        }
+/* h2タグを統一 */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
 
-        body[data-theme="green"] {
-            --primary-color: #6b8c6b;
-            --primary-hover: #5a7b5a;
-            --primary-color-dark: #5a7c5a;
-            --primary-hover-dark: #4a6c4a;
-            --bg-light: #f0f5f0;
-            --bg-dark: #2a3a2d;
-            --panel-dark: #11231a;
-            --panel-dark-2: #2f4036;
-            --panel-light: #f7fbf7;
-        }
+h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
 
-        body[data-theme="purple"] {
-            --primary-color: #7b6b8c;
-            --primary-hover: #6a5a7b;
-            --primary-color-dark: #6b5a7c;
-            --primary-hover-dark: #5b4a6c;
-            --bg-light: #f5f0f5;
-            --bg-dark: #2d2a3a;
-            --panel-dark: #24162a;
-            --panel-dark-2: #473447;
-            --panel-light: #fbf8fd;
-        }
+/* より淡い色パレット - 全テーマ */
+:root {
+    --primary-color: #9db4c8;
+    --primary-hover: #8ba4b8;
+    --primary-color-dark: #7a95ab;
+    --primary-hover-dark: #6a859b;
+    --bg-light: #f8f9fb;
+    --bg-dark: #2d3142;
+    /* Panel colors - soft/pale defaults */
+    --panel-dark: #252a38;
+    --panel-dark-2: #3d4454;
+    --panel-light: #f0f2f7;
+    /* Light-mode helpers (theme-aware) */
+    --panel-light-hover: #e6e8ed;
+    --panel-light-2: #e8eaef;
+    --panel-light-border: #dfe1e6;
+    --panel-light-focus: #eceef3;
+}
 
-        body[data-theme="orange"] {
-            --primary-color: #c97c5d;
-            --primary-hover: #b86c4d;
-            --primary-color-dark: #b86c4d;
-            --primary-hover-dark: #a85c3d;
-            --bg-light: #f5e9e1;
-            --bg-dark: #3a2e2a;
-            --panel-dark: #2f1b16;
-            --panel-dark-2: #5a4038;
-            --panel-light: #e6dbd2;
-        }
+body[data-theme="green"] {
+    --primary-color: #a8c9a8;
+    --primary-hover: #96b996;
+    --primary-color-dark: #88ab88;
+    --primary-hover-dark: #789b78;
+    --bg-light: #f7faf7;
+    --bg-dark: #2d3a30;
+    --panel-dark: #242e28;
+    --panel-dark-2: #3a4740;
+    --panel-light: #eff5ef;
+}
 
-        body[data-theme="pink"] {
-            --primary-color: #c77d88;
-            --primary-hover: #b66d78;
-            --primary-color-dark: #b66d78;
-            --primary-hover-dark: #a65d68;
-            --bg-light: #f5f0f2;
-            --bg-dark: #3a2a2d;
-            --panel-dark: #2e1a20;
-            --panel-dark-2: #53343b;
-            --panel-light: #fff6f8;
-        }
+body[data-theme="purple"] {
+    --primary-color: #b8a8c9;
+    --primary-hover: #a896b9;
+    --primary-color-dark: #9a88ab;
+    --primary-hover-dark: #8a789b;
+    --bg-light: #faf7fb;
+    --bg-dark: #332d3a;
+    --panel-dark: #2c2430;
+    --panel-dark-2: #443a4a;
+    --panel-light: #f5eff7;
+}
 
-        body[data-theme="teal"] {
-            --primary-color: #5d9d9d;
-            --primary-hover: #4d8d8d;
-            --primary-color-dark: #4d8d8d;
-            --primary-hover-dark: #3d7d7d;
-            --bg-light: #f0f5f5;
-            --bg-dark: #2a3a3a;
-            --panel-dark: #112f2f;
-            --panel-dark-2: #2f4a4a;
-            --panel-light: #f7fbfb;
-        }
+body[data-theme="orange"] {
+    --primary-color: #d9b4a0;
+    --primary-hover: #c9a490;
+    --primary-color-dark: #b99480;
+    --primary-hover-dark: #a98470;
+    --bg-light: #faf6f3;
+    --bg-dark: #3a312d;
+    --panel-dark: #2e2621;
+    --panel-dark-2: #4a3f38;
+    --panel-light: #f5f0ed;
+}
 
-        /* Blue theme (default) panel overrides */
-        body[data-theme="blue"] {
-            --panel-dark: #1f242b;
-            --panel-dark-2: #3b4150;
-            --panel-light: #f3f7fb;
-        }
+body[data-theme="pink"] {
+    --primary-color: #d9a8b4;
+    --primary-hover: #c996a4;
+    --primary-color-dark: #b98896;
+    --primary-hover-dark: #a97886;
+    --bg-light: #faf7f8;
+    --bg-dark: #3a2d30;
+    --panel-dark: #2e2426;
+    --panel-dark-2: #4a3a3e;
+    --panel-light: #f5eff1;
+}
+
+body[data-theme="teal"] {
+    --primary-color: #a0c9c9;
+    --primary-hover: #90b9b9;
+    --primary-color-dark: #80abab;
+    --primary-hover-dark: #709b9b;
+    --bg-light: #f7fafa;
+    --bg-dark: #2d3a3a;
+    --panel-dark: #243030;
+    --panel-dark-2: #3a4848;
+    --panel-light: #eff5f5;
+}
+
+/* Blue theme (default) panel overrides */
+body[data-theme="blue"] {
+    --panel-dark: #252a38;
+    --panel-dark-2: #3d4454;
+    --panel-light: #f0f2f7;
+}
+
+/* ボタンの角丸を統一 */
+button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.menu button {
+    padding: 10px 25px;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+/* ホバーエフェクトを追加 */
+.light button.secondary:hover {
+    background-color: var(--panel-light-hover);
+    transform: scale(1.02);
+}
+
+.dark button.secondary:hover {
+    background-color: var(--panel-dark-2);
+    transform: scale(1.02);
+}
+
+/* セクション間の余白を統一 */
+.settings-section {
+    margin-bottom: 35px;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.music-player {
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.theme-selector {
+    margin-bottom: 35px;
+}
+
+.group-selector {
+    margin-bottom: 25px;
+}
+
+.search-box {
+    margin-bottom: 25px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.group-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.music-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.history-list {
+    max-height: 550px;
+    overflow-y: auto;
+    margin-top: 25px;
+}
+
+.player-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.clear-history {
+    margin-top: 35px;
+}
+
+.copyright {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid;
+    font-size: 0.85rem;
+    opacity: 0.5;
+}
+
+.theme-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.empty-state {
+    margin-top: 50px;
+    opacity: 0.5;
+    font-size: 1rem;
+}
     </style>
 </head>
 <body class="light" data-theme="blue">
@@ -1170,7 +1304,6 @@
 
         <div id="musicPage" class="page">
             <div class="music-player">
-                <h2 style="font-size: 1.3rem; margin-bottom: 20px; font-weight: 500;">音楽プレイヤー</h2>
                     <div class="music-controls">
                         <div class="file-select-group">
                             <label class="file-select-label" id="musicFileLabel" tabindex="0" role="button" aria-haspopup="true">
@@ -1228,7 +1361,6 @@
 </div>
 <div id="todoPage" class="page">
         <div class="todo-list">
-            <h2 style="font-size: 1.3rem; margin-bottom: 20px; font-weight: 500;">ToDo リスト</h2>
             <div class="todo-input">
                 <input type="text" id="todoInput" placeholder="新しいタスクを入力">
                 <button class="primary" onclick="addTodo()">追加</button>
@@ -1255,56 +1387,56 @@
         </div>
         <div class="theme-selector">
             <h2>テーマカラー</h2>
-            <div class="theme-options">
-                <div class="theme-option selected" data-theme="blue" onclick="changeTheme('blue')">
-                    <div class="theme-option-preview" style="background-color: var(--panel-light);">
-                        <div style="background-color: #6b7b8c;"></div>
-                        <div style="background-color: #5a6a7b;"></div>
-                        <div style="background-color: #4a5a6b;"></div>
-                    </div>
-                    <div class="theme-option-name">ブルー</div>
-                </div>
-                <div class="theme-option" data-theme="green" onclick="changeTheme('green')">
-                    <div class="theme-option-preview" style="background-color: var(--panel-light);">
-                        <div style="background-color: #6b8c6b;"></div>
-                        <div style="background-color: #5a7b5a;"></div>
-                        <div style="background-color: #4a6a4a;"></div>
-                    </div>
-                    <div class="theme-option-name">グリーン</div>
-                </div>
-                <div class="theme-option" data-theme="purple" onclick="changeTheme('purple')">
-                    <div class="theme-option-preview" style="background-color: var(--panel-light);">
-                        <div style="background-color: #7b6b8c;"></div>
-                        <div style="background-color: #6a5a7b;"></div>
-                        <div style="background-color: #5a4a6a;"></div>
-                    </div>
-                    <div class="theme-option-name">パープル</div>
-                </div>
-                <div class="theme-option" data-theme="orange" onclick="changeTheme('orange')">
-                    <div class="theme-option-preview" style="background-color: var(--panel-light);">
-                        <div style="background-color: #c97c5d;"></div>
-                        <div style="background-color: #b86c4d;"></div>
-                        <div style="background-color: #a85c3d;"></div>
-                    </div>
-                    <div class="theme-option-name">オレンジ</div>
-                </div>
-                <div class="theme-option" data-theme="pink" onclick="changeTheme('pink')">
-                    <div class="theme-option-preview" style="background-color: var(--panel-light);">
-                        <div style="background-color: #c77d88;"></div>
-                        <div style="background-color: #b66d78;"></div>
-                        <div style="background-color: #a65d68;"></div>
-                    </div>
-                    <div class="theme-option-name">ピンク</div>
-                </div>
-                <div class="theme-option" data-theme="teal" onclick="changeTheme('teal')">
-                    <div class="theme-option-preview" style="background-color: var(--panel-light);">
-                        <div style="background-color: #5d9d9d;"></div>
-                        <div style="background-color: #4d8d8d;"></div>
-                        <div style="background-color: #3d7d7d;"></div>
-                    </div>
-                    <div class="theme-option-name">ティール</div>
-                </div>
-            </div>
+<div class="theme-options">
+    <div class="theme-option selected" data-theme="blue" onclick="changeTheme('blue')">
+        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+            <div style="background-color: #9db4c8;"></div>
+            <div style="background-color: #8ba4b8;"></div>
+            <div style="background-color: #7a95ab;"></div>
+        </div>
+        <div class="theme-option-name">ブルー</div>
+    </div>
+    <div class="theme-option" data-theme="green" onclick="changeTheme('green')">
+        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+            <div style="background-color: #a8c9a8;"></div>
+            <div style="background-color: #96b996;"></div>
+            <div style="background-color: #88ab88;"></div>
+        </div>
+        <div class="theme-option-name">グリーン</div>
+    </div>
+    <div class="theme-option" data-theme="purple" onclick="changeTheme('purple')">
+        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+            <div style="background-color: #b8a8c9;"></div>
+            <div style="background-color: #a896b9;"></div>
+            <div style="background-color: #9a88ab;"></div>
+        </div>
+        <div class="theme-option-name">パープル</div>
+    </div>
+    <div class="theme-option" data-theme="orange" onclick="changeTheme('orange')">
+        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+            <div style="background-color: #d9b4a0;"></div>
+            <div style="background-color: #c9a490;"></div>
+            <div style="background-color: #b99480;"></div>
+        </div>
+        <div class="theme-option-name">オレンジ</div>
+    </div>
+    <div class="theme-option" data-theme="pink" onclick="changeTheme('pink')">
+        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+            <div style="background-color: #d9a8b4;"></div>
+            <div style="background-color: #c996a4;"></div>
+            <div style="background-color: #b98896;"></div>
+        </div>
+        <div class="theme-option-name">ピンク</div>
+    </div>
+    <div class="theme-option" data-theme="teal" onclick="changeTheme('teal')">
+        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+            <div style="background-color: #a0c9c9;"></div>
+            <div style="background-color: #90b9b9;"></div>
+            <div style="background-color: #80abab;"></div>
+        </div>
+        <div class="theme-option-name">ティール</div>
+    </div>
+</div>
         </div>
         <div class="copyright">© KokyuJene™ All rights reserved.</div>
     </div>
