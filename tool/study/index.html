@@ -1386,7 +1386,7 @@
     }
     .dark .about-dialog { background: var(--panel-dark); }
     .about-dialog h2 { margin-top: 0; margin-bottom: 8px; font-size:1.25rem; }
-    .about-content { line-height:1.7; opacity:0.95; }
+    .about-content { line-height:1.7; opacity:0.95; text-align: left; }
     .about-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:16px; }
     .no-scroll { overflow: hidden; }
     /* About button (minimal pill) */
@@ -2863,8 +2863,8 @@ const tutorialSteps = [
         page: 'timer'
     },
     {
-        title: 'タイマーが起動しました',
-        message: 'タイマーが動いています。実際の勉強では、このまま集中して作業を続けましょう。',
+        title: 'タイマーがスタートしました',
+        message: '今はチュートリアルですが、実際の勉強では、このまま集中して作業を続けましょう。',
         target: '#timer',
         position: 'bottom',
         action: 'view',
@@ -2896,7 +2896,7 @@ const tutorialSteps = [
     },
     {
         title: 'グループ分け',
-        message: 'グループ名を入力すると、後で科目別や分野別に記録を分類できます。例：「数学」「英語」など',
+        message: 'グループ名を入力すると、後で科目別や分野別に記録を分類できます。例:「数学」や、「英語」など',
         target: '#groupInput',
         position: 'top',
         action: 'view',
@@ -2928,7 +2928,7 @@ const tutorialSteps = [
     },
     {
         title: '設定画面',
-        message: 'ここから設定画面を開けます。テーマカラーの変更、音楽プレイヤーやToDoリストの表示切替、データのバックアップなどができます。クリックして確認してみましょう！',
+        message: 'ここから設定画面を開けます。テーマカラーの変更、音楽プレイヤーやToDoリストの表示切替、データのバックアップなどができます。クリックして確認してみましょう!',
         target: '.settings-btn',
         position: 'left',
         action: 'click',
@@ -2959,8 +2959,8 @@ const tutorialSteps = [
         page: 'settings'
     },
     {
-        title: 'チュートリアル完了！',
-        message: 'お疲れ様でした！これで基本的な使い方の説明は終了です。分からないことがあれば、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
+        title: 'チュートリアル完了!',
+        message: 'お疲れ様でした!これで基本的な使い方の説明は終了です。また分からなくなったら、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
         target: null,
         position: 'center',
         action: 'finish',
