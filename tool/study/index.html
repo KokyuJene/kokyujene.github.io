@@ -1245,7 +1245,7 @@
         --panel-light: #f0f2f7;
         /* Light-mode helpers (theme-aware) */
         --panel-light-hover: #e6e8ed;
-        --panel-light-2: #e8eaef;
+        --panel-light-2: #f0f2f7;
         --panel-light-border: #dfe1e6;
         --panel-light-focus: #eceef3;
     }
@@ -1260,6 +1260,7 @@
         --panel-dark: #242e28;
         --panel-dark-2: #3a4740;
         --panel-light: #eff5ef;
+        --panel-light-2: #eff5ef;
     }
 
     body[data-theme="purple"] {
@@ -1272,6 +1273,7 @@
         --panel-dark: #2c2430;
         --panel-dark-2: #443a4a;
         --panel-light: #f5eff7;
+        --panel-light-2: #f5eff7;
     }
 
     body[data-theme="orange"] {
@@ -1284,6 +1286,7 @@
         --panel-dark: #2e2621;
         --panel-dark-2: #4a3f38;
         --panel-light: #f5f0ed;
+        --panel-light-2: #f5f0ed;
     }
 
     body[data-theme="pink"] {
@@ -1296,6 +1299,7 @@
         --panel-dark: #2e2426;
         --panel-dark-2: #4a3a3e;
         --panel-light: #f5eff1;
+        --panel-light-2: #f5eff1;
     }
 
     body[data-theme="teal"] {
@@ -1308,6 +1312,7 @@
         --panel-dark: #243030;
         --panel-dark-2: #3a4848;
         --panel-light: #eff5f5;
+        --panel-light-2: #eff5f5;        
     }
 
     /* Blue theme (default) panel overrides */
@@ -1408,6 +1413,213 @@
     .dark .about-button { border-color: rgba(255,255,255,0.06); }
     .light .about-button:hover { background: rgba(0,0,0,0.03); }
     .dark .about-button:hover { background: rgba(255,255,255,0.02); }
+    
+    /* Data management section */
+    .data-management {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .data-management button {
+        flex: 1;
+        min-width: 160px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+/* チュートリアル関連スタイル */
+.tutorial-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    backdrop-filter: blur(3px);
+    pointer-events: none;
+}
+
+.tutorial-overlay.show {
+    display: block;
+}
+
+.tutorial-welcome {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    background: var(--panel-light);
+    color: inherit;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 10001;
+    animation: slideInRight 0.3s ease-out;
+    pointer-events: auto;
+}
+
+.dark .tutorial-welcome {
+    background: var(--panel-dark);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.tutorial-welcome h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.tutorial-welcome p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    opacity: 0.9;
+}
+
+.tutorial-welcome-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.tutorial-welcome-buttons button {
+    flex: 1;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.tutorial-box {
+    position: fixed;
+    background: var(--panel-light);
+    color: inherit;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 10002;
+    max-width: 400px;
+    width: calc(100vw - 40px);
+    animation: fadeIn 0.3s ease-out;
+    pointer-events: auto;
+}
+
+.dark .tutorial-box {
+    background: var(--panel-dark);
+}
+
+.tutorial-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.tutorial-box p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    opacity: 0.9;
+}
+
+.tutorial-step-info {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-bottom: 12px;
+}
+
+.tutorial-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.tutorial-buttons button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.tutorial-highlight {
+    position: relative;
+    z-index: 10001 !important;
+    box-shadow: 0 0 0 4px rgba(157, 180, 200, 0.5) !important;
+    border-radius: 12px !important;
+}
+
+.tutorial-click-area {
+    position: fixed;
+    z-index: 10001;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.tutorial-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 10002;
+}
+
+.tutorial-arrow-up {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--panel-light);
+}
+
+.dark .tutorial-arrow-up {
+    border-bottom-color: var(--panel-dark);
+}
+
+.tutorial-arrow-down {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--panel-light);
+}
+
+.dark .tutorial-arrow-down {
+    border-top-color: var(--panel-dark);
+}
+
+.tutorial-arrow-left {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid var(--panel-light);
+}
+
+.dark .tutorial-arrow-left {
+    border-right-color: var(--panel-dark);
+}
+
+.tutorial-arrow-right {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--panel-light);
+}
+
+.dark .tutorial-arrow-right {
+    border-left-color: var(--panel-dark);
+}
+
+@media (max-width: 768px) {
+    .tutorial-welcome {
+        top: 70px;
+        right: 10px;
+        width: calc(100vw - 20px);
+    }
+    
+    .tutorial-box {
+        max-width: calc(100vw - 20px);
+    }
+}
 </style>
 
 </head>
@@ -1428,6 +1640,32 @@
 </div>
 
 <div class="top-buttons">
+    <!-- チュートリアル -->
+<div class="tutorial-overlay" id="tutorialOverlay"></div>
+<div class="tutorial-welcome" id="tutorialWelcome" style="display: none;">
+    <h3>
+        <img src="guide.webp" alt="ガイド" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;">
+        使い方を説明しますか?
+    </h3>
+    <p>初めての方向けに、このサイトの使い方を順番に説明します。</p>
+    <div class="tutorial-welcome-buttons">
+        <button class="secondary" onclick="closeTutorial()">閉じる</button>
+        <button class="primary" onclick="startTutorial()">はい</button>
+    </div>
+</div>
+<div class="tutorial-box" id="tutorialBox" style="display: none;">
+    <div class="tutorial-step-info" id="tutorialStepInfo">ステップ 1/7</div>
+    <h3 id="tutorialTitle">タイトル</h3>
+    <p id="tutorialMessage">メッセージ</p>
+    <div class="tutorial-buttons">
+        <button class="secondary" onclick="skipTutorial()">スキップ</button>
+        <div style="display: flex; gap: 10px;">
+            <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()">戻る</button>
+            <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()">次へ</button>
+        </div>
+    </div>
+</div>
+<div class="tutorial-arrow" id="tutorialArrow"></div>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え">
         <img id="themeIcon" src="moon.webp" alt="テーマ切り替え">
     </button>
@@ -1476,6 +1714,15 @@
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="日付や時刻で検索(例: 2025年12月11日や、14:30)" oninput="loadHistory()">
         </div>
+
+<div class="sort-controls" style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+    <span style="font-size: 0.9rem; opacity: 0.8;">並び替え:</span>
+    <button class="secondary" onclick="sortHistory('date-desc')" style="padding: 8px 16px; font-size: 0.85rem;">新しい順</button>
+    <button class="secondary" onclick="sortHistory('date-asc')" style="padding: 8px 16px; font-size: 0.85rem;">古い順</button>
+    <button class="secondary" onclick="sortHistory('duration-desc')" style="padding: 8px 16px; font-size: 0.85rem;">時間が長い順</button>
+    <button class="secondary" onclick="sortHistory('duration-asc')" style="padding: 8px 16px; font-size: 0.85rem;">時間が短い順</button>
+</div>
+
         <div class="action-buttons">
             <button class="secondary" onclick="toggleSelectAll()">すべて選択</button>
             <button class="secondary" id="deleteBtn" onclick="deleteSelected()" disabled>選択を削除</button>
@@ -1575,6 +1822,7 @@
             </div>
         </div>
     </div>
+    
     <div class="theme-selector">
         <h2>テーマカラー</h2>
         <div class="theme-options">
@@ -1628,6 +1876,30 @@
             </div>
         </div>
     </div>
+    
+    <div class="settings-section">
+        <h2>データ管理</h2>
+        <div class="data-management">
+            <button class="secondary" onclick="exportData()">
+                <img src="export.webp" alt="エクスポート" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
+                データをエクスポート
+            </button>
+            <button class="secondary" onclick="document.getElementById('importFile').click()">
+                <img src="import.webp" alt="インポート" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
+                データをインポート
+            </button>
+            <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+        </div>
+    </div>
+    
+    <div class="settings-section">
+        <h2>ヘルプ</h2>
+        <button class="secondary" onclick="restartTutorial()" style="width: 100%; padding: 12px 20px;">
+            <img src="guide.webp" alt="ガイド" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
+            使い方ガイドを再表示
+        </button>
+    </div>
+    
     <div class="copyright">© KokyuJene™ All rights reserved.</div>
     
     <div class="about-link">
@@ -1642,7 +1914,6 @@
             <span class="about-text">このサイトについて</span>
         </button>
     </div>
-</div>
 </div>
 
 <div class="about-overlay" id="aboutOverlay" aria-hidden="true">
@@ -2289,6 +2560,16 @@ function loadHistory() {
             return dateStr.includes(searchTerm) || startTimeStr.includes(searchTerm) || endTimeStr.includes(searchTerm);
         });
     }
+    // ソート処理
+    if (currentSort === 'date-desc') {
+        history.sort((a, b) => new Date(b.start) - new Date(a.start));
+    } else if (currentSort === 'date-asc') {
+        history.sort((a, b) => new Date(a.start) - new Date(b.start));
+    } else if (currentSort === 'duration-desc') {
+        history.sort((a, b) => b.duration - a.duration);
+    } else if (currentSort === 'duration-asc') {
+        history.sort((a, b) => a.duration - b.duration);
+    }
     if (history.length === 0) {
         historyList.innerHTML = '<div class="empty-state">学習記録がありません</div>';
         updateActionButtons();
@@ -2303,6 +2584,13 @@ function loadHistory() {
         return `<div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})"><input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})"><div class="history-item-date">${formatDate(start)}</div><div class="history-item-time">開始: ${formatDateTime(start)}<br>終了: ${formatDateTime(end)}</div><div class="history-item-duration">学習時間: ${formatTime(item.duration)}</div>${groupBadge}</div>`;
     }).join('');
     updateActionButtons();
+}
+
+let currentSort = 'date-desc'; // デフォルトは新しい順
+
+function sortHistory(sortType) {
+    currentSort = sortType;
+    loadHistory();
 }
 
 function toggleSelection(event, index) {
@@ -2461,6 +2749,491 @@ async function clearHistory() {
     }
 }
 
+function exportData() {
+    const data = {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        studyHistory: JSON.parse(getCookie('studyHistory') || '[]'),
+        todos: JSON.parse(getCookie('todos') || '[]'),
+        theme: getCookie('theme') || 'blue',
+        mode: getCookie('mode') || 'light',
+        feature_music: getCookie('feature_music') || 'false',
+        feature_todo: getCookie('feature_todo') || 'false',
+    };
+    
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `studytime_backup_${new Date().getTime()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            // バージョン確認
+            if (!data.version) throw new Error('無効なファイル形式です');
+            
+            // 確認ダイアログを表示
+            const confirmed = await customConfirm(
+                `${data.studyHistory?.length || 0}件の学習記録、${data.todos?.length || 0}件のToDoを復元します。上書きしてもよろしいですか?`,
+                'データをインポート',
+                'warning.webp'
+            );
+            
+            if (confirmed) {
+                // データを復元
+                if (data.studyHistory) setCookie('studyHistory', JSON.stringify(data.studyHistory));
+                if (data.todos) setCookie('todos', JSON.stringify(data.todos));
+                if (data.theme) {
+                    setCookie('theme', data.theme);
+                    changeTheme(data.theme);
+                }
+                if (data.mode) {
+                    setCookie('mode', data.mode);
+                    if (data.mode === 'dark') {
+                        document.body.classList.remove('light');
+                        document.body.classList.add('dark');
+                    } else {
+                        document.body.classList.remove('dark');
+                        document.body.classList.add('light');
+                    }
+                    const themeIcon = document.getElementById('themeIcon');
+                    if (themeIcon) themeIcon.src = data.mode === 'dark' ? 'sun.webp' : 'moon.webp';
+                }
+                
+                // 表示設定を復元
+                if (data.feature_music !== undefined) {
+                    setCookie('feature_music', data.feature_music);
+                    const toggle = document.getElementById('toggleMusic');
+                    if (data.feature_music === 'true') {
+                        toggle.classList.add('active');
+                        addMenuButton('music');
+                    } else {
+                        toggle.classList.remove('active');
+                        removeMenuButton('music');
+                    }
+                }
+                if (data.feature_todo !== undefined) {
+                    setCookie('feature_todo', data.feature_todo);
+                    const toggle = document.getElementById('toggleTodo');
+                    if (data.feature_todo === 'true') {
+                        toggle.classList.add('active');
+                        addMenuButton('todo');
+                    } else {
+                        toggle.classList.remove('active');
+                        removeMenuButton('todo');
+                    }
+                }
+                
+                // 履歴をリロード
+                if (document.getElementById('historyList')) loadHistory();
+                if (document.getElementById('todoItems')) loadTodos();
+                if (document.getElementById('statsContainer')) loadStats();
+            }
+        } catch (error) {
+            await customConfirm(`インポート失敗: ${error.message}`, 'エラー', 'warning.webp');
+        }
+    };
+    reader.readAsText(file);
+    
+    // ファイル選択をリセット
+    event.target.value = '';
+}
+
+// チュートリアル関連
+let currentTutorialStep = 0;
+const tutorialSteps = [
+    {
+        title: 'ストップウォッチの開始',
+        message: 'この「勉強開始」ボタンをクリックすると、タイマーがスタートします。',
+        target: '#startBtn',
+        position: 'top',
+        action: 'click',
+        page: 'timer'
+    },
+    {
+        title: 'タイマーが起動しました',
+        message: 'タイマーが動いています。実際の勉強では、このまま集中して作業を続けましょう。',
+        target: '#timer',
+        position: 'bottom',
+        action: 'view',
+        page: 'timer'
+    },
+    {
+        title: '一時停止',
+        message: '休憩したい時は、この「一時停止」ボタンをクリックして時間を止めることができます。試してみましょう。',
+        target: '#pauseBtn',
+        position: 'top',
+        action: 'click',
+        page: 'timer'
+    },
+    {
+        title: '一時停止中',
+        message: 'タイマーが一時停止しました。もう一度ボタンを押すと再開できます。',
+        target: '#pauseBtn',
+        position: 'top',
+        action: 'view',
+        page: 'timer'
+    },
+    {
+        title: '記録の終了',
+        message: '勉強が完全に終わったら「終了」ボタンを押します。これで学習時間が自動的に記録されます。クリックしてみましょう。',
+        target: '#endBtn',
+        position: 'top',
+        action: 'click',
+        page: 'timer'
+    },
+    {
+        title: 'グループ分け',
+        message: 'グループ名を入力すると、後で科目別や分野別に記録を分類できます。例：「数学」「英語」など',
+        target: '#groupInput',
+        position: 'top',
+        action: 'view',
+        page: 'timer'
+    },
+    {
+        title: '統計の確認',
+        message: 'ここをクリックして統計画面に移動してみましょう。累計の勉強時間、連続日数、グループ別の集計などが確認できます。',
+        target: '.menu button:nth-child(2)',
+        position: 'bottom',
+        action: 'click',
+        page: 'timer'
+    },
+    {
+        title: '履歴の確認',
+        message: 'ここをクリックしてリスト画面に移動してみましょう。過去の学習記録を一覧で見ることができます。検索、ソート、グループ移動などの機能があります。',
+        target: '.menu button:nth-child(3)',
+        position: 'bottom',
+        action: 'click',
+        page: 'stats'
+    },
+    {
+        title: 'ダークモード',
+        message: 'このボタンをクリックするとライト/ダークモードを切り替えられます。目に優しい表示で集中できます。試しに切り替えてみましょう。',
+        target: '.theme-toggle',
+        position: 'left',
+        action: 'click',
+        page: 'list'
+    },
+    {
+        title: '設定画面',
+        message: 'ここから設定画面を開けます。テーマカラーの変更、音楽プレイヤーやToDoリストの表示切替、データのバックアップなどができます。クリックして確認してみましょう！',
+        target: '.settings-btn',
+        position: 'left',
+        action: 'click',
+        page: 'list'
+    },
+    {
+        title: '表示設定',
+        message: 'ここで音楽プレイヤーやToDoリストの表示/非表示を切り替えられます。必要な機能だけを表示してシンプルに使えます。',
+        target: '.settings-section:nth-child(1)',
+        position: 'bottom',
+        action: 'view',
+        page: 'settings'
+    },
+    {
+        title: 'テーマカラー',
+        message: 'お好みのテーマカラーを選択できます。ブルー、グリーン、パープル、オレンジ、ピンク、ティールの6色から選べます。',
+        target: '.theme-selector',
+        position: 'top',
+        action: 'view',
+        page: 'settings'
+    },
+    {
+        title: 'データ管理',
+        message: 'データのエクスポート/インポート機能です。バックアップを取ったり、他のデバイスにデータを移行できます。',
+        target: '.settings-section:nth-child(3)',
+        position: 'top',
+        action: 'view',
+        page: 'settings'
+    },
+    {
+        title: 'チュートリアル完了！',
+        message: 'お疲れ様でした！これで基本的な使い方の説明は終了です。分からないことがあれば、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
+        target: null,
+        position: 'center',
+        action: 'finish',
+        page: 'settings'
+    }
+];
+
+function showTutorialWelcome() {
+    const completed = getCookie('tutorial_completed');
+    if (!completed) {
+        document.getElementById('tutorialWelcome').style.display = 'block';
+    }
+}
+
+function closeTutorial() {
+    document.getElementById('tutorialWelcome').style.display = 'none';
+    setCookie('tutorial_completed', 'true', 365);
+}
+
+function startTutorial() {
+    document.getElementById('tutorialWelcome').style.display = 'none';
+    currentTutorialStep = 0;
+    showTutorialStep();
+}
+
+function restartTutorial() {
+    currentTutorialStep = 0;
+    showPage('timer');
+    setTimeout(() => {
+        showTutorialStep();
+    }, 300);
+}
+
+function skipTutorial() {
+    hideTutorialStep();
+    setCookie('tutorial_completed', 'true', 365);
+}
+
+function nextTutorialStep() {
+    const step = tutorialSteps[currentTutorialStep];
+    
+    if (step.action === 'click') {
+        return;
+    }
+    
+    if (currentTutorialStep < tutorialSteps.length - 1) {
+        currentTutorialStep++;
+        showTutorialStep();
+    } else {
+        hideTutorialStep();
+        setCookie('tutorial_completed', 'true', 365);
+    }
+}
+
+function prevTutorialStep() {
+    if (currentTutorialStep > 0) {
+        currentTutorialStep--;
+        // 戻る時は必要なページに戻る
+        const prevStep = tutorialSteps[currentTutorialStep];
+        if (prevStep.page) {
+            showPage(prevStep.page);
+        }
+        setTimeout(() => {
+            showTutorialStep();
+        }, 300);
+    }
+}
+
+function showTutorialStep() {
+    const step = tutorialSteps[currentTutorialStep];
+    const overlay = document.getElementById('tutorialOverlay');
+    const box = document.getElementById('tutorialBox');
+    const arrow = document.getElementById('tutorialArrow');
+    
+    // ページ切替が必要な場合
+    if (step.page && currentTutorialStep > 0) {
+        const currentPage = document.querySelector('.page.active');
+        if (currentPage && !currentPage.id.includes(step.page)) {
+            // ページが異なる場合のみ切り替え
+        }
+    }
+    
+    // 完了画面の場合
+    if (step.action === 'finish') {
+        overlay.classList.add('show');
+        box.style.display = 'block';
+        arrow.style.display = 'none';
+        
+        document.getElementById('tutorialStepInfo').textContent = '';
+        document.getElementById('tutorialTitle').textContent = step.title;
+        document.getElementById('tutorialMessage').textContent = step.message;
+        
+        const prevBtn = document.getElementById('tutorialPrevBtn');
+        const nextBtn = document.getElementById('tutorialNextBtn');
+        prevBtn.style.display = 'block';
+        prevBtn.textContent = '戻る';
+        prevBtn.onclick = prevTutorialStep;
+        nextBtn.style.display = 'block';
+        nextBtn.textContent = '終了';
+        nextBtn.onclick = () => {
+            hideTutorialStep();
+            setCookie('tutorial_completed', 'true', 365);
+        };
+        
+        // 画面中央に配置
+        box.style.left = '50%';
+        box.style.top = '50%';
+        box.style.transform = 'translate(-50%, -50%)';
+        box.style.bottom = 'auto';
+        
+        document.querySelectorAll('.tutorial-highlight').forEach(el => {
+            el.classList.remove('tutorial-highlight');
+        });
+        
+        const clickArea = document.getElementById('tutorialClickArea');
+        if (clickArea) clickArea.remove();
+        
+        return;
+    }
+    
+    const target = document.querySelector(step.target);
+    
+    if (!target) {
+        nextTutorialStep();
+        return;
+    }
+    
+    overlay.classList.add('show');
+    box.style.display = 'block';
+    
+    document.getElementById('tutorialStepInfo').textContent = `ステップ ${currentTutorialStep + 1}/${tutorialSteps.length}`;
+    document.getElementById('tutorialTitle').textContent = step.title;
+    document.getElementById('tutorialMessage').textContent = step.message;
+    
+    const prevBtn = document.getElementById('tutorialPrevBtn');
+    const nextBtn = document.getElementById('tutorialNextBtn');
+    prevBtn.style.display = currentTutorialStep === 0 ? 'none' : 'block';
+    prevBtn.textContent = '戻る';
+    prevBtn.onclick = prevTutorialStep;
+    
+    if (step.action === 'click') {
+        nextBtn.style.display = 'none';
+    } else {
+        nextBtn.style.display = 'block';
+        nextBtn.textContent = '次へ';
+        nextBtn.onclick = nextTutorialStep;
+    }
+    
+    document.querySelectorAll('.tutorial-highlight').forEach(el => {
+        el.classList.remove('tutorial-highlight');
+    });
+    target.classList.add('tutorial-highlight');
+    
+    // クリック可能エリアを作成
+    const existingClickArea = document.getElementById('tutorialClickArea');
+    if (existingClickArea) existingClickArea.remove();
+    
+    if (step.action === 'click') {
+        const clickArea = document.createElement('div');
+        clickArea.id = 'tutorialClickArea';
+        clickArea.className = 'tutorial-click-area';
+        
+        // 少し遅延させてから位置を取得
+        setTimeout(() => {
+            const targetRect = target.getBoundingClientRect();
+            clickArea.style.left = targetRect.left + 'px';
+            clickArea.style.top = targetRect.top + 'px';
+            clickArea.style.width = targetRect.width + 'px';
+            clickArea.style.height = targetRect.height + 'px';
+        }, 50);
+        
+        clickArea.onclick = () => {
+            target.click();
+            setTimeout(() => {
+                if (currentTutorialStep < tutorialSteps.length - 1) {
+                    currentTutorialStep++;
+                    showTutorialStep();
+                } else {
+                    hideTutorialStep();
+                    setCookie('tutorial_completed', 'true', 365);
+                }
+            }, 300);
+        };
+        document.body.appendChild(clickArea);
+    }
+    
+    // 少し遅延させてから位置を計算
+    setTimeout(() => {
+        const targetRect = target.getBoundingClientRect();
+        const boxWidth = Math.min(400, window.innerWidth - 40);
+        const boxPadding = 20;
+        
+        arrow.className = 'tutorial-arrow';
+        box.style.transform = 'none';
+        
+        if (step.position === 'top') {
+            const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
+            box.style.left = leftPos + 'px';
+            box.style.top = Math.max(boxPadding, targetRect.top - 20) + 'px';
+            box.style.bottom = 'auto';
+            box.style.transform = 'translateY(-100%)';
+            
+            arrow.classList.add('tutorial-arrow-down');
+            arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
+            arrow.style.top = (targetRect.top - 10) + 'px';
+            arrow.style.display = 'block';
+        } else if (step.position === 'bottom') {
+            const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
+            box.style.left = leftPos + 'px';
+            box.style.top = (targetRect.bottom + 20) + 'px';
+            box.style.bottom = 'auto';
+            box.style.transform = 'none';
+            
+            arrow.classList.add('tutorial-arrow-up');
+            arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
+            arrow.style.top = (targetRect.bottom + 10) + 'px';
+            arrow.style.display = 'block';
+        } else if (step.position === 'left') {
+            box.style.left = Math.max(boxPadding, targetRect.left - boxWidth - 20) + 'px';
+            box.style.top = Math.max(boxPadding, targetRect.top + targetRect.height / 2 - 100) + 'px';
+            box.style.bottom = 'auto';
+            box.style.transform = 'none';
+            
+            arrow.classList.add('tutorial-arrow-right');
+            arrow.style.left = (targetRect.left - 10) + 'px';
+            arrow.style.top = (targetRect.top + targetRect.height / 2 - 10) + 'px';
+            arrow.style.display = 'block';
+        } else if (step.position === 'right') {
+            box.style.left = Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.right + 20) + 'px';
+            box.style.top = Math.max(boxPadding, targetRect.top + targetRect.height / 2 - 100) + 'px';
+            box.style.bottom = 'auto';
+            box.style.transform = 'none';
+            
+            arrow.classList.add('tutorial-arrow-left');
+            arrow.style.left = (targetRect.right + 10) + 'px';
+            arrow.style.top = (targetRect.top + targetRect.height / 2 - 10) + 'px';
+            arrow.style.display = 'block';
+        }
+        
+        // 画面外チェック
+        setTimeout(() => {
+            const boxRect = box.getBoundingClientRect();
+            if (boxRect.bottom > window.innerHeight - 20) {
+                const newTop = window.innerHeight - boxRect.height - 20;
+                box.style.top = newTop + 'px';
+                if (step.position === 'top') {
+                    box.style.transform = 'none';
+                }
+            }
+            if (boxRect.right > window.innerWidth - 20) {
+                box.style.left = (window.innerWidth - boxRect.width - 20) + 'px';
+            }
+            if (boxRect.left < 20) {
+                box.style.left = '20px';
+            }
+        }, 10);
+    }, 100);
+}
+
+function hideTutorialStep() {
+    document.getElementById('tutorialOverlay').classList.remove('show');
+    document.getElementById('tutorialBox').style.display = 'none';
+    document.getElementById('tutorialArrow').style.display = 'none';
+    document.querySelectorAll('.tutorial-highlight').forEach(el => {
+        el.classList.remove('tutorial-highlight');
+    });
+    const clickArea = document.getElementById('tutorialClickArea');
+    if (clickArea) clickArea.remove();
+}
+
+document.getElementById('tutorialOverlay').addEventListener('click', skipTutorial);
+
 window.onload = function() {
     const mode = getCookie('mode');
     const theme = getCookie('theme');
@@ -2501,15 +3274,42 @@ window.onload = function() {
     (function restoreOngoingSession(){
         const startCookie = getCookie('studyStartTime');
         if (!startCookie) return;
+        
+        // クッキーの妥当性チェック（古いクッキーを無視）
+        const startDate = new Date(startCookie);
+        if (isNaN(startDate.getTime())) return; // 無効な日付形式
+        
+        const now = Date.now();
+        const startTime_ms = startDate.getTime();
+        const MAX_SESSION_HOURS = 24; // セッションの最大時間（24時間）
+        
+        // セッション開始時刻が未来または24時間以上前の場合は無視
+        if (startTime_ms > now || (now - startTime_ms) > MAX_SESSION_HOURS * 60 * 60 * 1000) {
+            // 古いクッキーをクリア
+            setCookie('studyStartTime', '', -1);
+            setCookie('studyPaused', '', -1);
+            setCookie('studyPausedAccum', '', -1);
+            return;
+        }
+        
         const pausedAccum = parseInt(getCookie('studyPausedAccum') || '0', 10) || 0;
         const pausedFlag = getCookie('studyPaused') === 'true';
+        
+        // pausedAccum の妥当性チェック（負数や異常に大きい値は無視）
+        if (pausedAccum < 0 || pausedAccum > MAX_SESSION_HOURS * 60 * 60 * 1000) {
+            setCookie('studyStartTime', '', -1);
+            setCookie('studyPaused', '', -1);
+            setCookie('studyPausedAccum', '', -1);
+            return;
+        }
+        
         // 表示・ボタン状態
         document.getElementById('startBtn').classList.add('hidden');
         document.getElementById('pauseBtn').classList.remove('hidden');
         document.getElementById('endBtn').classList.remove('hidden');
-        document.getElementById('sessionInfo').textContent = `開始時刻: ${formatDateTime(new Date(startCookie))}`;
+        document.getElementById('sessionInfo').textContent = `開始時刻: ${formatDateTime(startDate)}`;
         // 変数復元
-        startTime = new Date(startCookie).getTime();
+        startTime = startTime_ms;
         pausedTime = pausedAccum;
         isPaused = pausedFlag;
         if (isPaused) {
@@ -2643,6 +3443,10 @@ window.onload = function() {
             if (!dropdownMenu.contains(target) && target !== dropdownArrow) closeMenu();
         });
     })();
+// 初回訪問時のチュートリアル表示
+    setTimeout(() => {
+        showTutorialWelcome();
+    }, 500);
 };
 </script>
 </body>
