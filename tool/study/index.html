@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="shortcut icon" type="image/webp" href="favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta name="description" content="勉強とともにストップウォッチをスタートし、作業時間を記録しましょう。">
+    <meta name="description" content="勉強とともにタイマーをスタートし、作業時間を記録しましょう。">
     <style>
         * {
             margin: 0;
@@ -2504,7 +2504,6 @@ function addTodo() {
     setCookie('todos', JSON.stringify(todos));
     input.value = '';
     loadTodos();
-    try { input.blur(); } catch (e) { }
 }
 
 function loadTodos() {
@@ -3037,188 +3036,222 @@ function showTutorialStep() {
     const arrow = document.getElementById('tutorialArrow');
     
     // ページ切替が必要な場合
-    if (step.page && currentTutorialStep > 0) {
-        const currentPage = document.querySelector('.page.active');
-        if (currentPage && !currentPage.id.includes(step.page)) {
-            // ページが異なる場合のみ切り替え
+    if (step.page) {
+        const pages = {'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'settings': 'settingsPage'};
+        const currentActivePage = document.querySelector('.page.active');
+        const targetPageId = pages[step.page];
+        
+        if (currentActivePage && currentActivePage.id !== targetPageId) {
+            showPage(step.page);
+            // ページ切替後に少し待つ
+            setTimeout(() => {
+                continueShowingStep();
+            }, 400);
+            return;
         }
     }
     
-    // 完了画面の場合
-    if (step.action === 'finish') {
+    continueShowingStep();
+    
+    function continueShowingStep() {
+        // 完了画面の場合
+        if (step.action === 'finish') {
+            overlay.classList.add('show');
+            box.style.display = 'block';
+            arrow.style.display = 'none';
+            
+            document.getElementById('tutorialStepInfo').textContent = '';
+            document.getElementById('tutorialTitle').textContent = step.title;
+            document.getElementById('tutorialMessage').textContent = step.message;
+            
+            const prevBtn = document.getElementById('tutorialPrevBtn');
+            const nextBtn = document.getElementById('tutorialNextBtn');
+            prevBtn.style.display = 'block';
+            prevBtn.textContent = '戻る';
+            prevBtn.onclick = prevTutorialStep;
+            nextBtn.style.display = 'block';
+            nextBtn.textContent = '終了';
+            nextBtn.onclick = () => {
+                hideTutorialStep();
+                setCookie('tutorial_completed', 'true', 365);
+            };
+            
+            // 画面中央に配置
+            box.style.left = '50%';
+            box.style.top = '50%';
+            box.style.transform = 'translate(-50%, -50%)';
+            box.style.bottom = 'auto';
+            
+            document.querySelectorAll('.tutorial-highlight').forEach(el => {
+                el.classList.remove('tutorial-highlight');
+            });
+            
+            const clickArea = document.getElementById('tutorialClickArea');
+            if (clickArea) clickArea.remove();
+            
+            return;
+        }
+        
+        const target = document.querySelector(step.target);
+        
+        if (!target) {
+            nextTutorialStep();
+            return;
+        }
+        
+        // ターゲットが表示されるまで待つ
+        const targetVisible = target.offsetParent !== null;
+        if (!targetVisible) {
+            setTimeout(() => {
+                showTutorialStep();
+            }, 200);
+            return;
+        }
+        
         overlay.classList.add('show');
         box.style.display = 'block';
-        arrow.style.display = 'none';
         
-        document.getElementById('tutorialStepInfo').textContent = '';
+        document.getElementById('tutorialStepInfo').textContent = `ステップ ${currentTutorialStep + 1}/${tutorialSteps.length}`;
         document.getElementById('tutorialTitle').textContent = step.title;
         document.getElementById('tutorialMessage').textContent = step.message;
         
         const prevBtn = document.getElementById('tutorialPrevBtn');
         const nextBtn = document.getElementById('tutorialNextBtn');
-        prevBtn.style.display = 'block';
+        prevBtn.style.display = currentTutorialStep === 0 ? 'none' : 'block';
         prevBtn.textContent = '戻る';
         prevBtn.onclick = prevTutorialStep;
-        nextBtn.style.display = 'block';
-        nextBtn.textContent = '終了';
-        nextBtn.onclick = () => {
-            hideTutorialStep();
-            setCookie('tutorial_completed', 'true', 365);
-        };
         
-        // 画面中央に配置
-        box.style.left = '50%';
-        box.style.top = '50%';
-        box.style.transform = 'translate(-50%, -50%)';
-        box.style.bottom = 'auto';
+        if (step.action === 'click') {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = 'block';
+            nextBtn.textContent = '次へ';
+            nextBtn.onclick = nextTutorialStep;
+        }
         
         document.querySelectorAll('.tutorial-highlight').forEach(el => {
             el.classList.remove('tutorial-highlight');
         });
+        target.classList.add('tutorial-highlight');
         
-        const clickArea = document.getElementById('tutorialClickArea');
-        if (clickArea) clickArea.remove();
+        // クリック可能エリアを作成
+        const existingClickArea = document.getElementById('tutorialClickArea');
+        if (existingClickArea) existingClickArea.remove();
         
-        return;
-    }
-    
-    const target = document.querySelector(step.target);
-    
-    if (!target) {
-        nextTutorialStep();
-        return;
-    }
-    
-    overlay.classList.add('show');
-    box.style.display = 'block';
-    
-    document.getElementById('tutorialStepInfo').textContent = `ステップ ${currentTutorialStep + 1}/${tutorialSteps.length}`;
-    document.getElementById('tutorialTitle').textContent = step.title;
-    document.getElementById('tutorialMessage').textContent = step.message;
-    
-    const prevBtn = document.getElementById('tutorialPrevBtn');
-    const nextBtn = document.getElementById('tutorialNextBtn');
-    prevBtn.style.display = currentTutorialStep === 0 ? 'none' : 'block';
-    prevBtn.textContent = '戻る';
-    prevBtn.onclick = prevTutorialStep;
-    
-    if (step.action === 'click') {
-        nextBtn.style.display = 'none';
-    } else {
-        nextBtn.style.display = 'block';
-        nextBtn.textContent = '次へ';
-        nextBtn.onclick = nextTutorialStep;
-    }
-    
-    document.querySelectorAll('.tutorial-highlight').forEach(el => {
-        el.classList.remove('tutorial-highlight');
-    });
-    target.classList.add('tutorial-highlight');
-    
-    // クリック可能エリアを作成
-    const existingClickArea = document.getElementById('tutorialClickArea');
-    if (existingClickArea) existingClickArea.remove();
-    
-    if (step.action === 'click') {
-        const clickArea = document.createElement('div');
-        clickArea.id = 'tutorialClickArea';
-        clickArea.className = 'tutorial-click-area';
-        
-        // 少し遅延させてから位置を取得
-        setTimeout(() => {
-            const targetRect = target.getBoundingClientRect();
-            clickArea.style.left = targetRect.left + 'px';
-            clickArea.style.top = targetRect.top + 'px';
-            clickArea.style.width = targetRect.width + 'px';
-            clickArea.style.height = targetRect.height + 'px';
-        }, 50);
-        
-        clickArea.onclick = () => {
-            target.click();
+        if (step.action === 'click') {
+            const clickArea = document.createElement('div');
+            clickArea.id = 'tutorialClickArea';
+            clickArea.className = 'tutorial-click-area';
+            
             setTimeout(() => {
-                if (currentTutorialStep < tutorialSteps.length - 1) {
-                    currentTutorialStep++;
-                    showTutorialStep();
-                } else {
-                    hideTutorialStep();
-                    setCookie('tutorial_completed', 'true', 365);
-                }
-            }, 300);
-        };
-        document.body.appendChild(clickArea);
-    }
-    
-    // 少し遅延させてから位置を計算
-    setTimeout(() => {
-        const targetRect = target.getBoundingClientRect();
-        const boxWidth = Math.min(400, window.innerWidth - 40);
-        const boxPadding = 20;
-        
-        arrow.className = 'tutorial-arrow';
-        box.style.transform = 'none';
-        
-        if (step.position === 'top') {
-            const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
-            box.style.left = leftPos + 'px';
-            box.style.top = Math.max(boxPadding, targetRect.top - 20) + 'px';
-            box.style.bottom = 'auto';
-            box.style.transform = 'translateY(-100%)';
+                const targetRect = target.getBoundingClientRect();
+                clickArea.style.left = targetRect.left + 'px';
+                clickArea.style.top = targetRect.top + 'px';
+                clickArea.style.width = targetRect.width + 'px';
+                clickArea.style.height = targetRect.height + 'px';
+            }, 50);
             
-            arrow.classList.add('tutorial-arrow-down');
-            arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
-            arrow.style.top = (targetRect.top - 10) + 'px';
-            arrow.style.display = 'block';
-        } else if (step.position === 'bottom') {
-            const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
-            box.style.left = leftPos + 'px';
-            box.style.top = (targetRect.bottom + 20) + 'px';
-            box.style.bottom = 'auto';
-            box.style.transform = 'none';
-            
-            arrow.classList.add('tutorial-arrow-up');
-            arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
-            arrow.style.top = (targetRect.bottom + 10) + 'px';
-            arrow.style.display = 'block';
-        } else if (step.position === 'left') {
-            box.style.left = Math.max(boxPadding, targetRect.left - boxWidth - 20) + 'px';
-            box.style.top = Math.max(boxPadding, targetRect.top + targetRect.height / 2 - 100) + 'px';
-            box.style.bottom = 'auto';
-            box.style.transform = 'none';
-            
-            arrow.classList.add('tutorial-arrow-right');
-            arrow.style.left = (targetRect.left - 10) + 'px';
-            arrow.style.top = (targetRect.top + targetRect.height / 2 - 10) + 'px';
-            arrow.style.display = 'block';
-        } else if (step.position === 'right') {
-            box.style.left = Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.right + 20) + 'px';
-            box.style.top = Math.max(boxPadding, targetRect.top + targetRect.height / 2 - 100) + 'px';
-            box.style.bottom = 'auto';
-            box.style.transform = 'none';
-            
-            arrow.classList.add('tutorial-arrow-left');
-            arrow.style.left = (targetRect.right + 10) + 'px';
-            arrow.style.top = (targetRect.top + targetRect.height / 2 - 10) + 'px';
-            arrow.style.display = 'block';
+            clickArea.onclick = () => {
+                target.click();
+                setTimeout(() => {
+                    if (currentTutorialStep < tutorialSteps.length - 1) {
+                        currentTutorialStep++;
+                        showTutorialStep();
+                    } else {
+                        hideTutorialStep();
+                        setCookie('tutorial_completed', 'true', 365);
+                    }
+                }, 300);
+            };
+            document.body.appendChild(clickArea);
         }
         
-        // 画面外チェック
+        // 位置計算
         setTimeout(() => {
-            const boxRect = box.getBoundingClientRect();
-            if (boxRect.bottom > window.innerHeight - 20) {
-                const newTop = window.innerHeight - boxRect.height - 20;
-                box.style.top = newTop + 'px';
-                if (step.position === 'top') {
+            const targetRect = target.getBoundingClientRect();
+            const boxWidth = Math.min(400, window.innerWidth - 40);
+            const boxPadding = 20;
+            
+            arrow.className = 'tutorial-arrow';
+            box.style.transform = 'none';
+            
+            if (step.position === 'top') {
+                const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
+                box.style.left = leftPos + 'px';
+                box.style.top = Math.max(boxPadding, targetRect.top - 20) + 'px';
+                box.style.bottom = 'auto';
+                box.style.transform = 'translateY(-100%)';
+                
+                arrow.classList.add('tutorial-arrow-down');
+                arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
+                arrow.style.top = (targetRect.top - 10) + 'px';
+                arrow.style.display = 'block';
+            } else if (step.position === 'bottom') {
+                const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
+                box.style.left = leftPos + 'px';
+                box.style.top = (targetRect.bottom + 20) + 'px';
+                box.style.bottom = 'auto';
+                box.style.transform = 'none';
+                
+                arrow.classList.add('tutorial-arrow-up');
+                arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
+                arrow.style.top = (targetRect.bottom + 10) + 'px';
+                arrow.style.display = 'block';
+            } else if (step.position === 'left') {
+                // スマホでは左配置は使いにくいので下に変更
+                if (window.innerWidth <= 768) {
+                    const leftPos = Math.max(boxPadding, Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.left + targetRect.width / 2 - boxWidth / 2));
+                    box.style.left = leftPos + 'px';
+                    box.style.top = (targetRect.bottom + 20) + 'px';
+                    box.style.bottom = 'auto';
                     box.style.transform = 'none';
+                    
+                    arrow.classList.add('tutorial-arrow-up');
+                    arrow.style.left = (targetRect.left + targetRect.width / 2 - 10) + 'px';
+                    arrow.style.top = (targetRect.bottom + 10) + 'px';
+                    arrow.style.display = 'block';
+                } else {
+                    box.style.left = Math.max(boxPadding, targetRect.left - boxWidth - 20) + 'px';
+                    box.style.top = Math.max(boxPadding, targetRect.top + targetRect.height / 2 - 100) + 'px';
+                    box.style.bottom = 'auto';
+                    box.style.transform = 'none';
+                    
+                    arrow.classList.add('tutorial-arrow-right');
+                    arrow.style.left = (targetRect.left - 10) + 'px';
+                    arrow.style.top = (targetRect.top + targetRect.height / 2 - 10) + 'px';
+                    arrow.style.display = 'block';
                 }
+            } else if (step.position === 'right') {
+                box.style.left = Math.min(window.innerWidth - boxWidth - boxPadding, targetRect.right + 20) + 'px';
+                box.style.top = Math.max(boxPadding, targetRect.top + targetRect.height / 2 - 100) + 'px';
+                box.style.bottom = 'auto';
+                box.style.transform = 'none';
+                
+                arrow.classList.add('tutorial-arrow-left');
+                arrow.style.left = (targetRect.right + 10) + 'px';
+                arrow.style.top = (targetRect.top + targetRect.height / 2 - 10) + 'px';
+                arrow.style.display = 'block';
             }
-            if (boxRect.right > window.innerWidth - 20) {
-                box.style.left = (window.innerWidth - boxRect.width - 20) + 'px';
-            }
-            if (boxRect.left < 20) {
-                box.style.left = '20px';
-            }
-        }, 10);
-    }, 100);
+            
+            // 画面外チェック
+            setTimeout(() => {
+                const boxRect = box.getBoundingClientRect();
+                if (boxRect.bottom > window.innerHeight - 20) {
+                    const newTop = window.innerHeight - boxRect.height - 20;
+                    box.style.top = newTop + 'px';
+                    if (step.position === 'top') {
+                        box.style.transform = 'none';
+                    }
+                }
+                if (boxRect.right > window.innerWidth - 20) {
+                    box.style.left = (window.innerWidth - boxRect.width - 20) + 'px';
+                }
+                if (boxRect.left < 20) {
+                    box.style.left = '20px';
+                }
+            }, 10);
+        }, 150);
+    }
 }
 
 function hideTutorialStep() {
@@ -3376,20 +3409,28 @@ window.onload = function() {
         }
     })();
 
-    try {
-        const todoInput = document.getElementById('todoInput');
-        if (todoInput) {
-            let composing = false;
-            todoInput.addEventListener('compositionstart', () => composing = true);
-            todoInput.addEventListener('compositionend', () => { composing = false; });
-            todoInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !composing && !e.isComposing) {
-                    e.preventDefault();
-                    addTodo();
-                }
+try {
+    const todoInput = document.getElementById('todoInput');
+    if (todoInput) {
+        let composing = false;
+        todoInput.addEventListener('compositionstart', () => composing = true);
+        todoInput.addEventListener('compositionend', () => { composing = false; });
+        todoInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !composing && !e.isComposing) {
+                e.preventDefault();
+                addTodo();
+            }
+        });
+        // スマホでの追加ボタンタップ対応
+        const addButton = todoInput.nextElementSibling;
+        if (addButton) {
+            addButton.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                addTodo();
             });
         }
-    } catch (e) { console.warn('Failed to attach todo input handler', e); }
+    }
+} catch (e) { console.warn('Failed to attach todo input handler', e); }
 
     (function() {
         const dropdownArrow = document.getElementById('musicDropdownArrow');
