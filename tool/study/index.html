@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/webp" href="favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="description" content="勉強とともにタイマーをスタートし、作業時間を記録しましょう。">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -1620,6 +1621,128 @@
         max-width: calc(100vw - 20px);
     }
 }
+
+/* Todo関連の追加スタイル */
+.todo-priority-high {
+    border-left: 4px solid #e74c3c;
+}
+
+.todo-priority-normal {
+    border-left: 4px solid #3498db;
+}
+
+.todo-priority-low {
+    border-left: 4px solid #95a5a6;
+}
+
+.todo-repeat-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.light .todo-repeat-badge {
+    background-color: rgba(157, 180, 200, 0.2);
+    color: var(--primary-color);
+}
+
+.dark .todo-repeat-badge {
+    background-color: rgba(157, 180, 200, 0.3);
+    color: var(--primary-color-dark);
+}
+
+.todo-category-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.todo-category-study {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.todo-category-work {
+    background-color: rgba(230, 126, 34, 0.2);
+    color: #e67e22;
+}
+
+.todo-category-personal {
+    background-color: rgba(155, 89, 182, 0.2);
+    color: #9b59b6;
+}
+
+.todo-category-shopping {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.todo-category-health {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.todo-category-other {
+    background-color: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+}
+
+.todo-filter-btn.active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.dark .todo-filter-btn.active {
+    background-color: var(--primary-color-dark) !important;
+}
+
+.todo-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+/* グラフ設定の追加スタイル */
+#graphSettings {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.light #graphSettings {
+    background-color: var(--panel-light);
+}
+
+.dark #graphSettings {
+    background-color: var(--panel-dark);
+}
+
+#studyGraphContainer, #statsGraphContainer {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.light #studyGraphContainer, .light #statsGraphContainer {
+    background-color: var(--panel-light);
+}
+
+.dark #studyGraphContainer, .dark #statsGraphContainer {
+    background-color: var(--panel-dark);
+}
+
+#studyGraphContainer h2, #statsGraphContainer h2 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: left;
+}
 </style>
 
 </head>
@@ -1698,6 +1821,9 @@
 
     <div id="statsPage" class="page">
         <div class="stats-container" id="statsContainer"></div>
+        <div id="statsGraphContainer" style="display: none; margin-bottom: 30px;">
+            <canvas id="statsChart" style="max-height: 300px;"></canvas>
+        </div>
         <div class="group-selector" id="groupStatsSelector"></div>
         <div id="groupStats"></div>
     </div>
@@ -1740,6 +1866,10 @@
                 <button class="primary" onclick="moveSelectedToGroup()">移動</button>
             </div>
         </div>
+<div id="studyGraphContainer" style="display: none; margin-bottom: 30px;">
+    <h2>勉強時間グラフ</h2>
+    <canvas id="studyChart" style="max-height: 300px;"></canvas>
+</div>
         <div id="historyList" class="history-list"></div>
         <button class="secondary clear-history" onclick="clearHistory()">すべての履歴をクリア</button>
     </div>
@@ -1798,14 +1928,51 @@
 </div>
 </div>
 <div id="todoPage" class="page">
-        <div class="todo-list">
-            <div class="todo-input">
-                <input type="text" id="todoInput" placeholder="新しいタスクを入力">
-                <button class="primary" onclick="addTodo()">追加</button>
-            </div>
-            <div class="todo-items" id="todoItems"></div>
+    <div class="todo-list">
+        <div class="todo-input">
+            <input type="text" id="todoInput" placeholder="新しいタスクを入力">
+            <button class="primary" onclick="addTodo()">追加</button>
         </div>
+        
+        <div class="todo-options" style="margin-bottom: 20px;">
+            <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 140px;">
+                    <label style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;">繰り返し</label>
+                    <div class="custom-select" style="width: 100%;">
+                        <select id="todoRepeat" style="width: 100%;">
+                            <option value="none">なし</option>
+                            <option value="daily">毎日</option>
+                            <option value="weekly">毎週</option>
+                            <option value="monthly">毎月</option>
+                        </select>
+                        <div class="select-arrow">▾</div>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 140px;">
+                    <label style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;">優先度</label>
+                    <div class="custom-select" style="width: 100%;">
+                        <select id="todoPriority" style="width: 100%;">
+                            <option value="low">低</option>
+                            <option value="normal" selected>通常</option>
+                            <option value="high">高</option>
+                        </select>
+                        <div class="select-arrow">▾</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="todo-filter" style="margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="secondary todo-filter-btn active" onclick="filterTodos('all')" data-filter="all" style="padding: 8px 16px; font-size: 0.85rem;">すべて</button>
+            <button class="secondary todo-filter-btn" onclick="filterTodos('active')" data-filter="active" style="padding: 8px 16px; font-size: 0.85rem;">未完了</button>
+            <button class="secondary todo-filter-btn" onclick="filterTodos('completed')" data-filter="completed" style="padding: 8px 16px; font-size: 0.85rem;">完了</button>
+            <button class="secondary todo-filter-btn" onclick="filterTodos('daily')" data-filter="daily" style="padding: 8px 16px; font-size: 0.85rem;">毎日</button>
+            <button class="secondary todo-filter-btn" onclick="filterTodos('weekly')" data-filter="weekly" style="padding: 8px 16px; font-size: 0.85rem;">毎週</button>
+        </div>
+        
+        <div class="todo-items" id="todoItems"></div>
     </div>
+</div>
 <div id="settingsPage" class="page">
     <div class="settings-section">
         <h2>表示設定</h2>
@@ -1876,7 +2043,56 @@
             </div>
         </div>
     </div>
+<div class="settings-section">
+    <h2>グラフ表示</h2>
+    <div class="toggle-item">
+        <span>勉強時間のグラフ表示</span>
+        <div class="toggle-switch" id="toggleGraph" onclick="toggleGraph()">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
     
+    <div id="graphSettings" style="display: none; margin-top: 20px;">
+        <div style="margin-bottom: 15px;">
+            <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;">グラフの種類</label>
+            <div class="custom-select" style="width: 100%;">
+                <select id="graphType" onchange="saveGraphSettings()">
+                    <option value="bar">棒グラフ</option>
+                    <option value="line">折れ線グラフ</option>
+                    <option value="area">面グラフ</option>
+                </select>
+                <div class="select-arrow">▾</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;">表示期間</label>
+            <div class="custom-select" style="width: 100%;">
+                <select id="graphPeriod" onchange="saveGraphSettings()">
+                    <option value="7">過去7日間</option>
+                    <option value="14">過去14日間</option>
+                    <option value="30" selected>過去30日間</option>
+                    <option value="90">過去90日間</option>
+                    <option value="365">過去1年間</option>
+                    <option value="all">すべての期間</option>
+                </select>
+                <div class="select-arrow">▾</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;">表示場所</label>
+            <div class="custom-select" style="width: 100%;">
+                <select id="graphLocation" onchange="saveGraphSettings()">
+                    <option value="list">リスト画面</option>
+                    <option value="stats">統計画面</option>
+                    <option value="both">両方</option>
+                </select>
+                <div class="select-arrow">▾</div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="settings-section">
         <h2>データ管理</h2>
         <div class="data-management">
@@ -2154,24 +2370,24 @@ function customConfirm(message, title = '確認', iconSrc = 'warning.webp') {
         if (btn) btn.remove();
     }
 
-    function showPage(pageName) {
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-        document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
-        const pages = {'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'music': 'musicPage', 'todo': 'todoPage', 'settings': 'settingsPage'};
-        if (pages[pageName]) {
-            document.getElementById(pages[pageName]).classList.add('active');
-            const menuButtons = Array.from(document.querySelectorAll('.menu button'));
-            const activeBtn = menuButtons.find(btn => {
-                const btnText = btn.textContent;
-                return (pageName === 'timer' && btnText === 'タイマー') || (pageName === 'stats' && btnText === '統計') || (pageName === 'list' && btnText === 'リスト') || (pageName === 'music' && btnText === '音楽') || (pageName === 'todo' && btnText === 'ToDo');
-            });
-            if (activeBtn) activeBtn.classList.add('active');
-            if (pageName === 'stats') loadStats();
-            if (pageName === 'list') { updateGroupFilter(); loadHistory(); }
-            if (pageName === 'music') loadPlaylist();
-            if (pageName === 'todo') loadTodos();
-        }
+function showPage(pageName) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+    const pages = {'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'music': 'musicPage', 'todo': 'todoPage', 'settings': 'settingsPage'};
+    if (pages[pageName]) {
+        document.getElementById(pages[pageName]).classList.add('active');
+        const menuButtons = Array.from(document.querySelectorAll('.menu button'));
+        const activeBtn = menuButtons.find(btn => {
+            const btnText = btn.textContent;
+            return (pageName === 'timer' && btnText === 'タイマー') || (pageName === 'stats' && btnText === '統計') || (pageName === 'list' && btnText === 'リスト') || (pageName === 'music' && btnText === '音楽') || (pageName === 'todo' && btnText === 'ToDo');
+        });
+        if (activeBtn) activeBtn.classList.add('active');
+        if (pageName === 'stats') { loadStats(); updateGraphs(); }
+        if (pageName === 'list') { updateGroupFilter(); loadHistory(); updateGraphs(); }
+        if (pageName === 'music') loadPlaylist();
+        if (pageName === 'todo') loadTodos();
     }
+}
 
     function formatTime(ms) {
         const totalSeconds = Math.floor(ms / 1000);
@@ -2494,49 +2710,170 @@ if (volumeSlider) {
     });
 }
 
+let currentTodoFilter = 'all';
+
 function addTodo() {
     const input = document.getElementById('todoInput');
     const text = input.value.trim();
     if (!text) return;
+    
+    const repeat = document.getElementById('todoRepeat').value;
+    const priority = document.getElementById('todoPriority').value;
+    
     let todos = getCookie('todos');
     todos = todos ? JSON.parse(todos) : [];
-    todos.push({text: text, completed: false, id: Date.now()});
+    
+    const newTodo = {
+        text: text,
+        completed: false,
+        id: Date.now(),
+        repeat: repeat,
+        priority: priority,
+        createdAt: new Date().toISOString()
+    };
+    
+    if (repeat !== 'none') {
+        newTodo.lastCompleted = null;
+    }
+    
+    todos.push(newTodo);
     setCookie('todos', JSON.stringify(todos));
+    
     input.value = '';
+    document.getElementById('todoRepeat').value = 'none';
+    document.getElementById('todoPriority').value = 'normal';
+    
     loadTodos();
 }
 
 function loadTodos() {
     let todos = getCookie('todos');
     todos = todos ? JSON.parse(todos) : [];
+    
+    const now = new Date();
+    const today = now.toDateString();
+    
+    todos.forEach(todo => {
+        if (todo.repeat !== 'none' && todo.completed && todo.lastCompleted) {
+            const lastCompletedDate = new Date(todo.lastCompleted);
+            let shouldReset = false;
+            
+            if (todo.repeat === 'daily') {
+                shouldReset = lastCompletedDate.toDateString() !== today;
+            } else if (todo.repeat === 'weekly') {
+                const daysDiff = Math.floor((now - lastCompletedDate) / (1000 * 60 * 60 * 24));
+                shouldReset = daysDiff >= 7;
+            } else if (todo.repeat === 'monthly') {
+                shouldReset = lastCompletedDate.getMonth() !== now.getMonth() || 
+                             lastCompletedDate.getFullYear() !== now.getFullYear();
+            }
+            
+            if (shouldReset) {
+                todo.completed = false;
+            }
+        }
+    });
+    
+    setCookie('todos', JSON.stringify(todos));
+    
+    let filteredTodos = todos;
+    if (currentTodoFilter === 'active') {
+        filteredTodos = todos.filter(todo => !todo.completed);
+    } else if (currentTodoFilter === 'completed') {
+        filteredTodos = todos.filter(todo => todo.completed);
+    } else if (currentTodoFilter === 'daily') {
+        filteredTodos = todos.filter(todo => todo.repeat === 'daily');
+    } else if (currentTodoFilter === 'weekly') {
+        filteredTodos = todos.filter(todo => todo.repeat === 'weekly');
+    }
+    
+    filteredTodos.sort((a, b) => {
+        const priorityOrder = { high: 0, normal: 1, low: 2 };
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+    
     const todosDiv = document.getElementById('todoItems');
-    if (todos.length === 0) {
+    if (filteredTodos.length === 0) {
         todosDiv.innerHTML = '<div class="empty-state">タスクがありません</div>';
         return;
     }
-    todosDiv.innerHTML = todos.map((todo, index) => `
-        <div class="todo-item ${todo.completed ? 'completed' : ''}">
-            <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">
-            <span class="todo-text">${todo.text}</span>
-            <button class="todo-delete" onclick="deleteTodo(${index})">削除</button>
-        </div>
-    `).join('');
+    
+    todosDiv.innerHTML = filteredTodos.map((todo) => {
+        const index = todos.findIndex(t => t.id === todo.id);
+        const repeatBadge = todo.repeat !== 'none' ? 
+            `<span class="todo-repeat-badge">${getRepeatLabel(todo.repeat)}</span>` : '';
+        
+        return `
+            <div class="todo-item todo-priority-${todo.priority} ${todo.completed ? 'completed' : ''}">
+                <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">
+                <div style="flex: 1;">
+                    <span class="todo-text">${todo.text}</span>
+                    <div class="todo-meta">
+                        ${repeatBadge}
+                    </div>
+                </div>
+                <button class="todo-delete" onclick="deleteTodo(${index})">削除</button>
+            </div>
+        `;
+    }).join('');
+}
+
+function getRepeatLabel(repeat) {
+    const labels = {
+        'daily': '毎日',
+        'weekly': '毎週',
+        'monthly': '毎月'
+    };
+    return labels[repeat] || '';
+}
+
+function getCategoryLabel(category) {
+    const labels = {
+        'study': '勉強',
+        'work': '仕事',
+        'personal': '個人',
+        'shopping': '買い物',
+        'health': '健康',
+        'other': 'その他'
+    };
+    return labels[category] || '';
+}
+
+function filterTodos(filter) {
+    currentTodoFilter = filter;
+    
+    // ボタンのアクティブ状態を更新
+    document.querySelectorAll('.todo-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+    
+    loadTodos();
 }
 
 function toggleTodo(index) {
     let todos = getCookie('todos');
     todos = todos ? JSON.parse(todos) : [];
     todos[index].completed = !todos[index].completed;
+    
+    // 繰り返しタスクの場合、完了日を記録
+    if (todos[index].repeat !== 'none' && todos[index].completed) {
+        todos[index].lastCompleted = new Date().toISOString();
+    }
+    
     setCookie('todos', JSON.stringify(todos));
     loadTodos();
 }
 
 async function deleteTodo(index) {
-    let todos = getCookie('todos');
-    todos = todos ? JSON.parse(todos) : [];
-    todos.splice(index, 1);
-    setCookie('todos', JSON.stringify(todos));
-    loadTodos();
+    const confirmed = await customConfirm('このタスクを削除しますか?', '削除確認', 'delete.webp');
+    if (confirmed) {
+        let todos = getCookie('todos');
+        todos = todos ? JSON.parse(todos) : [];
+        todos.splice(index, 1);
+        setCookie('todos', JSON.stringify(todos));
+        loadTodos();
+    }
 }
 
 function loadHistory() {
@@ -3268,6 +3605,7 @@ function hideTutorialStep() {
 document.getElementById('tutorialOverlay').addEventListener('click', skipTutorial);
 
 window.onload = function() {
+
     const mode = getCookie('mode');
     const theme = getCookie('theme');
     const themeIcon = document.getElementById('themeIcon');
@@ -3488,7 +3826,200 @@ try {
     setTimeout(() => {
         showTutorialWelcome();
     }, 500);
+const graphEnabled = getCookie('graph_enabled') === 'true';
+if (graphEnabled) {
+    document.getElementById('toggleGraph').classList.add('active');
+    document.getElementById('graphSettings').style.display = 'block';
+    
+    const graphType = getCookie('graph_type');
+    const graphPeriod = getCookie('graph_period');
+    const graphLocation = getCookie('graph_location');
+    
+    if (graphType) document.getElementById('graphType').value = graphType;
+    if (graphPeriod) document.getElementById('graphPeriod').value = graphPeriod;
+    if (graphLocation) document.getElementById('graphLocation').value = graphLocation;
+}
 };
+let studyChart = null;
+let statsChart = null;
+
+function toggleGraph() {
+    const toggle = document.getElementById('toggleGraph');
+    const settings = document.getElementById('graphSettings');
+    const isActive = toggle.classList.contains('active');
+    
+    if (isActive) {
+        toggle.classList.remove('active');
+        settings.style.display = 'none';
+        setCookie('graph_enabled', 'false');
+        hideGraphs();
+    } else {
+        toggle.classList.add('active');
+        settings.style.display = 'block';
+        setCookie('graph_enabled', 'true');
+        saveGraphSettings();
+    }
+}
+
+function saveGraphSettings() {
+    const type = document.getElementById('graphType').value;
+    const period = document.getElementById('graphPeriod').value;
+    const location = document.getElementById('graphLocation').value;
+    
+    setCookie('graph_type', type);
+    setCookie('graph_period', period);
+    setCookie('graph_location', location);
+    
+    updateGraphs();
+}
+
+function hideGraphs() {
+    document.getElementById('studyGraphContainer').style.display = 'none';
+    document.getElementById('statsGraphContainer').style.display = 'none';
+    if (studyChart) {
+        studyChart.destroy();
+        studyChart = null;
+    }
+    if (statsChart) {
+        statsChart.destroy();
+        statsChart = null;
+    }
+}
+
+function updateGraphs() {
+    const enabled = getCookie('graph_enabled') === 'true';
+    if (!enabled) {
+        hideGraphs();
+        return;
+    }
+    
+    const location = getCookie('graph_location') || 'list';
+    
+    if (location === 'list' || location === 'both') {
+        document.getElementById('studyGraphContainer').style.display = 'block';
+        renderGraph('studyChart', 'studyChart');
+    } else {
+        document.getElementById('studyGraphContainer').style.display = 'none';
+    }
+    
+    if (location === 'stats' || location === 'both') {
+        document.getElementById('statsGraphContainer').style.display = 'block';
+        renderGraph('statsChart', 'statsChart');
+    } else {
+        document.getElementById('statsGraphContainer').style.display = 'none';
+    }
+}
+
+function renderGraph(canvasId, chartVar) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    
+    const type = getCookie('graph_type') || 'bar';
+    const period = getCookie('graph_period') || '30';
+    
+    let history = getCookie('studyHistory');
+    history = history ? JSON.parse(history) : [];
+    
+    // 期間フィルタリング
+    const now = new Date();
+    let startDate = new Date();
+    
+    if (period === 'all') {
+        startDate = new Date(0);
+    } else {
+        startDate.setDate(now.getDate() - parseInt(period));
+    }
+    
+    history = history.filter(item => {
+        const itemDate = new Date(item.start);
+        return itemDate >= startDate;
+    });
+    
+    // 日付ごとにグループ化
+    const dailyData = {};
+    history.forEach(item => {
+        const date = new Date(item.start);
+        const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        
+        if (!dailyData[dateKey]) {
+            dailyData[dateKey] = 0;
+        }
+        dailyData[dateKey] += item.duration;
+    });
+    
+    // データを配列に変換してソート
+    const sortedDates = Object.keys(dailyData).sort();
+    const labels = sortedDates.map(date => {
+        const d = new Date(date);
+        return `${d.getMonth() + 1}/${d.getDate()}`;
+    });
+    const data = sortedDates.map(date => dailyData[date] / (1000 * 60 * 60)); // 時間単位に変換
+    
+    // 既存のチャートを破棄
+    if (chartVar === 'studyChart' && studyChart) {
+        studyChart.destroy();
+    } else if (chartVar === 'statsChart' && statsChart) {
+        statsChart.destroy();
+    }
+    
+    // グラフの色を取得
+    const isDark = document.body.classList.contains('dark');
+    const textColor = isDark ? '#e8e8e8' : '#3a3a3a';
+    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+    
+    const config = {
+        type: type === 'area' ? 'line' : type,
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '勉強時間（時間）',
+                data: data,
+                backgroundColor: type === 'area' ? primaryColor + '40' : primaryColor,
+                borderColor: primaryColor,
+                borderWidth: 2,
+                fill: type === 'area',
+                tension: type === 'line' || type === 'area' ? 0.4 : 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        color: gridColor
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: textColor
+                    },
+                    grid: {
+                        color: gridColor
+                    }
+                }
+            }
+        }
+    };
+    
+    if (chartVar === 'studyChart') {
+        studyChart = new Chart(canvas, config);
+    } else {
+        statsChart = new Chart(canvas, config);
+    }
+}
 </script>
 </body>
 </html>
