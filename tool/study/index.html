@@ -3749,26 +3749,38 @@ window.onload = function() {
 
 try {
     const todoInput = document.getElementById('todoInput');
-    if (todoInput) {
+    const addButton = todoInput?.nextElementSibling;
+    
+    if (todoInput && addButton) {
         let composing = false;
-        todoInput.addEventListener('compositionstart', () => composing = true);
-        todoInput.addEventListener('compositionend', () => { composing = false; });
+        
+        todoInput.addEventListener('compositionstart', () => {
+            composing = true;
+        });
+        
+        todoInput.addEventListener('compositionend', () => {
+            composing = false;
+            // compositionend直後は入力が確確定されているのでそのまま追加可能
+        });
+        
+        // Enterキーでの追加
         todoInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !composing && !e.isComposing) {
+            if (e.key === 'Enter' && !composing) {
                 e.preventDefault();
                 addTodo();
             }
         });
-        // スマホでの追加ボタンタップ対応
-        const addButton = todoInput.nextElementSibling;
-        if (addButton) {
-            addButton.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                addTodo();
-            });
-        }
+        
+        // ボタンクリック時の追加（スマホ対応）
+        addButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            addTodo();
+        });
     }
-} catch (e) { console.warn('Failed to attach todo input handler', e); }
+} catch (e) { 
+    console.warn('Failed to attach todo input handler', e); 
+}
 
     (function() {
         const dropdownArrow = document.getElementById('musicDropdownArrow');
@@ -3920,7 +3932,6 @@ function renderGraph(canvasId, chartVar) {
     let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     
-    // 期間フィルタリング
     const now = new Date();
     let startDate = new Date();
     
@@ -3935,7 +3946,6 @@ function renderGraph(canvasId, chartVar) {
         return itemDate >= startDate;
     });
     
-    // 日付ごとにグループ化
     const dailyData = {};
     history.forEach(item => {
         const date = new Date(item.start);
@@ -3947,48 +3957,86 @@ function renderGraph(canvasId, chartVar) {
         dailyData[dateKey] += item.duration;
     });
     
-    // データを配列に変換してソート
     const sortedDates = Object.keys(dailyData).sort();
     const labels = sortedDates.map(date => {
         const d = new Date(date);
         return `${d.getMonth() + 1}/${d.getDate()}`;
     });
-    const data = sortedDates.map(date => dailyData[date] / (1000 * 60 * 60)); // 時間単位に変換
+    const data = sortedDates.map(date => dailyData[date] / (1000 * 60 * 60));
     
     // 既存のチャートを破棄
     if (chartVar === 'studyChart' && studyChart) {
         studyChart.destroy();
+        studyChart = null;
     } else if (chartVar === 'statsChart' && statsChart) {
         statsChart.destroy();
+        statsChart = null;
     }
     
-    // グラフの色を取得
+    // テーマに応じた色設定
     const isDark = document.body.classList.contains('dark');
     const textColor = isDark ? '#e8e8e8' : '#3a3a3a';
-    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+    const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+    const bgColor = isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)';
+    
+    // CSSカスタムプロパティからテーマカラーを取得
+    const root = document.documentElement;
+    const primaryColor = getComputedStyle(root).getPropertyValue('--primary-color').trim();
+    const primaryHover = getComputedStyle(root).getPropertyValue('--primary-hover').trim();
     
     const config = {
         type: type === 'area' ? 'line' : type,
         data: {
-            labels: labels,
+            labels: labels.length === 0 ? ['データなし'] : labels,
             datasets: [{
                 label: '勉強時間（時間）',
-                data: data,
-                backgroundColor: type === 'area' ? primaryColor + '40' : primaryColor,
+                data: data.length === 0 ? [0] : data,
+                backgroundColor: type === 'area' ? primaryColor + '33' : primaryColor,
                 borderColor: primaryColor,
-                borderWidth: 2,
+                borderWidth: type === 'line' || type === 'area' ? 2.5 : 0,
                 fill: type === 'area',
-                tension: type === 'line' || type === 'area' ? 0.4 : 0
+                tension: type === 'line' || type === 'area' ? 0.35 : 0,
+                pointBackgroundColor: primaryColor,
+                pointBorderColor: isDark ? '#3d4454' : '#f0f2f7',
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointHoverBackgroundColor: primaryHover,
+                hoverBackgroundColor: primaryHover
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: true,
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
             plugins: {
                 legend: {
+                    display: true,
                     labels: {
-                        color: textColor
+                        color: textColor,
+                        font: {
+                            size: 13,
+                            weight: '500'
+                        },
+                        padding: 15,
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    backgroundColor: isDark ? 'rgba(45, 49, 66, 0.9)' : 'rgba(248, 249, 251, 0.9)',
+                    titleColor: textColor,
+                    bodyColor: textColor,
+                    borderColor: primaryColor,
+                    borderWidth: 1,
+                    padding: 12,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return '学習時間: ' + context.parsed.y.toFixed(2) + '時間';
+                        }
                     }
                 }
             },
@@ -3996,18 +4044,30 @@ function renderGraph(canvasId, chartVar) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: textColor
+                        color: textColor,
+                        font: {
+                            size: 12
+                        },
+                        callback: function(value) {
+                            return value.toFixed(1) + 'h';
+                        }
                     },
                     grid: {
-                        color: gridColor
-                    }
+                        color: gridColor,
+                        drawBorder: false
+                    },
+                    backgroundColor: bgColor
                 },
                 x: {
                     ticks: {
-                        color: textColor
+                        color: textColor,
+                        font: {
+                            size: 12
+                        }
                     },
                     grid: {
-                        color: gridColor
+                        color: gridColor,
+                        drawBorder: false
                     }
                 }
             }
