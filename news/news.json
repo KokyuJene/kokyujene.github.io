@@ -34,5 +34,14 @@
     "category": "特大お知らせ",
     "description": "一体何が...?",
     "link": "/news/004"
+  },
+
+  {
+    "id": "005",
+    "title": "パクリ多発PART2 | ニュース",
+    "date": "2025.12.20",
+    "category": "緊急",
+    "description": "PART2来ないでほしかった",
+    "link": "/news/005"
   }
 ]
