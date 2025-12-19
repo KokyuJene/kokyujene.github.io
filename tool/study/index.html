@@ -1743,6 +1743,46 @@
     margin-bottom: 15px;
     text-align: left;
 }
+
+.todo-item {
+    display: flex;
+    gap: 12px;
+}
+
+.todo-checkbox {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.todo-text {
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
+    padding-top: 1px;
+}
+
+
+.todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.todo-checkbox {
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.todo-text {
+    line-height: 1.6;
+    padding-top: 3px;
+}
+
+.todo-delete {
+    align-self: flex-start;
+    margin-top: 3px;
+}
+
 </style>
 
 </head>
@@ -1931,7 +1971,7 @@
     <div class="todo-list">
         <div class="todo-input">
             <input type="text" id="todoInput" placeholder="新しいタスクを入力">
-            <button class="primary" onclick="addTodo()">追加</button>
+            <button type="button" class="primary" onclick="addTodo()">追加</button>
         </div>
         
         <div class="todo-options" style="margin-bottom: 20px;">
@@ -3770,13 +3810,18 @@ const addButton = document.querySelector('.todo-input button');
 if (addButton) {
     addButton.addEventListener('click', function(e) {
         e.preventDefault();
-        addTodo();
-    });
-    addButton.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        addTodo();
+        if (todoInput.value.trim()) {
+            addTodo();
+        }
     });
 }
+
+document.getElementById('todoInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addTodo();
+    }
+});
 
     (function() {
         const dropdownArrow = document.getElementById('musicDropdownArrow');
