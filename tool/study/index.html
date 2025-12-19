@@ -2324,18 +2324,26 @@ function customConfirm(message, title = '確認', iconSrc = 'warning.webp') {
             body.classList.add('light');
             themeIcon.src = 'moon.webp';
             themeIcon.alt = 'ダークモードに切り替え';
-            setCookie('mode', 'light');
-        }
+setCookie('mode', 'light');
+    
+    if (getCookie('graph_enabled') === 'true') {
+        setTimeout(() => updateGraphs(), 100);
+    }
+}
     }
 
-    function changeTheme(themeName) {
-        document.body.setAttribute('data-theme', themeName);
-        setCookie('theme', themeName);
-        document.querySelectorAll('.theme-option').forEach(option => {
-            option.classList.remove('selected');
-        });
-        document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
+function changeTheme(themeName) {
+    document.body.setAttribute('data-theme', themeName);
+    setCookie('theme', themeName);
+    document.querySelectorAll('.theme-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
+    
+    if (getCookie('graph_enabled') === 'true') {
+        setTimeout(() => updateGraphs(), 100);
     }
+}
 
     function toggleFeature(feature) {
         const toggle = document.getElementById(`toggle${feature.charAt(0).toUpperCase() + feature.slice(1)}`);
@@ -2721,7 +2729,17 @@ function addTodo() {
     const priority = document.getElementById('todoPriority').value;
     
     let todos = getCookie('todos');
-    todos = todos ? JSON.parse(todos) : [];
+    try {
+        todos = todos ? JSON.parse(todos) : [];
+        if (!Array.isArray(todos)) {
+            todos = [];
+            setCookie('todos', JSON.stringify(todos));
+        }
+    } catch (e) {
+        console.error('Todo data corrupted, resetting:', e);
+        todos = [];
+        setCookie('todos', JSON.stringify(todos));
+    }
     
     const newTodo = {
         text: text,
@@ -3747,39 +3765,17 @@ window.onload = function() {
         }
     })();
 
-try {
-    const todoInput = document.getElementById('todoInput');
-    const addButton = todoInput?.nextElementSibling;
-    
-    if (todoInput && addButton) {
-        let composing = false;
-        
-        todoInput.addEventListener('compositionstart', () => {
-            composing = true;
-        });
-        
-        todoInput.addEventListener('compositionend', () => {
-            composing = false;
-            // compositionend直後は入力が確確定されているのでそのまま追加可能
-        });
-        
-        // Enterキーでの追加
-        todoInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !composing) {
-                e.preventDefault();
-                addTodo();
-            }
-        });
-        
-        // ボタンクリック時の追加（スマホ対応）
-        addButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            addTodo();
-        });
-    }
-} catch (e) { 
-    console.warn('Failed to attach todo input handler', e); 
+const todoInput = document.getElementById('todoInput');
+const addButton = document.querySelector('.todo-input button');
+if (addButton) {
+    addButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        addTodo();
+    });
+    addButton.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        addTodo();
+    });
 }
 
     (function() {
@@ -3922,6 +3918,19 @@ function updateGraphs() {
     }
 }
 
+function getPrimaryColor() {
+    const theme = document.body.getAttribute('data-theme') || 'blue';
+    const colors = {
+        'blue': '#9db4c8',
+        'green': '#a8c9a8',
+        'purple': '#b8a8c9',
+        'orange': '#d9b4a0',
+        'pink': '#d9a8b4',
+        'teal': '#a0c9c9'
+    };
+    return colors[theme] || colors['blue'];
+}
+
 function renderGraph(canvasId, chartVar) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
@@ -3932,6 +3941,7 @@ function renderGraph(canvasId, chartVar) {
     let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     
+    // 期間フィルタリング
     const now = new Date();
     let startDate = new Date();
     
@@ -3946,6 +3956,7 @@ function renderGraph(canvasId, chartVar) {
         return itemDate >= startDate;
     });
     
+    // 日付ごとにグループ化
     const dailyData = {};
     history.forEach(item => {
         const date = new Date(item.start);
@@ -3957,6 +3968,7 @@ function renderGraph(canvasId, chartVar) {
         dailyData[dateKey] += item.duration;
     });
     
+    // データを配列に変換してソート
     const sortedDates = Object.keys(dailyData).sort();
     const labels = sortedDates.map(date => {
         const d = new Date(date);
@@ -3967,76 +3979,37 @@ function renderGraph(canvasId, chartVar) {
     // 既存のチャートを破棄
     if (chartVar === 'studyChart' && studyChart) {
         studyChart.destroy();
-        studyChart = null;
     } else if (chartVar === 'statsChart' && statsChart) {
         statsChart.destroy();
-        statsChart = null;
     }
     
-    // テーマに応じた色設定
+    // グラフの色をテーマから取得
     const isDark = document.body.classList.contains('dark');
     const textColor = isDark ? '#e8e8e8' : '#3a3a3a';
-    const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
-    const bgColor = isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)';
-    
-    // CSSカスタムプロパティからテーマカラーを取得
-    const root = document.documentElement;
-    const primaryColor = getComputedStyle(root).getPropertyValue('--primary-color').trim();
-    const primaryHover = getComputedStyle(root).getPropertyValue('--primary-hover').trim();
-    
+    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    const primaryColor = getPrimaryColor();
+
     const config = {
         type: type === 'area' ? 'line' : type,
         data: {
-            labels: labels.length === 0 ? ['データなし'] : labels,
+            labels: labels,
             datasets: [{
                 label: '勉強時間（時間）',
-                data: data.length === 0 ? [0] : data,
-                backgroundColor: type === 'area' ? primaryColor + '33' : primaryColor,
+                data: data,
+                backgroundColor: type === 'area' ? primaryColor + '40' : primaryColor,
                 borderColor: primaryColor,
-                borderWidth: type === 'line' || type === 'area' ? 2.5 : 0,
+                borderWidth: 2,
                 fill: type === 'area',
-                tension: type === 'line' || type === 'area' ? 0.35 : 0,
-                pointBackgroundColor: primaryColor,
-                pointBorderColor: isDark ? '#3d4454' : '#f0f2f7',
-                pointBorderWidth: 2,
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                pointHoverBackgroundColor: primaryHover,
-                hoverBackgroundColor: primaryHover
+                tension: type === 'line' || type === 'area' ? 0.4 : 0
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: true,
-            interaction: {
-                intersect: false,
-                mode: 'index'
-            },
             plugins: {
                 legend: {
-                    display: true,
                     labels: {
-                        color: textColor,
-                        font: {
-                            size: 13,
-                            weight: '500'
-                        },
-                        padding: 15,
-                        usePointStyle: true
-                    }
-                },
-                tooltip: {
-                    backgroundColor: isDark ? 'rgba(45, 49, 66, 0.9)' : 'rgba(248, 249, 251, 0.9)',
-                    titleColor: textColor,
-                    bodyColor: textColor,
-                    borderColor: primaryColor,
-                    borderWidth: 1,
-                    padding: 12,
-                    displayColors: false,
-                    callbacks: {
-                        label: function(context) {
-                            return '学習時間: ' + context.parsed.y.toFixed(2) + '時間';
-                        }
+                        color: textColor
                     }
                 }
             },
@@ -4044,30 +4017,18 @@ function renderGraph(canvasId, chartVar) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: textColor,
-                        font: {
-                            size: 12
-                        },
-                        callback: function(value) {
-                            return value.toFixed(1) + 'h';
-                        }
+                        color: textColor
                     },
                     grid: {
-                        color: gridColor,
-                        drawBorder: false
-                    },
-                    backgroundColor: bgColor
+                        color: gridColor
+                    }
                 },
                 x: {
                     ticks: {
-                        color: textColor,
-                        font: {
-                            size: 12
-                        }
+                        color: textColor
                     },
                     grid: {
-                        color: gridColor,
-                        drawBorder: false
+                        color: gridColor
                     }
                 }
             }
