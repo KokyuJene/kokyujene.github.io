@@ -2341,14 +2341,41 @@ function customConfirm(message, title = '確認', iconSrc = 'warning.webp') {
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+        if (parts.length === 2) {
+            const val = parts.pop().split(';').shift();
+            try {
+                return decodeURIComponent(val);
+            } catch (e) {
+                console.warn('Cookie decode failed:', e);
+                return val;
+            }
+        }
         return null;
     }
 
     function setCookie(name, value, days = 365) {
         const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+        document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
+    }
+
+    function getData(key) {
+        try {
+            const val = localStorage.getItem(key);
+            if (val !== null) return val;
+        } catch(e) {}
+        return getCookie(key);
+    }
+
+    function saveData(key, value) {
+        try {
+            localStorage.setItem(key, value);
+            // 古いCookieデータを削除して容量を確保・競合を防止
+            document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        } catch (e) {
+            console.error('LocalStorage save failed:', e);
+            setCookie(key, value);
+        }
     }
 
     function toggleTheme() {
@@ -2514,10 +2541,10 @@ function showPage(pageName) {
         if (startCookie) {
             const start = new Date(startCookie);
             const actualStudyTime = isPaused ? pausedTime : (Date.now() - startTime + pausedTime);
-            let history = getCookie('studyHistory');
+            let history = getData('studyHistory');
             history = history ? JSON.parse(history) : [];
             history.unshift({start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName});
-            setCookie('studyHistory', JSON.stringify(history));
+            saveData('studyHistory', JSON.stringify(history));
             document.getElementById('sessionInfo').innerHTML = `開始時刻: ${formatDateTime(start)}<br>終了時刻: ${formatDateTime(endTime)}<br>学習時間: ${formatTime(actualStudyTime)}${groupName ? '<br>グループ: ' + groupName : ''}`;
         }
         // セッション終了時は一時保存データを削除
@@ -2769,17 +2796,17 @@ function addTodo() {
     const repeat = document.getElementById('todoRepeat').value;
     const priority = document.getElementById('todoPriority').value;
     
-    let todos = getCookie('todos');
+    let todos = getData('todos');
     try {
         todos = todos ? JSON.parse(todos) : [];
         if (!Array.isArray(todos)) {
             todos = [];
-            setCookie('todos', JSON.stringify(todos));
+            saveData('todos', JSON.stringify(todos));
         }
     } catch (e) {
         console.error('Todo data corrupted, resetting:', e);
         todos = [];
-        setCookie('todos', JSON.stringify(todos));
+        saveData('todos', JSON.stringify(todos));
     }
     
     const newTodo = {
@@ -2796,7 +2823,7 @@ function addTodo() {
     }
     
     todos.push(newTodo);
-    setCookie('todos', JSON.stringify(todos));
+    saveData('todos', JSON.stringify(todos));
     
     input.value = '';
     document.getElementById('todoRepeat').value = 'none';
@@ -2806,7 +2833,7 @@ function addTodo() {
 }
 
 function loadTodos() {
-    let todos = getCookie('todos');
+    let todos = getData('todos');
     todos = todos ? JSON.parse(todos) : [];
     
     const now = new Date();
@@ -2833,7 +2860,7 @@ function loadTodos() {
         }
     });
     
-    setCookie('todos', JSON.stringify(todos));
+    saveData('todos', JSON.stringify(todos));
     
     let filteredTodos = todos;
     if (currentTodoFilter === 'active') {
@@ -2911,7 +2938,7 @@ function filterTodos(filter) {
 }
 
 function toggleTodo(index) {
-    let todos = getCookie('todos');
+    let todos = getData('todos');
     todos = todos ? JSON.parse(todos) : [];
     todos[index].completed = !todos[index].completed;
     
@@ -2920,17 +2947,17 @@ function toggleTodo(index) {
         todos[index].lastCompleted = new Date().toISOString();
     }
     
-    setCookie('todos', JSON.stringify(todos));
+    saveData('todos', JSON.stringify(todos));
     loadTodos();
 }
 
 async function deleteTodo(index) {
     const confirmed = await customConfirm('このタスクを削除しますか?', '削除確認', 'delete.webp');
     if (confirmed) {
-        let todos = getCookie('todos');
+        let todos = getData('todos');
         todos = todos ? JSON.parse(todos) : [];
         todos.splice(index, 1);
-        setCookie('todos', JSON.stringify(todos));
+        saveData('todos', JSON.stringify(todos));
         loadTodos();
     }
 }
@@ -2941,7 +2968,7 @@ function loadHistory() {
     const groupFilter = document.getElementById('groupFilter');
     const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
     const selectedGroup = groupFilter ? groupFilter.value : '';
-    let history = getCookie('studyHistory');
+    let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
     allHistoryItems = [...history];
     if (selectedGroup) history = history.filter(item => item.group === selectedGroup);
@@ -3036,11 +3063,11 @@ async function deleteSelected() {
     if (selectedItems.size === 0) return;
     const confirmed = await customConfirm(`選択した${selectedItems.size}件の記録を削除しますか?`, '削除確認', 'delete.webp');
     if (confirmed) {
-        let history = getCookie('studyHistory');
+        let history = getData('studyHistory');
         history = history ? JSON.parse(history) : [];
         const indicesToDelete = Array.from(selectedItems).sort((a, b) => b - a);
         indicesToDelete.forEach(index => { history.splice(index, 1); });
-        setCookie('studyHistory', JSON.stringify(history));
+        saveData('studyHistory', JSON.stringify(history));
         selectedItems.clear();
         updateGroupFilter();
         loadHistory();
@@ -3060,12 +3087,12 @@ function moveSelectedToGroup() {
     const sel = document.getElementById('moveGroupSelect');
     const newGroup = sel ? sel.value.trim() : '';
     if (selectedItems.size === 0) return;
-    let history = getCookie('studyHistory');
+    let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
     Array.from(selectedItems).forEach(index => {
         if (history[index]) history[index].group = newGroup;
     });
-    setCookie('studyHistory', JSON.stringify(history));
+    saveData('studyHistory', JSON.stringify(history));
     selectedItems.clear();
     if (sel) sel.selectedIndex = 0;
     updateGroupFilter();
@@ -3073,7 +3100,7 @@ function moveSelectedToGroup() {
 }
 
 function updateGroupFilter() {
-    let history = getCookie('studyHistory');
+    let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
     const groups = [...new Set(history.map(item => item.group).filter(g => g))];
     const groupFilter = document.getElementById('groupFilter');
@@ -3094,7 +3121,7 @@ function updateGroupFilter() {
 }
 
 function calculateStreak() {
-    let history = getCookie('studyHistory');
+    let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
     if (history.length === 0) return 0;
     const dates = [...new Set(history.map(item => {
@@ -3114,7 +3141,7 @@ function calculateStreak() {
 }
 
 function loadStats() {
-    let history = getCookie('studyHistory');
+    let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
     const totalTime = history.reduce((sum, item) => sum + item.duration, 0);
     const streak = calculateStreak();
@@ -3138,7 +3165,7 @@ function loadStats() {
 async function clearHistory() {
     const confirmed = await customConfirm('すべての学習記録を削除しますか?', '全削除確認', 'warning.webp');
     if (confirmed) {
-        setCookie('studyHistory', JSON.stringify([]));
+        saveData('studyHistory', JSON.stringify([]));
         selectedItems.clear();
         loadHistory();
     }
@@ -3189,8 +3216,8 @@ function importData(event) {
             
             if (confirmed) {
                 // データを復元
-                if (data.studyHistory) setCookie('studyHistory', JSON.stringify(data.studyHistory));
-                if (data.todos) setCookie('todos', JSON.stringify(data.todos));
+                if (data.studyHistory) saveData('studyHistory', JSON.stringify(data.studyHistory));
+                if (data.todos) saveData('todos', JSON.stringify(data.todos));
                 if (data.theme) {
                     setCookie('theme', data.theme);
                     changeTheme(data.theme);
@@ -3347,9 +3374,17 @@ const tutorialSteps = [
         page: 'settings'
     },
     {
+        title: 'グラフ表示',
+        message: '勉強時間のグラフの種類や表示期間、表示場所をカスタマイズできます。',
+        target: '.settings-section:nth-child(3)',
+        position: 'top',
+        action: 'view',
+        page: 'settings'
+    },
+    {
         title: 'データ管理',
         message: 'データのエクスポート/インポート機能です。バックアップを取ったり、他のデバイスにデータを移行できます。',
-        target: '.settings-section:nth-child(3)',
+        target: '.settings-section:nth-child(4)',
         position: 'top',
         action: 'view',
         page: 'settings'
