@@ -9,21 +9,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="description" content="勉強とともにタイマーをスタートし、作業時間を記録しましょう。">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js">const todoInput = document.getElementById("todoInput");todoInput.isComposing = false;
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;700&display=swap" rel="stylesheet">
-
+</script>
     <style>
-
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Zen Kaku Gothic Antique', system-ui, sans-serif;
-            
         }
 
         body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
             transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
             display: flex;
@@ -1788,6 +1783,7 @@
     align-self: flex-start;
     margin-top: 3px;
 }
+
 </style>
 
 </head>
@@ -2175,6 +2171,7 @@
             <span class="about-text">このサイトについて</span>
         </button>
     </div>
+</div>
 
 <div class="about-overlay" id="aboutOverlay" aria-hidden="true">
     <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
@@ -2344,41 +2341,14 @@ function customConfirm(message, title = '確認', iconSrc = 'warning.webp') {
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) {
-            const val = parts.pop().split(';').shift();
-            try {
-                return decodeURIComponent(val);
-            } catch (e) {
-                console.warn('Cookie decode failed:', e);
-                return val;
-            }
-        }
+        if (parts.length === 2) return parts.pop().split(';').shift();
         return null;
     }
 
     function setCookie(name, value, days = 365) {
         const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
-    }
-
-    function getData(key) {
-        try {
-            const val = localStorage.getItem(key);
-            if (val !== null) return val;
-        } catch(e) {}
-        return getCookie(key);
-    }
-
-    function saveData(key, value) {
-        try {
-            localStorage.setItem(key, value);
-            // 古いCookieデータを削除して容量を確保・競合を防止
-            document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
-        } catch (e) {
-            console.error('LocalStorage save failed:', e);
-            setCookie(key, value);
-        }
+        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
     }
 
     function toggleTheme() {
@@ -2458,7 +2428,7 @@ function showPage(pageName) {
         const menuButtons = Array.from(document.querySelectorAll('.menu button'));
         const activeBtn = menuButtons.find(btn => {
             const btnText = btn.textContent;
-            return (pageName === 'timer' && btnText === 'タイマー') || (pageName === 'stats' && btnText === '統計') || (pageName === 'list' && btnText === 'リスト') || (pageName === 'music' && btnText === '音楽') || (pageName === 'todo' && btnText === 'ToDo') || (pageName === 'settings' && false); // Settings has no menu button usually, or handled by icon
+            return (pageName === 'timer' && btnText === 'タイマー') || (pageName === 'stats' && btnText === '統計') || (pageName === 'list' && btnText === 'リスト') || (pageName === 'music' && btnText === '音楽') || (pageName === 'todo' && btnText === 'ToDo');
         });
         if (activeBtn) activeBtn.classList.add('active');
         if (pageName === 'stats') { loadStats(); updateGraphs(); }
@@ -2544,10 +2514,10 @@ function showPage(pageName) {
         if (startCookie) {
             const start = new Date(startCookie);
             const actualStudyTime = isPaused ? pausedTime : (Date.now() - startTime + pausedTime);
-            let history = getData('studyHistory');
+            let history = getCookie('studyHistory');
             history = history ? JSON.parse(history) : [];
             history.unshift({start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName});
-            saveData('studyHistory', JSON.stringify(history));
+            setCookie('studyHistory', JSON.stringify(history));
             document.getElementById('sessionInfo').innerHTML = `開始時刻: ${formatDateTime(start)}<br>終了時刻: ${formatDateTime(endTime)}<br>学習時間: ${formatTime(actualStudyTime)}${groupName ? '<br>グループ: ' + groupName : ''}`;
         }
         // セッション終了時は一時保存データを削除
@@ -2799,17 +2769,17 @@ function addTodo() {
     const repeat = document.getElementById('todoRepeat').value;
     const priority = document.getElementById('todoPriority').value;
     
-    let todos = getData('todos');
+    let todos = getCookie('todos');
     try {
         todos = todos ? JSON.parse(todos) : [];
         if (!Array.isArray(todos)) {
             todos = [];
-            saveData('todos', JSON.stringify(todos));
+            setCookie('todos', JSON.stringify(todos));
         }
     } catch (e) {
         console.error('Todo data corrupted, resetting:', e);
         todos = [];
-        saveData('todos', JSON.stringify(todos));
+        setCookie('todos', JSON.stringify(todos));
     }
     
     const newTodo = {
@@ -2826,7 +2796,7 @@ function addTodo() {
     }
     
     todos.push(newTodo);
-    saveData('todos', JSON.stringify(todos));
+    setCookie('todos', JSON.stringify(todos));
     
     input.value = '';
     document.getElementById('todoRepeat').value = 'none';
@@ -2836,7 +2806,7 @@ function addTodo() {
 }
 
 function loadTodos() {
-    let todos = getData('todos');
+    let todos = getCookie('todos');
     todos = todos ? JSON.parse(todos) : [];
     
     const now = new Date();
@@ -2863,7 +2833,7 @@ function loadTodos() {
         }
     });
     
-    saveData('todos', JSON.stringify(todos));
+    setCookie('todos', JSON.stringify(todos));
     
     let filteredTodos = todos;
     if (currentTodoFilter === 'active') {
@@ -2941,7 +2911,7 @@ function filterTodos(filter) {
 }
 
 function toggleTodo(index) {
-    let todos = getData('todos');
+    let todos = getCookie('todos');
     todos = todos ? JSON.parse(todos) : [];
     todos[index].completed = !todos[index].completed;
     
@@ -2950,17 +2920,17 @@ function toggleTodo(index) {
         todos[index].lastCompleted = new Date().toISOString();
     }
     
-    saveData('todos', JSON.stringify(todos));
+    setCookie('todos', JSON.stringify(todos));
     loadTodos();
 }
 
 async function deleteTodo(index) {
     const confirmed = await customConfirm('このタスクを削除しますか?', '削除確認', 'delete.webp');
     if (confirmed) {
-        let todos = getData('todos');
+        let todos = getCookie('todos');
         todos = todos ? JSON.parse(todos) : [];
         todos.splice(index, 1);
-        saveData('todos', JSON.stringify(todos));
+        setCookie('todos', JSON.stringify(todos));
         loadTodos();
     }
 }
@@ -2971,7 +2941,7 @@ function loadHistory() {
     const groupFilter = document.getElementById('groupFilter');
     const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
     const selectedGroup = groupFilter ? groupFilter.value : '';
-    let history = getData('studyHistory');
+    let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     allHistoryItems = [...history];
     if (selectedGroup) history = history.filter(item => item.group === selectedGroup);
@@ -3066,11 +3036,11 @@ async function deleteSelected() {
     if (selectedItems.size === 0) return;
     const confirmed = await customConfirm(`選択した${selectedItems.size}件の記録を削除しますか?`, '削除確認', 'delete.webp');
     if (confirmed) {
-        let history = getData('studyHistory');
+        let history = getCookie('studyHistory');
         history = history ? JSON.parse(history) : [];
         const indicesToDelete = Array.from(selectedItems).sort((a, b) => b - a);
         indicesToDelete.forEach(index => { history.splice(index, 1); });
-        saveData('studyHistory', JSON.stringify(history));
+        setCookie('studyHistory', JSON.stringify(history));
         selectedItems.clear();
         updateGroupFilter();
         loadHistory();
@@ -3090,12 +3060,12 @@ function moveSelectedToGroup() {
     const sel = document.getElementById('moveGroupSelect');
     const newGroup = sel ? sel.value.trim() : '';
     if (selectedItems.size === 0) return;
-    let history = getData('studyHistory');
+    let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     Array.from(selectedItems).forEach(index => {
         if (history[index]) history[index].group = newGroup;
     });
-    saveData('studyHistory', JSON.stringify(history));
+    setCookie('studyHistory', JSON.stringify(history));
     selectedItems.clear();
     if (sel) sel.selectedIndex = 0;
     updateGroupFilter();
@@ -3103,7 +3073,7 @@ function moveSelectedToGroup() {
 }
 
 function updateGroupFilter() {
-    let history = getData('studyHistory');
+    let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     const groups = [...new Set(history.map(item => item.group).filter(g => g))];
     const groupFilter = document.getElementById('groupFilter');
@@ -3124,7 +3094,7 @@ function updateGroupFilter() {
 }
 
 function calculateStreak() {
-    let history = getData('studyHistory');
+    let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     if (history.length === 0) return 0;
     const dates = [...new Set(history.map(item => {
@@ -3144,7 +3114,7 @@ function calculateStreak() {
 }
 
 function loadStats() {
-    let history = getData('studyHistory');
+    let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     const totalTime = history.reduce((sum, item) => sum + item.duration, 0);
     const streak = calculateStreak();
@@ -3168,7 +3138,7 @@ function loadStats() {
 async function clearHistory() {
     const confirmed = await customConfirm('すべての学習記録を削除しますか?', '全削除確認', 'warning.webp');
     if (confirmed) {
-        saveData('studyHistory', JSON.stringify([]));
+        setCookie('studyHistory', JSON.stringify([]));
         selectedItems.clear();
         loadHistory();
     }
@@ -3219,8 +3189,8 @@ function importData(event) {
             
             if (confirmed) {
                 // データを復元
-                if (data.studyHistory) saveData('studyHistory', JSON.stringify(data.studyHistory));
-                if (data.todos) saveData('todos', JSON.stringify(data.todos));
+                if (data.studyHistory) setCookie('studyHistory', JSON.stringify(data.studyHistory));
+                if (data.todos) setCookie('todos', JSON.stringify(data.todos));
                 if (data.theme) {
                     setCookie('theme', data.theme);
                     changeTheme(data.theme);
@@ -3377,17 +3347,9 @@ const tutorialSteps = [
         page: 'settings'
     },
     {
-        title: 'グラフ表示',
-        message: '勉強時間のグラフの種類や表示期間、表示場所をカスタマイズできます。',
-        target: '.settings-section:nth-child(3)',
-        position: 'top',
-        action: 'view',
-        page: 'settings'
-    },
-    {
         title: 'データ管理',
         message: 'データのエクスポート/インポート機能です。バックアップを取ったり、他のデバイスにデータを移行できます。',
-        target: '.settings-section:nth-child(4)',
+        target: '.settings-section:nth-child(3)',
         position: 'top',
         action: 'view',
         page: 'settings'
@@ -3923,24 +3885,13 @@ if (graphEnabled) {
     document.getElementById('toggleGraph').classList.add('active');
     document.getElementById('graphSettings').style.display = 'block';
     
-    const graphType = getCookie('graph_type') || 'bar';
-    const graphPeriod = getCookie('graph_period') || '30';
-    const graphLocation = getCookie('graph_location') || 'list';
+    const graphType = getCookie('graph_type');
+    const graphPeriod = getCookie('graph_period');
+    const graphLocation = getCookie('graph_location');
     
-    document.getElementById('graphType').value = graphType;
-    document.getElementById('graphPeriod').value = graphPeriod;
-    document.getElementById('graphLocation').value = graphLocation;
-    
-    setTimeout(() => updateGraphs(), 200);
-} else {
-    // グラフが無効の場合はデフォルト設定を適用
-    setCookie('graph_enabled', 'true');
-    setCookie('graph_type', 'bar');
-    setCookie('graph_period', '30');
-    setCookie('graph_location', 'list');
-    document.getElementById('toggleGraph').classList.add('active');
-    document.getElementById('graphSettings').style.display = 'block';
-    setTimeout(() => updateGraphs(), 200);
+    if (graphType) document.getElementById('graphType').value = graphType;
+    if (graphPeriod) document.getElementById('graphPeriod').value = graphPeriod;
+    if (graphLocation) document.getElementById('graphLocation').value = graphLocation;
 }
 };
 let studyChart = null;
@@ -3989,11 +3940,6 @@ function hideGraphs() {
     }
 }
 
-function showGraphs() {
-    document.getElementById('studyGraphContainer').style.display = 'block';
-    document.getElementById('statsGraphContainer').style.display = 'block';
-}
-
 function updateGraphs() {
     const enabled = getCookie('graph_enabled') === 'true';
     if (!enabled) {
@@ -4004,21 +3950,15 @@ function updateGraphs() {
     const location = getCookie('graph_location') || 'list';
     
     if (location === 'list' || location === 'both') {
-        const container = document.getElementById('studyGraphContainer');
-        if (container) {
-            container.style.display = 'block';
-            setTimeout(() => renderGraph('studyChart', 'studyChart'), 50);
-        }
+        document.getElementById('studyGraphContainer').style.display = 'block';
+        renderGraph('studyChart', 'studyChart');
     } else {
         document.getElementById('studyGraphContainer').style.display = 'none';
     }
     
     if (location === 'stats' || location === 'both') {
-        const container = document.getElementById('statsGraphContainer');
-        if (container) {
-            container.style.display = 'block';
-            setTimeout(() => renderGraph('statsChart', 'statsChart'), 50);
-        }
+        document.getElementById('statsGraphContainer').style.display = 'block';
+        renderGraph('statsChart', 'statsChart');
     } else {
         document.getElementById('statsGraphContainer').style.display = 'none';
     }
@@ -4044,14 +3984,10 @@ function renderGraph(canvasId, chartVar) {
     const type = getCookie('graph_type') || 'bar';
     const period = getCookie('graph_period') || '30';
     
-    let history = getData('studyHistory');
+    let history = getCookie('studyHistory');
     history = history ? JSON.parse(history) : [];
     
-    if (history.length === 0) {
-        console.log('No history data for graph');
-        return;
-    }
-    
+    // 期間フィルタリング
     const now = new Date();
     let startDate = new Date();
     
@@ -4066,11 +4002,7 @@ function renderGraph(canvasId, chartVar) {
         return itemDate >= startDate;
     });
     
-    if (history.length === 0) {
-        console.log('No history data after date filter');
-        return;
-    }
-    
+    // 日付ごとにグループ化
     const dailyData = {};
     history.forEach(item => {
         const date = new Date(item.start);
@@ -4082,6 +4014,7 @@ function renderGraph(canvasId, chartVar) {
         dailyData[dateKey] += item.duration;
     });
     
+    // データを配列に変換してソート
     const sortedDates = Object.keys(dailyData).sort();
     const labels = sortedDates.map(date => {
         const d = new Date(date);
@@ -4089,19 +4022,19 @@ function renderGraph(canvasId, chartVar) {
     });
     const data = sortedDates.map(date => dailyData[date] / (1000 * 60 * 60));
     
+    // 既存のチャートを破棄
     if (chartVar === 'studyChart' && studyChart) {
         studyChart.destroy();
-        studyChart = null;
     } else if (chartVar === 'statsChart' && statsChart) {
         statsChart.destroy();
-        statsChart = null;
     }
     
+    // グラフの色をテーマから取得
     const isDark = document.body.classList.contains('dark');
     const textColor = isDark ? '#e8e8e8' : '#3a3a3a';
     const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
     const primaryColor = getPrimaryColor();
-    
+
     const config = {
         type: type === 'area' ? 'line' : type,
         data: {
@@ -4148,11 +4081,10 @@ function renderGraph(canvasId, chartVar) {
         }
     };
     
-    const ctx = canvas.getContext('2d');
     if (chartVar === 'studyChart') {
-        studyChart = new Chart(ctx, config);
+        studyChart = new Chart(canvas, config);
     } else {
-        statsChart = new Chart(ctx, config);
+        statsChart = new Chart(canvas, config);
     }
 }
 
