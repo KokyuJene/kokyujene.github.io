@@ -941,6 +941,7 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
         .todo-delete:hover {
@@ -1816,6 +1817,44 @@
     align-self: flex-start;
     margin-top: 3px;
 }
+
+/* ドラッグハンドル画像 */
+.drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  opacity: 0.8;
+  margin-right: 8px;
+}
+.drag-handle:active { cursor: grabbing; }
+
+/* ドラッグ中のスタイル */
+.playlist-item.dragging {
+  opacity: 0.6;
+  border: 2px dashed #999;
+}
+
+.playlist-item.drag-over {
+  border: 2px solid #2196F3;
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+/* 一貫した削除ボタン */
+.delete-btn, .todo-delete {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  background-color: #d66;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.delete-btn:hover, .todo-delete:hover { 
+  background-color: #c55; 
+}
 </style>
 
 </head>
@@ -1831,6 +1870,17 @@
         <div class="custom-confirm-buttons">
             <button class="custom-confirm-cancel" id="confirmCancel">キャンセル</button>
             <button class="custom-confirm-ok" id="confirmOk">OK</button>
+        </div>
+    </div>
+</div>
+
+<div class="custom-confirm-overlay" id="renameOverlay">
+    <div class="custom-confirm-dialog">
+        <div class="custom-confirm-title" id="renameTitle">曲名を変更</div>
+        <input type="text" id="renameInput" placeholder="曲名を入力" style="width:100%; padding:12px 15px; border:none; border-radius:8px; font-size:0.95rem; font-family:inherit; margin-bottom:20px;">
+        <div class="custom-confirm-buttons">
+            <button class="custom-confirm-cancel" id="renameCancelBtn">キャンセル</button>
+            <button class="custom-confirm-ok" id="renameOkBtn">保存</button>
         </div>
     </div>
 </div>
@@ -2402,7 +2452,9 @@ function customConfirm(message, title = '確認', iconSrc = 'warning.webp') {
         try {
             localStorage.setItem(key, value);
             // 古いCookieデータを削除して容量を確保・競合を防止
+            // 複数の path パターンで削除を試みる
             document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+            document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/tool/study/`;
         } catch (e) {
             console.error('LocalStorage save failed:', e);
             setCookie(key, value);
@@ -2417,32 +2469,32 @@ function customConfirm(message, title = '確認', iconSrc = 'warning.webp') {
             body.classList.add('dark');
             themeIcon.src = 'sun.webp';
             themeIcon.alt = 'ライトモードに切り替え';
-            setCookie('mode', 'dark');
+            saveData('mode', 'dark');
         } else {
             body.classList.remove('dark');
             body.classList.add('light');
             themeIcon.src = 'moon.webp';
             themeIcon.alt = 'ダークモードに切り替え';
-setCookie('mode', 'light');
-    
-    if (getCookie('graph_enabled') === 'true') {
-        setTimeout(() => updateGraphs(), 100);
-    }
-}
+            saveData('mode', 'light');
+        }
+        
+        if (getData('graph_enabled') === 'true') {
+            setTimeout(() => updateGraphs(), 100);
+        }
     }
 
-function changeTheme(themeName) {
-    document.body.setAttribute('data-theme', themeName);
-    setCookie('theme', themeName);
-    document.querySelectorAll('.theme-option').forEach(option => {
-        option.classList.remove('selected');
-    });
-document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
-    
-    if (getCookie('graph_enabled') === 'true') {
-        setTimeout(() => updateGraphs(), 100);
+    function changeTheme(themeName) {
+        document.body.setAttribute('data-theme', themeName);
+        saveData('theme', themeName);
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
+        
+        if (getData('graph_enabled') === 'true') {
+            setTimeout(() => updateGraphs(), 100);
+        }
     }
-}
 
     function toggleFeature(feature) {
         const toggle = document.getElementById(`toggle${feature.charAt(0).toUpperCase() + feature.slice(1)}`);
@@ -2450,11 +2502,11 @@ document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
         if (isActive) {
             toggle.classList.remove('active');
             removeMenuButton(feature);
-            setCookie(`feature_${feature}`, 'false');
+            saveData(`feature_${feature}`, 'false');
         } else {
             toggle.classList.add('active');
             addMenuButton(feature);
-            setCookie(`feature_${feature}`, 'true');
+            saveData(`feature_${feature}`, 'true');
         }
     }
 
@@ -2531,9 +2583,9 @@ function showPage(pageName) {
         pausedTime = 0;
         isPaused = false;
         const startTimeStr = new Date().toISOString();
-        setCookie('studyStartTime', startTimeStr);
-        setCookie('studyPaused', 'false');
-        setCookie('studyPausedAccum', '0');
+        saveData('studyStartTime', startTimeStr);
+        saveData('studyPaused', 'false');
+        saveData('studyPausedAccum', '0');
         document.getElementById('startBtn').classList.add('hidden');
         document.getElementById('pauseBtn').classList.remove('hidden');
         document.getElementById('endBtn').classList.remove('hidden');
@@ -2546,7 +2598,7 @@ function showPage(pageName) {
             // 再開
             startTime = Date.now();
             isPaused = false;
-            setCookie('studyPaused', 'false');
+            saveData('studyPaused', 'false');
             document.getElementById('pauseBtn').textContent = '一時停止';
             // 再開時にはタイマー更新を再スタート
             if (timerInterval) clearInterval(timerInterval);
@@ -2556,8 +2608,8 @@ function showPage(pageName) {
             // 一時停止
             pausedTime += Date.now() - startTime;
             isPaused = true;
-            setCookie('studyPaused', 'true');
-            setCookie('studyPausedAccum', String(pausedTime));
+            saveData('studyPaused', 'true');
+            saveData('studyPausedAccum', String(pausedTime));
             document.getElementById('pauseBtn').textContent = '再開';
         }
     }
@@ -2566,7 +2618,7 @@ function showPage(pageName) {
         if (timerInterval) clearInterval(timerInterval);
         document.title = '勉強時間管理';
         const endTime = new Date();
-        const startCookie = getCookie('studyStartTime');
+        const startCookie = getData('studyStartTime');
         const groupInput = document.getElementById('groupInput');
         const groupName = groupInput.value.trim() || '';
         if (startCookie) {
@@ -2625,8 +2677,10 @@ function showPage(pageName) {
     }
 function savePlaylist() {
 const playlistData = musicFiles.map(m => ({title: m.title, id: m.id}));
-setCookie('musicPlaylist', JSON.stringify(playlistData));
+saveData('musicPlaylist', JSON.stringify(playlistData));
 }
+
+// 新しいプレイリスト描画（handle と data-index を付与）
 function loadPlaylist() {
     const playlistDiv = document.getElementById('playlist');
     if (musicFiles.length === 0) {
@@ -2634,17 +2688,158 @@ function loadPlaylist() {
         return;
     }
     playlistDiv.innerHTML = musicFiles.map((item, index) => `
-        <div class="playlist-item ${currentMusicIndex === index ? 'playing' : ''}" onclick="playMusic(${index})">
-            <div class="playlist-item-info">
-                <div class="playlist-item-title">${item.title}</div>
+        <div class="playlist-item" data-index="${index}">
+            <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                <img src="drag_handle.webp" class="drag-handle" data-index="${index}" aria-label="並べ替えハンドル" style="width: 24px; height: 24px; cursor: grab; touch-action: none;" alt="">
+                <div class="playlist-item-info" style="flex:1; min-width:0;">
+                    <div class="playlist-item-title" style="display:flex;align-items:center;gap:8px;">
+                        <span class="title-text">${escapeHtml(item.title)}</span>
+                    </div>
+                </div>
             </div>
             <div class="playlist-item-buttons">
-                <button class="secondary" onclick="event.stopPropagation(); renameMusic(${index})">名前変更</button>
-                <button class="secondary" onclick="event.stopPropagation(); deleteMusic(${index})">削除</button>
+                <button class="secondary" onclick="event.stopPropagation(); startRename(${index})">名前変更</button>
+                <button class="delete-btn" onclick="event.stopPropagation(); deleteMusic(${index})">削除</button>
             </div>
         </div>
     `).join('');
+    attachPlaylistHandlers();
 }
+
+// エスケープ用（簡易）
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
+}
+
+// ドラッグ & 長押しで並べ替えモード
+let _dragSrcIndex = null;
+function attachPlaylistHandlers() {
+    const playlist = document.getElementById('playlist');
+    
+    // 各プレイリストアイテムにドラッグを有効化
+    playlist.querySelectorAll('.playlist-item').forEach(item => {
+        const idx = parseInt(item.getAttribute('data-index'), 10);
+        item.setAttribute('draggable', 'true');
+        
+        // dragstart: ドラッグ開始
+        item.addEventListener('dragstart', (e) => {
+            _dragSrcIndex = idx;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', String(idx));
+            item.classList.add('dragging');
+        });
+        
+        // dragover: ドラッグ中は常にデフォルト動作を抑止
+        item.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            item.classList.add('drag-over');
+        });
+        
+        // dragleave: ドラッグ対象外になった時
+        item.addEventListener('dragleave', () => {
+            item.classList.remove('drag-over');
+        });
+        
+        // drop: ドロップ時に並べ替え実行
+        item.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            item.classList.remove('drag-over');
+            
+            const targetIndex = parseInt(item.getAttribute('data-index'), 10);
+            const src = _dragSrcIndex !== null ? _dragSrcIndex : parseInt(e.dataTransfer.getData('text/plain') || -1, 10);
+            
+            if (!isNaN(src) && src >= 0 && src !== targetIndex) {
+                reorderMusic(src, targetIndex);
+            }
+            
+            _dragSrcIndex = null;
+        });
+        
+        // dragend: ドラッグ終了
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            item.classList.remove('drag-over');
+            _dragSrcIndex = null;
+        });
+        
+        // クリックで再生（ハンドル以外の場所をクリック時）
+        item.addEventListener('click', (e) => {
+            if (e.target.classList.contains('drag-handle') || e.target.closest('.drag-handle')) {
+                return; // ハンドルクリックは無視
+            }
+            playMusic(idx);
+        });
+    });
+}
+
+// 実際の並べ替え処理
+function reorderMusic(srcIndex, targetIndex) {
+    if (srcIndex === targetIndex) return;
+    const item = musicFiles.splice(srcIndex,1)[0];
+    musicFiles.splice(targetIndex,0,item);
+    savePlaylist();
+    loadPlaylist();
+}
+
+// 独自の曲名編集（ポップアップ方式）
+let _renamingIndex = null;
+
+function startRename(index) {
+    _renamingIndex = index;
+    const currentTitle = musicFiles[index].title;
+    const overlay = document.getElementById('renameOverlay');
+    const input = document.getElementById('renameInput');
+    
+    input.value = currentTitle;
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden', 'false');
+    
+    setTimeout(() => {
+        input.focus();
+        input.select();
+    }, 100);
+}
+
+function commitRename() {
+    if (_renamingIndex === null) return;
+    const input = document.getElementById('renameInput');
+    const newName = input.value.trim();
+    
+    if (newName && newName !== musicFiles[_renamingIndex].title) {
+        musicFiles[_renamingIndex].title = newName;
+        savePlaylist();
+    }
+    
+    cancelRename();
+}
+
+function cancelRename() {
+    const overlay = document.getElementById('renameOverlay');
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+    _renamingIndex = null;
+    loadPlaylist();
+}
+
+// rename ポップアップのイベントリスナー
+document.getElementById('renameOkBtn')?.addEventListener('click', commitRename);
+document.getElementById('renameCancelBtn')?.addEventListener('click', cancelRename);
+document.getElementById('renameOverlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) cancelRename();
+});
+
+// renameInputでEnterキー対応
+document.getElementById('renameInput')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        commitRename();
+    } else if (e.key === 'Escape') {
+        e.preventDefault();
+        cancelRename();
+    }
+});
 
 function playMusic(index) {
     if (musicFiles[index]) {
@@ -2722,12 +2917,7 @@ function toggleShuffle() {
 }
 
 async function renameMusic(index) {
-    const newName = prompt('新しい名前を入力してください', musicFiles[index].title);
-    if (newName && newName.trim()) {
-        musicFiles[index].title = newName.trim();
-        savePlaylist();
-        loadPlaylist();
-    }
+    startRename(index);
 }
 
 async function deleteMusic(index) {
@@ -3206,12 +3396,12 @@ function exportData() {
     const data = {
         version: 1,
         exportedAt: new Date().toISOString(),
-        studyHistory: JSON.parse(getCookie('studyHistory') || '[]'),
-        todos: JSON.parse(getCookie('todos') || '[]'),
-        theme: getCookie('theme') || 'blue',
-        mode: getCookie('mode') || 'light',
-        feature_music: getCookie('feature_music') || 'false',
-        feature_todo: getCookie('feature_todo') || 'false',
+        studyHistory: JSON.parse(getData('studyHistory') || '[]'),
+        todos: JSON.parse(getData('todos') || '[]'),
+        theme: getData('theme') || 'blue',
+        mode: getData('mode') || 'light',
+        feature_music: getData('feature_music') || 'false',
+        feature_todo: getData('feature_todo') || 'false',
     };
     
     const json = JSON.stringify(data, null, 2);
@@ -3250,11 +3440,11 @@ function importData(event) {
                 if (data.studyHistory) saveData('studyHistory', JSON.stringify(data.studyHistory));
                 if (data.todos) saveData('todos', JSON.stringify(data.todos));
                 if (data.theme) {
-                    setCookie('theme', data.theme);
+                    saveData('theme', data.theme);
                     changeTheme(data.theme);
                 }
                 if (data.mode) {
-                    setCookie('mode', data.mode);
+                    saveData('mode', data.mode);
                     if (data.mode === 'dark') {
                         document.body.classList.remove('light');
                         document.body.classList.add('dark');
@@ -3268,7 +3458,7 @@ function importData(event) {
                 
                 // 表示設定を復元
                 if (data.feature_music !== undefined) {
-                    setCookie('feature_music', data.feature_music);
+                    saveData('feature_music', data.feature_music);
                     const toggle = document.getElementById('toggleMusic');
                     if (data.feature_music === 'true') {
                         toggle.classList.add('active');
@@ -3279,7 +3469,7 @@ function importData(event) {
                     }
                 }
                 if (data.feature_todo !== undefined) {
-                    setCookie('feature_todo', data.feature_todo);
+                    saveData('feature_todo', data.feature_todo);
                     const toggle = document.getElementById('toggleTodo');
                     if (data.feature_todo === 'true') {
                         toggle.classList.add('active');
@@ -3731,8 +3921,8 @@ document.getElementById('tutorialOverlay').addEventListener('click', skipTutoria
 
 window.onload = function() {
 
-    const mode = getCookie('mode');
-    const theme = getCookie('theme');
+    const mode = getData('mode');
+    const theme = getData('theme');
     const themeIcon = document.getElementById('themeIcon');
     if (mode === 'dark') {
         document.body.classList.remove('light');
@@ -3745,8 +3935,8 @@ window.onload = function() {
         document.querySelectorAll('.theme-option').forEach(option => { option.classList.remove('selected'); });
         document.querySelector(`[data-theme="${theme}"]`)?.classList.add('selected');
     }
-    const musicEnabled = getCookie('feature_music') === 'true';
-    const todoEnabled = getCookie('feature_todo') === 'true';
+    const musicEnabled = getData('feature_music') === 'true';
+    const todoEnabled = getData('feature_todo') === 'true';
     if (musicEnabled) {
         document.getElementById('toggleMusic').classList.add('active');
         addMenuButton('music');
@@ -3756,7 +3946,7 @@ window.onload = function() {
         addMenuButton('todo');
     }
     
-    let history = getCookie('studyHistory');
+    let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
     if (history.length > 0) {
         const last = history[0];
@@ -3788,8 +3978,8 @@ window.onload = function() {
             return;
         }
         
-        const pausedAccum = parseInt(getCookie('studyPausedAccum') || '0', 10) || 0;
-        const pausedFlag = getCookie('studyPaused') === 'true';
+        const pausedAccum = parseInt(getData('studyPausedAccum') || '0', 10) || 0;
+        const pausedFlag = getData('studyPaused') === 'true';
         
         // pausedAccum の妥当性チェック（負数や異常に大きい値は無視）
         if (pausedAccum < 0 || pausedAccum > MAX_SESSION_HOURS * 60 * 60 * 1000) {
@@ -3851,7 +4041,7 @@ window.onload = function() {
     }
     (async () => {
         try {
-            const playlistCookie = getCookie('musicPlaylist');
+            const playlistCookie = getData('musicPlaylist');
             if (playlistCookie) {
                 const list = JSON.parse(playlistCookie);
                 for (const item of list) {
@@ -3946,14 +4136,14 @@ document.getElementById('todoInput').addEventListener('keydown', e => {
     setTimeout(() => {
         showTutorialWelcome();
     }, 500);
-const graphEnabled = getCookie('graph_enabled') === 'true';
+const graphEnabled = getData('graph_enabled') === 'true';
 if (graphEnabled) {
     document.getElementById('toggleGraph').classList.add('active');
     document.getElementById('graphSettings').style.display = 'block';
     
-    const graphType = getCookie('graph_type') || 'bar';
-    const graphPeriod = getCookie('graph_period') || '30';
-    const graphLocation = getCookie('graph_location') || 'list';
+    const graphType = getData('graph_type') || 'bar';
+    const graphPeriod = getData('graph_period') || '30';
+    const graphLocation = getData('graph_location') || 'list';
     
     document.getElementById('graphType').value = graphType;
     document.getElementById('graphPeriod').value = graphPeriod;
@@ -3970,6 +4160,60 @@ if (graphEnabled) {
     document.getElementById('graphSettings').style.display = 'block';
     setTimeout(() => updateGraphs(), 200);
 }
+
+// ショートカットキーの処理
+document.addEventListener('keydown', (e) => {
+    // IME入力中は無視
+    if (e.isComposing) return;
+    
+    const activePageId = Array.from(document.querySelectorAll('.page')).find(p => {
+        const style = window.getComputedStyle(p);
+        return style.display !== 'none';
+    })?.id;
+    
+    // 音楽ページのショートカット
+    if (activePageId === 'musicPage') {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            togglePlay();
+        } else if (e.key.toLowerCase() === 'n') {
+            e.preventDefault();
+            playNext();
+        } else if (e.key.toLowerCase() === 'b') {
+            e.preventDefault();
+            playPrevious();
+        } else if (e.key.toLowerCase() === 's') {
+            e.preventDefault();
+            toggleShuffle();
+        } else if (e.key.toLowerCase() === 'r') {
+            e.preventDefault();
+            toggleLoop();
+        }
+    }
+    
+    // タイマーページのショートカット
+    if (activePageId === 'timerPage') {
+        if (e.key.toLowerCase() === 's') {
+            e.preventDefault();
+            const startBtn = document.getElementById('startBtn');
+            const endBtn = document.getElementById('endBtn');
+            
+            if (!startBtn.classList.contains('hidden')) {
+                startStudy();
+            } else if (!endBtn.classList.contains('hidden')) {
+                endStudy();
+            }
+        } else if (e.code === 'Space') {
+            e.preventDefault();
+            const pauseBtn = document.getElementById('pauseBtn');
+            
+            // 一時停止ボタンが表示されている場合のみ動作
+            if (!pauseBtn.classList.contains('hidden')) {
+                pauseStudy();
+            }
+        }
+    }
+});
 };
 let studyChart = null;
 let statsChart = null;
@@ -3982,12 +4226,12 @@ function toggleGraph() {
     if (isActive) {
         toggle.classList.remove('active');
         settings.style.display = 'none';
-        setCookie('graph_enabled', 'false');
+        saveData('graph_enabled', 'false');
         hideGraphs();
     } else {
         toggle.classList.add('active');
         settings.style.display = 'block';
-        setCookie('graph_enabled', 'true');
+        saveData('graph_enabled', 'true');
         saveGraphSettings();
     }
 }
@@ -3997,9 +4241,9 @@ function saveGraphSettings() {
     const period = document.getElementById('graphPeriod').value;
     const location = document.getElementById('graphLocation').value;
     
-    setCookie('graph_type', type);
-    setCookie('graph_period', period);
-    setCookie('graph_location', location);
+    saveData('graph_type', type);
+    saveData('graph_period', period);
+    saveData('graph_location', location);
     
     updateGraphs();
 }
@@ -4023,13 +4267,13 @@ function showGraphs() {
 }
 
 function updateGraphs() {
-    const enabled = getCookie('graph_enabled') === 'true';
+    const enabled = getData('graph_enabled') === 'true';
     if (!enabled) {
         hideGraphs();
         return;
     }
     
-    const location = getCookie('graph_location') || 'list';
+    const location = getData('graph_location') || 'list';
     
     if (location === 'list' || location === 'both') {
         const container = document.getElementById('studyGraphContainer');
@@ -4069,8 +4313,8 @@ function renderGraph(canvasId, chartVar) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
     
-    const type = getCookie('graph_type') || 'bar';
-    const period = getCookie('graph_period') || '30';
+    const type = getData('graph_type') || 'bar';
+    const period = getData('graph_period') || '30';
     
     let history = getData('studyHistory');
     history = history ? JSON.parse(history) : [];
