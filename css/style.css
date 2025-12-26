@@ -70,6 +70,8 @@ a {
     display: inline-block;
     position: relative;
     outline: none;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 /* 下線は擬似要素で作り、中央から左右に伸ばすアニメーションにする */
@@ -771,23 +773,42 @@ footer li {
 }
 
 .footer-link {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
+    margin: 20px 0;
 }
 
-.footer-link a {
-  padding: 0 15px;
-  text-decoration: none;
-  color: inherit;
-  border-right: 1px solid currentColor;
+/* Footer separators implemented via container gap + pseudo-elements.
+   This prevents the underline or hover effect from visually extending to
+   the original border seam. */
+footer > .footer-link {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.footer-link a:last-child {
-  border-right: none;
+footer > .footer-link a {
+    padding: 6px 10px;
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    position: relative;
 }
+
+/* separator line between items using ::before on each item except the first */
+footer > .footer-link a::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 18px;
+    background: currentColor;
+    opacity: 0.28;
+}
+
+footer > .footer-link a:first-child::before { display: none; }
 
 .theme-toggle-icon {
     float: left;
@@ -1046,4 +1067,22 @@ footer li {
     .name img {
         margin: auto 10px;
     }
+}
+
+/* --- 追加の上書きルール --- */
+/* ハンバーガーメニューを確実にビューポートに固定する（モバイルでスクロール時に隠れないように） */
+.header-icon-menu {
+    position: fixed !important;
+    top: calc(12px + env(safe-area-inset-top)) !important;
+    right: calc(14px + env(safe-area-inset-right)) !important;
+    z-index: 9999999 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: top, right;
+}
+
+/* small screen 安定化 */
+@media screen and (max-width: 580px) {
+    .header-icon-menu { display: flex !important; }
 }
