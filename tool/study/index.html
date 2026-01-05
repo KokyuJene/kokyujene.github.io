@@ -19,7 +19,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Zen Kaku Gothic Antique', system-ui, sans-serif;
+            font-family: 'Zen Kaku Gothic Antique', system-ui, sans-serif;
 
         }
 
@@ -1437,6 +1437,9 @@
         .about-dialog {
             width: 100%;
             max-width: 720px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
             background: var(--panel-light);
             color: inherit;
             border-radius: 14px;
@@ -1460,6 +1463,7 @@
             line-height: 1.7;
             opacity: 0.95;
             text-align: left;
+            overflow-y: auto;
         }
 
         .about-actions {
@@ -2550,15 +2554,18 @@
                             <p style="margin-left: 15px;">A. する予定はないです。各サービスの利用規約に違反する可能性があるからです。</p>
 
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 今後も機能を追加する予定は?</h3>
-                            <p style="margin-left: 15px;">A. 決まってはいません。ただし、最低限に使用したい方もいらっしゃると思うので追加する場合はその機能を設定のON/OFFなどで表示を切り替えられるようにする予定です。</p>
+                            <p style="margin-left: 15px;">A.
+                                決まってはいません。ただし、最低限に使用したい方もいらっしゃると思うので追加する場合はその機能を設定のON/OFFなどで表示を切り替えられるようにする予定です。</p>
 
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 収益化などの広告導入のつもりはある?</h3>
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 収益化などの広告導入のつもりはある?
+                            </h3>
                             <p style="margin-left: 15px;">A. な い で す ( 断 言 )</p>
 
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. アプリとかリリースする?</h3>
                             <p style="margin-left: 15px;">A. 逆にリリースしたいです...。技術的にまだ足りないので無理ですね。</p>
 
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. にゃにゃにゃにゃぁ?(Q&A増える?)</h3>
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. にゃにゃにゃにゃぁ?(Q&A増える?)
+                            </h3>
                             <p style="margin-left: 15px;">A. にゃにゃにゃにゃぁ。(Q&Aは今後多分増えます。)</p>
 
                             <h3 style="font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px;">こんなもんですかね...</h3>
