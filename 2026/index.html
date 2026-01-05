@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 色設定：サイトの雰囲気に合わせた淡いトーン */
+        :root {
+            /* ライトモード（デフォルト） */
+            --bg-color: #F0F2F5;       /* サイト背景に近いごく薄いグレー */
+            --text-main: #4A5568;      /* 視認性の良いダークグレー */
+            --text-sub: #A0AEC0;       /* 淡いグレー */
+            --accent: #718096;         /* 落ち着いたアクセント */
+            --card-bg: rgba(255, 255, 255, 0.6); /* ガラスのような透明感 */
+            --btn-hover: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ダークモード設定 */
+        body.dark-mode {
+            --bg-color: #1A202C;       /* 深いブルーグレー */
+            --text-main: #E2E8F0;      /* 明るいグレー */
+            --text-sub: #718096;       /* 暗めの文字色 */
+            --accent: #CBD5E0;
+            --card-bg: rgba(0, 0, 0, 0.2);
+            --btn-hover: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: "Zen Kaku Gothic Antique", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            position: relative;
+        }
+
+        /* テーマ切り替えボタン */
+        .theme-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .theme-toggle img {
+            width: 32px;
+            height: 32px;
+            display: block;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .theme-toggle:hover img {
+            opacity: 1;
+        }
+
+        /* モードによってアイコンを出し分ける */
+        .theme-toggle .icon-sun { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        
+        body.dark-mode .theme-toggle .icon-sun { display: block; }
+        body.dark-mode .theme-toggle .icon-moon { display: none; }
+
+
+        /* カウントダウン表示エリア */
+        .container {
+            /* 枠線をなくし、背景もほぼ透明にして究極にシンプルに */
+            padding: 2rem;
+            text-align: center;
+            /* ほんの少しだけ背景を入れることで視認性を確保（不要なら削除可） */
+            background-color: var(--card-bg); 
+            border-radius: 30px;
+            backdrop-filter: blur(5px); /* すりガラス効果 */
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-sub);
+            margin-bottom: 3rem;
+            letter-spacing: 0.15em;
+        }
+
+        .timer-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 3rem; /* 間隔を広めに */
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .number {
+            font-size: 5rem; /* 数字をより細く大きく */
+            font-weight: 300; /* Lightウェイトで繊細に */
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+
+        .label {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        /* スマホ向け調整 */
+        @media (max-width: 600px) {
+            .timer-wrapper {
+                gap: 1.5rem;
+            }
+            .number {
+                font-size: 2.5rem;
+            }
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle" id="themeBtn" aria-label="テーマ切り替え">
+        <img src="https://kokyujene.github.io/tool/study/moon.webp" alt="Dark Mode" class="icon-moon">
+        <img src="https://kokyujene.github.io/tool/study/sun.webp" alt="Light Mode" class="icon-sun">
+    </button>
+
+    <div class="container">
+        <h1>2026</h1>
+        <div class="timer-wrapper" id="countdown">
+            <div class="time-unit">
+                <span class="number" id="days">--</span>
+                <span class="label">日</span>
+            </div>
+            <div class="time-unit">
+                <span class="number" id="hours">--</span>
+                <span class="label">時間</span>
+            </div>
+            <div class="time-unit">
+                <span class="number" id="minutes">--</span>
+                <span class="label">分</span>
+            </div>
+            <div class="time-unit">
+                <span class="number" id="seconds">--</span>
+                <span class="label">秒</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // カウントダウン機能
+        function updateCountdown() {
+            const now = new Date();
+            const targetDate = new Date('January 1, 2026 00:00:00');
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.querySelector('h1').innerText = "Happy New Year 2026";
+                document.getElementById('countdown').style.display = 'none';
+                return;
+            }
+
+            const d = Math.floor(diff / 1000 / 60 / 60 / 24);
+            const h = Math.floor(diff / 1000 / 60 / 60) % 24;
+            const m = Math.floor(diff / 1000 / 60) % 60;
+            const s = Math.floor(diff / 1000) % 60;
+
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ダークモード切り替え機能
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+
+        // 保存されたテーマがあれば適用
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // 設定を保存
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
