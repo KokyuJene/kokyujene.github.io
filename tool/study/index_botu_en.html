@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>勉強時間管理</title>
+    <title data-i18n="title">勉強時間管理</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="shortcut icon" type="image/webp" href="favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -2067,23 +2067,23 @@
             <div class="custom-confirm-icon" id="confirmIcon">
                 <img id="confirmIconImg" src="warning.webp" alt="確認">
             </div>
-            <div class="custom-confirm-title" id="confirmTitle">確認</div>
-            <div class="custom-confirm-message" id="confirmMessage">この操作を実行しますか?</div>
+            <div class="custom-confirm-title" id="confirmTitle" data-i18n="confirm_title">確認</div>
+            <div class="custom-confirm-message" id="confirmMessage" data-i18n="confirm_message">この操作を実行しますか?</div>
             <div class="custom-confirm-buttons">
-                <button class="custom-confirm-cancel" id="confirmCancel">キャンセル</button>
-                <button class="custom-confirm-ok" id="confirmOk">OK</button>
+                <button class="custom-confirm-cancel" id="confirmCancel" data-i18n="confirm_cancel">キャンセル</button>
+                <button class="custom-confirm-ok" id="confirmOk" data-i18n="confirm_ok">OK</button>
             </div>
         </div>
     </div>
 
     <div class="custom-confirm-overlay" id="renameOverlay">
         <div class="custom-confirm-dialog">
-            <div class="custom-confirm-title" id="renameTitle">曲名を変更</div>
-            <input type="text" id="renameInput" placeholder="曲名を入力"
+            <div class="custom-confirm-title" id="renameTitle" data-i18n="rename_title">曲名を変更</div>
+            <input type="text" id="renameInput" data-i18n="rename_placeholder" placeholder="曲名を入力"
                 style="width:100%; padding:12px 15px; border:none; border-radius:8px; font-size:0.95rem; font-family:inherit; margin-bottom:20px;">
             <div class="custom-confirm-buttons">
-                <button class="custom-confirm-cancel" id="renameCancelBtn">キャンセル</button>
-                <button class="custom-confirm-ok" id="renameOkBtn">保存</button>
+                <button class="custom-confirm-cancel" id="renameCancelBtn" data-i18n="confirm_cancel">キャンセル</button>
+                <button class="custom-confirm-ok" id="renameOkBtn" data-i18n="rename_save">保存</button>
             </div>
         </div>
     </div>
@@ -2092,14 +2092,14 @@
         <!-- チュートリアル -->
         <div class="tutorial-overlay" id="tutorialOverlay"></div>
         <div class="tutorial-welcome" id="tutorialWelcome" style="display: none;">
-            <h3>
+            <h3 data-i18n="tutorial_welcome_title">
                 <img src="guide.webp" alt="ガイド" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;">
                 使い方を説明しますか?
             </h3>
-            <p>初めての方向けに、このサイトの使い方を順番に説明します。</p>
+            <p data-i18n="tutorial_welcome_message">初めての方向けに、このサイトの使い方を順番に説明します。</p>
             <div class="tutorial-welcome-buttons">
-                <button class="secondary" onclick="closeTutorial()" data-i18n="closeButton">閉じる</button>
-                <button class="primary" onclick="startTutorial()" data-i18n="tutorialYes">はい</button>
+                <button class="secondary" onclick="closeTutorial()" data-i18n="tutorial_welcome_no">閉じる</button>
+                <button class="primary" onclick="startTutorial()" data-i18n="tutorial_welcome_yes">はい</button>
             </div>
         </div>
         <div class="tutorial-box" id="tutorialBox" style="display: none;">
@@ -2107,10 +2107,12 @@
             <h3 id="tutorialTitle">タイトル</h3>
             <p id="tutorialMessage">メッセージ</p>
             <div class="tutorial-buttons">
-                <button class="secondary" onclick="skipTutorial()" data-i18n="skipButton">スキップ</button>
+                <button class="secondary" onclick="skipTutorial()" data-i18n="tutorial_skip">スキップ</button>
                 <div style="display: flex; gap: 10px;">
-                    <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()">戻る</button>
-                    <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()">次へ</button>
+                    <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()"
+                        data-i18n="tutorial_prev">戻る</button>
+                    <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()"
+                        data-i18n="tutorial_next">次へ</button>
                 </div>
             </div>
         </div>
@@ -2124,25 +2126,25 @@
     </div>
 
     <div class="container">
-        <h1 data-i18n="studyTimeManagement">勉強時間管理</h1>
+        <h1 data-i18n="title">勉強時間管理</h1>
 
         <div class="menu" id="mainMenu">
-            <button class="active" onclick="showPage('timer')" data-i18n="menuTimer">タイマー</button>
-            <button onclick="showPage('stats')" data-i18n="menuStats">統計</button>
-            <button onclick="showPage('list')" data-i18n="menuList">リスト</button>
+            <button class="active" onclick="showPage('timer')" data-i18n="menu_timer" data-feature="timer">タイマー</button>
+            <button onclick="showPage('stats')" data-i18n="menu_stats" data-feature="stats">統計</button>
+            <button onclick="showPage('list')" data-i18n="menu_list" data-feature="list">リスト</button>
         </div>
 
         <div id="timerPage" class="page active">
             <div class="timer" id="timer">00:00:00</div>
             <div class="group-input">
-                <input type="text" id="groupInput" placeholder="グループ名(任意)" data-i18n="groupPlaceholder">
+                <input type="text" id="groupInput" data-i18n="timer_placeholder" placeholder="グループ名(任意)">
             </div>
-            <div class="session-info" id="sessionInfo" data-i18n="sessionStart">開始ボタンを押して学習を始めましょう</div>
+            <div class="session-info" id="sessionInfo" data-i18n="timer_start_info">開始ボタンを押して学習を始めましょう</div>
             <div class="controls">
-                <button id="startBtn" class="primary" onclick="startStudy()" data-i18n="startButton">勉強開始</button>
+                <button id="startBtn" class="primary" onclick="startStudy()" data-i18n="timer_start_btn">勉強開始</button>
                 <button id="pauseBtn" class="secondary hidden" onclick="pauseStudy()"
-                    data-i18n="pauseButton">一時停止</button>
-                <button id="endBtn" class="secondary hidden" onclick="endStudy()" data-i18n="endButton">終了</button>
+                    data-i18n="timer_pause_btn">一時停止</button>
+                <button id="endBtn" class="secondary hidden" onclick="endStudy()" data-i18n="timer_end_btn">終了</button>
             </div>
         </div>
 
@@ -2159,53 +2161,53 @@
             <div class="group-selector">
                 <div class="custom-select">
                     <select id="groupFilter" onchange="loadHistory()" aria-label="グループで絞り込む">
-                        <option value="" data-i18n="allGroupsFilter">すべてのグループ</option>
+                        <option value="" data-i18n="list_filter_all">すべてのグループ</option>
                     </select>
                     <div class="select-arrow">▾</div>
                 </div>
             </div>
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="日付や時刻で検索(例: 2025年12月11日や、14:30)"
-                    data-i18n="searchPlaceholder" oninput="loadHistory()">
+                <input type="text" id="searchInput" data-i18n="list_search_placeholder"
+                    placeholder="日付や時刻で検索(例: 2025年12月11日や、14:30)" oninput="loadHistory()">
             </div>
 
             <div class="sort-controls"
                 style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
                 <button class="secondary filter-control-btn active" onclick="sortHistory('date-desc')"
-                    data-sort="date-desc" data-i18n="sortNewest">新しい順</button>
+                    data-sort="date-desc" data-i18n="list_sort_new">新しい順</button>
                 <button class="secondary filter-control-btn" onclick="sortHistory('date-asc')" data-sort="date-asc"
-                    data-i18n="sortOldest">古い順</button>
+                    data-i18n="list_sort_old">古い順</button>
                 <button class="secondary filter-control-btn" onclick="sortHistory('duration-desc')"
-                    data-sort="duration-desc" data-i18n="sortLongest">時間が長い順</button>
+                    data-sort="duration-desc" data-i18n="list_sort_long">時間が長い順</button>
                 <button class="secondary filter-control-btn" onclick="sortHistory('duration-asc')"
-                    data-sort="duration-asc" data-i18n="sortShortest">時間が短い順</button>
+                    data-sort="duration-asc" data-i18n="list_sort_short">時間が短い順</button>
             </div>
 
             <div class="action-buttons">
-                <button class="secondary" onclick="toggleSelectAll()" data-i18n="selectAll">すべて選択</button>
+                <button class="secondary" onclick="toggleSelectAll()" data-i18n="list_select_all">すべて選択</button>
                 <button class="secondary" id="deleteBtn" onclick="deleteSelected()" disabled
-                    data-i18n="deleteSelected">選択を削除</button>
+                    data-i18n="list_delete_selected">選択を削除</button>
             </div>
             <div class="move-group-container" id="moveGroupContainer">
                 <div class="move-count" id="moveCount"></div>
                 <div class="custom-select" style="display:inline-block; margin-right:8px;">
                     <select id="moveGroupSelect" aria-label="移動先のグループを選択">
-                        <option value="" data-i18n="moveDestination">移動先を選択</option>
+                        <option value="" data-i18n="list_move_to">移動先を選択</option>
                     </select>
                     <div class="select-arrow">▾</div>
                 </div>
                 <div class="move-group-buttons">
-                    <button class="secondary" onclick="hideMoveGroup()" data-i18n="cancelButton">キャンセル</button>
-                    <button class="primary" onclick="moveSelectedToGroup()" data-i18n="moveButton">移動</button>
+                    <button class="secondary" onclick="hideMoveGroup()" data-i18n="list_move_cancel">キャンセル</button>
+                    <button class="primary" onclick="moveSelectedToGroup()" data-i18n="list_move_btn">移動</button>
                 </div>
             </div>
             <div id="studyGraphContainer" style="display: none; margin-bottom: 30px;">
-                <h2 data-i18n="graphTitle">勉強時間グラフ</h2>
+                <h2 data-i18n="list_graph_title">勉強時間グラフ</h2>
                 <canvas id="studyChart" style="max-height: 300px;"></canvas>
             </div>
             <div id="historyList" class="history-list"></div>
             <button class="secondary clear-history" onclick="clearHistory()"
-                data-i18n="clearHistory">すべての履歴をクリア</button>
+                data-i18n="list_clear_all">すべての履歴をクリア</button>
         </div>
 
         <div id="musicPage" class="page">
@@ -2215,13 +2217,14 @@
                         <label class="file-select-label" id="musicFileLabel" tabindex="0" role="button"
                             aria-haspopup="true">
                             <img id="musicDropdownArrow" class="file-select-arrow" src="arrow_down.webp" alt="メニュー">
-                            <span class="file-select-text" data-i18n="selectFile">ファイルを選択</span>
+                            <span class="file-select-text" data-i18n="music_file_select">ファイルを選択</span>
                         </label>
                         <input type="file" id="musicFileInput" accept=".mp3,.wav,.flac,.m4a,.aac,.ogg,.webm,audio/*"
                             onchange="addMusicFile(event)" multiple style="display:none;">
 
                         <div class="file-dropdown-menu" id="musicDropdownMenu" role="menu" aria-hidden="true">
-                            <div class="dropdown-item" id="chooseFolderItem" data-i18n="selectFolder">フォルダを選択</div>
+                            <div class="dropdown-item" id="chooseFolderItem" data-i18n="music_folder_select">フォルダを選択
+                            </div>
                         </div>
 
                         <input type="file" id="musicFolderInput" webkitdirectory directory multiple
@@ -2274,33 +2277,33 @@
         <div id="todoPage" class="page">
             <div class="todo-list">
                 <div class="todo-input">
-                    <input type="text" id="todoInput" placeholder="新しいタスクを入力" data-i18n="todoPlaceholder">
-                    <button type="button" class="primary" onclick="addTodo()" data-i18n="todoAddButton">追加</button>
+                    <input type="text" id="todoInput" data-i18n="todo_placeholder" placeholder="新しいタスクを入力">
+                    <button type="button" class="primary" onclick="addTodo()" data-i18n="todo_add_btn">追加</button>
                 </div>
 
                 <div class="todo-options" style="margin-bottom: 20px;">
                     <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 140px;">
                             <label style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;"
-                                data-i18n="repeat">繰り返し</label>
+                                data-i18n="todo_repeat_label">繰り返し</label>
                             <div class="custom-select" style="width: 100%;">
                                 <select id="todoRepeat" style="width: 100%;">
-                                    <option value="none" data-i18n="repeatNone">なし</option>
-                                    <option value="daily" data-i18n="repeatDaily">毎日</option>
-                                    <option value="weekly" data-i18n="repeatWeekly">毎週</option>
-                                    <option value="monthly" data-i18n="repeatMonthly">毎月</option>
+                                    <option value="none" data-i18n="todo_repeat_none">なし</option>
+                                    <option value="daily" data-i18n="todo_repeat_daily">毎日</option>
+                                    <option value="weekly" data-i18n="todo_repeat_weekly">毎週</option>
+                                    <option value="monthly" data-i18n="todo_repeat_monthly">毎月</option>
                                 </select>
                                 <div class="select-arrow">▾</div>
                             </div>
                         </div>
                         <div style="flex: 1; min-width: 140px;">
                             <label style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;"
-                                data-i18n="priority">優先度</label>
+                                data-i18n="todo_priority_label">優先度</label>
                             <div class="custom-select" style="width: 100%;">
                                 <select id="todoPriority" style="width: 100%;">
-                                    <option value="low" data-i18n="priorityLow">低</option>
-                                    <option value="normal" selected data-i18n="priorityNormal">通常</option>
-                                    <option value="high" data-i18n="priorityHigh">高</option>
+                                    <option value="low" data-i18n="todo_priority_low">低</option>
+                                    <option value="normal" selected data-i18n="todo_priority_normal">通常</option>
+                                    <option value="high" data-i18n="todo_priority_high">高</option>
                                 </select>
                                 <div class="select-arrow">▾</div>
                             </div>
@@ -2310,15 +2313,15 @@
 
                 <div class="todo-filter" style="margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
                     <button class="secondary todo-filter-btn filter-control-btn active" onclick="filterTodos('all')"
-                        data-filter="all" data-i18n="filterAll">すべて</button>
+                        data-filter="all" data-i18n="todo_filter_all">すべて</button>
                     <button class="secondary todo-filter-btn filter-control-btn" onclick="filterTodos('active')"
-                        data-filter="active" data-i18n="filterActive">未完了</button>
+                        data-filter="active" data-i18n="todo_filter_active">未完了</button>
                     <button class="secondary todo-filter-btn filter-control-btn" onclick="filterTodos('completed')"
-                        data-filter="completed" data-i18n="filterCompleted">完了</button>
+                        data-filter="completed" data-i18n="todo_filter_completed">完了</button>
                     <button class="secondary todo-filter-btn filter-control-btn" onclick="filterTodos('daily')"
-                        data-filter="daily" data-i18n="filterDaily">毎日</button>
+                        data-filter="daily" data-i18n="todo_filter_daily">毎日</button>
                     <button class="secondary todo-filter-btn filter-control-btn" onclick="filterTodos('weekly')"
-                        data-filter="weekly" data-i18n="filterWeekly">毎週</button>
+                        data-filter="weekly" data-i18n="todo_filter_weekly">毎週</button>
                 </div>
 
                 <div class="todo-items" id="todoItems"></div>
@@ -2326,45 +2329,29 @@
         </div>
         <div id="settingsPage" class="page">
             <div class="settings-section">
-                <h2 data-i18n="settingsDisplay">表示設定</h2>
+                <h2 data-i18n="settings_display">表示設定</h2>
                 <div class="toggle-item">
-                    <span data-i18n="musicPlayer">音楽プレイヤー</span>
+                    <span data-i18n="settings_music">音楽プレイヤー</span>
                     <div class="toggle-switch" id="toggleMusic" onclick="toggleFeature('music')">
                         <div class="toggle-slider"></div>
                     </div>
                 </div>
                 <div class="toggle-item">
-                    <span data-i18n="todoList">ToDoリスト</span>
+                    <span data-i18n="settings_todo">ToDoリスト</span>
                     <div class="toggle-switch" id="toggleTodo" onclick="toggleFeature('todo')">
                         <div class="toggle-slider"></div>
                     </div>
                 </div>
                 <div class="toggle-item">
-                    <span data-i18n="titleTimeDisplay">タイトルの時間表示</span>
+                    <span data-i18n="settings_title_time">タイトルの時間表示</span>
                     <div class="toggle-switch" id="toggleTitleTime" onclick="toggleTitleTime()">
                         <div class="toggle-slider"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="settings-section">
-                <h2 data-i18n="languageSettings">言語設定</h2>
-                <div class="toggle-item">
-                    <div class="language-options" style="display: flex; gap: 10px; width: 100%;">
-                        <button class="secondary language-option active" data-lang="ja" onclick="changeLanguage('ja')"
-                            style="flex: 1; padding: 12px;">
-                            <span data-i18n="japanese">日本語</span>
-                        </button>
-                        <button class="secondary language-option" data-lang="en" onclick="changeLanguage('en')"
-                            style="flex: 1; padding: 12px;">
-                            <span data-i18n="english">English</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
             <div class="theme-selector">
-                <h2 data-i18n="themeColor">テーマカラー</h2>
+                <h2 data-i18n="settings_theme">テーマカラー</h2>
                 <div class="theme-options">
                     <div class="theme-option selected" data-theme="blue" onclick="changeTheme('blue')">
                         <div class="theme-option-preview" style="background-color: var(--panel-light);">
@@ -2372,7 +2359,7 @@
                             <div style="background-color: #8ba4b8;"></div>
                             <div style="background-color: #7a95ab;"></div>
                         </div>
-                        <div class="theme-option-name" data-i18n="themeBlue">ブルー</div>
+                        <div class="theme-option-name" data-i18n="theme_blue">ブルー</div>
                     </div>
                     <div class="theme-option" data-theme="green" onclick="changeTheme('green')">
                         <div class="theme-option-preview" style="background-color: var(--panel-light);">
@@ -2380,7 +2367,7 @@
                             <div style="background-color: #96b996;"></div>
                             <div style="background-color: #88ab88;"></div>
                         </div>
-                        <div class="theme-option-name" data-i18n="themeGreen">グリーン</div>
+                        <div class="theme-option-name" data-i18n="theme_green">グリーン</div>
                     </div>
                     <div class="theme-option" data-theme="purple" onclick="changeTheme('purple')">
                         <div class="theme-option-preview" style="background-color: var(--panel-light);">
@@ -2388,7 +2375,7 @@
                             <div style="background-color: #a896b9;"></div>
                             <div style="background-color: #9a88ab;"></div>
                         </div>
-                        <div class="theme-option-name" data-i18n="themePurple">パープル</div>
+                        <div class="theme-option-name" data-i18n="theme_purple">パープル</div>
                     </div>
                     <div class="theme-option" data-theme="orange" onclick="changeTheme('orange')">
                         <div class="theme-option-preview" style="background-color: var(--panel-light);">
@@ -2396,7 +2383,7 @@
                             <div style="background-color: #c9a490;"></div>
                             <div style="background-color: #b99480;"></div>
                         </div>
-                        <div class="theme-option-name" data-i18n="themeOrange">オレンジ</div>
+                        <div class="theme-option-name" data-i18n="theme_orange">オレンジ</div>
                     </div>
                     <div class="theme-option" data-theme="pink" onclick="changeTheme('pink')">
                         <div class="theme-option-preview" style="background-color: var(--panel-light);">
@@ -2404,7 +2391,7 @@
                             <div style="background-color: #c996a4;"></div>
                             <div style="background-color: #b98896;"></div>
                         </div>
-                        <div class="theme-option-name" data-i18n="themePink">ピンク</div>
+                        <div class="theme-option-name" data-i18n="theme_pink">ピンク</div>
                     </div>
                     <div class="theme-option" data-theme="teal" onclick="changeTheme('teal')">
                         <div class="theme-option-preview" style="background-color: var(--panel-light);">
@@ -2412,14 +2399,14 @@
                             <div style="background-color: #90b9b9;"></div>
                             <div style="background-color: #80abab;"></div>
                         </div>
-                        <div class="theme-option-name" data-i18n="themeTeal">ティール</div>
+                        <div class="theme-option-name" data-i18n="theme_teal">ティール</div>
                     </div>
                 </div>
             </div>
             <div class="settings-section">
-                <h2 data-i18n="graphDisplay">グラフ表示</h2>
+                <h2 data-i18n="settings_graph">グラフ表示</h2>
                 <div class="toggle-item">
-                    <span data-i18n="studyGraph">勉強時間のグラフ表示</span>
+                    <span data-i18n="settings_graph_toggle">勉強時間のグラフ表示</span>
                     <div class="toggle-switch" id="toggleGraph" onclick="toggleGraph()">
                         <div class="toggle-slider"></div>
                     </div>
@@ -2428,12 +2415,12 @@
                 <div id="graphSettings" style="display: none; margin-top: 20px;">
                     <div style="margin-bottom: 15px;">
                         <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
-                            data-i18n="graphType">グラフの種類</label>
+                            data-i18n="settings_graph_type">グラフの種類</label>
                         <div class="custom-select" style="width: 100%;">
                             <select id="graphType" onchange="saveGraphSettings()">
-                                <option value="bar" data-i18n="graphBar">棒グラフ</option>
-                                <option value="line" data-i18n="graphLine">折れ線グラフ</option>
-                                <option value="area" data-i18n="graphArea">面グラフ</option>
+                                <option value="bar" data-i18n="settings_graph_bar">棒グラフ</option>
+                                <option value="line" data-i18n="settings_graph_line">折れ線グラフ</option>
+                                <option value="area" data-i18n="settings_graph_area">面グラフ</option>
                             </select>
                             <div class="select-arrow">▾</div>
                         </div>
@@ -2441,15 +2428,15 @@
 
                     <div style="margin-bottom: 15px;">
                         <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
-                            data-i18n="displayPeriod">表示期間</label>
+                            data-i18n="settings_graph_period">表示期間</label>
                         <div class="custom-select" style="width: 100%;">
                             <select id="graphPeriod" onchange="saveGraphSettings()">
-                                <option value="7" data-i18n="period7days">過去7日間</option>
-                                <option value="14" data-i18n="period14days">過去14日間</option>
-                                <option value="30" selected data-i18n="period30days">過去30日間</option>
-                                <option value="90" data-i18n="period90days">過去90日間</option>
-                                <option value="365" data-i18n="period1year">過去1年間</option>
-                                <option value="all" data-i18n="periodAll">すべての期間</option>
+                                <option value="7" data-i18n="settings_graph_7d">過去7日間</option>
+                                <option value="14" data-i18n="settings_graph_14d">過去14日間</option>
+                                <option value="30" selected data-i18n="settings_graph_30d">過去30日間</option>
+                                <option value="90" data-i18n="settings_graph_90d">過去90日間</option>
+                                <option value="365" data-i18n="settings_graph_1y">過去1年間</option>
+                                <option value="all" data-i18n="settings_graph_all">すべての期間</option>
                             </select>
                             <div class="select-arrow">▾</div>
                         </div>
@@ -2457,12 +2444,12 @@
 
                     <div style="margin-bottom: 15px;">
                         <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
-                            data-i18n="displayLocation">表示場所</label>
+                            data-i18n="settings_graph_location">表示場所</label>
                         <div class="custom-select" style="width: 100%;">
                             <select id="graphLocation" onchange="saveGraphSettings()">
-                                <option value="list" data-i18n="locationList">リスト画面</option>
-                                <option value="stats" data-i18n="locationStats">統計画面</option>
-                                <option value="both" data-i18n="locationBoth">両方</option>
+                                <option value="list" data-i18n="settings_graph_loc_list">リスト画面</option>
+                                <option value="stats" data-i18n="settings_graph_loc_stats">統計画面</option>
+                                <option value="both" data-i18n="settings_graph_loc_both">両方</option>
                             </select>
                             <div class="select-arrow">▾</div>
                         </div>
@@ -2470,17 +2457,18 @@
                 </div>
             </div>
             <div class="settings-section">
-                <h2 data-i18n="dataManagement">データ管理</h2>
+                <h2 data-i18n="settings_data">データ管理</h2>
                 <div class="data-management">
-                    <button class="secondary" onclick="exportData()">
+                    <button class="secondary" onclick="exportData()" data-i18n="settings_export">
                         <img src="export.webp" alt="エクスポート"
                             style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
-                        <span data-i18n="exportData">データをエクスポート</span>
+                        データをエクスポート
                     </button>
-                    <button class="secondary" onclick="document.getElementById('importFile').click()">
+                    <button class="secondary" onclick="document.getElementById('importFile').click()"
+                        data-i18n="settings_import">
                         <img src="import.webp" alt="インポート"
                             style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
-                        <span data-i18n="importData">データをインポート</span>
+                        データをインポート
                     </button>
                     <input type="file" id="importFile" accept=".json" style="display:none;"
                         onchange="importData(event)">
@@ -2488,11 +2476,23 @@
             </div>
 
             <div class="settings-section">
-                <h2 data-i18n="helpSection">ヘルプ</h2>
-                <button class="secondary" onclick="restartTutorial()" style="width: 100%; padding: 12px 20px;">
+                <h2 data-i18n="settings_language">言語 / Language</h2>
+                <div class="custom-select" style="width: 100%; margin-top: 15px;">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)">
+                        <option value="ja">日本語 (Japanese)</option>
+                        <option value="en">English</option>
+                    </select>
+                    <div class="select-arrow">▾</div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2 data-i18n="settings_help">ヘルプ</h2>
+                <button class="secondary" onclick="restartTutorial()" style="width: 100%; padding: 12px 20px;"
+                    data-i18n="settings_restart_tutorial">
                     <img src="guide.webp" alt="ガイド"
                         style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
-                    <span data-i18n="showGuide">使い方ガイドを再表示</span>
+                    使い方ガイドを再表示
                 </button>
             </div>
 
@@ -2509,7 +2509,7 @@
                             <circle cx="12" cy="7" r="0.8" fill="currentColor"></circle>
                         </svg>
                     </span>
-                    <span class="about-text" data-i18n="aboutButton">このサイトについて</span>
+                    <span class="about-text" data-i18n="settings_about_site">このサイトについて</span>
                 </button>
             </div>
 
@@ -2524,32 +2524,83 @@
                             <circle cx="12" cy="17" r="0.8" fill="currentColor"></circle>
                         </svg>
                     </span>
-                    <span class="about-text" data-i18n="qaButton">よくある質問(Q&A)</span>
+                    <span class="about-text" data-i18n="settings_faq">よくある質問(Q&A)</span>
                 </button>
             </div>
 
             <div class="about-overlay" id="aboutOverlay" aria-hidden="true">
                 <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
-                    <h2 id="aboutTitle" data-i18n="aboutTitle">このサイトについて</h2>
-                    <div class="about-content" id="aboutContent" data-i18n-html="aboutContent">
-                        <!-- Content will be replaced by JS -->
+                    <h2 id="aboutTitle" data-i18n="about_title">このサイトについて</h2>
+                    <div id="aboutContent" class="about-content" data-i18n="about_content">
+                        このサイトは勉強や作業時間を管理できるサイトです。<br>勉強や作業に没頭できるよう、シンプルで最低限、淡い色などで統一しました。<br><br>勉強とともにストップウォッチをスタートし、作業時間を記録しましょう。<br>
+                        <div class="tyuui-mini-text">※ データはすべてローカルに保存されます。</div>ぜひSNSで共有してくれると嬉しいです!<div
+                            class="tyuui-mini-text"><a
+                                href="https://twitter.com/intent/tweet?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%81%97%E3%80%81%E4%BD%9C%E6%A5%AD%E6%99%82%E9%96%93%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F"
+                                target="_blank">X</a> <a
+                                href="https://www.threads.net/intent/post?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%81%97%E3%80%81%E4%BD%9C%E6%A5%AD%E6%99%82%E9%96%93%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F"
+                                target="_blank">Threads</a> <a
+                                href="https://bsky.app/intent/compose?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%81%97%E3%80%81%E4%BD%9C%E6%A5%AD%E6%99%82%E9%96%93%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F"
+                                target="_blank">Bluesky</a> <a
+                                href="https://misskeyshare.link/share.html?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%81%97%E3%80%81%E4%BD%9C%E6%A5%AD%E6%99%82%E9%96%93%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F"
+                                target="_blank">Misskey</a></div><span data-i18n="about_developed_by">このサイトは<a
+                                href="https://kokyujene.github.io/members/super-hiko14/">Super Hiko14</a>が開発しました。</span>
+                        <div class="tyuui-mini-text">※ 一部AIが使用されています。</div>
                     </div>
                     <div class="about-actions">
-                        <button class="secondary" id="aboutCloseBtn" data-i18n="closeButton">閉じる</button>
-                        <button class="primary" id="aboutOkBtn" data-i18n="okButton">了解</button>
+                        <button class="secondary" id="aboutCloseBtn" data-i18n="about_close">閉じる</button>
+                        <button class="primary" id="aboutOkBtn" data-i18n="about_ok">了解</button>
                     </div>
                 </div>
             </div>
 
             <div class="about-overlay" id="qaOverlay" aria-hidden="true">
                 <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="qaTitle">
-                    <h2 id="qaTitle" data-i18n="qaTitle">よくある質問(Q&A)</h2>
-                    <div id="qaContent" class="about-content" data-i18n-html="qaContent">
-                        <!-- Content will be replaced by JS -->
+                    <h2 id="qaTitle" data-i18n="qa_title">よくある質問(Q&A)</h2>
+                    <div id="qaContent" class="about-content" data-i18n="qa_content">
+                        <div style="text-align: left;">
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. データはどこに保存されますか?
+                            </h3>
+                            <p style="margin-left: 15px;">A. すべてのデータはブラウザのローカルストレージに保存されます。サーバーには一切送信されません。</p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q.
+                                他のデバイスでデータへ移行やバックアップを取りたい。</h3>
+                            <p style="margin-left: 15px;">A. エクスポートからJsonファイルをダウンロードできます。インポートで他デバイスに移行やバックアップとして保存できます。
+                            </p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q.
+                                音楽プレイヤーで再生できるファイル形式は?</h3>
+                            <p style="margin-left: 15px;">A. mp3, wav, flac, m4a, aac, ogg, webmなどの一般的な音楽ファイルに対応しています。
+                            </p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q.
+                                タイマーを一時停止したまま閉じてしまった場合は?</h3>
+                            <p style="margin-left: 15px;">A. 大丈夫です。再度サイトを閉じてもタイマーは作動し続けます。</p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q.
+                                なんで音楽プレイヤーにYoutube動画とかを追加する予定ってないの?</h3>
+                            <p style="margin-left: 15px;">A. する予定はないです。各サービスの利用規約に違反する可能性があるからです。</p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 今後も機能を追加する予定は?</h3>
+                            <p style="margin-left: 15px;">A.
+                                決まってはいません。ただし、最低限に使用したい方もいらっしゃると思うので追加する場合はその機能を設定のON/OFFなどで表示を切り替えられるようにする予定です。</p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 収益化などの広告導入のつもりはある?
+                            </h3>
+                            <p style="margin-left: 15px;">A. な い で す ( 断 言 )</p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. アプリとかリリースする?</h3>
+                            <p style="margin-left: 15px;">A. 逆にリリースしたいです...。技術的にまだ足りないので無理ですね。</p>
+
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. にゃにゃにゃにゃぁ?(Q&A増える?)
+                            </h3>
+                            <p style="margin-left: 15px;">A. にゃにゃにゃにゃぁ。(Q&Aは今後多分増えます。)</p>
+
+                            <h3 style="font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px;">こんなもんですかね...</h3>
+                        </div>
                     </div>
                     <div class="about-actions">
-                        <button class="secondary" id="qaCloseBtn" data-i18n="closeButton">閉じる</button>
-                        <button class="primary" id="qaOkBtn" data-i18n="okButton">了解</button>
+                        <button class="secondary" id="qaCloseBtn">閉じる</button>
+                        <button class="primary" id="qaOkBtn">了解</button>
                     </div>
                 </div>
             </div>
@@ -2567,642 +2618,448 @@
                 let isShuffle = false;
                 let _musicDB = null;
 
-                // 多言語対応システム
-                let currentLanguage = 'ja'; // デフォルトは日本語
-
                 const translations = {
                     ja: {
-                        // メタ
-                        title: '勉強時間管理',
-                        description: '勉強とともにタイマーをスタートし、作業時間を記録しましょう。',
-
-                        // メインメニュー
-                        menuTimer: 'タイマー',
-                        menuStats: '統計',
-                        menuList: 'リスト',
-                        menuMusic: '音楽',
-                        menuTodo: 'ToDo',
-
-                        // タイマーページ
-                        groupPlaceholder: 'グループ名(任意)',
-                        sessionStart: '開始ボタンを押して学習を始めましょう',
-                        startButton: '勉強開始',
-                        pauseButton: '一時停止',
-                        resumeButton: '再開',
-                        endButton: '終了',
-                        startTime: '開始時刻',
-                        endTime: '終了時刻',
-                        studyTime: '学習時間',
-                        previousSession: '前回の学習',
-                        group: 'グループ',
-
-                        // 統計ページ
-                        totalTime: '総勉強時間',
-                        todayTime: '今日の勉強時間',
-                        weekTime: '今週の勉強時間',
-                        monthTime: '今月の勉強時間',
-                        averageTime: '平均勉強時間/日',
-                        selectGroup: 'グループを選択',
-                        allGroups: 'すべてのグループ',
-
-                        // リストページ
-                        allGroupsFilter: 'すべてのグループ',
-                        searchPlaceholder: '日付や時刻で検索(例: 2025年12月11日や、14:30)',
-                        sortNewest: '新しい順',
-                        sortOldest: '古い順',
-                        sortLongest: '時間が長い順',
-                        sortShortest: '時間が短い順',
-                        selectAll: 'すべて選択',
-                        deleteSelected: '選択を削除',
-                        moveGroup: 'グループ移動',
-                        moveCount: '件選択中',
-                        moveDestination: '移動先を選択',
-                        moveButton: '移動',
-                        cancelButton: 'キャンセル',
-                        graphTitle: '勉強時間グラフ',
-                        historyClearConfirm: 'すべての学習記録を削除しますか?',
-                        historyClearTitle: '全削除確認',
-                        deleteSelectedConfirm: '選択した{n}件の記録を削除しますか?',
-                        deleteConfirmTitle: '削除確認',
-                        clearHistory: 'すべての履歴をクリア',
-                        noHistory: 'まだ履歴がありません',
-                        hours: '時間',
-
-                        // 音楽プレイヤー
-                        selectFile: 'ファイルを選択',
-                        selectFolder: 'フォルダを選択',
-                        previous: '前へ',
-                        play: '再生',
-                        pause: '一時停止',
-                        next: '次へ',
-                        loop: 'ループ',
-                        loopOn: 'ループオン',
-                        loopOff: 'ループオフ',
-                        shuffle: 'シャッフル',
-                        shuffleOn: 'シャッフルオン',
-                        shuffleOff: 'シャッフルオフ',
-                        volume: '音量',
-                        playlist: 'プレイリスト',
-                        deleteButton: '削除',
-                        renameButton: '名前変更',
-                        renameSong: '曲名を変更',
-                        songNamePlaceholder: '曲名を入力',
-                        saveButton: '保存',
-
-                        // ToDoリスト
-                        newTaskPlaceholder: '新しいタスクを入力',
-                        addButton: '追加',
-                        repeat: '繰り返し',
-                        repeatNone: 'なし',
-                        repeatDaily: '毎日',
-                        repeatWeekly: '毎週',
-                        repeatMonthly: '毎月',
-                        priority: '優先度',
-                        priorityLow: '低',
-                        priorityNormal: '通常',
-                        priorityHigh: '高',
-                        filterAll: 'すべて',
-                        filterActive: '未完了',
-                        filterCompleted: '完了',
-                        filterDaily: '毎日',
-                        filterWeekly: '毎週',
-
-                        // 設定ページ
-                        settingsDisplay: '表示設定',
-                        musicPlayer: '音楽プレイヤー',
-                        todoList: 'ToDoリスト',
-                        titleTimeDisplay: 'タイトルの時間表示',
-                        themeColor: 'テーマカラー',
-                        themeBlue: 'ブルー',
-                        themeGreen: 'グリーン',
-                        themePurple: 'パープル',
-                        themeOrange: 'オレンジ',
-                        themePink: 'ピンク',
-                        themeTeal: 'ティール',
-                        graphDisplay: 'グラフ表示',
-                        studyGraph: '勉強時間のグラフ表示',
-                        graphType: 'グラフの種類',
-                        graphBar: '棒グラフ',
-                        graphLine: '折れ線グラフ',
-                        graphArea: '面グラフ',
-                        displayPeriod: '表示期間',
-                        period7days: '過去7日間',
-                        period14days: '過去14日間',
-                        period30days: '過去30日間',
-                        period90days: '過去90日間',
-                        period1year: '過去1年間',
-                        periodAll: 'すべての期間',
-                        displayLocation: '表示場所',
-                        locationList: 'リスト画面',
-                        locationStats: '統計画面',
-                        locationBoth: '両方',
-                        dataManagement: 'データ管理',
-                        exportData: 'データをエクスポート',
-                        importData: 'データをインポート',
-                        helpSection: 'ヘルプ',
-                        showGuide: '使い方ガイドを再表示',
-                        languageSettings: '言語設定',
-                        japanese: '日本語',
-                        english: 'English',
-
-                        // About
-                        aboutButton: 'このサイトについて',
-                        qaButton: 'よくある質問(Q&A)',
-                        aboutTitle: 'このサイトについて',
-                        qaTitle: 'よくある質問(Q&A)',
-                        closeButton: '閉じる',
-                        okButton: '了解',
-
-                        // 確認ダイアログ
-                        confirm: '確認',
-                        confirmDelete: '削除してもよろしいですか?',
-                        confirmClear: 'すべての履歴を削除してもよろしいですか?',
-
-                        // チュートリアル
-                        tutorialWelcome: '使い方を説明しますか?',
-                        tutorialWelcomeMessage: '初めての方向けに、このサイトの使い方を順番に説明します。',
-                        tutorialClose: '閉じる',
-                        tutorialYes: 'はい',
-                        tutorialSkip: 'スキップ',
-                        tutorialPrev: '戻る',
-                        tutorialNext: '次へ',
-                        tutorialFinish: '終了',
-                        tutorialStep: 'ステップ',
-                        tutorialComplete: 'チュートリアル完了!',
-                        tutorialCompleteMessage: 'お疲れ様でした!これで基本的な使い方の説明は終了です。また分からなくなったら、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
-
-                        // チュートリアル
-                        tutorialStartTitle: 'ストップウォッチの開始',
-                        tutorialStartMessage: 'この「勉強開始」ボタンをクリックすると、タイマーがスタートします。',
-                        tutorialTimerStartedTitle: 'タイマーがスタートしました',
-                        tutorialTimerStartedMessage: '今はチュートリアルですが、実際の勉強では、このまま集中して作業を続けましょう。',
-                        tutorialPauseTitle: '一時停止',
-                        tutorialPauseMessage: '休憩したい時は、この「一時停止」ボタンをクリックして時間を止めることができます。試してみましょう。',
-                        tutorialPausedTitle: '一時停止中',
-                        tutorialPausedMessage: 'タイマーが一時停止しました。もう一度ボタンを押すと再開できます。',
-                        tutorialEndTitle: '記録の終了',
-                        tutorialEndMessage: '勉強が完全に終わったら「終了」ボタンを押します。これで学習時間が自動的に記録されます。クリックしてみましょう。',
-                        tutorialGroupTitle: 'グループ分け',
-                        tutorialGroupMessage: 'グループ名を入力すると、後で科目別や分野別に記録を分類できます。例:「数学」や、「英語」など',
-                        tutorialStatsTitle: '統計の確認',
-                        tutorialStatsMessage: 'ここをクリックして統計画面に移動してみましょう。累計の勉強時間、連続日数、グループ別の集計などが確認できます。',
-                        tutorialHistoryTitle: '履歴の確認',
-                        tutorialHistoryMessage: 'ここをクリックしてリスト画面に移動してみましょう。過去の学習記録を一覧で見ることができます。検索、ソート、グループ移動などの機能があります。',
-                        tutorialDarkModeTitle: 'ダークモード',
-                        tutorialDarkModeMessage: 'このボタンをクリックするとライト/ダークモードを切り替えられます。目に優しい表示で集中できます。試しに切り替えてみましょう。',
-                        tutorialSettingsTitle: '設定画面',
-                        tutorialSettingsMessage: 'ここから設定画面を開けます。テーマカラーの変更、音楽プレイヤーやToDoリストの表示切替、データのバックアップなどができます。クリックして確認してみましょう!',
-                        tutorialDisplaySettingsTitle: '表示設定',
-                        tutorialDisplaySettingsMessage: 'ここで音楽プレイヤーやToDoリストの表示/非表示を切り替えられます。必要な機能だけを表示してシンプルに使えます。',
-                        tutorialThemeColorTitle: 'テーマカラー',
-                        tutorialThemeColorMessage: 'お好みのテーマカラーを選択できます。ブルー、グリーン、パープル、オレンジ、ピンク、ティールの6色から選べます。',
-                        tutorialGraphDisplayTitle: 'グラフ表示',
-                        tutorialGraphDisplayMessage: '勉強時間のグラフの種類や表示期間、表示場所をカスタマイズできます。',
-                        tutorialDataManagementTitle: 'データ管理',
-                        tutorialDataManagementMessage: 'データのエクスポート/インポート機能です。バックアップを取ったり、他のデバイスにデータを移行できます。',
-                        tutorialCompletedTitle: 'チュートリアル完了!',
-                        tutorialCompletedMessage: 'お疲れ様でした!これで基本的な使い方の説明は終了です。また分からなくなったら、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
-                        skipButton: 'スキップ',
-                        step: 'ステップ',
-
-                        // 汎用
-                        confirmDefaultTitle: '確認',
-                        studyTimeManagement: '勉強時間管理',
-                        cancelButton: 'キャンセル',
-
-                        // About & QA
-                        aboutContent: `<div style="text-align: center; margin-bottom: 20px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">⏱️</div>
-                        <h3 style="margin-top: 0;">Study Time Manager</h3>
-                        <p>シンプルで使いやすい勉強時間管理ツール。</p>
-                        <div class="share-buttons">
-                            <a href="https://twitter.com/intent/tweet?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%81%97%E3%80%81%E4%BD%9C%E6%A5%AD%E6%99%82%E9%96%93%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">X(Twitter)</a>
-                            <a href="https://www.threads.net/intent/post?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%82%87%E3%81%86%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">Threads</a>
-                            <a href="https://bsky.app/intent/compose?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">Bluesky</a>
-                            <a href="https://misskeyshare.link/share.html?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">Misskey</a>
-                        </div>
-                        このサイトは<a href="https://kokyujene.github.io/members/super-hiko14/">Super Hiko14</a>が開発しました。<div class="tyuui-mini-text">※ 一部AIが使用されています。</div>
-                        </div>`,
-                        qaContent: `<div style="text-align: left;">
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. データはどこに保存されますか?</h3>
-                            <p style="margin-left: 15px;">A. すべてのデータはブラウザのローカルストレージに保存されます。サーバーには一切送信されません。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 他のデバイスでデータへ移行やバックアップを取りたい。</h3>
-                            <p style="margin-left: 15px;">A. エクスポートからJsonファイルをダウンロードできます。インポートで他デバイスに移行やバックアップとして保存できます。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 音楽プレイヤーで再生できるファイル形式は?</h3>
-                            <p style="margin-left: 15px;">A. mp3, wav, flac, m4a, aac, ogg, webmなどの一般的な音楽ファイルに対応しています。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. タイマーを一時停止したまま閉じてしまった場合は?</h3>
-                            <p style="margin-left: 15px;">A. 大丈夫です。再度サイトを閉じてもタイマーは作動し続けます。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. なんで音楽プレイヤーにYoutube動画とかを追加する予定ってないの?</h3>
-                            <p style="margin-left: 15px;">A. する予定はないです。各サービスの利用規約に違反する可能性があるからです。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 今後も機能を追加する予定は?</h3>
-                            <p style="margin-left: 15px;">A. 決まってはいません。ただし、最低限に使用したい方もいらっしゃると思うので追加する場合はその機能を設定のON/OFFなどで表示を切り替えられるようにする予定です。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 収益化などの広告導入のつもりはある?</h3>
-                            <p style="margin-left: 15px;">A. な い で す ( 断 言 )</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. アプリとかリリースする?</h3>
-                            <p style="margin-left: 15px;">A. 逆にリリースしたいです...。技術的にまだ足りないので無理ですね。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. にゃにゃにゃにゃぁ?(Q&A増える?)</h3>
-                            <p style="margin-left: 15px;">A. にゃにゃにゃにゃぁ。(Q&Aは今後多分増えます。)</p>
-                            <h3 style="font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px;">こんなもんですかね...</h3>
-                        </div>`,
-
-                        // 日付形式
-                        year: '年',
-                        month: '月',
-                        day: '日',
-
-                        // 統計ページ - 追加
-                        totalStudyTime: '総勉強時間',
-                        consecutiveDays: '連続日数',
-                        totalSessions: '総セッション数',
-                        groupStats: 'グループ統計',
-                        uncategorized: '未分類',
-                        days: '日',
-                        sessions: 'セッション',
-
-                        // リストページ - 追加
-                        start: '開始',
-                        end: '終了',
-                        itemsToMove: '件を移動',
-                        selectDestinationGroup: '移動先を選択',
-
-                        // 音楽プレイヤー - 追加
-                        addFilesMessage: 'ファイルを追加してください',
-                        emptyPlaylist: 'ファイルを追加してください',
-
-                        // ToDoリスト - 追加
-                        noTasks: 'タスクがありません',
-                        newTask: '新しいタスクを入力',
-
-                        // チュートリアルステップ
-                        tutorialStep1Title: 'メインメニュー',
-                        tutorialStep1Desc: 'ここから各機能にアクセスできます。タイマー、統計、履歴リストなどを切り替えられます。',
-                        tutorialStep2Title: 'タイマー',
-                        tutorialStep2Desc: 'このタイマーで勉強時間を計測します。開始ボタンを押すと計測が始まります。',
-                        tutorialStep3Title: '勉強開始',
-                        tutorialStep3Desc: 'このボタンを押すと勉強時間の計測が開始されます。',
-                        tutorialStep4Title: 'グループ名',
-                        tutorialStep4Desc: 'ここにグループ名を入力すると、後で統計やリストで分類できます（任意）。',
-                        tutorialStep5Title: '統計',
-                        tutorialStep5Desc: '統計画面では、今日・今週・今月の勉強時間や、グループごとの統計を確認できます。',
-                        tutorialStep6Title: '履歴リスト',
-                        tutorialStep6Desc: 'これまでの学習履歴を一覧で確認できます。検索やソート、グループでの絞り込みも可能です。',
-                        tutorialStep7Title: '設定',
-                        tutorialStep7Desc: 'ここでテーマの変更、音楽プレイヤーやToDoリストの有効化、データのエクスポート/インポートができます。',
-                        tutorialStep8Title: 'テーマ切り替え',
-                        tutorialStep8Desc: 'このボタンでダークモードとライトモードを切り替えられます。',
+                        title: "勉強時間管理",
+                        menu_timer: "タイマー",
+                        menu_stats: "統計",
+                        menu_list: "リスト",
+                        menu_music: "音楽",
+                        menu_todo: "ToDo",
+                        timer_placeholder: "グループ名(任意)",
+                        timer_start_info: "開始ボタンを押して学習を始めましょう",
+                        timer_start_btn: "勉強開始",
+                        timer_pause_btn: "一時停止",
+                        timer_resume_btn: "再開",
+                        timer_end_btn: "終了",
+                        stats_total_time: "トータル勉強時間",
+                        stats_streak: "連続日数",
+                        stats_sessions: "総セッション数",
+                        stats_group_title: "グループ別統計",
+                        list_filter_all: "すべてのグループ",
+                        list_search_placeholder: "日付や時刻で検索(例: 2025年12月11日や、14:30)",
+                        list_sort_new: "新しい順",
+                        list_sort_old: "古い順",
+                        list_sort_long: "時間が長い順",
+                        list_sort_short: "時間が短い順",
+                        list_select_all: "すべて選択",
+                        list_delete_selected: "選択を削除",
+                        list_move_cancel: "キャンセル",
+                        list_move_btn: "移動",
+                        list_move_to: "移動先を選択",
+                        list_graph_title: "勉強時間グラフ",
+                        list_clear_all: "すべての履歴をクリア",
+                        music_file_select: "ファイルを選択",
+                        music_folder_select: "フォルダを選択",
+                        music_time_format: "{cur} / {dur}",
+                        music_empty_state: "ファイルを追加してください",
+                        music_rename: "名前変更",
+                        music_delete: "削除",
+                        todo_placeholder: "新しいタスクを入力",
+                        todo_add_btn: "追加",
+                        todo_repeat_label: "繰り返し",
+                        todo_priority_label: "優先度",
+                        todo_repeat_none: "なし",
+                        todo_repeat_daily: "毎日",
+                        todo_repeat_weekly: "毎週",
+                        todo_repeat_monthly: "毎月",
+                        todo_priority_low: "低",
+                        todo_priority_normal: "通常",
+                        todo_priority_high: "高",
+                        todo_filter_all: "すべて",
+                        todo_filter_active: "未完了",
+                        todo_filter_completed: "完了",
+                        todo_filter_daily: "毎日",
+                        todo_filter_weekly: "毎週",
+                        todo_empty_state: "タスクがありません",
+                        settings_display: "表示設定",
+                        settings_music: "音楽プレイヤー",
+                        settings_todo: "ToDoリスト",
+                        settings_title_time: "タイトルの時間表示",
+                        settings_theme: "テーマカラー",
+                        settings_graph: "グラフ表示",
+                        settings_graph_toggle: "勉強時間のグラフ表示",
+                        settings_graph_type: "グラフの種類",
+                        settings_graph_period: "表示期間",
+                        settings_graph_location: "表示場所",
+                        settings_graph_bar: "棒グラフ",
+                        settings_graph_line: "折れ線グラフ",
+                        settings_graph_area: "面グラフ",
+                        settings_graph_7d: "過去7日間",
+                        settings_graph_14d: "過去14日間",
+                        settings_graph_30d: "過去30日間",
+                        settings_graph_90d: "過去90日間",
+                        settings_graph_1y: "過去1年間",
+                        settings_graph_all: "すべての期間",
+                        settings_graph_loc_list: "リスト画面",
+                        settings_graph_loc_stats: "統計画面",
+                        settings_graph_loc_both: "両方",
+                        settings_data: "データ管理",
+                        settings_export: "データをエクスポート",
+                        settings_import: "データをインポート",
+                        settings_help: "ヘルプ",
+                        settings_restart_tutorial: "使い方ガイドを再表示",
+                        settings_about_site: "このサイトについて",
+                        settings_faq: "よくある質問(Q&A)",
+                        settings_language: "言語 / Language",
+                        about_title: "このサイトについて",
+                        about_content: "このサイトは勉強や作業時間を管理できるサイトです。<br>勉強や作業に没頭できるよう、シンプルで最低限、淡い色などで統一しました。<br><br>勉強とともにストップウォッチをスタートし、作業時間を記録しましょう。<br><div class=\"tyuui-mini-text\">※ データはすべてローカルに保存されます。</div>ぜひSNSで共有してくれると嬉しいです!",
+                        about_developed_by: "このサイトは<a href=\"https://kokyujene.github.io/members/super-hiko14/\">Super Hiko14</a>が開発しました。<div class=\"tyuui-mini-text\">※ 一部AIが使用されています。</div>",
+                        about_close: "閉じる",
+                        about_ok: "了解",
+                        qa_title: "よくある質問(Q&A)",
+                        confirm_ok: "OK",
+                        confirm_cancel: "キャンセル",
+                        confirm_title: "確認",
+                        confirm_message: "この操作を実行しますか?",
+                        rename_title: "曲名を変更",
+                        rename_placeholder: "曲名を入力",
+                        rename_save: "保存",
+                        prev_session: "前回の学習",
+                        session_start: "開始",
+                        session_end: "終了",
+                        session_duration: "学習時間",
+                        session_group: "グループ",
+                        day_unit: "日",
+                        delete_confirm_music: "この曲を削除しますか?",
+                        delete_confirm_todo: "このタスクを削除しますか?",
+                        delete_confirm_selected: "選択した{count}件の記録を削除しますか?",
+                        delete_confirm_all: "すべての学習記録を削除しますか?",
+                        delete_title: "削除確認",
+                        import_confirm: "{history}件の学習記録、{todos}件のToDoを復元します。上書きしてもよろしいですか?",
+                        import_title: "データをインポート",
+                        import_failed: "インポート失敗: {error}",
+                        error_title: "エラー",
+                        tutorial_welcome_title: "使い方を説明しますか?",
+                        tutorial_welcome_message: "初めての方向けに、このサイトの使い方を順番に説明します。",
+                        tutorial_welcome_yes: "はい",
+                        tutorial_welcome_no: "閉じる",
+                        tutorial_step: "ステップ {current}/{total}",
+                        tutorial_skip: "スキップ",
+                        tutorial_prev: "戻る",
+                        tutorial_next: "次へ",
+                        tutorial_finish: "終了",
+                        tutorial_1_title: "ストップウォッチの開始",
+                        tutorial_1_message: "この「勉強開始」ボタンをクリックすると、タイマーがスタートします。",
+                        tutorial_2_title: "タイマーがスタートしました",
+                        tutorial_2_message: "今はチュートリアルですが、実際の勉強では、このまま集中して作業を続けましょう。",
+                        tutorial_3_title: "一時停止",
+                        tutorial_3_message: "休憩したい時は、この「一時停止」ボタンをクリックして時間を止めることができます。試してみましょう。",
+                        tutorial_4_title: "一時停止中",
+                        tutorial_4_message: "タイマーが一時停止しました。もう一度ボタンを押すと再開できます。",
+                        tutorial_5_title: "記録の終了",
+                        tutorial_5_message: "勉強が完全に終わったら「終了」ボタンを押します。これで学習時間が自動的に記録されます。クリックしてみましょう。",
+                        tutorial_6_title: "グループ分け",
+                        tutorial_6_message: "グループ名を入力すると、後で科目別や分野別に記録を分類できます。例:「数学」や、「英語」など",
+                        tutorial_7_title: "統計の確認",
+                        tutorial_7_message: "ここをクリックして統計画面に移動してみましょう。累計の勉強時間、連続日数、グループ別の集計などが確認できます。",
+                        tutorial_8_title: "履歴の確認",
+                        tutorial_8_message: "ここをクリックしてリスト画面に移動してみましょう。過去の学習記録を一覧で見ることができます。検索、ソート、グループ移動などの機能があります。",
+                        tutorial_9_title: "ダークモード",
+                        tutorial_9_message: "このボタンをクリックするとライト/ダークモードを切り替えられます。目に優しい表示で集中できます。試しに切り替えてみましょう。",
+                        tutorial_10_title: "設定画面",
+                        tutorial_10_message: "ここから設定画面を開けます。テーマカラーの変更、音楽プレイヤーやToDoリストの表示切替、データのバックアップなどができます。クリックして確認してみましょう!",
+                        tutorial_11_title: "表示設定",
+                        tutorial_11_message: "ここで音楽プレイヤーやToDoリストの表示/非表示を切り替えられます。必要な機能だけを表示してシンプルに使えます。",
+                        tutorial_12_title: "テーマカラー",
+                        tutorial_12_message: "お好みのテーマカラーを選択できます。ブルー、グリーン、パープル、オレンジ、ピンク、ティールの6色から選べます。",
+                        tutorial_13_title: "グラフ表示",
+                        tutorial_13_message: "勉強時間のグラフの種類や表示期間、表示場所をカスタマイズできます。",
+                        tutorial_14_title: "データ管理",
+                        tutorial_14_message: "データのエクスポート/インポート機能です。バックアップを取ったり、他のデバイスにデータを移行できます。",
+                        tutorial_15_title: "チュートリアル完了!",
+                        tutorial_15_message: "お疲れ様でした!これで基本的な使い方の説明は終了です。また分からなくなったら、設定画面の「使い方ガイドを再表示」からいつでも確認できます。",
+                        graph_label_hours: "勉強時間(時間)",
+                        theme_blue: "ブルー",
+                        theme_green: "グリーン",
+                        theme_purple: "パープル",
+                        theme_orange: "オレンジ",
+                        theme_pink: "ピンク",
+                        theme_teal: "ティール",
+                        stats_unclassified: "未分類",
+                        history_empty: "学習記録がありません",
+                        history_start: "開始",
+                        history_end: "終了",
+                        history_last_session: "前回の学習",
+                        delete_selected_count: "{count}件を削除",
+                        move_selected_count: "{count}件を移動",
+                        confirm_clear_all_title: "全削除確認",
+                        music_play: "再生",
+                        music_pause: "一時停止",
+                        music_loop_on: "ループオン",
+                        music_loop_off: "ループオフ",
+                        music_shuffle_on: "シャッフルオン",
+                        music_shuffle_off: "シャッフルオフ",
+                        mode_light_toggle: "ライトモードに切り替え",
+                        mode_dark_toggle: "ダークモードに切り替え",
+                        date_format: "{y}年{m}月{d}日"
                     },
                     en: {
-                        // Meta
-                        title: 'Study Time Manager',
-                        description: 'Start the timer with your study session and track your work time.',
-
-                        // Main Menu
-                        menuTimer: 'Timer',
-                        menuStats: 'Stats',
-                        menuList: 'List',
-                        menuMusic: 'Music',
-                        menuTodo: 'ToDo',
-
-                        // Timer Page
-                        groupPlaceholder: 'Group name (optional)',
-                        sessionStart: 'Press the start button to begin studying',
-                        startButton: 'Start Study',
-                        pauseButton: 'Pause',
-                        resumeButton: 'Resume',
-                        endButton: 'End',
-                        startTime: 'Start time',
-                        endTime: 'End time',
-                        studyTime: 'Study time',
-                        previousSession: 'Previous session',
-                        group: 'Group',
-
-                        // Stats Page
-                        totalTime: 'Total Study Time',
-                        todayTime: 'Today\'s Study Time',
-                        weekTime: 'This Week\'s Study Time',
-                        monthTime: 'This Month\'s Study Time',
-                        averageTime: 'Average Study Time/Day',
-                        selectGroup: 'Select Group',
-                        allGroups: 'All Groups',
-
-                        // List Page
-                        allGroupsFilter: 'All Groups',
-                        searchPlaceholder: 'Search by date or time (e.g., Dec 11, 2025 or 14:30)',
-                        sortNewest: 'Newest First',
-                        sortOldest: 'Oldest First',
-                        sortLongest: 'Longest First',
-                        sortShortest: 'Shortest First',
-                        selectAll: 'Select All',
-                        deleteSelected: 'Delete Selected',
-                        moveGroup: 'Move to Group',
-                        moveCount: 'selected',
-                        moveDestination: 'Select destination',
-                        moveButton: 'Move',
-                        cancelButton: 'Cancel',
-                        graphTitle: 'Study Time Graph',
-                        clearHistory: 'Clear All History',
-                        noHistory: 'No history yet',
-                        hours: 'hours',
-
-                        // Music Player
-                        selectFile: 'Select File',
-                        selectFolder: 'Select Folder',
-                        previous: 'Previous',
-                        play: 'Play',
-                        pause: 'Pause',
-                        next: 'Next',
-                        loop: 'Loop',
-                        loopOn: 'Loop On',
-                        loopOff: 'Loop Off',
-                        shuffle: 'Shuffle',
-                        shuffleOn: 'Shuffle On',
-                        shuffleOff: 'Shuffle Off',
-                        volume: 'Volume',
-                        playlist: 'Playlist',
-                        deleteButton: 'Delete',
-                        renameButton: 'Rename',
-                        renameSong: 'Rename Song',
-                        songNamePlaceholder: 'Enter song name',
-                        saveButton: 'Save',
-
-                        // ToDo List
-                        newTaskPlaceholder: 'Enter a new task',
-                        addButton: 'Add',
-                        repeat: 'Repeat',
-                        repeatNone: 'None',
-                        repeatDaily: 'Daily',
-                        repeatWeekly: 'Weekly',
-                        repeatMonthly: 'Monthly',
-                        priority: 'Priority',
-                        priorityLow: 'Low',
-                        priorityNormal: 'Normal',
-                        priorityHigh: 'High',
-                        filterAll: 'All',
-                        filterActive: 'Active',
-                        filterCompleted: 'Completed',
-                        filterDaily: 'Daily',
-                        filterWeekly: 'Weekly',
-
-                        // Settings Page
-                        settingsDisplay: 'Display Settings',
-                        musicPlayer: 'Music Player',
-                        todoList: 'ToDo List',
-                        titleTimeDisplay: 'Show Time in Title',
-                        themeColor: 'Theme Color',
-                        themeBlue: 'Blue',
-                        themeGreen: 'Green',
-                        themePurple: 'Purple',
-                        themeOrange: 'Orange',
-                        themePink: 'Pink',
-                        themeTeal: 'Teal',
-                        graphDisplay: 'Graph Display',
-                        studyGraph: 'Show Study Time Graph',
-                        graphType: 'Graph Type',
-                        graphBar: 'Bar Chart',
-                        graphLine: 'Line Chart',
-                        graphArea: 'Area Chart',
-                        displayPeriod: 'Display Period',
-                        period7days: 'Last 7 Days',
-                        period14days: 'Last 14 Days',
-                        period30days: 'Last 30 Days',
-                        period90days: 'Last 90 Days',
-                        period1year: 'Last Year',
-                        periodAll: 'All Time',
-                        displayLocation: 'Display Location',
-                        locationList: 'List Screen',
-                        locationStats: 'Stats Screen',
-                        locationBoth: 'Both',
-                        dataManagement: 'Data Management',
-                        exportData: 'Export Data',
-                        importData: 'Import Data',
-                        helpSection: 'Help',
-                        showGuide: 'Show User Guide',
-                        languageSettings: 'Language Settings',
-                        japanese: '日本語',
-                        english: 'English',
-
-                        // About
-                        aboutButton: 'About This Site',
-                        qaButton: 'FAQ (Q&A)',
-                        aboutTitle: 'About This Site',
-                        qaTitle: 'Frequently Asked Questions (FAQ)',
-                        closeButton: 'Close',
-                        okButton: 'OK',
-
-                        // Confirm Dialog
-                        confirm: 'Confirm',
-                        confirmDelete: 'Are you sure you want to delete?',
-                        confirmClear: 'Are you sure you want to clear all history?',
-
-                        // Tutorial
-                        tutorialWelcome: 'Would you like a tutorial?',
-                        tutorialWelcomeMessage: 'For first-time users, we\'ll guide you through how to use this site step by step.',
-                        tutorialClose: 'Close',
-                        tutorialYes: 'Yes',
-                        tutorialSkip: 'Skip',
-                        tutorialPrev: 'Back',
-                        tutorialNext: 'Next',
-                        tutorialFinish: 'Finish',
-                        tutorialStep: 'Step',
-                        tutorialComplete: 'Tutorial Complete!',
-                        tutorialCompleteMessage: 'Great job! You\'ve completed the basic tutorial. If you need help again, you can access the guide anytime from "Show User Guide" in the settings.',
-                        // Date format
-                        year: '',
-                        month: '/',
-                        day: '',
-
-                        // Stats Page - Additional
-                        totalStudyTime: 'Total Study Time',
-                        consecutiveDays: 'Consecutive Days',
-                        totalSessions: 'Total Sessions',
-                        groupStats: 'Group Statistics',
-                        uncategorized: 'Uncategorized',
-                        days: 'days',
-                        sessions: 'sessions',
-
-                        // List Page - Additional
-                        start: 'Start',
-                        end: 'End',
-                        itemsToMove: 'items to move',
-                        selectDestinationGroup: 'Select destination',
-
-                        // Music Player - Additional
-                        addFilesMessage: 'Please add files',
-                        emptyPlaylist: 'Please add files',
-
-                        // ToDo List - Additional
-                        noTasks: 'No tasks',
-                        newTask: 'Enter a new task',
-
-                        // Tutorial Steps
-                        tutorialStep1Title: 'Main Menu',
-                        tutorialStep1Desc: 'Access all features from here. Switch between Timer, Stats, History list, and more.',
-                        tutorialStep2Title: 'Timer',
-                        tutorialStep2Desc: 'This timer tracks your study time. Press the start button to begin measuring.',
-                        tutorialStep3Title: 'Start Studying',
-                        tutorialStep3Desc: 'Click this button to start tracking your study time.',
-                        tutorialStep4Title: 'Group Name',
-                        tutorialStep4Desc: 'Enter a group name here to categorize your sessions in stats and lists (optional).',
-                        tutorialStep5Title: 'Statistics',
-                        tutorialStep5Desc: 'View study time for today, this week, this month, and statistics by group.',
-                        tutorialStep6Title: 'History List',
-                        tutorialStep6Desc: 'View all your past study sessions. Search, sort, and filter by group.',
-                        tutorialStep7Title: 'Settings',
-                        tutorialStep7Desc: 'Change themes, enable music player and todo list, export/import data.',
-                        tutorialStep8Title: 'Theme Toggle',
-                        tutorialStep8Desc: 'Switch between Dark mode and Light mode with this button.',
-
-                        // Tutorial
-                        tutorialStartTitle: 'Start Stopwatch',
-                        tutorialStartMessage: 'Click here to start the timer.',
-                        tutorialTimerStartedTitle: 'Timer Started',
-                        tutorialTimerStartedMessage: 'In actual study, focus on your work from here.',
-                        tutorialPauseTitle: 'Pause',
-                        tutorialPauseMessage: 'Click "Pause" button to take a break.',
-                        tutorialPausedTitle: 'Paused',
-                        tutorialPausedMessage: 'Timer is paused. Click again to resume.',
-                        tutorialEndTitle: 'Finish Recording',
-                        tutorialEndMessage: 'Click "Finish" when you are done. Time will be recorded.',
-                        tutorialGroupTitle: 'Grouping',
-                        tutorialGroupMessage: 'Enter group name to categorize your study (e.g., Math, English).',
-                        tutorialStatsTitle: 'Check Statistics',
-                        tutorialStatsMessage: 'Click here to see total time, consecutive days, and group stats.',
-                        tutorialHistoryTitle: 'Check History',
-                        tutorialHistoryMessage: 'Click here to view past study records. Search, sort, and edit.',
-                        tutorialDarkModeTitle: 'Dark Mode',
-                        tutorialDarkModeMessage: 'Toggle light/dark mode for eye comfort.',
-                        tutorialSettingsTitle: 'Settings',
-                        tutorialSettingsMessage: 'Open settings for themes, data backup, and feature toggles.',
-                        tutorialDisplaySettingsTitle: 'Display Settings',
-                        tutorialDisplaySettingsMessage: 'Toggle features like Music Player or ToDo list on/off.',
-                        tutorialThemeColorTitle: 'Theme Color',
-                        tutorialThemeColorMessage: 'Choose your favorite theme color from 6 options.',
-                        tutorialGraphDisplayTitle: 'Graph Settings',
-                        tutorialGraphDisplayMessage: 'Customize graph type and display period.',
-                        tutorialDataManagementTitle: 'Data Management',
-                        tutorialDataManagementMessage: 'Export/Import data for backup or migration.',
-                        tutorialCompletedTitle: 'Tutorial Completed!',
-                        tutorialCompletedMessage: 'That\'s it! You can review this guide anytime from Settings.',
-                        skipButton: 'Skip',
-                        step: 'step',
-
-                        // General
-                        confirmDefaultTitle: 'Confirm',
-                        studyTimeManagement: 'Study Time Manager',
-                        cancelButton: 'Cancel',
-
-                        // About & QA
-                        aboutContent: `<div style="text-align: center; margin-bottom: 20px;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">⏱️</div>
-                        <h3 style="margin-top: 0;">Study Time Manager</h3>
-                        <p>Simple and easy-to-use study time management tool.</p>
-                        <div class="share-buttons">
-                            <a href="https://twitter.com/intent/tweet?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">X(Twitter)</a>
-                            <a href="https://www.threads.net/intent/post?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">Threads</a>
-                            <a href="https://bsky.app/intent/compose?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">Bluesky</a>
-                            <a href="https://misskeyshare.link/share.html?text=%E5%8B%89%E5%BC%B7%E3%81%A8%E3%81%A8%E3%81%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81%E3%82%92%E8%A8%98%E9%8C%B2%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%0Ahttps%3A%2F%2Fkokyujene.github.io%2Ftool%2Fstudy%2F" target="_blank">Misskey</a>
-                        </div>
-                        Developed by <a href="https://kokyujene.github.io/members/super-hiko14/">Super Hiko14</a>.<div class="tyuui-mini-text">* AI is used in some parts.</div>
-                        </div>`,
-                        qaContent: `<div style="text-align: left;">
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Where is data saved?</h3>
-                            <p style="margin-left: 15px;">A. All data is saved in your browser's local storage. Not sent to any server.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. I want to migrate/backup data.</h3>
-                            <p style="margin-left: 15px;">A. You can download a JSON file from Export. Use Import to restore or migrate.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. What music files are supported?</h3>
-                            <p style="margin-left: 15px;">A. Supports mp3, wav, flac, m4a, aac, ogg, webm etc.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. If I close while timer paused?</h3>
-                            <p style="margin-left: 15px;">A. Timer continues running even if site is closed.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Will you add Youtube support?</h3>
-                            <p style="margin-left: 15px;">A. No plans due to Terms of Service compliance.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Future features?</h3>
-                            <p style="margin-left: 15px;">A. Undecided. If added, will be togglable in settings.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Monetization/Ads?</h3>
-                            <p style="margin-left: 15px;">A. N O (Assertive)</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. App release?</h3>
-                            <p style="margin-left: 15px;">A. I want to... but not technically capable yet.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Meow meow? (More Q&A?)</h3>
-                            <p style="margin-left: 15px;">A. Meow meow. (More Q&A maybe later.)</p>
-                            <h3 style="font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px;">That's about it...</h3>
-                        </div>`,
-
-                        historyClearConfirm: 'Are you sure you want to delete all study history?',
-                        historyClearTitle: 'Confirm Delete All',
-                        deleteSelectedConfirm: 'Delete selected {n} items?',
-                        deleteConfirmTitle: 'Confirm Delete',
-
-                        // ToDo List
-                        todoPlaceholder: 'Enter a new task',
-                        todoAddButton: 'Add',
+                        title: "Study Timer",
+                        menu_timer: "Timer",
+                        menu_stats: "Stats",
+                        menu_list: "List",
+                        menu_music: "Music",
+                        menu_todo: "ToDo",
+                        timer_placeholder: "Group name (optional)",
+                        timer_start_info: "Press the start button to begin studying",
+                        timer_start_btn: "Start Study",
+                        timer_pause_btn: "Pause",
+                        timer_resume_btn: "Resume",
+                        timer_end_btn: "End",
+                        stats_total_time: "Total Study Time",
+                        stats_streak: "Daily Streak",
+                        stats_sessions: "Total Sessions",
+                        stats_group_title: "Stats by Group",
+                        list_filter_all: "All Groups",
+                        list_search_placeholder: "Search by date or time (e.g. 2025/12/11 or 14:30)",
+                        list_sort_new: "Newest",
+                        list_sort_old: "Oldest",
+                        list_sort_long: "Longest",
+                        list_sort_short: "Shortest",
+                        list_select_all: "Select All",
+                        list_delete_selected: "Delete Selected",
+                        list_move_cancel: "Cancel",
+                        list_move_btn: "Move",
+                        list_move_to: "Select target group",
+                        list_graph_title: "Study Time Graph",
+                        list_clear_all: "Clear All History",
+                        music_file_select: "Select Files",
+                        music_folder_select: "Select Folder",
+                        music_time_format: "{cur} / {dur}",
+                        music_empty_state: "Please add files",
+                        music_rename: "Rename",
+                        music_delete: "Delete",
+                        todo_placeholder: "Enter new task",
+                        todo_add_btn: "Add",
+                        todo_repeat_label: "Repeat",
+                        todo_priority_label: "Priority",
+                        todo_repeat_none: "None",
+                        todo_repeat_daily: "Daily",
+                        todo_repeat_weekly: "Weekly",
+                        todo_repeat_monthly: "Monthly",
+                        todo_priority_low: "Low",
+                        todo_priority_normal: "Normal",
+                        todo_priority_high: "High",
+                        todo_filter_all: "All",
+                        todo_filter_active: "Active",
+                        todo_filter_completed: "Done",
+                        todo_filter_daily: "Daily",
+                        todo_filter_weekly: "Weekly",
+                        todo_empty_state: "No tasks",
+                        settings_display: "Display Settings",
+                        settings_music: "Music Player",
+                        settings_todo: "ToDo List",
+                        settings_title_time: "Show time in title",
+                        settings_theme: "Theme Color",
+                        settings_graph: "Graph Display",
+                        settings_graph_toggle: "Study time graph",
+                        settings_graph_type: "Graph Type",
+                        settings_graph_period: "Period",
+                        settings_graph_location: "Location",
+                        settings_graph_bar: "Bar",
+                        settings_graph_line: "Line",
+                        settings_graph_area: "Area",
+                        settings_graph_7d: "Last 7 days",
+                        settings_graph_14d: "Last 14 days",
+                        settings_graph_30d: "Last 30 days",
+                        settings_graph_90d: "Last 90 days",
+                        settings_graph_1y: "Last year",
+                        settings_graph_all: "All time",
+                        settings_graph_loc_list: "List View",
+                        settings_graph_loc_stats: "Stats View",
+                        settings_graph_loc_both: "Both",
+                        settings_data: "Data Management",
+                        settings_export: "Export Data",
+                        settings_import: "Import Data",
+                        settings_help: "Help",
+                        settings_restart_tutorial: "Restart Tutorial",
+                        settings_about_site: "About this site",
+                        settings_faq: "FAQ",
+                        settings_language: "Language",
+                        about_title: "About this site",
+                        about_content: "This site helps you manage your study and work sessions.<br>Designed to be simple and minimal with soft colors so you can stay focused.<br><br>Start the stopwatch as you study and keep track of your progress.<br><div class=\"tyuui-mini-text\">* All data is stored locally.</div>Please share it on SNS!",
+                        about_developed_by: "Developed by <a href=\"https://kokyujene.github.io/members/super-hiko14/\">Super Hiko14</a>. <div class=\"tyuui-mini-text\">* Uses AI in some parts.</div>",
+                        about_close: "Close",
+                        about_ok: "Got it",
+                        qa_title: "FAQ",
+                        confirm_ok: "OK",
+                        confirm_cancel: "Cancel",
+                        confirm_title: "Confirmation",
+                        confirm_message: "Do you want to proceed?",
+                        rename_title: "Rename Track",
+                        rename_placeholder: "Enter title",
+                        rename_save: "Save",
+                        prev_session: "Previous Session",
+                        session_start: "Start",
+                        session_end: "End",
+                        session_duration: "Duration",
+                        session_group: "Group",
+                        day_unit: "days",
+                        delete_confirm_music: "Do you want to delete this track?",
+                        delete_confirm_todo: "Do you want to delete this task?",
+                        delete_confirm_selected: "Delete {count} selected records?",
+                        delete_confirm_all: "Delete all study records?",
+                        delete_title: "Confirm Deletion",
+                        import_confirm: "Restore {history} records and {todos} tasks? This will overwrite existing data.",
+                        import_title: "Import Data",
+                        import_failed: "Import failed: {error}",
+                        error_title: "Error",
+                        tutorial_welcome_title: "Show tutorial?",
+                        tutorial_welcome_message: "Would you like a quick tour of how to use this site?",
+                        tutorial_welcome_yes: "Yes",
+                        tutorial_welcome_no: "Close",
+                        tutorial_step: "Step {current}/{total}",
+                        tutorial_skip: "Skip",
+                        tutorial_prev: "Back",
+                        tutorial_next: "Next",
+                        tutorial_finish: "Finish",
+                        tutorial_1_title: "Start Stopwatch",
+                        tutorial_1_message: "Click this 'Start Study' button to begin the timer.",
+                        tutorial_2_title: "Timer Started",
+                        tutorial_2_message: "This is a tutorial, but in actual use, stay focused on your work while the timer runs.",
+                        tutorial_3_title: "Pause",
+                        tutorial_3_message: "When you need a break, you can stop the time with this 'Pause' button. Give it a try.",
+                        tutorial_4_title: "Paused",
+                        tutorial_4_message: "The timer is now paused. Click the button again to resume.",
+                        tutorial_5_title: "End Session",
+                        tutorial_5_message: "When you're completely finished, click 'End'. This will automatically record your study time. Try it.",
+                        tutorial_6_title: "Grouping",
+                        tutorial_6_message: "Enter a group name to categorize your records later by subject or field. e.g. 'Math' or 'English'.",
+                        tutorial_7_title: "Check Stats",
+                        tutorial_7_message: "Click here to see the stats page. You can check total time, streaks, and summaries by group.",
+                        tutorial_8_title: "Check History",
+                        tutorial_8_message: "Click here to see the list page. You can view all past records. Features include search, sort, and re-grouping.",
+                        tutorial_9_title: "Dark Mode",
+                        tutorial_9_message: "Click this button to toggle between light and dark modes. Use eye-friendly colors to stay focused. Try switching!",
+                        tutorial_10_title: "Settings",
+                        tutorial_10_message: "Open settings from here. You can change themes, toggle Music/ToDo visibility, and backup your data. Let's check it out!",
+                        tutorial_11_title: "Display Settings",
+                        tutorial_11_message: "Toggle the music player or ToDo list here. Keep it simple by only showing what you need.",
+                        tutorial_12_title: "Theme Colors",
+                        tutorial_12_message: "Pick your favorite theme. Choose from Blue, Green, Purple, Orange, Pink, and Teal.",
+                        tutorial_13_title: "Graph Settings",
+                        tutorial_13_message: "Customize graph types, periods, and where they appear.",
+                        tutorial_14_title: "Data Management",
+                        tutorial_14_message: "Export or import your data. Backup your progress or migrate to another device.",
+                        tutorial_15_title: "Tutorial Finished!",
+                        tutorial_15_message: "Great job! You've learned the basics. You can restart this tour anytime from the settings.",
+                        graph_label_hours: "Study Time (Hours)",
+                        theme_blue: "Blue",
+                        theme_green: "Green",
+                        theme_purple: "Purple",
+                        theme_orange: "Orange",
+                        theme_pink: "Pink",
+                        theme_teal: "Teal",
+                        stats_unclassified: "Unclassified",
+                        history_empty: "No study records",
+                        history_start: "Start",
+                        history_end: "End",
+                        history_last_session: "Previous Session",
+                        delete_selected_count: "Delete {count}",
+                        move_selected_count: "Move {count}",
+                        confirm_clear_all_title: "Clear All Confirmation",
+                        music_play: "Play",
+                        music_pause: "Pause",
+                        music_loop_on: "Loop On",
+                        music_loop_off: "Loop Off",
+                        music_shuffle_on: "Shuffle On",
+                        music_shuffle_off: "Shuffle Off",
+                        mode_light_toggle: "Switch to Light Mode",
+                        mode_dark_toggle: "Switch to Dark Mode",
+                        date_format: "{y}/{m}/{d}"
                     }
                 };
 
-                // 翻訳テキストを取得
-                function getText(key) {
-                    return translations[currentLanguage][key] || translations['ja'][key] || key;
-                }
+                let currentLang = 'ja';
 
-                // 言語を変更
-                function changeLanguage(lang) {
-                    currentLanguage = lang;
-                    saveData('app_language', lang);
-                    applyTranslations();
-
-                    // 動的に生成される要素も更新
-                    if (getData('graph_enabled') === 'true') {
-                        updateGraphs();
+                function i18n(key, params = {}) {
+                    let text = translations[currentLang][key] || translations['ja'][key] || key;
+                    for (const [k, v] of Object.entries(params)) {
+                        text = text.replace(`{${k}}`, v);
                     }
-                    loadHistory();
-                    loadStats();
+                    return text;
                 }
 
-                // すべての翻訳を適用
                 function applyTranslations() {
-                    // data-i18n属性を持つ要素を更新
-                    document.querySelectorAll('[data-i18n]').forEach(element => {
-                        const key = element.getAttribute('data-i18n');
-                        const text = getText(key);
+                    document.title = i18n('title');
+                    document.documentElement.lang = currentLang;
 
-                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                            if (element.placeholder !== undefined) {
-                                element.placeholder = text;
-                            }
-                        } else if (element.tagName === 'SELECT') {
-                            // select要素は子要素のoptionを個別に処理
-                        } else if (element.tagName === 'OPTION') {
-                            element.textContent = text;
+                    document.querySelectorAll('[data-i18n]').forEach(el => {
+                        const key = el.getAttribute('data-i18n');
+                        if (el.tagName === 'INPUT' && (el.type === 'text' || el.type === 'search')) {
+                            el.placeholder = i18n(key);
+                        } else if (el.tagName === 'IMG') {
+                            el.alt = i18n(key);
                         } else {
-                            // ボタンやラベルなど
-                            element.textContent = text;
+                            el.innerHTML = i18n(key);
                         }
                     });
 
-                    // data-i18n-html属性を持つ要素を更新（HTML含む）
-                    document.querySelectorAll('[data-i18n-html]').forEach(element => {
-                        const key = element.getAttribute('data-i18n-html');
-                        element.innerHTML = getText(key);
-                    });
+                    // 特殊な要素の更新
+                    const startBtn = document.getElementById('startBtn');
+                    if (startBtn) startBtn.textContent = i18n('timer_start_btn');
 
-                    // 言語切り替えボタンの状態を更新
-                    document.querySelectorAll('.language-option').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    document.querySelector(`[data-lang="${currentLanguage}"]`)?.classList.add('active');
+                    const pauseBtn = document.getElementById('pauseBtn');
+                    if (pauseBtn) pauseBtn.textContent = isPaused ? i18n('timer_resume_btn') : i18n('timer_pause_btn');
 
-                    // ページタイトルも更新
-                    if (!startTime) {
-                        document.title = getText('title');
+                    const endBtn = document.getElementById('endBtn');
+                    if (endBtn) endBtn.textContent = i18n('timer_end_btn');
+
+                    const confirmOk = document.getElementById('confirmOk');
+                    if (confirmOk) confirmOk.textContent = i18n('confirm_ok');
+
+                    const confirmCancel = document.getElementById('confirmCancel');
+                    if (confirmCancel) confirmCancel.textContent = i18n('confirm_cancel');
+
+                    const renameOkBtn = document.getElementById('renameOkBtn');
+                    if (renameOkBtn) renameOkBtn.textContent = i18n('rename_save');
+
+                    const renameCancelBtn = document.getElementById('renameCancelBtn');
+                    if (renameCancelBtn) renameCancelBtn.textContent = i18n('confirm_cancel');
+
+                    const aboutOkBtn = document.getElementById('aboutOkBtn');
+                    if (aboutOkBtn) aboutOkBtn.textContent = i18n('about_ok');
+
+                    const aboutCloseBtn = document.getElementById('aboutCloseBtn');
+                    if (aboutCloseBtn) aboutCloseBtn.textContent = i18n('about_close');
+
+                    const qaOkBtn = document.getElementById('qaOkBtn');
+                    if (qaOkBtn) qaOkBtn.textContent = i18n('about_ok');
+
+                    const qaCloseBtn = document.getElementById('qaCloseBtn');
+                    if (qaCloseBtn) qaCloseBtn.textContent = i18n('about_close');
+
+                    // チュートリアルのパラメータ更新
+                    updateTutorialSteps();
+                }
+
+                function updateTutorialSteps() {
+                    for (let i = 0; i < tutorialSteps.length; i++) {
+                        tutorialSteps[i].title = i18n(`tutorial_${i + 1}_title`);
+                        tutorialSteps[i].message = i18n(`tutorial_${i + 1}_message`);
                     }
+                }
 
-                    // HTML lang属性を更新
-                    document.documentElement.lang = currentLanguage;
+                function changeLanguage(lang) {
+                    currentLang = lang;
+                    saveData('language', lang);
+                    applyTranslations();
+
+                    const langSelect = document.getElementById('languageSelect');
+                    if (langSelect) langSelect.value = lang;
+
+                    // 動的なリストや統計を再描画
+                    if (document.getElementById('historyList')) loadHistory();
+                    if (document.getElementById('todoItems')) loadTodos();
+                    if (document.getElementById('statsContainer')) loadStats();
+                    if (typeof updateGraphs === 'function') updateGraphs();
                 }
 
                 // カスタム確認ダイアログ
                 let confirmResolve = null;
 
-
-                function customConfirm(message, title = null, iconSrc = 'warning.webp') {
+                function customConfirm(message, title = i18n('confirm_title'), iconSrc = 'warning.webp') {
                     return new Promise((resolve) => {
                         confirmResolve = resolve;
                         const overlay = document.getElementById('customConfirmOverlay');
@@ -3210,13 +3067,8 @@
                         const messageEl = document.getElementById('confirmMessage');
                         const iconImg = document.getElementById('confirmIconImg');
 
-                        titleEl.textContent = title || getText('confirmDefaultTitle');
+                        titleEl.textContent = title;
                         messageEl.textContent = message;
-
-                        // キャンセルボタンのテキスト更新
-                        const cancelBtn = document.getElementById('confirmCancel');
-                        if (cancelBtn) cancelBtn.textContent = getText('cancelButton');
-
                         if (iconImg) {
                             iconImg.src = iconSrc;
                         }
@@ -3423,13 +3275,13 @@
                         body.classList.remove('light');
                         body.classList.add('dark');
                         themeIcon.src = 'sun.webp';
-                        themeIcon.alt = 'ライトモードに切り替え';
+                        themeIcon.alt = i18n('mode_light_toggle');
                         saveData('mode', 'dark');
                     } else {
                         body.classList.remove('dark');
                         body.classList.add('light');
                         themeIcon.src = 'moon.webp';
-                        themeIcon.alt = 'ダークモードに切り替え';
+                        themeIcon.alt = i18n('mode_dark_toggle');
                         saveData('mode', 'light');
                     }
 
@@ -3471,7 +3323,7 @@
                     if (isActive) {
                         toggle.classList.remove('active');
                         saveData('feature_title_time', 'false');
-                        document.title = getText('studyTimeManagement'); // 即座に反映
+                        document.title = '勉強時間管理'; // 即座に反映
                     } else {
                         toggle.classList.add('active');
                         saveData('feature_title_time', 'true');
@@ -3482,17 +3334,14 @@
 
                 function addMenuButton(feature) {
                     const menu = document.getElementById('mainMenu');
-                    const btnText = feature === 'music' ? getText('menuMusic') : getText('menuTodo');
-                    const existingBtn = Array.from(menu.children).find(btn => btn.getAttribute('data-feature') === feature);
+                    const existingBtn = menu.querySelector(`[data-feature="${feature}"]`);
                     if (!existingBtn) {
                         const btn = document.createElement('button');
-                        btn.textContent = btnText;
+                        btn.textContent = feature === 'music' ? i18n('menu_music') : i18n('menu_todo');
+                        btn.setAttribute('data-i18n', feature === 'music' ? 'menu_music' : 'menu_todo');
                         btn.onclick = () => showPage(feature);
                         btn.setAttribute('data-feature', feature);
                         menu.appendChild(btn);
-                    } else {
-                        // 既存ボタンのテキスト更新(言語切り替え時など)
-                        existingBtn.textContent = btnText;
                     }
                 }
 
@@ -3509,10 +3358,7 @@
                     if (pages[pageName]) {
                         document.getElementById(pages[pageName]).classList.add('active');
                         const menuButtons = Array.from(document.querySelectorAll('.menu button'));
-                        const activeBtn = menuButtons.find(btn => {
-                            const btnText = btn.textContent;
-                            return (pageName === 'timer' && btnText === 'タイマー') || (pageName === 'stats' && btnText === '統計') || (pageName === 'list' && btnText === 'リスト') || (pageName === 'music' && btnText === '音楽') || (pageName === 'todo' && btnText === 'ToDo') || (pageName === 'settings' && false); // Settings has no menu button usually, or handled by icon
-                        });
+                        const activeBtn = menuButtons.find(btn => btn.getAttribute('data-feature') === pageName);
                         if (activeBtn) activeBtn.classList.add('active');
                         if (pageName === 'stats') { loadStats(); updateGraphs(); }
                         if (pageName === 'list') { updateGroupFilter(); loadHistory(); updateGraphs(); }
@@ -3536,13 +3382,10 @@
                 }
 
                 function formatDate(date) {
-                    const year = date.getFullYear();
-                    const month = String(date.getMonth() + 1).padStart(2, '0');
-                    const day = String(date.getDate()).padStart(2, '0');
-                    if (currentLanguage === 'en') {
-                        return `${year}/${month}/${day}`;
-                    }
-                    return `${year}${getText('year')}${month}${getText('month')}${day}${getText('day')}`;
+                    const y = date.getFullYear();
+                    const m = String(date.getMonth() + 1).padStart(2, '0');
+                    const d = String(date.getDate()).padStart(2, '0');
+                    return i18n('date_format', { y, m, d });
                 }
 
                 function updateTimer() {
@@ -3553,9 +3396,9 @@
 
                         // 設定に基づいてタイトルを更新
                         if (getData('feature_title_time') !== 'false') {
-                            document.title = `${timeStr} - ${getText('studyTimeManagement')}`;
+                            document.title = `${timeStr} - ${i18n('title')}`;
                         } else {
-                            document.title = getText('studyTimeManagement'); // OFFの場合は固定
+                            document.title = i18n('title'); // OFFの場合は固定
                         }
                     }
                 }
@@ -3571,7 +3414,7 @@
                     document.getElementById('startBtn').classList.add('hidden');
                     document.getElementById('pauseBtn').classList.remove('hidden');
                     document.getElementById('endBtn').classList.remove('hidden');
-                    document.getElementById('sessionInfo').textContent = `${getText('startTime')}: ${formatDateTime(new Date())}`;
+                    document.getElementById('sessionInfo').textContent = `${i18n('session_start')}: ${formatDateTime(new Date())}`;
                     timerInterval = setInterval(updateTimer, 100);
                 }
 
@@ -3581,7 +3424,7 @@
                         pausedTime += Date.now() - startTime;
                         isPaused = true;
                         if (timerInterval) clearInterval(timerInterval);
-                        document.getElementById('pauseBtn').textContent = getText('resumeButton');
+                        document.getElementById('pauseBtn').textContent = i18n('timer_resume_btn');
                         saveData('studyPaused', 'true');
                         saveData('studyPausedAccum', String(pausedTime));
                     } else {
@@ -3589,14 +3432,14 @@
                         startTime = Date.now();
                         isPaused = false;
                         timerInterval = setInterval(updateTimer, 100);
-                        document.getElementById('pauseBtn').textContent = getText('pauseButton');
+                        document.getElementById('pauseBtn').textContent = i18n('timer_pause_btn');
                         saveData('studyPaused', 'false');
                     }
                 }
 
                 function endStudy() {
                     if (timerInterval) clearInterval(timerInterval);
-                    document.title = getText('studyTimeManagement');
+                    document.title = '勉強時間管理';
                     const endTime = new Date();
                     const startCookie = getData('studyStartTime');
                     const groupInput = document.getElementById('groupInput');
@@ -3608,7 +3451,7 @@
                         history = history ? JSON.parse(history) : [];
                         history.unshift({ start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName });
                         saveData('studyHistory', JSON.stringify(history));
-                        document.getElementById('sessionInfo').innerHTML = `${getText('startTime')}: ${formatDateTime(start)}<br>${getText('endTime')}: ${formatDateTime(endTime)}<br>${getText('studyTime')}: ${formatTime(actualStudyTime)}${groupName ? '<br>' + getText('group') + ': ' + groupName : ''}`;
+                        document.getElementById('sessionInfo').innerHTML = `${i18n('session_start')}: ${formatDateTime(start)}<br>${i18n('session_end')}: ${formatDateTime(endTime)}<br>${i18n('session_duration')}: ${formatTime(actualStudyTime)}${groupName ? '<br>' + i18n('session_group') + ': ' + groupName : ''}`;
                     }
                     // セッション終了時は一時保存データを削除
                     localStorage.removeItem('studyStartTime');
@@ -3620,7 +3463,7 @@
                     document.getElementById('startBtn').classList.remove('hidden');
                     document.getElementById('pauseBtn').classList.add('hidden');
                     document.getElementById('endBtn').classList.add('hidden');
-                    document.getElementById('pauseBtn').textContent = getText('pauseButton');
+                    document.getElementById('pauseBtn').textContent = i18n('timer_pause_btn');
                     groupInput.value = '';
                     startTime = null;
                     pausedTime = 0;
@@ -3667,7 +3510,7 @@
                 function loadPlaylist() {
                     const playlistDiv = document.getElementById('playlist');
                     if (musicFiles.length === 0) {
-                        playlistDiv.innerHTML = `<div class="empty-state">${getText('emptyPlaylist')}</div>`;
+                        playlistDiv.innerHTML = `<div class="empty-state">${i18n('music_empty_state')}</div>`;
                         return;
                     }
                     playlistDiv.innerHTML = musicFiles.map((item, index) => `
@@ -3681,8 +3524,8 @@
                 </div>
             </div>
             <div class="playlist-item-buttons">
-                <button class="secondary" onclick="event.stopPropagation(); startRename(${index})">${getText('renameButton')}</button>
-                <button class="delete-btn" onclick="event.stopPropagation(); deleteMusic(${index})">${getText('deleteButton')}</button>
+                <button class="secondary" onclick="event.stopPropagation(); startRename(${index})">${i18n('music_rename')}</button>
+                <button class="delete-btn" onclick="event.stopPropagation(); deleteMusic(${index})">${i18n('music_delete')}</button>
             </div>
         </div>
     `).join('');
@@ -3891,7 +3734,7 @@
                     const playImg = document.getElementById('playIconImg');
                     if (playImg) {
                         playImg.src = isPlaying ? 'pause.webp' : 'play_arrow.webp';
-                        playImg.alt = isPlaying ? '一時停止' : '再生';
+                        playImg.alt = isPlaying ? i18n('music_pause') : i18n('music_play');
                     }
                     // リスト上のplayingクラスは再生中も一時停止中もactiveで良いならそのままだが、
                     // 一時停止中にスタイルを変えたい場合はここで制御。今回は変更なし。
@@ -3944,7 +3787,7 @@
                     const loopImg = document.getElementById('loopBtnImg');
                     if (loopImg) {
                         loopImg.src = isLoop ? 'loop_on.webp' : 'loop_off.webp';
-                        loopImg.alt = isLoop ? 'ループオン' : 'ループオフ';
+                        loopImg.alt = isLoop ? i18n('music_loop_on') : i18n('music_loop_off');
                     }
                 }
 
@@ -3954,7 +3797,7 @@
                     const shImg = document.getElementById('shuffleBtnImg');
                     if (shImg) {
                         shImg.src = isShuffle ? 'shuffle_on.webp' : 'shuffle_off.webp';
-                        shImg.alt = isShuffle ? 'シャッフルオン' : 'シャッフルオフ';
+                        shImg.alt = isShuffle ? i18n('music_shuffle_on') : i18n('music_shuffle_off');
                     }
                 }
 
@@ -3963,7 +3806,7 @@
                 }
 
                 async function deleteMusic(index) {
-                    const confirmed = await customConfirm(getText('deleteMusicConfirm'), getText('deleteConfirmTitle'), 'delete.webp');
+                    const confirmed = await customConfirm(i18n('delete_confirm_music'), i18n('delete_title'), 'delete.webp');
                     if (confirmed) {
                         const removed = musicFiles[index];
                         if (currentMusicIndex === index) {
@@ -4143,7 +3986,7 @@
 
                     const todosDiv = document.getElementById('todoItems');
                     if (filteredTodos.length === 0) {
-                        todosDiv.innerHTML = `<div class="empty-state">${getText('noTasks')}</div>`;
+                        todosDiv.innerHTML = `<div class="empty-state">${i18n('todo_empty_state')}</div>`;
                         return;
                     }
 
@@ -4161,7 +4004,7 @@
                         ${repeatBadge}
                     </div>
                 </div>
-                <button class="todo-delete" onclick="deleteTodo(${index})">${getText('deleteButton')}</button>
+                <button class="todo-delete" onclick="deleteTodo(${index})">${i18n('music_delete')}</button>
             </div>
         `;
                     }).join('');
@@ -4169,21 +4012,21 @@
 
                 function getRepeatLabel(repeat) {
                     const labels = {
-                        'daily': getText('daily'),
-                        'weekly': getText('weekly'),
-                        'monthly': getText('monthly')
+                        'daily': i18n('todo_repeat_daily'),
+                        'weekly': i18n('todo_repeat_weekly'),
+                        'monthly': i18n('todo_repeat_monthly')
                     };
                     return labels[repeat] || '';
                 }
 
                 function getCategoryLabel(category) {
                     const labels = {
-                        'study': getText('study'),
-                        'work': getText('work'),
-                        'personal': getText('personal'),
-                        'shopping': getText('shopping'),
-                        'health': getText('health'),
-                        'other': getText('other')
+                        'study': '勉強', // These aren't fully used in UI but let's keep them
+                        'work': '仕事',
+                        'personal': '個人',
+                        'shopping': '買い物',
+                        'health': '健康',
+                        'other': 'その他'
                     };
                     return labels[category] || '';
                 }
@@ -4215,7 +4058,7 @@
                 }
 
                 async function deleteTodo(index) {
-                    const confirmed = await customConfirm(getText('deleteTaskConfirm'), getText('deleteConfirmTitle'), 'delete.webp');
+                    const confirmed = await customConfirm(i18n('delete_confirm_todo'), i18n('delete_title'), 'delete.webp');
                     if (confirmed) {
                         let todos = getData('todos');
                         todos = todos ? JSON.parse(todos) : [];
@@ -4256,7 +4099,7 @@
                         history.sort((a, b) => a.duration - b.duration);
                     }
                     if (history.length === 0) {
-                        historyList.innerHTML = `<div class="empty-state">${getText('noHistory')}</div>`;
+                        historyList.innerHTML = `<div class="empty-state">${i18n('history_empty')}</div>`;
                         updateActionButtons();
                         return;
                     }
@@ -4266,7 +4109,7 @@
                         const end = new Date(item.end);
                         const groupBadge = item.group ? `<div class="group-badge">${item.group}</div>` : '';
                         const isSelected = selectedItems.has(actualIndex);
-                        return `<div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})"><input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})"><div class="history-item-date">${formatDate(start)}</div><div class="history-item-time">${getText('start')}: ${formatDateTime(start)}<br>${getText('end')}: ${formatDateTime(end)}</div><div class="history-item-duration">${getText('studyTime')}: ${formatTime(item.duration)}</div>${groupBadge}</div>`;
+                        return `<div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})"><input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})"><div class="history-item-date">${formatDate(start)}</div><div class="history-item-time">${i18n('history_start')}: ${formatDateTime(start)}<br>${i18n('history_end')}: ${formatDateTime(end)}</div><div class="history-item-duration">${i18n('session_duration')}: ${formatTime(item.duration)}</div>${groupBadge}</div>`;
                     }).join('');
                     updateActionButtons();
                 }
@@ -4324,12 +4167,12 @@
                     }
                     if (deleteBtn) deleteBtn.disabled = !hasSelection;
                     const moveCount = document.getElementById('moveCount');
-                    if (moveCount) moveCount.textContent = hasSelection ? `${selectedItems.size}${getText('itemsToMove')}` : '';
+                    if (moveCount) moveCount.textContent = hasSelection ? i18n('move_selected_count', { count: selectedItems.size }) : '';
                 }
 
                 async function deleteSelected() {
                     if (selectedItems.size === 0) return;
-                    const confirmed = await customConfirm(getText('deleteSelectedConfirm').replace('{n}', selectedItems.size), getText('deleteConfirmTitle'), 'delete.webp');
+                    const confirmed = await customConfirm(i18n('delete_confirm_selected', { count: selectedItems.size }), i18n('delete_title'), 'delete.webp');
                     if (confirmed) {
                         let history = getData('studyHistory');
                         history = history ? JSON.parse(history) : [];
@@ -4372,7 +4215,7 @@
                     history = history ? JSON.parse(history) : [];
                     const groups = [...new Set(history.map(item => item.group).filter(g => g))];
                     const groupFilter = document.getElementById('groupFilter');
-                    groupFilter.innerHTML = `<option value="">${getText('allGroupsFilter')}</option>`;
+                    groupFilter.innerHTML = `<option value="">${i18n('list_filter_all')}</option>`;
                     groups.forEach(group => {
                         groupFilter.innerHTML += `<option value="${group}">${group}</option>`;
                     });
@@ -4380,7 +4223,7 @@
                     const moveSel = document.getElementById('moveGroupSelect');
                     if (moveSel) {
                         const prev = moveSel.value;
-                        moveSel.innerHTML = `<option value="">${getText('selectDestinationGroup')}</option>`;
+                        moveSel.innerHTML = `<option value="">${i18n('list_move_to')}</option>`;
                         groups.forEach(group => {
                             moveSel.innerHTML += `<option value="${group}">${group}</option>`;
                         });
@@ -4415,23 +4258,23 @@
                     const streak = calculateStreak();
                     const totalSessions = history.length;
                     const statsContainer = document.getElementById('statsContainer');
-                    statsContainer.innerHTML = `<div class="stat-card"><div class="stat-label">${getText('totalTime')}</div><div class="stat-value">${formatTime(totalTime)}</div></div><div class="stat-card"><div class="stat-label">${getText('consecutiveDays')}</div><div class="stat-value">${streak}${getText('days')}</div></div><div class="stat-card"><div class="stat-label">${getText('totalSessions')}</div><div class="stat-value">${totalSessions}</div></div>`;
+                    statsContainer.innerHTML = `<div class="stat-card"><div class="stat-label">${i18n('stats_total_time')}</div><div class="stat-value">${formatTime(totalTime)}</div></div><div class="stat-card"><div class="stat-label">${i18n('stats_streak')}</div><div class="stat-value">${streak}${i18n('day_unit')}</div></div><div class="stat-card"><div class="stat-label">${i18n('stats_sessions')}</div><div class="stat-value">${totalSessions}</div></div>`;
                     const groups = {};
                     history.forEach(item => {
-                        const group = item.group || getText('uncategorized');
+                        const group = item.group || i18n('stats_unclassified');
                         if (!groups[group]) groups[group] = 0;
                         groups[group] += item.duration;
                     });
                     const groupStatsSelector = document.getElementById('groupStatsSelector');
                     const groupStats = document.getElementById('groupStats');
                     if (Object.keys(groups).length > 0) {
-                        groupStatsSelector.innerHTML = `<h2>${getText('groupStats')}</h2>`;
+                        groupStatsSelector.innerHTML = `<h2>${i18n('stats_group_title')}</h2>`;
                         groupStats.innerHTML = Object.entries(groups).sort((a, b) => b[1] - a[1]).map(([group, duration]) => `<div class="stat-card" style="margin-bottom: 15px;"><div class="stat-label">${group}</div><div class="stat-value">${formatTime(duration)}</div></div>`).join('');
                     }
                 }
 
                 async function clearHistory() {
-                    const confirmed = await customConfirm(getText('clearHistoryConfirm'), getText('clearAllConfirmTitle'), 'warning.webp');
+                    const confirmed = await customConfirm(i18n('delete_confirm_all'), i18n('confirm_clear_all_title'), 'warning.webp');
                     if (confirmed) {
                         saveData('studyHistory', JSON.stringify([]));
                         selectedItems.clear();
@@ -4473,12 +4316,12 @@
                             const data = JSON.parse(e.target.result);
 
                             // バージョン確認
-                            if (!data.version) throw new Error(getText('invalidFileFormat'));
+                            if (!data.version) throw new Error('無効なファイル形式です');
 
                             // 確認ダイアログを表示
                             const confirmed = await customConfirm(
-                                getText('importConfirm').replace('{historyCount}', data.studyHistory?.length || 0).replace('{todoCount}', data.todos?.length || 0),
-                                getText('importDataTitle'),
+                                i18n('import_confirm', { history: data.studyHistory?.length || 0, todos: data.todos?.length || 0 }),
+                                i18n('import_title'),
                                 'warning.webp'
                             );
 
@@ -4533,7 +4376,7 @@
                                 if (document.getElementById('statsContainer')) loadStats();
                             }
                         } catch (error) {
-                            await customConfirm(`${getText('importFailed')}: ${error.message}`, getText('errorTitle'), 'warning.webp');
+                            await customConfirm(`インポート失敗: ${error.message}`, 'エラー', 'warning.webp');
                         }
                     };
                     reader.readAsText(file);
@@ -4546,120 +4389,120 @@
                 let currentTutorialStep = 0;
                 const tutorialSteps = [
                     {
-                        titleKey: 'tutorialStartTitle',
-                        messageKey: 'tutorialStartMessage',
+                        title: 'ストップウォッチの開始',
+                        message: 'この「勉強開始」ボタンをクリックすると、タイマーがスタートします。',
                         target: '#startBtn',
                         position: 'top',
                         action: 'click',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialTimerStartedTitle',
-                        messageKey: 'tutorialTimerStartedMessage',
+                        title: 'タイマーがスタートしました',
+                        message: '今はチュートリアルですが、実際の勉強では、このまま集中して作業を続けましょう。',
                         target: '#timer',
                         position: 'bottom',
                         action: 'view',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialPauseTitle',
-                        messageKey: 'tutorialPauseMessage',
+                        title: '一時停止',
+                        message: '休憩したい時は、この「一時停止」ボタンをクリックして時間を止めることができます。試してみましょう。',
                         target: '#pauseBtn',
                         position: 'top',
                         action: 'click',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialPausedTitle',
-                        messageKey: 'tutorialPausedMessage',
+                        title: '一時停止中',
+                        message: 'タイマーが一時停止しました。もう一度ボタンを押すと再開できます。',
                         target: '#pauseBtn',
                         position: 'top',
                         action: 'view',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialEndTitle',
-                        messageKey: 'tutorialEndMessage',
+                        title: '記録の終了',
+                        message: '勉強が完全に終わったら「終了」ボタンを押します。これで学習時間が自動的に記録されます。クリックしてみましょう。',
                         target: '#endBtn',
                         position: 'top',
                         action: 'click',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialGroupTitle',
-                        messageKey: 'tutorialGroupMessage',
+                        title: 'グループ分け',
+                        message: 'グループ名を入力すると、後で科目別や分野別に記録を分類できます。例:「数学」や、「英語」など',
                         target: '#groupInput',
                         position: 'top',
                         action: 'view',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialStatsTitle',
-                        messageKey: 'tutorialStatsMessage',
+                        title: '統計の確認',
+                        message: 'ここをクリックして統計画面に移動してみましょう。累計の勉強時間、連続日数、グループ別の集計などが確認できます。',
                         target: '.menu button:nth-child(2)',
                         position: 'bottom',
                         action: 'click',
                         page: 'timer'
                     },
                     {
-                        titleKey: 'tutorialHistoryTitle',
-                        messageKey: 'tutorialHistoryMessage',
+                        title: '履歴の確認',
+                        message: 'ここをクリックしてリスト画面に移動してみましょう。過去の学習記録を一覧で見ることができます。検索、ソート、グループ移動などの機能があります。',
                         target: '.menu button:nth-child(3)',
                         position: 'bottom',
                         action: 'click',
                         page: 'stats'
                     },
                     {
-                        titleKey: 'tutorialDarkModeTitle',
-                        messageKey: 'tutorialDarkModeMessage',
+                        title: 'ダークモード',
+                        message: 'このボタンをクリックするとライト/ダークモードを切り替えられます。目に優しい表示で集中できます。試しに切り替えてみましょう。',
                         target: '.theme-toggle',
                         position: 'left',
                         action: 'click',
                         page: 'list'
                     },
                     {
-                        titleKey: 'tutorialSettingsTitle',
-                        messageKey: 'tutorialSettingsMessage',
+                        title: '設定画面',
+                        message: 'ここから設定画面を開けます。テーマカラーの変更、音楽プレイヤーやToDoリストの表示切替、データのバックアップなどができます。クリックして確認してみましょう!',
                         target: '.settings-btn',
                         position: 'left',
                         action: 'click',
                         page: 'list'
                     },
                     {
-                        titleKey: 'tutorialDisplaySettingsTitle',
-                        messageKey: 'tutorialDisplaySettingsMessage',
+                        title: '表示設定',
+                        message: 'ここで音楽プレイヤーやToDoリストの表示/非表示を切り替えられます。必要な機能だけを表示してシンプルに使えます。',
                         target: '.settings-section:nth-child(1)',
                         position: 'bottom',
                         action: 'view',
                         page: 'settings'
                     },
                     {
-                        titleKey: 'tutorialThemeColorTitle',
-                        messageKey: 'tutorialThemeColorMessage',
+                        title: 'テーマカラー',
+                        message: 'お好みのテーマカラーを選択できます。ブルー、グリーン、パープル、オレンジ、ピンク、ティールの6色から選べます。',
                         target: '.theme-selector',
                         position: 'top',
                         action: 'view',
                         page: 'settings'
                     },
                     {
-                        titleKey: 'tutorialGraphDisplayTitle',
-                        messageKey: 'tutorialGraphDisplayMessage',
+                        title: 'グラフ表示',
+                        message: '勉強時間のグラフの種類や表示期間、表示場所をカスタマイズできます。',
                         target: '.settings-section:nth-child(3)',
                         position: 'top',
                         action: 'view',
                         page: 'settings'
                     },
                     {
-                        titleKey: 'tutorialDataManagementTitle',
-                        messageKey: 'tutorialDataManagementMessage',
+                        title: 'データ管理',
+                        message: 'データのエクスポート/インポート機能です。バックアップを取ったり、他のデバイスにデータを移行できます。',
                         target: '.settings-section:nth-child(4)',
                         position: 'top',
                         action: 'view',
                         page: 'settings'
                     },
                     {
-                        titleKey: 'tutorialCompletedTitle',
-                        messageKey: 'tutorialCompletedMessage',
+                        title: 'チュートリアル完了!',
+                        message: 'お疲れ様でした!これで基本的な使い方の説明は終了です。また分からなくなったら、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
                         target: null,
                         position: 'center',
                         action: 'finish',
@@ -4760,17 +4603,16 @@
                             arrow.style.display = 'none';
 
                             document.getElementById('tutorialStepInfo').textContent = '';
-                            document.getElementById('tutorialStepInfo').textContent = '';
-                            document.getElementById('tutorialTitle').textContent = getText(step.titleKey);
-                            document.getElementById('tutorialMessage').textContent = getText(step.messageKey);
+                            document.getElementById('tutorialTitle').textContent = step.title;
+                            document.getElementById('tutorialMessage').textContent = step.message;
 
                             const prevBtn = document.getElementById('tutorialPrevBtn');
                             const nextBtn = document.getElementById('tutorialNextBtn');
                             prevBtn.style.display = 'block';
-                            prevBtn.textContent = getText('backButton');
+                            prevBtn.textContent = i18n('tutorial_prev');
                             prevBtn.onclick = prevTutorialStep;
                             nextBtn.style.display = 'block';
-                            nextBtn.textContent = getText('finishButton');
+                            nextBtn.textContent = i18n('tutorial_finish');
                             nextBtn.onclick = () => {
                                 hideTutorialStep();
                                 setCookie('tutorial_completed', 'true', 365);
@@ -4811,21 +4653,21 @@
                         overlay.classList.add('show');
                         box.style.display = 'block';
 
-                        document.getElementById('tutorialStepInfo').textContent = `${getText('step')} ${currentTutorialStep + 1}/${tutorialSteps.length}`;
-                        document.getElementById('tutorialTitle').textContent = getText(step.titleKey);
-                        document.getElementById('tutorialMessage').textContent = getText(step.messageKey);
+                        document.getElementById('tutorialStepInfo').textContent = i18n('tutorial_step', { current: currentTutorialStep + 1, total: tutorialSteps.length });
+                        document.getElementById('tutorialTitle').textContent = step.title;
+                        document.getElementById('tutorialMessage').textContent = step.message;
 
                         const prevBtn = document.getElementById('tutorialPrevBtn');
                         const nextBtn = document.getElementById('tutorialNextBtn');
                         prevBtn.style.display = currentTutorialStep === 0 ? 'none' : 'block';
-                        prevBtn.textContent = getText('backButton');
+                        prevBtn.textContent = i18n('tutorial_prev');
                         prevBtn.onclick = prevTutorialStep;
 
                         if (step.action === 'click') {
                             nextBtn.style.display = 'none';
                         } else {
                             nextBtn.style.display = 'block';
-                            nextBtn.textContent = getText('nextButton');
+                            nextBtn.textContent = i18n('tutorial_next');
                             nextBtn.onclick = nextTutorialStep;
                         }
 
@@ -4968,11 +4810,19 @@
                 document.getElementById('tutorialOverlay').addEventListener('click', skipTutorial);
 
                 window.onload = function () {
-
-                    // 言語設定を読み込んで適用
-                    const savedLanguage = getData('app_language') || 'ja';
-                    currentLanguage = savedLanguage;
+                    // 言語設定の初期化
+                    const savedLang = getData('language');
+                    if (savedLang) {
+                        currentLang = savedLang;
+                    } else {
+                        // ブラウザの言語設定を確認
+                        const browserLang = navigator.language.split('-')[0];
+                        if (browserLang === 'en') currentLang = 'en';
+                        else currentLang = 'ja';
+                    }
                     applyTranslations();
+                    const langSelect = document.getElementById('languageSelect');
+                    if (langSelect) langSelect.value = currentLang;
 
                     const mode = getData('mode');
                     const theme = getData('theme');
@@ -4981,7 +4831,9 @@
                         document.body.classList.remove('light');
                         document.body.classList.add('dark');
                         themeIcon.src = 'sun.webp';
-                        themeIcon.alt = getText('toggleLightMode');
+                        themeIcon.alt = i18n('mode_light_toggle');
+                    } else {
+                        themeIcon.alt = i18n('mode_dark_toggle');
                     }
                     if (theme) {
                         document.body.setAttribute('data-theme', theme);
@@ -5006,7 +4858,7 @@
                         const start = new Date(last.start);
                         const end = new Date(last.end);
                         document.getElementById('sessionInfo').innerHTML =
-                            `${getText('previousSession')}<br>${getText('startTime')}: ${formatDateTime(start)}<br>${getText('endTime')}: ${formatDateTime(end)}<br>${getText('studyTime')}: ${formatTime(last.duration)}`;
+                            `前回の学習<br>開始: ${formatDateTime(start)} / 終了: ${formatDateTime(end)}<br>学習時間: ${formatTime(last.duration)}`;
                     }
 
                     // 以前のセッションがあれば復元(リロードやタブ閉じ後も継続)
@@ -5445,7 +5297,7 @@
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: '勉強時間(時間)',
+                                label: i18n('graph_label_hours'),
                                 data: data,
                                 backgroundColor: type === 'area' ? primaryColor + '40' : primaryColor,
                                 borderColor: primaryColor,
