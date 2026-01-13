@@ -11,16 +11,22 @@
     <meta name="description" content="勉強とともにタイマーをスタートし、作業時間を記録しましょう。">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js">const todoInput = document.getElementById("todoInput"); todoInput.isComposing = false;
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@300;400&family=JetBrains+Mono:wght@300;400&family=Jost:wght@300;400&family=Klee+One:wght@300;400&family=Lora:wght@400&family=Montserrat:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Quicksand:wght@300;400&family=Sawarabi+Gothic&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@300;400&display=swap"
         rel="stylesheet">
 
     <style>
+        :root {
+            --font-ja: 'Zen Kaku Gothic Antique';
+            --font-en: '';
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Zen Kaku Gothic Antique', system-ui, sans-serif;
-
+            font-family: var(--font-en), var(--font-ja), system-ui, sans-serif;
+            font-weight: 300;
         }
 
         body {
@@ -53,17 +59,27 @@
             text-decoration: underline;
         }
 
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        strong,
+        b,
+        th {
+            font-weight: 300;
+        }
+
         h1 {
             font-size: 1.8rem;
             margin-bottom: 30px;
-            font-weight: 500;
             letter-spacing: 1px;
         }
 
         h2 {
             font-size: 1.3rem;
             margin-bottom: 20px;
-            font-weight: 500;
             letter-spacing: 0.5px;
             text-align: center;
         }
@@ -89,7 +105,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 500;
+            font-weight: 300;
         }
 
         .light .menu button {
@@ -148,7 +164,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 500;
+            font-weight: 300;
         }
 
         .light button.primary {
@@ -275,7 +291,7 @@
 
         .history-item-date {
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 300;
             margin-bottom: 10px;
         }
 
@@ -288,7 +304,7 @@
         .history-item-duration {
             font-size: 1.2rem;
             margin-top: 10px;
-            font-weight: 500;
+            font-weight: 300;
         }
 
         .light .history-item-duration {
@@ -385,7 +401,7 @@
 
         .stat-value {
             font-size: 1.8rem;
-            font-weight: 600;
+            font-weight: 300;
         }
 
         .light .stat-value {
@@ -451,7 +467,7 @@
             border-radius: 12px;
             font-size: 0.85rem;
             margin-top: 8px;
-            font-weight: 500;
+            font-weight: 300;
         }
 
         .light .group-badge {
@@ -604,7 +620,7 @@
         .theme-option-name {
             margin-top: 8px;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 300;
         }
 
         .theme-option-preview {
@@ -2363,6 +2379,41 @@
                 </div>
             </div>
 
+            <div class="settings-section">
+                <h2 data-i18n="fontSettings">フォント設定</h2>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
+                        data-i18n="fontJapanese">日本語フォント</label>
+                    <div class="custom-select" style="width: 100%;">
+                        <select id="fontJaSelect" onchange="saveFontSettings()">
+                            <option value="Zen Kaku Gothic Antique">Zen Kaku Gothic Antique</option>
+                            <option value="Klee One">Klee One</option>
+                            <option value="BIZ UDPGothic">BIZ UDPGothic</option>
+                            <option value="Zen Maru Gothic">Zen Maru Gothic</option>
+                            <option value="Noto Sans JP">Noto Sans JP</option>
+                            <option value="Sawarabi Gothic">Sawarabi Gothic</option>
+                        </select>
+                        <div class="select-arrow">▾</div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
+                        data-i18n="fontEnglish">英語フォント</label>
+                    <div class="custom-select" style="width: 100%;">
+                        <select id="fontEnSelect" onchange="saveFontSettings()">
+                            <option value="" data-i18n="fontNone">未設定</option>
+                            <option value="Zen Kaku Gothic Antique">Zen Kaku Gothic Antique</option>
+                            <option value="Jost">Jost</option>
+                            <option value="JetBrains Mono">JetBrains Mono</option>
+                            <option value="Montserrat">Montserrat</option>
+                            <option value="Lora">Lora</option>
+                            <option value="Quicksand">Quicksand</option>
+                        </select>
+                        <div class="select-arrow">▾</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="theme-selector">
                 <h2 data-i18n="themeColor">テーマカラー</h2>
                 <div class="theme-options">
@@ -2496,7 +2547,7 @@
                 </button>
             </div>
 
-            <div class="copyright">© KokyuJene™ All rights reserved.</div>
+            <div class="copyright">© 高級ジェネ™ All rights reserved.</div>
 
             <div class="about-link">
                 <button class="about-button" onclick="showAboutModal()" aria-label="このサイトについて">
@@ -2528,6 +2579,26 @@
                 </button>
             </div>
 
+            <div class="about-link" style="margin-top: 8px;">
+                <button class="about-button" onclick="showLicenseModal()" aria-label="ライセンス">
+                    <span class="about-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor"
+                                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14 2v6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M16 13H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M16 17H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M10 9H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="about-text" data-i18n="licenseButton">ライセンス</span>
+                </button>
+            </div>
+
             <div class="about-overlay" id="aboutOverlay" aria-hidden="true">
                 <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
                     <h2 id="aboutTitle" data-i18n="aboutTitle">このサイトについて</h2>
@@ -2554,6 +2625,40 @@
                 </div>
             </div>
 
+            <div class="about-overlay" id="licenseOverlay" aria-hidden="true">
+                <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="licenseTitle">
+                    <h2 id="licenseTitle" data-i18n="licenseTitle">フォントライセンス</h2>
+                    <div id="licenseContent" class="about-content"
+                        style="white-space: pre-wrap; font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
+                        <p><strong>Jost</strong><br>by Indestructible Type is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Zen Kaku Gothic Antique</strong><br>by Astrolab Inc. is licensed under the SIL Open
+                            Font License,<br>Version 1.1.</p>
+                        <p><strong>JetBrains Mono</strong><br>by JetBrains s.r.o. is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Montserrat</strong><br>by Julieta Ulanovsky is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Lora</strong><br>by Cyreal is licensed under the SIL Open Font License,<br>Version
+                            1.1.</p>
+                        <p><strong>Quicksand</strong><br>by Andrew Paglinawan is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Klee One</strong><br>by Fontworks Inc. is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>BIZ UDPGothic</strong><br>by Morisawa Inc. is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Zen Maru Gothic</strong><br>by Yoshimichi Ohira is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Noto Sans JP</strong><br>by Google is licensed under the SIL Open Font
+                            License,<br>Version 1.1.</p>
+                        <p><strong>Sawarabi Gothic</strong><br>by mplus-fonts-dev is licensed under the Creative
+                            Commons<br>Attribution 4.0 International License / SIL Open Font License.</p>
+                    </div>
+                    <div class="about-actions">
+                        <button class="primary" id="licenseOkBtn" data-i18n="closeButton">閉じる</button>
+                    </div>
+                </div>
+            </div>
+
             <script>
                 let startTime = null;
                 let pausedTime = 0;
@@ -2575,6 +2680,15 @@
                         // メタ
                         title: '勉強時間管理',
                         description: '勉強とともにタイマーをスタートし、作業時間を記録しましょう。',
+
+
+                        // フォント設定
+                        fontSettings: 'フォント設定',
+                        fontJapanese: '日本語フォント',
+                        fontEnglish: '英語フォント',
+                        fontNone: '未設定',
+                        licenseButton: 'ライセンス',
+                        licenseTitle: 'フォントライセンス',
 
                         // 追加: 削除確認メッセージ等
                         deleteTaskConfirm: 'このタスクを削除しますか?',
@@ -2853,6 +2967,14 @@
                         tutorialStep8Desc: 'このボタンでダークモードとライトモードを切り替えられます。',
                     },
                     en: {
+                        // Font Settings
+                        fontSettings: 'Font Settings',
+                        fontJapanese: 'Japanese Font',
+                        fontEnglish: 'English Font',
+                        fontNone: 'None (Unset)',
+                        licenseButton: 'License',
+                        licenseTitle: 'Font Licenses',
+
                         // Meta
                         title: 'Study Time Manager',
                         description: 'Start the timer with your study session and track your work time.',
@@ -4972,12 +5094,53 @@
 
                 document.getElementById('tutorialOverlay').addEventListener('click', skipTutorial);
 
+                function showLicenseModal() {
+                    const overlay = document.getElementById('licenseOverlay');
+                    overlay.classList.add('show');
+                    overlay.setAttribute('aria-hidden', 'false');
+                }
+
+                function hideLicenseModal() {
+                    const overlay = document.getElementById('licenseOverlay');
+                    overlay.classList.remove('show');
+                    overlay.setAttribute('aria-hidden', 'true');
+                }
+
+                document.getElementById('licenseOkBtn').addEventListener('click', hideLicenseModal);
+                document.getElementById('licenseOverlay').addEventListener('click', (e) => {
+                    if (e.target === e.currentTarget) hideLicenseModal();
+                });
+
+                function saveFontSettings() {
+                    const fontJa = document.getElementById('fontJaSelect').value;
+                    const fontEn = document.getElementById('fontEnSelect').value;
+
+                    saveData('font_ja', fontJa);
+                    saveData('font_en', fontEn);
+
+                    applyFonts();
+                }
+
+                function applyFonts() {
+                    const fontJa = getData('font_ja') || 'Zen Kaku Gothic Antique';
+                    const fontEn = getData('font_en') || '';
+
+                    document.documentElement.style.setProperty('--font-ja', `'${fontJa}'`);
+                    document.documentElement.style.setProperty('--font-en', fontEn ? `'${fontEn}'` : '');
+
+                    const jaSelect = document.getElementById('fontJaSelect');
+                    const enSelect = document.getElementById('fontEnSelect');
+                    if (jaSelect) jaSelect.value = fontJa;
+                    if (enSelect) enSelect.value = fontEn;
+                }
+
                 window.onload = function () {
 
                     // 言語設定を読み込んで適用
                     const savedLanguage = getData('app_language') || 'ja';
                     currentLanguage = savedLanguage;
                     applyTranslations();
+                    applyFonts();
 
                     const mode = getData('mode');
                     const theme = getData('theme');
