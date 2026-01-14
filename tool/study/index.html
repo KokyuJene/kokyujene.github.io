@@ -36,6 +36,11 @@
             src: url('001Shirokuma-Regular.otf') format('opentype');
         }
 
+        @font-face {
+            font-family: 'Mushin';
+            src: url('mushin.otf') format('opentype');
+        }
+
         :root {
             --font-ja: 'Zen Kaku Gothic Antique';
             --font-en: '';
@@ -46,7 +51,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: var(--font-en), var(--font-ja), system-ui, sans-serif;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         body {
@@ -72,6 +77,7 @@
             padding: 40px;
             max-width: 600px;
             width: 100%;
+            font-weight: 400;
         }
 
         a {
@@ -88,7 +94,7 @@
         strong,
         b,
         th {
-            font-weight: 300;
+            font-weight: 400;
         }
 
         h1 {
@@ -125,7 +131,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .light .menu button {
@@ -158,7 +164,7 @@
 
         .timer {
             font-size: 4rem;
-            font-weight: 300;
+            font-weight: 400;
             margin: 40px 0;
             font-variant-numeric: tabular-nums;
         }
@@ -184,7 +190,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .light button.primary {
@@ -311,7 +317,7 @@
 
         .history-item-date {
             font-size: 1.1rem;
-            font-weight: 300;
+            font-weight: 400;
             margin-bottom: 10px;
         }
 
@@ -324,7 +330,7 @@
         .history-item-duration {
             font-size: 1.2rem;
             margin-top: 10px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .light .history-item-duration {
@@ -421,7 +427,7 @@
 
         .stat-value {
             font-size: 1.8rem;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .light .stat-value {
@@ -487,7 +493,7 @@
             border-radius: 12px;
             font-size: 0.85rem;
             margin-top: 8px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .light .group-badge {
@@ -640,7 +646,7 @@
         .theme-option-name {
             margin-top: 8px;
             font-size: 0.85rem;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .theme-option-preview {
@@ -1389,6 +1395,19 @@
             --panel-light-2: #eff5f5;
         }
 
+        body[data-theme="white"] {
+            --primary-color: #b3b3b3;
+            --primary-hover: #dadada;
+            --primary-color-dark: #424242;
+            --primary-hover-dark: #202020;
+            --bg-light: #fdfdfd;
+            --bg-dark: #0a0a0a;
+            --panel-dark: #151515;
+            --panel-dark-2: #252525;
+            --panel-light: #f5f5f5;
+            --panel-light-2: #f5f5f5;
+        }
+
         /* Blue theme (default) panel overrides */
         body[data-theme="blue"] {
             --panel-dark: #252a38;
@@ -2048,6 +2067,33 @@
             border: 2px dashed #999;
         }
 
+        /* Loading Overlay */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #8ba4b8;
+            /* Initial color (Default blue theme hover) */
+            z-index: 999999;
+            pointer-events: none;
+        }
+
+        #loadingOverlay.wipe-out {
+            animation: diagonalEraser 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes diagonalEraser {
+            0% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+
+            100% {
+                clip-path: polygon(200% 0%, 200% 0%, 100% 100%, 100% 100%);
+            }
+        }
+
         .playlist-item.drag-over {
             border: 2px solid #2196F3;
             background-color: rgba(33, 150, 243, 0.1);
@@ -2097,6 +2143,7 @@
 </head>
 
 <body class="light" data-theme="blue">
+    <div id="loadingOverlay"></div>
 
     <div class="custom-confirm-overlay" id="customConfirmOverlay">
         <div class="custom-confirm-dialog">
@@ -2154,8 +2201,8 @@
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え">
             <img id="themeIcon" src="moon.webp" alt="テーマ切り替え">
         </button>
-        <button class="settings-btn" onclick="showPage('settings')" aria-label="設定">
-            <img src="settings.webp" alt="設定">
+        <button id="settingsBtn" class="settings-btn" onclick="showPage('settings')" aria-label="設定">
+            <img id="settingsIcon" src="settings.webp" alt="設定">
         </button>
     </div>
 
@@ -2169,7 +2216,7 @@
         </div>
 
         <div id="timerPage" class="page active">
-            <div class="timer" id="timer">00:00:00</div>
+            <div class="timer" id="timer" style="font-weight: 300;">00:00:00</div>
             <div class="group-input">
                 <input type="text" id="groupInput" placeholder="グループ名(任意)" data-i18n="groupPlaceholder">
             </div>
@@ -2381,6 +2428,12 @@
                         <div class="toggle-slider"></div>
                     </div>
                 </div>
+                <div class="toggle-item">
+                    <span data-i18n="lockSettingsDuringTimer">タイマー作動中は設定を無効化</span>
+                    <div class="toggle-switch" id="toggleLockSettings" onclick="toggleLockSettingsDuringTimer()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="settings-section">
@@ -2417,6 +2470,7 @@
                             <option value="Misaki Gothic">美咲ゴシック</option>
                             <option value="Kodenmachou">小伝馬町</option>
                             <option value="Shirokuma">しろくまフォント</option>
+                            <option value="Mushin">無心</option>
                         </select>
                         <div class="select-arrow">▾</div>
                     </div>
@@ -2490,10 +2544,24 @@
                         </div>
                         <div class="theme-option-name" data-i18n="themeTeal">ティール</div>
                     </div>
+                    <div class="theme-option" data-theme="white" onclick="changeTheme('white')">
+                        <div class="theme-option-preview" style="background-color: var(--panel-light);">
+                            <div style="background-color: #ededed;"></div>
+                            <div style="background-color: #dadada;"></div>
+                            <div style="background-color: #101010;"></div>
+                        </div>
+                        <div class="theme-option-name" data-i18n="themeWhite">ホワイト/ブラック</div>
+                    </div>
                 </div>
             </div>
             <div class="settings-section">
                 <h2 data-i18n="graphDisplay">グラフ表示</h2>
+                <div class="toggle-item">
+                    <span data-i18n="loadingAnimSetting">開始時にローディングアニメーションを表示</span>
+                    <div class="toggle-switch" id="toggleLoadingAnim" onclick="toggleLoadingAnim()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
                 <div class="toggle-item">
                     <span data-i18n="studyGraph">勉強時間のグラフ表示</span>
                     <div class="toggle-switch" id="toggleGraph" onclick="toggleGraph()">
@@ -2655,23 +2723,39 @@
                     <h2 id="licenseTitle" data-i18n="licenseTitle">フォントライセンス</h2>
                     <div id="licenseContent" class="about-content"
                         style="white-space: pre-wrap; font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
-                        <p><strong>Jost</strong><br>by Indestructible Type is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Zen Kaku Gothic Antique</strong><br>by Astrolab Inc. is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>JetBrains Mono</strong><br>by JetBrains s.r.o. is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Montserrat</strong><br>by Julieta Ulanovsky is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Lora</strong><br>by Cyreal is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Quicksand</strong><br>by Andrew Paglinawan is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Klee One</strong><br>by Fontworks Inc. is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>BIZ UDPGothic</strong><br>by Morisawa Inc. is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Zen Maru Gothic</strong><br>by Yoshimichi Ohira is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Noto Sans JP</strong><br>by Google is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>Sawarabi Gothic</strong><br>by mplus-fonts-dev is licensed under the Creative Commons<br>Attribution 4.0 International License / SIL Open Font License.</p>
-                        <p><strong>Hina Mincho</strong><br>by Shujiro Sano is licensed under the SIL Open Font License, Version 1.1.</p>
-                        <p><strong>うつくし明朝体 (Utsukushi Font)</strong><br>by FLOP DESIGN is licensed under the Apache License, Version 2.0.</p>
-                        <p><strong>美咲ゴシック (Misaki Gothic)</strong><br>by 門真 なむ (Little Limit) is licensed under the Public Domain (or equivalent free license).</p>
-                        <p><strong>小伝馬町 (Kodenmachou)</strong><br>by 自家製フォント工房 is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Jost</strong><br>by Indestructible Type is licensed under the SIL Open Font License,
+                            Version 1.1.</p>
+                        <p><strong>Zen Kaku Gothic Antique</strong><br>by Astrolab Inc. is licensed under the SIL Open
+                            Font License, Version 1.1.</p>
+                        <p><strong>JetBrains Mono</strong><br>by JetBrains s.r.o. is licensed under the SIL Open Font
+                            License, Version 1.1.</p>
+                        <p><strong>Montserrat</strong><br>by Julieta Ulanovsky is licensed under the SIL Open Font
+                            License, Version 1.1.</p>
+                        <p><strong>Lora</strong><br>by Cyreal is licensed under the SIL Open Font License, Version 1.1.
+                        </p>
+                        <p><strong>Quicksand</strong><br>by Andrew Paglinawan is licensed under the SIL Open Font
+                            License, Version 1.1.</p>
+                        <p><strong>Klee One</strong><br>by Fontworks Inc. is licensed under the SIL Open Font License,
+                            Version 1.1.</p>
+                        <p><strong>BIZ UDPGothic</strong><br>by Morisawa Inc. is licensed under the SIL Open Font
+                            License, Version 1.1.</p>
+                        <p><strong>Zen Maru Gothic</strong><br>by Yoshimichi Ohira is licensed under the SIL Open Font
+                            License, Version 1.1.</p>
+                        <p><strong>Noto Sans JP</strong><br>by Google is licensed under the SIL Open Font License,
+                            Version 1.1.</p>
+                        <p><strong>Sawarabi Gothic</strong><br>by mplus-fonts-dev is licensed under the Creative
+                            Commons<br>Attribution 4.0 International License / SIL Open Font License.</p>
+                        <p><strong>Hina Mincho</strong><br>by Shujiro Sano is licensed under the SIL Open Font License,
+                            Version 1.1.</p>
+                        <p><strong>うつくし明朝体 (Utsukushi Font)</strong><br>by FLOP DESIGN is licensed under the Apache
+                            License, Version 2.0.</p>
+                        <p><strong>美咲ゴシック (Misaki Gothic)</strong><br>by 門真 なむ (Little Limit) is licensed under the
+                            Public Domain (or equivalent free license).</p>
+                        <p><strong>小伝馬町 (Kodenmachou)</strong><br>by 自家製フォント工房 is licensed under the SIL Open Font
+                            License, Version 1.1.</p>
                         <p><strong>しろくまフォント (Shirokuma)</strong><br>by しろくまはなこ is free for personal and commercial use.
                         </p>
+                        <p><strong>無心 (Mushin)</strong><br>by MODI工場 is licensed under the MODI工場独自ライセンス.</p>
                     </div>
                     <div class="about-actions">
                         <button class="primary" id="licenseOkBtn" data-i18n="closeButton">閉じる</button>
@@ -2820,6 +2904,9 @@
                         themeOrange: 'オレンジ',
                         themePink: 'ピンク',
                         themeTeal: 'ティール',
+                        themeWhite: 'ホワイト/ブラック',
+                        lockSettingsDuringTimer: 'タイマー作動中は設定を無効化',
+                        loadingAnimSetting: '開始時にローディングアニメーションを表示',
                         graphDisplay: 'グラフ表示',
                         studyGraph: '勉強時間のグラフ表示',
                         graphType: 'グラフの種類',
@@ -2927,7 +3014,7 @@
                             <p style="margin-left: 15px;">A. mp3, wav, flac, m4a, aac, ogg, webmなどの一般的な音楽ファイルに対応しています。</p>
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. タイマーを一時停止したまま閉じてしまった場合は?</h3>
                             <p style="margin-left: 15px;">A. 大丈夫です。再度サイトを閉じてもタイマーは作動し続けます。</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. なんで音楽プレイヤーにYoutube動画とかを追加する予定ってないの?</h3>
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 音楽プレイヤーにYoutube動画とかを追加する予定ってないの?</h3>
                             <p style="margin-left: 15px;">A. する予定はないです。各サービスの利用規約に違反する可能性があるからです。</p>
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 今後も機能を追加する予定は?</h3>
                             <p style="margin-left: 15px;">A. 決まってはいません。ただし、最低限に使用したい方もいらっしゃると思うので追加する場合はその機能を設定のON/OFFなどで表示を切り替えられるようにする予定です。</p>
@@ -3098,6 +3185,9 @@
                         themeOrange: 'Orange',
                         themePink: 'Pink',
                         themeTeal: 'Teal',
+                        themeWhite: 'White/Black',
+                        lockSettingsDuringTimer: 'Lock Settings during Timer',
+                        loadingAnimSetting: 'Show Loading Animation on Start',
                         graphDisplay: 'Graph Display',
                         studyGraph: 'Show Study Time Graph',
                         graphType: 'Graph Type',
@@ -3256,7 +3346,7 @@
                             <p style="margin-left: 15px;">A. Supports mp3, wav, flac, m4a, aac, ogg, webm etc.</p>
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. If I close while timer paused?</h3>
                             <p style="margin-left: 15px;">A. Timer continues running even if site is closed.</p>
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Will you add Youtube support?</h3>
+                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Do you have any plans to add YouTube videos or anything like that to the music player?</h3>
                             <p style="margin-left: 15px;">A. No plans due to Terms of Service compliance.</p>
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Future features?</h3>
                             <p style="margin-left: 15px;">A. Undecided. If added, will be togglable in settings.</p>
@@ -3649,6 +3739,12 @@
                 }
 
                 function showPage(pageName) {
+                    if (pageName === 'settings') {
+                        const isTimerRunning = startTime !== null && !isPaused;
+                        if (isTimerRunning && getData('lock_settings_during_timer') === 'true') {
+                            return;
+                        }
+                    }
                     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
                     document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
                     const pages = { 'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'music': 'musicPage', 'todo': 'todoPage', 'settings': 'settingsPage' };
@@ -3720,6 +3816,7 @@
                     document.getElementById('endBtn').classList.remove('hidden');
                     document.getElementById('sessionInfo').textContent = `${getText('startTime')}: ${formatDateTime(new Date())}`;
                     timerInterval = setInterval(updateTimer, 100);
+                    updateSettingsButtonState();
                 }
 
                 function pauseStudy() {
@@ -3731,6 +3828,7 @@
                         document.getElementById('pauseBtn').textContent = getText('resumeButton');
                         saveData('studyPaused', 'true');
                         saveData('studyPausedAccum', String(pausedTime));
+                        updateSettingsButtonState();
                     } else {
                         // 再開
                         startTime = Date.now();
@@ -3738,6 +3836,7 @@
                         timerInterval = setInterval(updateTimer, 100);
                         document.getElementById('pauseBtn').textContent = getText('pauseButton');
                         saveData('studyPaused', 'false');
+                        updateSettingsButtonState();
                     }
                 }
 
@@ -3772,6 +3871,7 @@
                     startTime = null;
                     pausedTime = 0;
                     isPaused = false;
+                    updateSettingsButtonState();
                 }
 
                 async function addMusicFile(event) {
@@ -5249,9 +5349,13 @@
                             timerInterval = setInterval(updateTimer, 100);
                             updateTimer();
                         }
+                        updateSettingsButtonState();
                     })();
 
                     // 各種設定のロード(グラフ以外)
+                    if (getData('lock_settings_during_timer') === 'true') {
+                        document.getElementById('toggleLockSettings').classList.add('active');
+                    }
                     if (getData('feature_music') === 'true') {
                         document.getElementById('toggleMusic').classList.add('active');
                         addMenuButton('music');
@@ -5262,6 +5366,10 @@
                     }
                     if (getData('feature_title_time') !== 'false') { // デフォルトON
                         document.getElementById('toggleTitleTime').classList.add('active');
+                    }
+                    if (getData('feature_loading_anim') !== 'false') { // デフォルトON
+                        const toggle = document.getElementById('toggleLoadingAnim');
+                        if (toggle) toggle.classList.add('active');
                     }
 
                     const loopImg = document.getElementById('loopBtnImg');
@@ -5472,6 +5580,50 @@
                 let studyChart = null;
                 let statsChart = null;
 
+                function toggleLoadingAnim() {
+                    const toggle = document.getElementById('toggleLoadingAnim');
+                    const isActive = toggle.classList.contains('active');
+
+                    if (isActive) {
+                        toggle.classList.remove('active');
+                        saveData('feature_loading_anim', 'false');
+                    } else {
+                        toggle.classList.add('active');
+                        saveData('feature_loading_anim', 'true');
+                    }
+                }
+
+                function toggleLockSettingsDuringTimer() {
+                    const toggle = document.getElementById('toggleLockSettings');
+                    const isActive = toggle.classList.contains('active');
+                    if (isActive) {
+                        toggle.classList.remove('active');
+                        saveData('lock_settings_during_timer', 'false');
+                    } else {
+                        toggle.classList.add('active');
+                        saveData('lock_settings_during_timer', 'true');
+                    }
+                    updateSettingsButtonState();
+                }
+
+                function updateSettingsButtonState() {
+                    const isTimerRunning = startTime !== null && !isPaused;
+                    const lockDuringTimer = getData('lock_settings_during_timer') === 'true';
+                    const settingsBtn = document.getElementById('settingsBtn');
+                    const settingsIcon = document.getElementById('settingsIcon');
+                    if (!settingsBtn || !settingsIcon) return;
+
+                    if (isTimerRunning && lockDuringTimer) {
+                        settingsIcon.src = 'no_settings.webp';
+                        settingsBtn.style.pointerEvents = 'none';
+                        settingsBtn.style.opacity = '0.7';
+                    } else {
+                        settingsIcon.src = 'settings.webp';
+                        settingsBtn.style.pointerEvents = 'auto';
+                        settingsBtn.style.opacity = '1';
+                    }
+                }
+
                 function toggleGraph() {
                     const toggle = document.getElementById('toggleGraph');
                     const settings = document.getElementById('graphSettings');
@@ -5558,7 +5710,8 @@
                         'purple': '#b8a8c9',
                         'orange': '#d9b4a0',
                         'pink': '#d9a8b4',
-                        'teal': '#a0c9c9'
+                        'teal': '#a0c9c9',
+                        'white': '#ededed'
                     };
                     return colors[theme] || colors['blue'];
                 }
@@ -5691,6 +5844,33 @@
                 todoInput.addEventListener("compositionend", () => {
                     todoInput.isComposing = false;
                 });
+
+                // Trigger loading overlay wipe animation
+                setTimeout(() => {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay) {
+                        // Check user setting
+                        const showAnim = getData('feature_loading_anim') !== 'false'; // Default true
+
+                        if (!showAnim) {
+                            overlay.style.display = 'none';
+                            overlay.remove();
+                            return;
+                        }
+
+                        // Use current theme's primary-hover if theme is loaded
+                        const primaryHover = getComputedStyle(document.body).getPropertyValue('--primary-hover');
+                        if (primaryHover) {
+                            overlay.style.backgroundColor = primaryHover.trim();
+                        }
+
+                        overlay.classList.add('wipe-out');
+                        // Remove overlay element after animation completes
+                        setTimeout(() => {
+                            overlay.remove();
+                        }, 1200);
+                    }
+                }, 100);
             </script>
 </body>
 
