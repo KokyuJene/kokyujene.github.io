@@ -12,10 +12,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js">const todoInput = document.getElementById("todoInput"); todoInput.isComposing = false;
     </script>
     <link
-        href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@300;400&family=JetBrains+Mono:wght@300;400&family=Jost:wght@300;400&family=Klee+One:wght@300;400&family=Lora:wght@400&family=Montserrat:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Quicksand:wght@300;400&family=Sawarabi+Gothic&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@300;400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@300;400&family=Hina+Mincho&family=JetBrains+Mono:wght@300;400&family=Jost:wght@300;400&family=Klee+One:wght@300;400&family=Lora:wght@400&family=Montserrat:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Quicksand:wght@300;400&family=Sawarabi+Gothic&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@300;400&display=swap"
         rel="stylesheet">
 
     <style>
+        @font-face {
+            font-family: 'Utsukushi Font';
+            src: url('UtsukushiFONT.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Misaki Gothic';
+            src: url('misaki_gothic_2nd.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Kodenmachou';
+            src: url('KH-Dot-Kodenmachou-16.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Shirokuma';
+            src: url('001Shirokuma-Regular.otf') format('opentype');
+        }
+
         :root {
             --font-ja: 'Zen Kaku Gothic Antique';
             --font-en: '';
@@ -2392,6 +2412,11 @@
                             <option value="Zen Maru Gothic">Zen Maru Gothic</option>
                             <option value="Noto Sans JP">Noto Sans JP</option>
                             <option value="Sawarabi Gothic">Sawarabi Gothic</option>
+                            <option value="Hina Mincho">Hina Mincho</option>
+                            <option value="Utsukushi Font">うつくし明朝体</option>
+                            <option value="Misaki Gothic">美咲ゴシック</option>
+                            <option value="Kodenmachou">小伝馬町</option>
+                            <option value="Shirokuma">しろくまフォント</option>
                         </select>
                         <div class="select-arrow">▾</div>
                     </div>
@@ -2630,28 +2655,23 @@
                     <h2 id="licenseTitle" data-i18n="licenseTitle">フォントライセンス</h2>
                     <div id="licenseContent" class="about-content"
                         style="white-space: pre-wrap; font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
-                        <p><strong>Jost</strong><br>by Indestructible Type is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Zen Kaku Gothic Antique</strong><br>by Astrolab Inc. is licensed under the SIL Open
-                            Font License,<br>Version 1.1.</p>
-                        <p><strong>JetBrains Mono</strong><br>by JetBrains s.r.o. is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Montserrat</strong><br>by Julieta Ulanovsky is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Lora</strong><br>by Cyreal is licensed under the SIL Open Font License,<br>Version
-                            1.1.</p>
-                        <p><strong>Quicksand</strong><br>by Andrew Paglinawan is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Klee One</strong><br>by Fontworks Inc. is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>BIZ UDPGothic</strong><br>by Morisawa Inc. is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Zen Maru Gothic</strong><br>by Yoshimichi Ohira is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Noto Sans JP</strong><br>by Google is licensed under the SIL Open Font
-                            License,<br>Version 1.1.</p>
-                        <p><strong>Sawarabi Gothic</strong><br>by mplus-fonts-dev is licensed under the Creative
-                            Commons<br>Attribution 4.0 International License / SIL Open Font License.</p>
+                        <p><strong>Jost</strong><br>by Indestructible Type is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Zen Kaku Gothic Antique</strong><br>by Astrolab Inc. is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>JetBrains Mono</strong><br>by JetBrains s.r.o. is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Montserrat</strong><br>by Julieta Ulanovsky is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Lora</strong><br>by Cyreal is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Quicksand</strong><br>by Andrew Paglinawan is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Klee One</strong><br>by Fontworks Inc. is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>BIZ UDPGothic</strong><br>by Morisawa Inc. is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Zen Maru Gothic</strong><br>by Yoshimichi Ohira is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Noto Sans JP</strong><br>by Google is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>Sawarabi Gothic</strong><br>by mplus-fonts-dev is licensed under the Creative Commons<br>Attribution 4.0 International License / SIL Open Font License.</p>
+                        <p><strong>Hina Mincho</strong><br>by Shujiro Sano is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>うつくし明朝体 (Utsukushi Font)</strong><br>by FLOP DESIGN is licensed under the Apache License, Version 2.0.</p>
+                        <p><strong>美咲ゴシック (Misaki Gothic)</strong><br>by 門真 なむ (Little Limit) is licensed under the Public Domain (or equivalent free license).</p>
+                        <p><strong>小伝馬町 (Kodenmachou)</strong><br>by 自家製フォント工房 is licensed under the SIL Open Font License, Version 1.1.</p>
+                        <p><strong>しろくまフォント (Shirokuma)</strong><br>by しろくまはなこ is free for personal and commercial use.
+                        </p>
                     </div>
                     <div class="about-actions">
                         <button class="primary" id="licenseOkBtn" data-i18n="closeButton">閉じる</button>
