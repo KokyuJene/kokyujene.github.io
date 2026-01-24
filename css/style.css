@@ -47,7 +47,7 @@ body {
 }
 
 .dark body {
-    background-color: #11100f;
+    background-color: #0a0a0a;
     color: #fff8eb;
 }
 
@@ -721,7 +721,7 @@ p {
 }
 
 .dark .my-box {
-    background-color: #362400;
+    background-color: #130f08;
 }
 
 .osyare_tate {
@@ -747,7 +747,7 @@ footer {
 }
 
 .dark footer {
-    background-color: #1d1400;
+    background-color: #0c0902;
 }
 
 footer p {
@@ -828,7 +828,7 @@ footer > .footer-link a:first-child::before { display: none; }
 }
 
 .dark .members {
-    background-color: #362400;
+    background-color: #130f08;
 }
 
 .name {
