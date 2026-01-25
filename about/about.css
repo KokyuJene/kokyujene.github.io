@@ -237,18 +237,24 @@ header {
 .naiyou-container {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-out;
+  transition: grid-template-rows 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .naiyou-container.open {
   grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
 }
 
 .naiyou {
   min-height: 0;
   color: #b8b8b8;
-  padding-top: 4px;
+  padding: 10px 0 15px 15px;
+  border-left: 3px solid #555;
+  margin-left: 5px;
 }
 
 .yajirusi {
@@ -424,12 +430,6 @@ b {
 .toggle-head .yajirusi {
   font-size: 0.6em;
   transition: transform 0.3s;
-}
-
-.accordion-item .naiyou {
-  padding-left: 10px;
-  border-left: 2px solid #333;
-  margin-top: 10px;
 }
 
 .toggle-head {
