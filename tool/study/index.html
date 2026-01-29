@@ -2141,6 +2141,666 @@
                 background-color: #c55;
             }
         }
+
+        /* ToDo Ver.2 スタイル */
+        .todo-v2-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .todo-v2-popup-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .todo-v2-popup {
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease-out;
+            text-align: center;
+        }
+
+        .light .todo-v2-popup {
+            background-color: var(--bg-light);
+            color: #3a3a3a;
+        }
+
+        .dark .todo-v2-popup {
+            background-color: var(--panel-dark);
+            color: #e8e8e8;
+        }
+
+        .todo-v2-popup-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .todo-v2-popup-message {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .todo-v2-popup-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .todo-v2-popup-toggle-label {
+            font-size: 1.1rem;
+        }
+
+        .todo-v2-popup-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .todo-v2-popup-buttons button {
+            padding: 12px 30px;
+            font-size: 1rem;
+        }
+
+        /* 段階的完了チェックボックス */
+        .todo-stage-checkboxes {
+            display: flex;
+            gap: 6px;
+            margin-right: 10px;
+            align-items: center;
+        }
+
+        .todo-stage-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .todo-stage-checkbox.stage-all {
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            border-radius: 4px;
+        }
+
+        .todo-stage-checkbox.stage-all:checked {
+            background: var(--primary-color);
+        }
+
+        .light .todo-stage-checkbox.stage-all {
+            border-color: var(--primary-color);
+        }
+
+        .dark .todo-stage-checkbox.stage-all {
+            border-color: var(--primary-color-dark);
+        }
+
+        .todo-progress-container {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .todo-progress-bar {
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .light .todo-progress-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .todo-progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .todo-progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .light .todo-progress-fill {
+            background: var(--primary-color);
+        }
+
+        .dark .todo-progress-fill {
+            background: var(--primary-color-dark);
+        }
+
+        .todo-period {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 6px;
+        }
+
+        /* カレンダービュー */
+        .calendar-view {
+            padding: 20px 0;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header button {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .calendar-month-year {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            padding: 8px;
+            font-weight: 500;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 1px solid;
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .light .calendar-day {
+            border-color: rgba(0, 0, 0, 0.1);
+            background: var(--panel-light);
+        }
+
+        .dark .calendar-day {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: var(--panel-dark);
+        }
+
+        .calendar-day:hover {
+            transform: scale(1.02);
+        }
+
+        .light .calendar-day:hover {
+            background: var(--panel-light-hover);
+        }
+
+        .dark .calendar-day:hover {
+            background: var(--panel-dark-2);
+        }
+
+        .calendar-day-number {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+        }
+
+        .calendar-day.today {
+            border-width: 2px;
+            box-shadow: inset 0 0 10px rgba(157, 180, 200, 0.2);
+        }
+
+        .light .calendar-day.today {
+            border-color: var(--primary-color);
+            background: rgba(157, 180, 200, 0.1);
+        }
+
+        .dark .calendar-day.today {
+            border-color: var(--primary-color-dark);
+            background: rgba(122, 149, 171, 0.1);
+        }
+
+        .calendar-day.today::after {
+            content: 'Today';
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .light .calendar-day.today::after {
+            color: var(--primary-color);
+        }
+
+        .dark .calendar-day.today::after {
+            color: var(--primary-color-dark);
+        }
+
+        .calendar-day.has-todos {
+            border-bottom-width: 3px;
+        }
+
+        .light .calendar-day.has-todos {
+            background: linear-gradient(to bottom, var(--panel-light), var(--bg-light));
+        }
+
+        .dark .calendar-day.has-todos {
+            background: linear-gradient(to bottom, var(--panel-dark), var(--bg-dark));
+        }
+
+        .calendar-todo-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        .calendar-todo-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .light .calendar-todo-indicator {
+            background: var(--primary-color);
+        }
+
+        .dark .calendar-todo-indicator {
+            background: var(--primary-color-dark);
+        }
+
+        /* ToDoビュー切り替えメニュー */
+        .todo-view-menu {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .todo-view-btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .light .todo-view-btn {
+            background-color: var(--panel-light);
+            color: #3a3a3a;
+        }
+
+        .dark .todo-view-btn {
+            background-color: var(--panel-dark);
+            color: #e8e8e8;
+        }
+
+        .light .todo-view-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .dark .todo-view-btn.active {
+            background-color: var(--primary-color-dark);
+            color: white;
+        }
+
+        /* カスタム日付ピッカー */
+        .custom-date-picker {
+            position: relative;
+            width: 100%;
+        }
+
+        .custom-date-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .light .custom-date-input {
+            background-color: var(--panel-light);
+            color: #3a3a3a;
+        }
+
+        .dark .custom-date-input {
+            background-color: var(--panel-dark);
+            color: #e8e8e8;
+        }
+
+        .custom-date-input:hover {
+            opacity: 0.9;
+        }
+
+        .date-picker-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            min-width: 300px;
+        }
+
+        .light .date-picker-dropdown {
+            background-color: var(--bg-light);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .date-picker-dropdown {
+            background-color: var(--panel-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .date-picker-dropdown.show {
+            display: block;
+        }
+
+        .date-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .date-picker-header button {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+
+        .date-picker-month-year {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .date-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .date-picker-day-header {
+            text-align: center;
+            font-size: 0.75rem;
+            opacity: 0.7;
+            padding: 8px 4px;
+        }
+
+        .date-picker-day {
+            aspect-ratio: 1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .light .date-picker-day {
+            background: var(--panel-light);
+        }
+
+        .dark .date-picker-day {
+            background: var(--panel-dark-2);
+        }
+
+        .date-picker-day:hover {
+            transform: scale(1.1);
+        }
+
+        .light .date-picker-day:hover {
+            background: var(--panel-light-hover);
+        }
+
+        .dark .date-picker-day:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .date-picker-day.other-month {
+            opacity: 0.3;
+        }
+
+        .date-picker-day.today {
+            font-weight: 600;
+        }
+
+        .light .date-picker-day.today {
+            color: var(--primary-color);
+        }
+
+        .dark .date-picker-day.today {
+            color: var(--primary-color-dark);
+        }
+
+        .date-picker-day.selected {
+            font-weight: 600;
+        }
+
+        .light .date-picker-day.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .dark .date-picker-day.selected {
+            background: var(--primary-color-dark);
+            color: white;
+        }
+
+        /* カレンダー日付詳細ダイアログ */
+        .calendar-day-dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 10001;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .calendar-day-dialog-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-day-dialog {
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .light .calendar-day-dialog {
+            background-color: var(--bg-light);
+            color: #3a3a3a;
+        }
+
+        .dark .calendar-day-dialog {
+            background-color: var(--panel-dark);
+            color: #e8e8e8;
+        }
+
+        .calendar-day-dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day-dialog-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .calendar-day-dialog-close {
+            padding: 8px 16px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .calendar-day-todos {
+            margin-bottom: 20px;
+        }
+
+        .calendar-day-todo-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .light .calendar-day-todo-item {
+            background-color: var(--panel-light);
+        }
+
+        .dark .calendar-day-todo-item {
+            background-color: var(--panel-dark-2);
+        }
+
+        .calendar-day-add-form {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid;
+        }
+
+        .light .calendar-day-add-form {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .calendar-day-add-form {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* モバイル対応レスポンシブスタイル */
+        @media (max-width: 600px) {
+            .todo-v2-popup {
+                padding: 25px;
+                width: 85%;
+            }
+
+            .todo-v2-popup-title {
+                font-size: 1.25rem;
+            }
+
+            .todo-v2-popup-message {
+                font-size: 0.9rem;
+            }
+
+            .todo-item {
+                align-items: flex-start;
+                gap: 8px;
+                padding: 12px;
+            }
+
+            .todo-stage-checkboxes {
+                gap: 4px;
+                margin-right: 6px;
+                margin-top: 4px;
+                /* Align with text top */
+            }
+
+            .todo-stage-checkbox {
+                width: 16px;
+                height: 16px;
+            }
+
+            .calendar-header button {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            .calendar-month-year {
+                font-size: 1rem;
+            }
+
+            .calendar-grid {
+                gap: 4px;
+            }
+
+            .calendar-day {
+                padding: 4px;
+                min-height: 50px;
+                border-radius: 6px;
+            }
+
+            .calendar-day-number {
+                font-size: 0.8rem;
+            }
+
+            .calendar-todo-indicator {
+                width: 4px;
+                height: 4px;
+            }
+
+            .date-picker-dropdown {
+                min-width: unset;
+                width: 85vw;
+                padding: 15px;
+                left: 50% !important;
+                transform: translateX(-50%);
+            }
+
+            .calendar-day-dialog {
+                padding: 20px;
+                width: 85%;
+            }
+
+            .calendar-day-dialog-title {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 
 </head>
@@ -2170,6 +2830,46 @@
             <div class="custom-confirm-buttons">
                 <button class="custom-confirm-cancel" id="renameCancelBtn" data-i18n="cancelButton">キャンセル</button>
                 <button class="custom-confirm-ok" id="renameOkBtn" data-i18n="saveButton">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ToDo Ver.2 ポップアップ -->
+    <div class="todo-v2-popup-overlay" id="todoV2PopupOverlay">
+        <div class="todo-v2-popup">
+            <div class="todo-v2-popup-title">ToDo Ver.2を有効にしますか?</div>
+            <div class="todo-v2-popup-message">
+                新しいToDo Ver.2では、段階的完了機能、期間設定、カレンダービューなどの高度な機能が利用できます。
+            </div>
+            <div class="todo-v2-popup-toggle">
+                <span class="todo-v2-popup-toggle-label">ToDo Ver.2を有効にする</span>
+                <div class="toggle-switch" id="todoV2Toggle" onclick="toggleTodoV2Popup()">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="todo-v2-popup-buttons">
+                <button class="secondary" onclick="closeTodoV2Popup()">決定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- カレンダー日付詳細ダイアログ -->
+    <div class="calendar-day-dialog-overlay" id="calendarDayDialog">
+        <div class="calendar-day-dialog">
+            <div class="calendar-day-dialog-header">
+                <div class="calendar-day-dialog-title" id="calendarDayDialogTitle">2026年1月29日</div>
+                <button class="secondary calendar-day-dialog-close" onclick="closeCalendarDayDialog()">閉じる</button>
+            </div>
+            <div class="calendar-day-todos" id="calendarDayTodos">
+                <!-- ToDoリストがここに表示される -->
+            </div>
+            <div class="calendar-day-add-form">
+                <h4 style="margin: 0 0 15px 0; font-size: 1rem;">新しいToDoを追加</h4>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" id="calendarAddTodoInput" placeholder="タスクを入力"
+                        style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-family: inherit;">
+                    <button class="primary" onclick="addTodoFromCalendar()">追加</button>
+                </div>
             </div>
         </div>
     </div>
@@ -2358,7 +3058,14 @@
             </div>
         </div>
         <div id="todoPage" class="page">
-            <div class="todo-list">
+            <!-- ビュー切り替えメニュー -->
+            <div class="todo-view-menu">
+                <button class="todo-view-btn active" onclick="switchTodoView('list')" id="todoViewList">ToDoリスト</button>
+                <button class="todo-view-btn" onclick="switchTodoView('calendar')" id="todoViewCalendar">カレンダー</button>
+            </div>
+
+            <!-- ToDoリストビュー -->
+            <div id="todoListView" class="todo-list">
                 <div class="todo-input">
                     <input type="text" id="todoInput" placeholder="新しいタスクを入力" data-i18n="todoPlaceholder">
                     <button type="button" class="primary" onclick="addTodo()" data-i18n="todoAddButton">追加</button>
@@ -2392,6 +3099,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Ver.2: 期間設定 -->
+                    <div id="todoPeriodSettings"
+                        style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 140px;">
+                            <label
+                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;">開始日(任意)</label>
+                            <div class="custom-date-picker">
+                                <input type="text" id="todoPeriodStart" class="custom-date-input" placeholder="日付を選択"
+                                    readonly onclick="openDatePicker('start')">
+                                <div class="date-picker-dropdown" id="datePickerStart"></div>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 140px;">
+                            <label
+                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;">終了日(任意)</label>
+                            <div class="custom-date-picker">
+                                <input type="text" id="todoPeriodEnd" class="custom-date-input" placeholder="日付を選択"
+                                    readonly onclick="openDatePicker('end')">
+                                <div class="date-picker-dropdown" id="datePickerEnd"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="todo-filter" style="margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -2408,6 +3138,16 @@
                 </div>
 
                 <div class="todo-items" id="todoItems"></div>
+            </div>
+
+            <!-- カレンダービュー -->
+            <div id="todoCalendarView" class="calendar-view" style="display: none;">
+                <div class="calendar-header">
+                    <button class="secondary" onclick="changeCalendarMonth(-1)">◀ 前月</button>
+                    <div class="calendar-month-year" id="calendarMonthYear">2026年1月</div>
+                    <button class="secondary" onclick="changeCalendarMonth(1)">次月 ▶</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
             </div>
         </div>
         <div id="settingsPage" class="page">
@@ -2426,6 +3166,12 @@
                     </div>
                 </div>
                 <div class="toggle-item">
+                    <span>ToDo Ver.2</span>
+                    <div class="toggle-switch" id="toggleTodoV2" onclick="toggleTodoV2Setting()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="toggle-item">
                     <span data-i18n="titleTimeDisplay">タイトルの時間表示</span>
                     <div class="toggle-switch" id="toggleTitleTime" onclick="toggleTitleTime()">
                         <div class="toggle-slider"></div>
@@ -2438,7 +3184,7 @@
                     </div>
                 </div>
                 <div class="toggle-item">
-                    <span data-i18n="loadingAnimSetting">開始時にローディングアニメーションを表示</span>
+                    <span data-i18n="loadingAnimSetting">ローディングアニメーション表示</span>
                     <div class="toggle-switch" id="toggleLoadingAnim" onclick="toggleLoadingAnim()">
                         <div class="toggle-slider"></div>
                     </div>
@@ -2726,39 +3472,54 @@
                     <h2 id="licenseTitle" data-i18n="licenseTitle">フォントライセンス</h2>
                     <div id="licenseContent" class="about-content"
                         style="font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
-                        <p><b><strong>Jost</strong></b><br>by Indestructible Type is licensed under the SIL Open Font License,
+                        <p><b><strong>Jost</strong></b><br>by Indestructible Type is licensed under the SIL Open Font
+                            License,
                             Version 1.1.</p>
-                        <p><b><strong>Zen Kaku Gothic Antique</strong></b><br>by Astrolab Inc. is licensed under the SIL Open
+                        <p><b><strong>Zen Kaku Gothic Antique</strong></b><br>by Astrolab Inc. is licensed under the SIL
+                            Open
                             Font License, Version 1.1.</p>
-                        <p><b><strong>JetBrains Mono</strong></b><br>by JetBrains s.r.o. is licensed under the SIL Open Font
+                        <p><b><strong>JetBrains Mono</strong></b><br>by JetBrains s.r.o. is licensed under the SIL Open
+                            Font
                             License, Version 1.1.</p>
-                        <p><b><strong>Montserrat</strong></b><br>by Julieta Ulanovsky is licensed under the SIL Open Font
+                        <p><b><strong>Montserrat</strong></b><br>by Julieta Ulanovsky is licensed under the SIL Open
+                            Font
                             License, Version 1.1.</p>
-                        <p><b><strong>Lora</strong></b><br>by Cyreal is licensed under the SIL Open Font License, Version 1.1.
+                        <p><b><strong>Lora</strong></b><br>by Cyreal is licensed under the SIL Open Font License,
+                            Version 1.1.
                         </p>
                         <p><b><strong>Quicksand</strong></b><br>by Andrew Paglinawan is licensed under the SIL Open Font
                             License, Version 1.1.</p>
-                        <p><b><strong>Klee One</strong></b><br>by Fontworks Inc. is licensed under the SIL Open Font License,
+                        <p><b><strong>Klee One</strong></b><br>by Fontworks Inc. is licensed under the SIL Open Font
+                            License,
                             Version 1.1.</p>
                         <p><b><strong>BIZ UDPGothic</strong></b><br>by Morisawa Inc. is licensed under the SIL Open Font
                             License, Version 1.1.</p>
-                        <p><b><strong>Zen Maru Gothic</strong></b><br>by Yoshimichi Ohira is licensed under the SIL Open Font
+                        <p><b><strong>Zen Maru Gothic</strong></b><br>by Yoshimichi Ohira is licensed under the SIL Open
+                            Font
                             License, Version 1.1.</p>
-                        <p><b><strong>Noto Sans JP</strong></b><br>by Google is licensed under the SIL Open Font License,
+                        <p><b><strong>Noto Sans JP</strong></b><br>by Google is licensed under the SIL Open Font
+                            License,
                             Version 1.1.</p>
-                        <p><b><strong>Sawarabi Gothic</strong></b><br>by mplus-fonts-dev is licensed under the Creative Commons
+                        <p><b><strong>Sawarabi Gothic</strong></b><br>by mplus-fonts-dev is licensed under the Creative
+                            Commons
                             Attribution 4.0 International License / SIL Open Font License.</p>
-                        <p><b><strong>Hina Mincho</strong></b><br>by Shujiro Sano is licensed under the SIL Open Font License,
+                        <p><b><strong>Hina Mincho</strong></b><br>by Shujiro Sano is licensed under the SIL Open Font
+                            License,
                             Version 1.1.</p>
-                        <p><b><strong>うつくし明朝体 (Utsukushi Font)</strong></b><br>by FLOP DESIGN is licensed under the Apache
+                        <p><b><strong>うつくし明朝体 (Utsukushi Font)</strong></b><br>by FLOP DESIGN is licensed under the
+                            Apache
                             License, Version 2.0.</p>
-                        <p><b><strong>美咲ゴシック (Misaki Gothic)</strong></b><br>by 門真 なむ (Little Limit) is licensed under the
+                        <p><b><strong>美咲ゴシック (Misaki Gothic)</strong></b><br>by 門真 なむ (Little Limit) is licensed under
+                            the
                             Public Domain (or equivalent free license).</p>
-                        <p><b><strong>小伝馬町 (Kodenmachou)</strong></b><br>by 自家製フォント工房 is licensed under the SIL Open Font
+                        <p><b><strong>小伝馬町 (Kodenmachou)</strong></b><br>by 自家製フォント工房 is licensed under the SIL Open
+                            Font
                             License, Version 1.1.</p>
-                        <p><b><strong>しろくまフォント (Shirokuma)</strong></b><br>by しろくまはなこ is free for personal and commercial use.
+                        <p><b><strong>しろくまフォント (Shirokuma)</strong></b><br>by しろくまはなこ is free for personal and
+                            commercial use.
                         </p>
-                        <p><b><strong>無心 (Mushin)</strong></b><br>by Maniackers Design is licensed under the SIL Open Font
+                        <p><b><strong>無心 (Mushin)</strong></b><br>by Maniackers Design is licensed under the SIL Open
+                            Font
                             License, Version 1.1.</p>
                     </div>
                     <div class="about-actions">
@@ -2910,7 +3671,7 @@
                         themeTeal: 'ティール',
                         themeWhite: 'ホワイト/ブラック',
                         lockSettingsDuringTimer: 'タイマー作動中は設定を無効化',
-                        loadingAnimSetting: '開始時にローディングアニメーションを表示',
+                        loadingAnimSetting: 'ローディングアニメーション表示',
                         graphDisplay: 'グラフ表示',
                         studyGraph: '勉強時間のグラフ表示',
                         graphType: 'グラフの種類',
@@ -4310,6 +5071,10 @@
                     const repeat = document.getElementById('todoRepeat').value;
                     const priority = document.getElementById('todoPriority').value;
 
+                    // Ver.2: 期間設定を取得
+                    const periodStart = document.getElementById('todoPeriodStart').value;
+                    const periodEnd = document.getElementById('todoPeriodEnd').value;
+
                     let todos = getData('todos');
                     try {
                         todos = todos ? JSON.parse(todos) : [];
@@ -4329,7 +5094,18 @@
                         id: Date.now(),
                         repeat: repeat,
                         priority: priority,
-                        createdAt: new Date().toISOString()
+                        createdAt: new Date().toISOString(),
+                        // Ver.2: 段階的完了
+                        completionStages: {
+                            stage1: false,
+                            stage2: false,
+                            stage3: false
+                        },
+                        // Ver.2: 期間設定
+                        period: {
+                            start: periodStart || null,
+                            end: periodEnd || null
+                        }
                     };
 
                     if (repeat !== 'none') {
@@ -4342,6 +5118,8 @@
                     input.value = '';
                     document.getElementById('todoRepeat').value = 'none';
                     document.getElementById('todoPriority').value = 'normal';
+                    document.getElementById('todoPeriodStart').value = '';
+                    document.getElementById('todoPeriodEnd').value = '';
 
                     loadTodos();
                 }
@@ -4349,11 +5127,22 @@
                 function loadTodos() {
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
+                    const todoV2Enabled = getData('todo_v2_enabled') === 'true';
 
                     const now = new Date();
                     const today = now.toDateString();
 
+                    // Ver.2データ構造への互換性対応
                     todos.forEach(todo => {
+                        // 既存データに段階的完了がない場合は追加
+                        if (!todo.completionStages) {
+                            todo.completionStages = { stage1: false, stage2: false, stage3: false };
+                        }
+                        // 期間設定がない場合は追加
+                        if (!todo.period) {
+                            todo.period = { start: null, end: null };
+                        }
+
                         if (todo.repeat !== 'none' && todo.completed && todo.lastCompleted) {
                             const lastCompletedDate = new Date(todo.lastCompleted);
                             let shouldReset = false;
@@ -4403,14 +5192,65 @@
                         const repeatBadge = todo.repeat !== 'none' ?
                             `<span class="todo-repeat-badge">${getRepeatLabel(todo.repeat)}</span>` : '';
 
+                        // Ver.2: 期間表示
+                        let periodDisplay = '';
+                        if (todoV2Enabled && todo.period && (todo.period.start || todo.period.end)) {
+                            const startStr = todo.period.start || '未設定';
+                            const endStr = todo.period.end || '未設定';
+                            periodDisplay = `<div class="todo-period">期間: ${startStr} 〜 ${endStr}</div>`;
+                        }
+
+                        // Ver.2: 段階的完了チェックボックス
+                        let stageCheckboxes = '';
+                        let progressBar = '';
+                        if (todoV2Enabled) {
+                            const s1 = todo.completionStages.stage1 ? 'checked' : '';
+                            const s2 = todo.completionStages.stage2 ? 'checked' : '';
+                            const s3 = todo.completionStages.stage3 ? 'checked' : '';
+                            const allChecked = todo.completed ? 'checked' : '';
+
+                            stageCheckboxes = `
+                                <div class="todo-stage-checkboxes">
+                                    <input type="checkbox" class="todo-stage-checkbox stage-all" ${allChecked} 
+                                        onchange="toggleTodoStageAll(${index})" title="一括完了">
+                                    <input type="checkbox" class="todo-stage-checkbox" ${s1} 
+                                        onchange="toggleTodoStage(${index}, 1)" title="1段階完了">
+                                    <input type="checkbox" class="todo-stage-checkbox" ${s2} 
+                                        onchange="toggleTodoStage(${index}, 2)" title="2段階完了">
+                                    <input type="checkbox" class="todo-stage-checkbox" ${s3} 
+                                        onchange="toggleTodoStage(${index}, 3)" title="3段階完了">
+                                </div>
+                            `;
+
+                            // プログレスバー計算: 各段階25%
+                            let progress = 0;
+                            if (todo.completed) progress = 100;
+                            else if (todo.completionStages.stage3) progress = 75;
+                            else if (todo.completionStages.stage2) progress = 50;
+                            else if (todo.completionStages.stage1) progress = 25;
+
+                            progressBar = `
+                                <div class="todo-progress-container">
+                                    <div class="todo-progress-bar">
+                                        <div class="todo-progress-fill" style="width: ${progress}%;"></div>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            // Ver.1: 従来のチェックボックス
+                            stageCheckboxes = `<input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">`;
+                        }
+
                         return `
             <div class="todo-item todo-priority-${todo.priority} ${todo.completed ? 'completed' : ''}">
-                <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">
+                ${stageCheckboxes}
                 <div style="flex: 1;">
                     <span class="todo-text">${todo.text}</span>
                     <div class="todo-meta">
                         ${repeatBadge}
                     </div>
+                    ${periodDisplay}
+                    ${progressBar}
                 </div>
                 <button class="todo-delete" onclick="deleteTodo(${index})">${getText('deleteButton')}</button>
             </div>
@@ -4473,6 +5313,492 @@
                         todos.splice(index, 1);
                         saveData('todos', JSON.stringify(todos));
                         loadTodos();
+                    }
+                }
+
+                // ToDo Ver.2 関数群
+
+                // 段階的完了 - 一括チェック
+                function toggleTodoStageAll(index) {
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+
+                    const newState = !todos[index].completed;
+                    todos[index].completed = newState;
+
+                    // 一括チェックの場合、全ステージも同期
+                    if (newState) {
+                        todos[index].completionStages.stage1 = true;
+                        todos[index].completionStages.stage2 = true;
+                        todos[index].completionStages.stage3 = true;
+                    } else {
+                        todos[index].completionStages.stage1 = false;
+                        todos[index].completionStages.stage2 = false;
+                        todos[index].completionStages.stage3 = false;
+                    }
+
+                    if (todos[index].repeat !== 'none' && newState) {
+                        todos[index].lastCompleted = new Date().toISOString();
+                    }
+
+                    saveData('todos', JSON.stringify(todos));
+                    loadTodos();
+                }
+
+                // 段階的完了 - 個別ステージ
+                function toggleTodoStage(index, stage) {
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+
+                    const stageKey = `stage${stage}`;
+                    const newState = !todos[index].completionStages[stageKey];
+                    todos[index].completionStages[stageKey] = newState;
+
+                    // ステージ3がチェックされたら全体完了
+                    if (stage === 3 && newState) {
+                        todos[index].completionStages.stage1 = true;
+                        todos[index].completionStages.stage2 = true;
+                        todos[index].completed = true;
+                        if (todos[index].repeat !== 'none') {
+                            todos[index].lastCompleted = new Date().toISOString();
+                        }
+                    }
+                    // ステージ2がチェックされたらステージ1も
+                    else if (stage === 2 && newState) {
+                        todos[index].completionStages.stage1 = true;
+                    }
+
+                    // チェック解除時は完了状態も解除
+                    if (!newState) {
+                        todos[index].completed = false;
+                        // より高いステージのチェックも外す
+                        if (stage === 1) {
+                            todos[index].completionStages.stage2 = false;
+                            todos[index].completionStages.stage3 = false;
+                        } else if (stage === 2) {
+                            todos[index].completionStages.stage3 = false;
+                        }
+                    }
+
+                    saveData('todos', JSON.stringify(todos));
+                    loadTodos();
+                }
+
+                // ビュー切り替え
+                let currentTodoView = 'list';
+
+                function switchTodoView(view) {
+                    currentTodoView = view;
+
+                    const listView = document.getElementById('todoListView');
+                    const calendarView = document.getElementById('todoCalendarView');
+                    const listBtn = document.getElementById('todoViewList');
+                    const calendarBtn = document.getElementById('todoViewCalendar');
+
+                    if (view === 'list') {
+                        listView.style.display = 'block';
+                        calendarView.style.display = 'none';
+                        listBtn.classList.add('active');
+                        calendarBtn.classList.remove('active');
+                    } else if (view === 'calendar') {
+                        listView.style.display = 'none';
+                        calendarView.style.display = 'block';
+                        listBtn.classList.remove('active');
+                        calendarBtn.classList.add('active');
+                        renderCalendar(calendarYear, calendarMonth);
+                    }
+                }
+
+                // カレンダービュー
+                let calendarYear = new Date().getFullYear();
+                let calendarMonth = new Date().getMonth();
+
+                function changeCalendarMonth(delta) {
+                    calendarMonth += delta;
+                    if (calendarMonth > 11) {
+                        calendarMonth = 0;
+                        calendarYear++;
+                    } else if (calendarMonth < 0) {
+                        calendarMonth = 11;
+                        calendarYear--;
+                    }
+                    renderCalendar(calendarYear, calendarMonth);
+                }
+
+                function renderCalendar(year, month) {
+                    const monthYearDiv = document.getElementById('calendarMonthYear');
+                    const gridDiv = document.getElementById('calendarGrid');
+
+                    // 月年表示
+                    monthYearDiv.textContent = `${year}年${month + 1}月`;
+
+                    // カレンダーグリッド生成
+                    const firstDay = new Date(year, month, 1);
+                    const lastDay = new Date(year, month + 1, 0);
+                    const startDay = firstDay.getDay(); // 0=日曜
+                    const daysInMonth = lastDay.getDate();
+
+                    // ToDoデータ取得
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+
+                    let html = '';
+
+                    // 曜日ヘッダー
+                    const dayHeaders = ['日', '月', '火', '水', '木', '金', '土'];
+                    dayHeaders.forEach(day => {
+                        html += `<div class="calendar-day-header">${day}</div>`;
+                    });
+
+                    // 前月の日付(空白)
+                    for (let i = 0; i < startDay; i++) {
+                        html += `<div class="calendar-day other-month"></div>`;
+                    }
+
+                    // 当月の日付
+                    const today = new Date();
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        const currentDate = new Date(year, month, day);
+                        const dateStr = currentDate.toISOString().split('T')[0];
+                        const isToday = currentDate.toDateString() === today.toDateString();
+
+                        // この日付に関連するToDoを取得
+                        const dayTodos = todos.filter(todo => {
+                            if (!todo.period) return false;
+                            const start = todo.period.start ? new Date(todo.period.start) : null;
+                            const end = todo.period.end ? new Date(todo.period.end) : null;
+
+                            if (start && end) {
+                                return currentDate >= start && currentDate <= end;
+                            } else if (start) {
+                                return currentDate.toDateString() === start.toDateString();
+                            } else if (end) {
+                                return currentDate.toDateString() === end.toDateString();
+                            }
+                            return false;
+                        });
+
+                        const hasTodos = dayTodos.length > 0;
+                        const indicators = dayTodos.map(() => `<div class="calendar-todo-indicator"></div>`).join('');
+
+                        const dayClasses = ['calendar-day'];
+                        if (isToday) dayClasses.push('today');
+                        if (hasTodos) dayClasses.push('has-todos');
+
+                        html += `
+                            <div class="${dayClasses.join(' ')}" onclick="openCalendarDayDialog(new Date('${dateStr}'))">
+                                <div class="calendar-day-number">${day}</div>
+                                <div class="calendar-todo-indicators">${indicators}</div>
+                            </div>
+                        `;
+                    }
+
+                    gridDiv.innerHTML = html;
+                }
+
+                // ToDo Ver.2 ポップアップ管理
+                let todoV2PopupState = false;
+
+                function showTodoV2Popup() {
+                    // 既存データの有無を確認 (初回訪問時は表示しない)
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+
+                    if (todos.length === 0) return;
+
+                    // 初回表示チェック
+                    if (getData('todo_v2_prompt_shown') === 'true') return;
+
+                    const overlay = document.getElementById('todoV2PopupOverlay');
+                    const toggle = document.getElementById('todoV2Toggle');
+
+                    // デフォルトはOFF
+                    const currentState = getData('todo_v2_enabled') === 'true';
+                    if (currentState) {
+                        toggle.classList.add('active');
+                    }
+                    todoV2PopupState = currentState;
+
+                    overlay.classList.add('show');
+                }
+
+                function toggleTodoV2Popup() {
+                    todoV2PopupState = !todoV2PopupState;
+                    const toggle = document.getElementById('todoV2Toggle');
+                    if (todoV2PopupState) {
+                        toggle.classList.add('active');
+                    } else {
+                        toggle.classList.remove('active');
+                    }
+                }
+
+                function closeTodoV2Popup() {
+                    const overlay = document.getElementById('todoV2PopupOverlay');
+                    overlay.classList.remove('show');
+
+                    // 設定を保存
+                    saveData('todo_v2_enabled', todoV2PopupState ? 'true' : 'false');
+                    saveData('todo_v2_prompt_shown', 'true');
+
+                    // ToDoをリロードしてVer.2を反映
+                    loadTodos();
+
+                    // 期間設定フィールドの表示/非表示
+                    updatePeriodSettingsVisibility();
+                }
+
+                // カスタム日付ピッカー
+                let currentDatePicker = null;  // 'start' or 'end'
+                let selectedDate = { start: null, end: null };
+
+                function openDatePicker(type) {
+                    currentDatePicker = type;
+                    const dropdownId = type === 'start' ? 'datePickerStart' : 'datePickerEnd';
+                    const dropdown = document.getElementById(dropdownId);
+
+                    // 他のピッカーを閉じる
+                    document.querySelectorAll('.date-picker-dropdown').forEach(d => {
+                        if (d.id !== dropdownId) d.classList.remove('show');
+                    });
+
+                    // トグル表示
+                    dropdown.classList.toggle('show');
+
+                    if (dropdown.classList.contains('show')) {
+                        renderDatePicker(type, new Date());
+                    }
+                }
+
+                function renderDatePicker(type, date) {
+                    const dropdownId = type === 'start' ? 'datePickerStart' : 'datePickerEnd';
+                    const dropdown = document.getElementById(dropdownId);
+
+                    const year = date.getFullYear();
+                    const month = date.getMonth();
+                    const firstDay = new Date(year, month, 1);
+                    const lastDay = new Date(year, month + 1, 0);
+                    const startDay = firstDay.getDay();
+                    const daysInMonth = lastDay.getDate();
+
+                    const today = new Date();
+                    const currentSelected = selectedDate[type] ? new Date(selectedDate[type]) : null;
+
+                    let html = `
+                        <div class="date-picker-header">
+                            <button class="secondary" onclick="changeDatePickerMonth(-1, '${type}')" type="button">◀</button>
+                            <div class="date-picker-month-year">${year}年${month + 1}月</div>
+                            <button class="secondary" onclick="changeDatePickerMonth(1, '${type}')" type="button">▶</button>
+                        </div>
+                        <div class="date-picker-grid">
+                    `;
+
+                    // 曜日ヘッダー
+                    ['日', '月', '火', '水', '木', '金', '土'].forEach(day => {
+                        html += `<div class="date-picker-day-header">${day}</div>`;
+                    });
+
+                    // 空白セル
+                    for (let i = 0; i < startDay; i++) {
+                        html += `<div class="date-picker-day other-month"></div>`;
+                    }
+
+                    // 日付セル
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        const currentDate = new Date(year, month, day);
+                        const dateStr = currentDate.toISOString().split('T')[0];
+                        const isToday = currentDate.toDateString() === today.toDateString();
+                        const isSelected = currentSelected && currentDate.toDateString() === currentSelected.toDateString();
+
+                        const classes = ['date-picker-day'];
+                        if (isToday) classes.push('today');
+                        if (isSelected) classes.push('selected');
+
+                        html += `<div class="${classes.join(' ')}" onclick="selectDate('${type}', '${dateStr}')">${day}</div>`;
+                    }
+
+                    html += `</div>`;
+                    dropdown.innerHTML = html;
+                }
+
+                let datePickerCurrentDate = { start: new Date(), end: new Date() };
+
+                function changeDatePickerMonth(delta, type) {
+                    if (!datePickerCurrentDate[type]) datePickerCurrentDate[type] = new Date();
+                    datePickerCurrentDate[type].setMonth(datePickerCurrentDate[type].getMonth() + delta);
+                    renderDatePicker(type, datePickerCurrentDate[type]);
+                }
+
+                function selectDate(type, dateStr) {
+                    selectedDate[type] = dateStr;
+                    const inputId = type === 'start' ? 'todoPeriodStart' : 'todoPeriodEnd';
+                    document.getElementById(inputId).value = dateStr;
+
+                    // ピッカーを閉じる
+                    const dropdownId = type === 'start' ? 'datePickerStart' : 'datePickerEnd';
+                    document.getElementById(dropdownId).classList.remove('show');
+                }
+
+                // 外部クリックでピッカーを閉じる
+                document.addEventListener('click', function (e) {
+                    if (!e.target.closest('.custom-date-picker')) {
+                        document.querySelectorAll('.date-picker-dropdown.show').forEach(d => {
+                            d.classList.remove('show');
+                        });
+                    }
+                });
+
+                // カレンダー日付クリックでダイアログ表示
+                let currentCalendarDate = null;
+
+                function openCalendarDayDialog(date) {
+                    currentCalendarDate = date;
+                    const dialog = document.getElementById('calendarDayDialog');
+                    const titleDiv = document.getElementById('calendarDayDialogTitle');
+
+                    // 日付フォーマット
+                    titleDiv.textContent = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+
+                    // その日のToDoを表示
+                    renderCalendarDayTodos(date);
+
+                    dialog.classList.add('show');
+                }
+
+                function closeCalendarDayDialog() {
+                    const dialog = document.getElementById('calendarDayDialog');
+                    dialog.classList.remove('show');
+                    document.getElementById('calendarAddTodoInput').value = '';
+                }
+
+                function renderCalendarDayTodos(date) {
+                    const dateStr = date.toISOString().split('T')[0];
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+
+                    // その日に関連するToDoを取得
+                    const dayTodos = todos.filter((todo, index) => {
+                        todo._index = index;  // インデックスを保持
+                        if (!todo.period) return false;
+                        const start = todo.period.start ? new Date(todo.period.start) : null;
+                        const end = todo.period.end ? new Date(todo.period.end) : null;
+
+                        if (start && end) {
+                            return date >= start && date <= end;
+                        } else if (start) {
+                            return date.toDateString() === start.toDateString();
+                        } else if (end) {
+                            return date.toDateString() === end.toDateString();
+                        }
+                        return false;
+                    });
+
+                    const todosDiv = document.getElementById('calendarDayTodos');
+
+                    if (dayTodos.length === 0) {
+                        todosDiv.innerHTML = `<div style="opacity: 0.7; text-align: center; padding: 20px;">この日にToDoはありません</div>`;
+                    } else {
+                        const todoV2Enabled = getData('todo_v2_enabled') === 'true';
+
+                        todosDiv.innerHTML = dayTodos.map(todo => {
+                            const index = todo._index;
+                            const completed = todo.completed ? '✓ ' : '';
+                            const completedClass = todo.completed ? 'style="opacity: 0.6; text-decoration: line-through;"' : '';
+
+                            return `
+                                <div class="calendar-day-todo-item">
+                                    <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodoFromCalendar(${index})">
+                                    <div style="flex: 1;" ${completedClass}>${completed}${todo.text}</div>
+                                    <button class="secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="deleteTodoFromCalendar(${index})">削除</button>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                }
+
+                function addTodoFromCalendar() {
+                    const input = document.getElementById('calendarAddTodoInput');
+                    const text = input.value.trim();
+                    if (!text || !currentCalendarDate) return;
+
+                    const dateStr = currentCalendarDate.toISOString().split('T')[0];
+
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+
+                    const newTodo = {
+                        text: text,
+                        completed: false,
+                        id: Date.now(),
+                        repeat: 'none',
+                        priority: 'normal',
+                        createdAt: new Date().toISOString(),
+                        completionStages: {
+                            stage1: false,
+                            stage2: false,
+                            stage3: false
+                        },
+                        period: {
+                            start: dateStr,
+                            end: dateStr
+                        }
+                    };
+
+                    todos.push(newTodo);
+                    saveData('todos', JSON.stringify(todos));
+
+                    input.value = '';
+                    renderCalendarDayTodos(currentCalendarDate);
+                    renderCalendar(calendarYear, calendarMonth);
+                    loadTodos();
+                }
+
+                function toggleTodoFromCalendar(index) {
+                    let todos = getData('todos');
+                    todos = todos ? JSON.parse(todos) : [];
+                    todos[index].completed = !todos[index].completed;
+
+                    if (todos[index].repeat !== 'none' && todos[index].completed) {
+                        todos[index].lastCompleted = new Date().toISOString();
+                    }
+
+                    saveData('todos', JSON.stringify(todos));
+                    renderCalendarDayTodos(currentCalendarDate);
+                    renderCalendar(calendarYear, calendarMonth);
+                    loadTodos();
+                }
+
+                async function deleteTodoFromCalendar(index) {
+                    const confirmed = await customConfirm('このToDoを削除しますか?', '確認', 'delete.webp');
+                    if (confirmed) {
+                        let todos = getData('todos');
+                        todos = todos ? JSON.parse(todos) : [];
+                        todos.splice(index, 1);
+                        saveData('todos', JSON.stringify(todos));
+                        renderCalendarDayTodos(currentCalendarDate);
+                        renderCalendar(calendarYear, calendarMonth);
+                        loadTodos();
+                    }
+                }
+
+                // 設定からのVer.2切り替え
+                function toggleTodoV2Setting() {
+                    const toggle = document.getElementById('toggleTodoV2');
+                    const currentState = getData('todo_v2_enabled') === 'true';
+                    const newState = !currentState;
+
+                    toggle.classList.toggle('active', newState);
+                    saveData('todo_v2_enabled', newState ? 'true' : 'false');
+
+                    loadTodos();
+                    updatePeriodSettingsVisibility();
+                }
+
+                function updatePeriodSettingsVisibility() {
+                    const todoV2Enabled = getData('todo_v2_enabled') === 'true';
+                    const periodSettings = document.getElementById('todoPeriodSettings');
+
+                    if (periodSettings) {
+                        periodSettings.style.display = todoV2Enabled ? 'flex' : 'none';
                     }
                 }
 
@@ -4919,7 +6245,7 @@
                 ];
 
                 function showTutorialWelcome() {
-                    const completed = getCookie('tutorial_completed');
+                    const completed = getData('tutorial_completed') === 'true';
                     if (!completed) {
                         document.getElementById('tutorialWelcome').style.display = 'block';
                     }
@@ -4927,7 +6253,7 @@
 
                 function closeTutorial() {
                     document.getElementById('tutorialWelcome').style.display = 'none';
-                    setCookie('tutorial_completed', 'true', 365);
+                    saveData('tutorial_completed', 'true');
                 }
 
                 function startTutorial() {
@@ -4946,7 +6272,7 @@
 
                 function skipTutorial() {
                     hideTutorialStep();
-                    setCookie('tutorial_completed', 'true', 365);
+                    saveData('tutorial_completed', 'true');
                 }
 
                 function nextTutorialStep() {
@@ -4961,7 +6287,7 @@
                         showTutorialStep();
                     } else {
                         hideTutorialStep();
-                        setCookie('tutorial_completed', 'true', 365);
+                        saveData('tutorial_completed', 'true');
                     }
                 }
 
@@ -5024,7 +6350,7 @@
                             nextBtn.textContent = getText('finishButton');
                             nextBtn.onclick = () => {
                                 hideTutorialStep();
-                                setCookie('tutorial_completed', 'true', 365);
+                                saveData('tutorial_completed', 'true');
                             };
 
                             // 画面中央に配置
@@ -5110,7 +6436,7 @@
                                         showTutorialStep();
                                     } else {
                                         hideTutorialStep();
-                                        setCookie('tutorial_completed', 'true', 365);
+                                        saveData('tutorial_completed', 'true');
                                     }
                                 }, 300);
                             };
@@ -5258,7 +6584,27 @@
                     if (enSelect) enSelect.value = fontEn;
                 }
 
-                window.onload = function () {
+                function finishLoading() {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay) {
+                        const showAnim = getData('feature_loading_anim') !== 'false';
+                        if (!showAnim) {
+                            overlay.style.display = 'none';
+                            overlay.remove();
+                            return;
+                        }
+                        const primaryHover = getComputedStyle(document.body).getPropertyValue('--primary-hover');
+                        if (primaryHover) {
+                            overlay.style.backgroundColor = primaryHover.trim();
+                        }
+                        overlay.classList.add('wipe-out');
+                        setTimeout(() => {
+                            overlay.remove();
+                        }, 1200);
+                    }
+                }
+
+                window.onload = async function () {
 
                     // 言語設定を読み込んで適用
                     const savedLanguage = getData('app_language') || 'ja';
@@ -5405,7 +6751,7 @@
                         }
                         if (volumeBtnImg) volumeBtnImg.src = 'volume.webp';
                     }
-                    (async () => {
+                    await (async () => {
                         try {
                             const playlistCookie = getData('musicPlaylist');
                             if (playlistCookie) {
@@ -5580,6 +6926,9 @@
                             }
                         }
                     });
+
+                    // Finish loading after all initializations
+                    finishLoading();
                 };
                 let studyChart = null;
                 let statsChart = null;
@@ -5849,32 +7198,23 @@
                     todoInput.isComposing = false;
                 });
 
-                // Trigger loading overlay wipe animation
+                // ToDo Ver.2 初期化
+                function initTodoV2() {
+                    // 初回ポップアップ表示
+                    showTodoV2Popup();
+
+                    // Ver.2有効時の UI調整
+                    updatePeriodSettingsVisibility();
+                }
+
+                // ページ読み込み時にToDo Ver.2を初期化
                 setTimeout(() => {
-                    const overlay = document.getElementById('loadingOverlay');
-                    if (overlay) {
-                        // Check user setting
-                        const showAnim = getData('feature_loading_anim') !== 'false'; // Default true
+                    initTodoV2();
+                }, 1000); // ローディングアニメーション後に表示
 
-                        if (!showAnim) {
-                            overlay.style.display = 'none';
-                            overlay.remove();
-                            return;
-                        }
+                // Trigger loading overlay wipe animation
+                // Trigger loading overlay wipe animation (Moved to window.onload)
 
-                        // Use current theme's primary-hover if theme is loaded
-                        const primaryHover = getComputedStyle(document.body).getPropertyValue('--primary-hover');
-                        if (primaryHover) {
-                            overlay.style.backgroundColor = primaryHover.trim();
-                        }
-
-                        overlay.classList.add('wipe-out');
-                        // Remove overlay element after animation completes
-                        setTimeout(() => {
-                            overlay.remove();
-                        }, 1200);
-                    }
-                }, 100);
             </script>
 </body>
 
