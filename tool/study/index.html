@@ -5718,9 +5718,9 @@
                         // この日付に関連するToDoを取得
                         const dayTodos = todos.filter(todo => {
                             if (!todo.period) return false;
-                            // 'YYYY-MM-DD' 形式の文字列をローカル日付として復元する
-                            const start = todo.period.start ? (function(){ const p = todo.period.start.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
-                            const end = todo.period.end ? (function(){ const p = todo.period.end.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
+                            // 保存された文字列をローカル日付として復元（'YYYY-MM-DD' や ISO を扱う）
+                            const start = todo.period.start ? parseLocalDate(todo.period.start) : null;
+                            const end = todo.period.end ? parseLocalDate(todo.period.end) : null;
 
                             if (start && end) {
                                 return currentDate >= start && currentDate <= end;
@@ -5740,7 +5740,7 @@
                         if (hasTodos) dayClasses.push('has-todos');
 
                         html += `
-                            <div class="${dayClasses.join(' ')}" onclick="openCalendarDayDialog(new Date('${dateStr}'))">
+                            <div class="${dayClasses.join(' ')}" onclick="openCalendarDayDialog(new Date(${year}, ${month}, ${day}))">
                                 <div class="calendar-day-number">${day}</div>
                                 <div class="calendar-todo-indicators">${indicators}</div>
                             </div>
@@ -5891,6 +5891,15 @@
 
                 let datePickerCurrentDate = { start: new Date(), end: new Date() };
 
+                // 文字列からローカル日付を復元するヘルパー（'YYYY-MM-DD' または ISO 全体を扱う）
+                function parseLocalDate(dateStr) {
+                    if (!dateStr) return null;
+                    const dateOnly = String(dateStr).split('T')[0];
+                    const parts = dateOnly.split('-').map(Number);
+                    if (parts.length < 3 || parts.some(p => Number.isNaN(p))) return null;
+                    return new Date(parts[0], parts[1] - 1, parts[2]);
+                }
+
                 function changeDatePickerMonth(delta, type) {
                     if (!datePickerCurrentDate[type]) datePickerCurrentDate[type] = new Date();
                     // 日付オーバーフローの副作用を避けるため、常に対象月の1日に切り替える
@@ -5947,9 +5956,9 @@
                     const dayTodos = todos.filter((todo, index) => {
                         todo._index = index;  // インデックスを保持
                         if (!todo.period) return false;
-                        // Stored 'YYYY-MM-DD' をローカル日付として復元して比較する
-                        const start = todo.period.start ? (function(){ const p = todo.period.start.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
-                        const end = todo.period.end ? (function(){ const p = todo.period.end.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
+                        // 保存された文字列をローカル日付として復元して比較する
+                        const start = todo.period.start ? parseLocalDate(todo.period.start) : null;
+                        const end = todo.period.end ? parseLocalDate(todo.period.end) : null;
 
                         if (start && end) {
                             return date >= start && date <= end;
