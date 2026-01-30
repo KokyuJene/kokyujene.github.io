@@ -970,7 +970,9 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 10px;
-            display: flex;
+            /* 中央カラムを持つ grid レイアウトにして、タイトルを中央揃えにする */
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
             gap: 12px;
         }
@@ -992,14 +994,16 @@
         }
 
         .todo-checkbox {
+            /* サイズと余白のみ維持 */
             width: 20px;
             height: 20px;
-            cursor: pointer;
         }
 
         .todo-text {
             flex: 1;
             word-break: break-word;
+            text-align: center;
+            justify-self: center;
         }
 
         .todo-delete {
@@ -1055,6 +1059,18 @@
 
             to {
                 transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUpCentered {
+            from {
+                transform: translate(-50%, -40%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, -50%);
                 opacity: 1;
             }
         }
@@ -2015,20 +2031,25 @@
         }
 
         .todo-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
             gap: 12px;
         }
 
         .todo-checkbox {
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: 0;
+            align-self: center;
         }
 
         .todo-text {
             display: flex;
             align-items: center;
             line-height: 1.5;
-            padding-top: 1px;
+            padding-top: 0;
+            justify-self: center;
+            text-align: center;
         }
 
 
@@ -2258,28 +2279,10 @@
         .todo-stage-checkbox {
             width: 22px;
             height: 22px;
-            cursor: pointer;
-            position: relative;
             flex-shrink: 0;
         }
 
-        .todo-stage-checkbox.stage-all {
-            border: 2px solid var(--primary-color);
-            background: transparent;
-            border-radius: 4px;
-        }
-
-        .todo-stage-checkbox.stage-all:checked {
-            background: var(--primary-color);
-        }
-
-        .light .todo-stage-checkbox.stage-all {
-            border-color: var(--primary-color);
-        }
-
-        .dark .todo-stage-checkbox.stage-all {
-            border-color: var(--primary-color-dark);
-        }
+        /* カスタムチェックボックスの枠線などの基本設定は input[type="checkbox"] で一括定義済み */
 
         .todo-progress-container {
             margin-top: 8px;
@@ -2596,7 +2599,7 @@
             z-index: 10001;
             width: 90%;
             max-width: 380px;
-            animation: slideUp 0.3s ease-out;
+            animation: slideUpCentered 0.3s ease-out;
         }
 
         /* 外部クリックを検知するためのオーバーレイを擬似的に表現するか、スクリプトで制御 */
@@ -2827,6 +2830,134 @@
             border-color: rgba(255, 255, 255, 0.1);
         }
 
+        /* カスタムチェックボックス (全般) */
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+
+            /* デフォルトサイズ (クラスで指定がない場合) */
+            width: 18px;
+            height: 18px;
+        }
+
+        /* 履歴アイテムのチェックボックスを右上に強制固定 */
+        .history-item-checkbox {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            width: 24px !important;
+            height: 24px !important;
+            margin: 0;
+        }
+
+        /* ToDoリストのチェックボックスの位置微調整 */
+        .todo-checkbox {
+            /* 移動用のマージンを廃止し、flex の中央揃えで対処 */
+            margin-top: 0 !important;
+            display: inline-block;
+            vertical-align: middle;
+            align-self: center;
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .todo-checkbox {
+                margin-top: 0 !important;
+            }
+        }
+
+        .dark input[type="checkbox"] {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark input[type="checkbox"]:checked {
+            background-color: var(--primary-color-dark);
+            border-color: var(--primary-color-dark);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* チェックマークアイコン */
+        input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            /* より厳密に中央に寄せる */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 30%;
+            height: 55%;
+            /* 少し細めにして小さなボックスでもバランスが良くなるように */
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            opacity: 0;
+            animation: checkAnim 0.2s forwards;
+        }
+
+        /* ToDo 用にさらに細かく補正（小さいボックスでの縦ずれ対策） */
+        .todo-checkbox:checked::after {
+            top: 50%;
+            transform: translate(-50%, -52%) rotate(45deg);
+            width: 34%;
+            height: 62%;
+            border-bottom-width: 2px;
+            border-right-width: 2px;
+        }
+
+        @keyframes checkAnim {
+            from {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            to {
+                opacity: 1;
+                width: 30%;
+                height: 55%;
+            }
+        }
+
+        /* ホバー効果 */
+        @media (hover: hover) {
+            input[type="checkbox"]:hover {
+                border-color: var(--primary-color);
+                background-color: rgba(157, 180, 200, 0.1);
+            }
+
+            .dark input[type="checkbox"]:hover {
+                border-color: var(--primary-color-dark);
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+
+            input[type="checkbox"]:checked:hover {
+                background-color: var(--primary-hover);
+                border-color: var(--primary-hover);
+            }
+
+            .dark input[type="checkbox"]:checked:hover {
+                background-color: var(--primary-hover-dark);
+                border-color: var(--primary-hover-dark);
+            }
+        }
+
         /* モバイル対応レスポンシブスタイル */
         @media (max-width: 600px) {
             .todo-v2-popup {
@@ -2843,9 +2974,18 @@
             }
 
             .todo-item {
-                align-items: flex-start;
+                /* モバイルでは grid を解除して横並びにして可読性を保つ */
+                display: flex;
+                flex-direction: row;
+                align-items: center;
                 gap: 8px;
                 padding: 12px;
+            }
+
+            .todo-text {
+                /* モバイルでは左寄せ */
+                text-align: left;
+                justify-self: start;
             }
 
             .todo-stage-checkboxes {
@@ -3875,7 +4015,6 @@
                         このサイトは<a href="https://kokyujene.github.io/members/super-hiko14/">Super Hiko14</a>が開発しました。<div class="tyuui-mini-text">※ 一部AIが使用されています。</div>
                         </div>`,
                         qaContent: `<div style="text-align: left;">
-                            <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. データはどこに保存されますか?</h3>
                             <p style="margin-left: 15px;">A. すべてのデータはブラウザのローカルストレージに保存されます。サーバーには一切送信されません。</p>
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. 他のデバイスでデータへ移行やバックアップを取りたい。</h3>
                             <p style="margin-left: 15px;">A. エクスポートからJsonファイルをダウンロードできます。インポートで他デバイスに移行やバックアップとして保存できます。</p>
@@ -5601,13 +5740,19 @@
                 let todoV2PopupState = false;
 
                 function showTodoV2Popup() {
-                    // 既存データの有無を確認 (初回訪問時は表示しない)
+                    // 既存データの有無を確認
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
 
-                    if (todos.length === 0) return;
+                    // 新規ユーザー（ToDoが一つもない場合）は確認なしで自動的にV2をONにする
+                    if (todos.length === 0 && getData('todo_v2_prompt_shown') !== 'true') {
+                        saveData('todo_v2_enabled', 'true');
+                        saveData('todo_v2_prompt_shown', 'true');
+                        syncTodoV2UI();
+                        return;
+                    }
 
-                    // 初回表示チェック
+                    // 初回表示チェック（既存ユーザー向け）
                     if (getData('todo_v2_prompt_shown') === 'true') return;
 
                     const overlay = document.getElementById('todoV2PopupOverlay');
