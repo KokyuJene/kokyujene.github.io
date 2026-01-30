@@ -1206,8 +1206,10 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 20px;
+                padding: 15px 12px;
                 max-width: 100%;
+                box-sizing: border-box;
+                overflow-x: hidden;
             }
 
             h1 {
@@ -1398,8 +1400,8 @@
         body[data-theme="white"] {
             --primary-color: #b3b3b3;
             --primary-hover: #dadada;
-            --primary-color-dark: #424242;
-            --primary-hover-dark: #202020;
+            --primary-color-dark: #999;
+            --primary-hover-dark: #bbb;
             --bg-light: #fdfdfd;
             --bg-dark: #0a0a0a;
             --panel-dark: #151515;
@@ -1910,13 +1912,15 @@
         }
 
         .light .todo-repeat-badge {
-            background-color: rgba(157, 180, 200, 0.2);
+            background-color: rgba(0, 0, 0, 0.05);
             color: var(--primary-color);
+            border: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         .dark .todo-repeat-badge {
-            background-color: rgba(157, 180, 200, 0.3);
-            color: var(--primary-color-dark);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #efefef;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .todo-category-badge {
@@ -2218,17 +2222,42 @@
             font-size: 1rem;
         }
 
-        /* 段階的完了チェックボックス */
-        .todo-stage-checkboxes {
+        .todo-v2-details {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
             display: flex;
-            gap: 6px;
-            margin-right: 10px;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .dark .todo-v2-details {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .todo-stage-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .todo-stage-label {
+            display: flex;
             align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            opacity: 0.9;
+            user-select: none;
+            padding: 4px 0;
         }
 
         .todo-stage-checkbox {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
             position: relative;
             flex-shrink: 0;
@@ -2280,10 +2309,6 @@
             border-radius: 2px;
         }
 
-        .light .todo-progress-fill {
-            background: var(--primary-color);
-        }
-
         .dark .todo-progress-fill {
             background: var(--primary-color-dark);
         }
@@ -2322,12 +2347,28 @@
             gap: 8px;
         }
 
+        @media (max-width: 480px) {
+            .calendar-grid {
+                gap: 2px;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
+
         .calendar-day-header {
             text-align: center;
             font-size: 0.85rem;
             opacity: 0.7;
             padding: 8px;
             font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .calendar-day-header {
+                padding: 2px;
+                font-size: 0.7rem;
+            }
         }
 
         .calendar-day {
@@ -2341,6 +2382,17 @@
             min-height: 60px;
             display: flex;
             flex-direction: column;
+        }
+
+        @media (max-width: 480px) {
+            .calendar-day {
+                padding: 1px;
+                min-height: auto;
+                aspect-ratio: auto;
+                height: 45px;
+                max-width: calc((100vw - 24px - 12px) / 7);
+                /* container padding + gap */
+            }
         }
 
         .light .calendar-day {
@@ -2371,53 +2423,52 @@
             margin-bottom: 4px;
         }
 
+        @media (max-width: 480px) {
+            .calendar-day-number {
+                font-size: 0.8rem;
+            }
+        }
+
         .calendar-day.other-month {
             opacity: 0.3;
         }
 
         .calendar-day.today {
             border-width: 2px;
-            box-shadow: inset 0 0 10px rgba(157, 180, 200, 0.2);
         }
 
         .light .calendar-day.today {
             border-color: var(--primary-color);
-            background: rgba(157, 180, 200, 0.1);
         }
 
         .dark .calendar-day.today {
             border-color: var(--primary-color-dark);
-            background: rgba(122, 149, 171, 0.1);
         }
 
         .calendar-day.today::after {
-            content: 'Today';
+            content: '';
             position: absolute;
-            top: 4px;
+            top: 6px;
             right: 6px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            opacity: 0.8;
-        }
-
-        .light .calendar-day.today::after {
-            color: var(--primary-color);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
         }
 
         .dark .calendar-day.today::after {
-            color: var(--primary-color-dark);
+            background-color: var(--primary-color-dark);
         }
 
         .calendar-day.has-todos {
-            border-bottom-width: 3px;
-        }
-
-        .light .calendar-day.has-todos {
-            background: linear-gradient(to bottom, var(--panel-light), var(--bg-light));
+            background-color: transparent !important;
+            border-left: 4px solid var(--primary-color) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
         }
 
         .dark .calendar-day.has-todos {
-            background: linear-gradient(to bottom, var(--panel-dark), var(--bg-dark));
+            border-left-color: var(--primary-color-dark) !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
         }
 
         .calendar-todo-indicators {
@@ -2427,12 +2478,34 @@
         }
 
         .calendar-todo-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+            display: none;
+            /* 従来のドットは非表示 */
         }
+
+        .calendar-todo-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.65rem;
+            min-width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 0 4px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+
+        .light .calendar-todo-badge {
+            color: #fff;
+        }
+
+        /* 重複する定義を削除 */
 
         .light .calendar-todo-indicator {
             background: var(--primary-color);
@@ -2513,25 +2586,56 @@
 
         .date-picker-dropdown {
             display: none;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            z-index: 10001;
+            width: 90%;
+            max-width: 380px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        /* 外部クリックを検知するためのオーバーレイを擬似的に表現するか、スクリプトで制御 */
+        .date-picker-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
             left: 0;
-            margin-top: 8px;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            min-width: 300px;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .date-picker-overlay.show,
+        .date-picker-dropdown.show {
+            display: block;
+        }
+
+        .date-picker-overlay.show {
+            display: block;
+        }
+
+        .date-picker-dropdown.show {
+            display: block;
         }
 
         .light .date-picker-dropdown {
             background-color: var(--bg-light);
             border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #3a3a3a;
         }
 
         .dark .date-picker-dropdown {
             background-color: var(--panel-dark);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e8e8e8;
         }
 
         .date-picker-dropdown.show {
@@ -2786,10 +2890,10 @@
 
             .date-picker-dropdown {
                 min-width: unset;
-                width: 85vw;
-                padding: 15px;
-                left: 50% !important;
-                transform: translateX(-50%);
+                width: 90%;
+                max-width: 350px;
+                padding: 20px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
             }
 
             .calendar-day-dialog {
@@ -2853,7 +2957,9 @@
         </div>
     </div>
 
-    <!-- カレンダー日付詳細ダイアログ -->
+    <!-- デイトピッカー用オーバーレイ -->
+    <div class="date-picker-overlay" id="datePickerOverlay" onclick="closeAllDatePickers()"></div>
+    <div class="date-picker-dropdown" id="commonDatePicker"></div>
     <div class="calendar-day-dialog-overlay" id="calendarDayDialog">
         <div class="calendar-day-dialog">
             <div class="calendar-day-dialog-header">
@@ -3109,7 +3215,6 @@
                             <div class="custom-date-picker">
                                 <input type="text" id="todoPeriodStart" class="custom-date-input" placeholder="日付を選択"
                                     readonly onclick="openDatePicker('start')">
-                                <div class="date-picker-dropdown" id="datePickerStart"></div>
                             </div>
                         </div>
                         <div style="flex: 1; min-width: 140px;">
@@ -3118,7 +3223,6 @@
                             <div class="custom-date-picker">
                                 <input type="text" id="todoPeriodEnd" class="custom-date-input" placeholder="日付を選択"
                                     readonly onclick="openDatePicker('end')">
-                                <div class="date-picker-dropdown" id="datePickerEnd"></div>
                             </div>
                         </div>
                     </div>
@@ -5200,27 +5304,12 @@
                             periodDisplay = `<div class="todo-period">期間: ${startStr} 〜 ${endStr}</div>`;
                         }
 
-                        // Ver.2: 段階的完了チェックボックス
-                        let stageCheckboxes = '';
-                        let progressBar = '';
+                        // Ver.2: 段階的完了とプログレス表示の統合
+                        let v2Details = '';
                         if (todoV2Enabled) {
                             const s1 = todo.completionStages.stage1 ? 'checked' : '';
                             const s2 = todo.completionStages.stage2 ? 'checked' : '';
                             const s3 = todo.completionStages.stage3 ? 'checked' : '';
-                            const allChecked = todo.completed ? 'checked' : '';
-
-                            stageCheckboxes = `
-                                <div class="todo-stage-checkboxes">
-                                    <input type="checkbox" class="todo-stage-checkbox stage-all" ${allChecked} 
-                                        onchange="toggleTodoStageAll(${index})" title="一括完了">
-                                    <input type="checkbox" class="todo-stage-checkbox" ${s1} 
-                                        onchange="toggleTodoStage(${index}, 1)" title="1段階完了">
-                                    <input type="checkbox" class="todo-stage-checkbox" ${s2} 
-                                        onchange="toggleTodoStage(${index}, 2)" title="2段階完了">
-                                    <input type="checkbox" class="todo-stage-checkbox" ${s3} 
-                                        onchange="toggleTodoStage(${index}, 3)" title="3段階完了">
-                                </div>
-                            `;
 
                             // プログレスバー計算: 各段階25%
                             let progress = 0;
@@ -5229,30 +5318,34 @@
                             else if (todo.completionStages.stage2) progress = 50;
                             else if (todo.completionStages.stage1) progress = 25;
 
-                            progressBar = `
-                                <div class="todo-progress-container">
-                                    <div class="todo-progress-bar">
-                                        <div class="todo-progress-fill" style="width: ${progress}%;"></div>
+                            v2Details = `
+                                <div class="todo-v2-details">
+                                    <div class="todo-stage-row">
+                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s1} onchange="toggleTodoStage(${index}, 1)"> Step 1</label>
+                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s2} onchange="toggleTodoStage(${index}, 2)"> Step 2</label>
+                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s3} onchange="toggleTodoStage(${index}, 3)"> Step 3</label>
+                                    </div>
+                                    <div class="todo-progress-container">
+                                        <div class="todo-progress-bar">
+                                            <div class="todo-progress-fill" style="width: ${progress}%;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             `;
-                        } else {
-                            // Ver.1: 従来のチェックボックス
-                            stageCheckboxes = `<input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">`;
                         }
 
                         return `
             <div class="todo-item todo-priority-${todo.priority} ${todo.completed ? 'completed' : ''}">
-                ${stageCheckboxes}
-                <div style="flex: 1;">
-                    <span class="todo-text">${todo.text}</span>
-                    <div class="todo-meta">
+                <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span class="todo-text">${todo.text}</span>
                         ${repeatBadge}
                     </div>
+                    ${v2Details}
                     ${periodDisplay}
-                    ${progressBar}
                 </div>
-                <button class="todo-delete" onclick="deleteTodo(${index})">${getText('deleteButton')}</button>
+                <button class="delete-btn" onclick="deleteTodo(${index})">${getText('deleteButton')}</button>
             </div>
         `;
                     }).join('');
@@ -5294,11 +5387,19 @@
                 function toggleTodo(index) {
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
-                    todos[index].completed = !todos[index].completed;
+                    const newState = !todos[index].completed;
+                    todos[index].completed = newState;
 
                     // 繰り返しタスクの場合、完了日を記録
-                    if (todos[index].repeat !== 'none' && todos[index].completed) {
+                    if (todos[index].repeat !== 'none' && newState) {
                         todos[index].lastCompleted = new Date().toISOString();
+                    }
+
+                    // Ver.2: 全体完了時は全てのステージも同期する
+                    if (getData('todo_v2_enabled') === 'true' && todos[index].completionStages) {
+                        todos[index].completionStages.stage1 = newState;
+                        todos[index].completionStages.stage2 = newState;
+                        todos[index].completionStages.stage3 = newState;
                     }
 
                     saveData('todos', JSON.stringify(todos));
@@ -5479,7 +5580,7 @@
                         });
 
                         const hasTodos = dayTodos.length > 0;
-                        const indicators = dayTodos.map(() => `<div class="calendar-todo-indicator"></div>`).join('');
+                        const indicators = hasTodos ? `<div class="calendar-todo-badge">${dayTodos.length}</div>` : '';
 
                         const dayClasses = ['calendar-day'];
                         if (isToday) dayClasses.push('today');
@@ -5525,10 +5626,8 @@
                 function toggleTodoV2Popup() {
                     todoV2PopupState = !todoV2PopupState;
                     const toggle = document.getElementById('todoV2Toggle');
-                    if (todoV2PopupState) {
-                        toggle.classList.add('active');
-                    } else {
-                        toggle.classList.remove('active');
+                    if (toggle) {
+                        toggle.classList.toggle('active', todoV2PopupState);
                     }
                 }
 
@@ -5540,11 +5639,11 @@
                     saveData('todo_v2_enabled', todoV2PopupState ? 'true' : 'false');
                     saveData('todo_v2_prompt_shown', 'true');
 
+                    // UI同期
+                    syncTodoV2UI();
+
                     // ToDoをリロードしてVer.2を反映
                     loadTodos();
-
-                    // 期間設定フィールドの表示/非表示
-                    updatePeriodSettingsVisibility();
                 }
 
                 // カスタム日付ピッカー
@@ -5553,25 +5652,25 @@
 
                 function openDatePicker(type) {
                     currentDatePicker = type;
-                    const dropdownId = type === 'start' ? 'datePickerStart' : 'datePickerEnd';
-                    const dropdown = document.getElementById(dropdownId);
-
-                    // 他のピッカーを閉じる
-                    document.querySelectorAll('.date-picker-dropdown').forEach(d => {
-                        if (d.id !== dropdownId) d.classList.remove('show');
-                    });
+                    const dropdown = document.getElementById('commonDatePicker');
+                    const overlay = document.getElementById('datePickerOverlay');
 
                     // トグル表示
-                    dropdown.classList.toggle('show');
+                    overlay.classList.add('show');
+                    dropdown.classList.add('show');
 
-                    if (dropdown.classList.contains('show')) {
-                        renderDatePicker(type, new Date());
-                    }
+                    renderDatePicker(type, datePickerCurrentDate[type] || new Date());
+                }
+
+                function closeAllDatePickers() {
+                    const dropdown = document.getElementById('commonDatePicker');
+                    const overlay = document.getElementById('datePickerOverlay');
+                    if (dropdown) dropdown.classList.remove('show');
+                    if (overlay) overlay.classList.remove('show');
                 }
 
                 function renderDatePicker(type, date) {
-                    const dropdownId = type === 'start' ? 'datePickerStart' : 'datePickerEnd';
-                    const dropdown = document.getElementById(dropdownId);
+                    const dropdown = document.getElementById('commonDatePicker');
 
                     const year = date.getFullYear();
                     const month = date.getMonth();
@@ -5585,8 +5684,12 @@
 
                     let html = `
                         <div class="date-picker-header">
+                            <h3 style="margin: 0; font-size: 1rem;">${type === 'start' ? '開始日' : '終了日'}を選択</h3>
+                            <button type="button" class="secondary" onclick="closeAllDatePickers()" style="padding: 4px 10px; font-size: 0.8rem;">閉じる</button>
+                        </div>
+                        <div class="date-picker-month-selector" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                             <button class="secondary" onclick="changeDatePickerMonth(-1, '${type}')" type="button">◀</button>
-                            <div class="date-picker-month-year">${year}年${month + 1}月</div>
+                            <div class="date-picker-month-year" style="font-weight: 500;">${year}年${month + 1}月</div>
                             <button class="secondary" onclick="changeDatePickerMonth(1, '${type}')" type="button">▶</button>
                         </div>
                         <div class="date-picker-grid">
@@ -5634,16 +5737,13 @@
                     document.getElementById(inputId).value = dateStr;
 
                     // ピッカーを閉じる
-                    const dropdownId = type === 'start' ? 'datePickerStart' : 'datePickerEnd';
-                    document.getElementById(dropdownId).classList.remove('show');
+                    closeAllDatePickers();
                 }
 
-                // 外部クリックでピッカーを閉じる
+                // 外部クリックでピッカーを閉じる (現在はoverlayのonclickで対応しているが念のため)
                 document.addEventListener('click', function (e) {
-                    if (!e.target.closest('.custom-date-picker')) {
-                        document.querySelectorAll('.date-picker-dropdown.show').forEach(d => {
-                            d.classList.remove('show');
-                        });
+                    if (e.target.classList.contains('date-picker-overlay')) {
+                        closeAllDatePickers();
                     }
                 });
 
@@ -5701,14 +5801,13 @@
 
                         todosDiv.innerHTML = dayTodos.map(todo => {
                             const index = todo._index;
-                            const completed = todo.completed ? '✓ ' : '';
                             const completedClass = todo.completed ? 'style="opacity: 0.6; text-decoration: line-through;"' : '';
 
                             return `
                                 <div class="calendar-day-todo-item">
                                     <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodoFromCalendar(${index})">
-                                    <div style="flex: 1;" ${completedClass}>${completed}${todo.text}</div>
-                                    <button class="secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="deleteTodoFromCalendar(${index})">削除</button>
+                                    <div style="flex: 1;" ${completedClass}>${todo.text}</div>
+                                    <button class="delete-btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="deleteTodoFromCalendar(${index})">削除</button>
                                 </div>
                             `;
                         }).join('');
@@ -5782,14 +5881,24 @@
 
                 // 設定からのVer.2切り替え
                 function toggleTodoV2Setting() {
-                    const toggle = document.getElementById('toggleTodoV2');
                     const currentState = getData('todo_v2_enabled') === 'true';
                     const newState = !currentState;
 
-                    toggle.classList.toggle('active', newState);
                     saveData('todo_v2_enabled', newState ? 'true' : 'false');
 
+                    syncTodoV2UI();
                     loadTodos();
+                }
+
+                // UI同期関数
+                function syncTodoV2UI() {
+                    const todoV2Enabled = getData('todo_v2_enabled') === 'true';
+                    const settingsToggle = document.getElementById('toggleTodoV2');
+                    const popupToggle = document.getElementById('todoV2Toggle');
+
+                    if (settingsToggle) settingsToggle.classList.toggle('active', todoV2Enabled);
+                    if (popupToggle) popupToggle.classList.toggle('active', todoV2Enabled);
+
                     updatePeriodSettingsVisibility();
                 }
 
@@ -7203,8 +7312,8 @@
                     // 初回ポップアップ表示
                     showTodoV2Popup();
 
-                    // Ver.2有効時の UI調整
-                    updatePeriodSettingsVisibility();
+                    // UI同期 (設定画面など)
+                    syncTodoV2UI();
                 }
 
                 // ページ読み込み時にToDo Ver.2を初期化
