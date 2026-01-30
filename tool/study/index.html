@@ -4786,6 +4786,11 @@
                     return `${hours}:${minutes}`;
                 }
 
+                // 日付と時刻を両方表示するためのヘルパー
+                function formatDateTimeLong(date) {
+                    return `${formatDate(date)} ${formatDateTime(date)}`;
+                }
+
                 function formatDate(date) {
                     const year = date.getFullYear();
                     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -4857,12 +4862,19 @@
                     const groupName = groupInput.value.trim() || '';
                     if (startCookie) {
                         const start = new Date(startCookie);
-                        const actualStudyTime = isPaused ? pausedTime : (Date.now() - startTime + pausedTime);
-                        let history = getData('studyHistory');
-                        history = history ? JSON.parse(history) : [];
-                        history.unshift({ start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName });
-                        saveData('studyHistory', JSON.stringify(history));
-                        document.getElementById('sessionInfo').innerHTML = `${getText('startTime')}: ${formatDateTime(start)}<br>${getText('endTime')}: ${formatDateTime(endTime)}<br>${getText('studyTime')}: ${formatTime(actualStudyTime)}${groupName ? '<br>' + getText('group') + ': ' + groupName : ''}`;
+                        if (isNaN(start.getTime())) {
+                            console.warn('Invalid stored start time:', startCookie);
+                        } else {
+                            // 終了時刻 - 保存された開始時刻 を使って計算（startTime 変数に依存しない）
+                            const actualStudyTime = isPaused ? pausedTime : (endTime.getTime() - start.getTime() + pausedTime);
+                            let history = getData('studyHistory');
+                            history = history ? JSON.parse(history) : [];
+                            history.unshift({ start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName });
+                            saveData('studyHistory', JSON.stringify(history));
+                            const startDisplay = formatDateTimeLong(start);
+                            const endDisplay = formatDateTimeLong(endTime);
+                            document.getElementById('sessionInfo').innerHTML = `${getText('startTime')}: ${startDisplay}<br>${getText('endTime')}: ${endDisplay}<br>${getText('studyTime')}: ${formatTime(actualStudyTime)}${groupName ? '<br>' + getText('group') + ': ' + groupName : ''}`;
+                        }
                     }
                     // セッション終了時は一時保存データを削除
                     localStorage.removeItem('studyStartTime');
@@ -6097,7 +6109,10 @@
                         const end = new Date(item.end);
                         const groupBadge = item.group ? `<div class="group-badge">${item.group}</div>` : '';
                         const isSelected = selectedItems.has(actualIndex);
-                        return `<div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})"><input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})"><div class="history-item-date">${formatDate(start)}</div><div class="history-item-time">${getText('start')}: ${formatDateTime(start)}<br>${getText('end')}: ${formatDateTime(end)}</div><div class="history-item-duration">${getText('studyTime')}: ${formatTime(item.duration)}</div>${groupBadge}</div>`;
+                        const dateDisplay = (formatDate(start) === formatDate(end)) ? formatDate(start) : `${formatDate(start)}<br><small>→ ${formatDate(end)}</small>`;
+                        const startDisplay = formatDateTime(start);
+                        const endDisplay = formatDateTime(end);
+                        return `<div class="history-item ${isSelected ? 'selected' : ''}" onclick="toggleSelection(event, ${actualIndex})"><input type="checkbox" class="history-item-checkbox" ${isSelected ? 'checked' : ''} onclick="toggleSelection(event, ${actualIndex})"><div class="history-item-date">${dateDisplay}</div><div class="history-item-time">${getText('start')}: ${startDisplay}<br>${getText('end')}: ${endDisplay}</div><div class="history-item-duration">${getText('studyTime')}: ${formatTime(item.duration)}</div>${groupBadge}</div>`;
                     }).join('');
                     updateActionButtons();
                 }
