@@ -3260,7 +3260,7 @@
                             style="display:none;" onchange="addMusicFile(event)">
                     </div>
                 </div>
-                <audio id="audioPlayer" style="display:none;"></audio>
+                <audio id="audioPlayer" style="display:none;" playsinline webkit-playsinline></audio>
                 <div class="custom-player" style="width:100%; margin-bottom:12px;">
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div id="timeDisplay" style="min-width:110px; font-size:0.95rem;">0:00 / 0:00</div>
@@ -5091,11 +5091,26 @@
                     }
                 });
 
+                // 汎用: 再生を試み、失敗時はリトライするヘルパー
+                function attemptPlay(audio, retries = 3, delay = 400) {
+                    return audio.play().catch(err => {
+                        if (retries <= 0) return Promise.reject(err);
+                        return new Promise(resolve => setTimeout(resolve, delay)).then(() => attemptPlay(audio, retries - 1, Math.min(delay * 2, 2000)));
+                    });
+                }
+
                 function playMusic(index) {
                     if (musicFiles[index]) {
                         const audio = document.getElementById('audioPlayer');
                         audio.src = musicFiles[index].url;
-                        audio.play();
+                        // iOS の場合、バックグラウンド復帰後などで play() が拒否されることがあるため、リトライを行う
+                        attemptPlay(audio).then(() => {
+                            updatePlayPauseUI(true);
+                        }).catch((err) => {
+                            console.warn('Playback failed after retries:', err);
+                            updatePlayPauseUI(false);
+                        });
+
                         currentMusicIndex = index;
                         const playImg = document.getElementById('playIconImg');
                         if (playImg) { playImg.src = 'pause.webp'; playImg.alt = '一時停止'; }
@@ -5112,11 +5127,13 @@
 
                     navigator.mediaSession.metadata = new MediaMetadata({
                         title: file.title,
-                        artist: 'Study Timer Music', // 任意のアーティスト名
+                        // ユーザー要望のサブタイトル（Artist フィールドを利用）
+                        artist: 'Study Time Manager - Music',
                         album: 'Local Playlist',
                         artwork: [
-                            { src: 'music_note.webp', sizes: '96x96', type: 'image/webp' }, // アイコンがあれば設定
-                            // { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
+                            { src: 'music.webp', sizes: '96x96', type: 'image/webp' },
+                            { src: 'music.webp', sizes: '180x180', type: 'image/webp' },
+                            { src: 'music.webp', sizes: '512x512', type: 'image/webp' }
                         ]
                     });
 
@@ -5154,6 +5171,8 @@
                 }
 
                 // 再生/一時停止UIの同期用ヘルパー
+                let userInitiatedPause = false; // ユーザー操作による一時停止かどうかのフラグ
+
                 function updatePlayPauseUI(isPlaying) {
                     const playImg = document.getElementById('playIconImg');
                     if (playImg) {
@@ -5167,13 +5186,19 @@
                 function togglePlay() {
                     const audio = document.getElementById('audioPlayer');
                     if (audio.paused) {
+                        userInitiatedPause = false;
                         if (currentMusicIndex === -1 && musicFiles.length > 0) {
                             playMusic(0);
                         } else {
-                            audio.play();
-                            updatePlayPauseUI(true);
+                            attemptPlay(audio).then(() => {
+                                updatePlayPauseUI(true);
+                            }).catch(() => {
+                                console.warn('Playback blocked on togglePlay');
+                                // UIは再生できなかった場合はそのままにしておく
+                            });
                         }
                     } else {
+                        userInitiatedPause = true;
                         audio.pause();
                         updatePlayPauseUI(false);
                     }
@@ -5263,9 +5288,26 @@
                     const playImg = document.getElementById('playIconImg');
                     if (playImg) { playImg.src = 'pause.webp'; playImg.alt = '一時停止'; }
                 });
+
+                // 自動的に停止された (バックグラウンドや別アプリの影響) 場合は短時間後に再生を試みる
                 audioEl.addEventListener('pause', () => {
                     const playImg = document.getElementById('playIconImg');
                     if (playImg) { playImg.src = 'play.webp'; playImg.alt = '再生'; }
+
+                    // ユーザーが明示的に一時停止した場合は復帰しない
+                    if (userInitiatedPause) return;
+
+                    // ドキュメントが非表示（バックグラウンド）または iOS の取り扱いで一時停止された可能性がある
+                    // 少し間をおいて再生を試みる（最大3回）
+                    if (document.hidden || /iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                        const audio = document.getElementById('audioPlayer');
+                        attemptPlay(audio, 3, 600).then(() => {
+                            console.info('Resumed playback after unexpected pause');
+                            updatePlayPauseUI(true);
+                        }).catch((e) => {
+                            console.warn('Could not resume playback automatically', e);
+                        });
+                    }
                 });
 
                 const progressContainer = document.getElementById('progressContainer');
