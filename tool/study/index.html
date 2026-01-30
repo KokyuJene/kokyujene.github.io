@@ -5711,14 +5711,16 @@
                     const today = new Date();
                     for (let day = 1; day <= daysInMonth; day++) {
                         const currentDate = new Date(year, month, day);
-                        const dateStr = currentDate.toISOString().split('T')[0];
+                        // ローカル日付を 'YYYY-MM-DD' 形式で生成（toISOString() はUTC変換で日付がずれる）
+                        const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
                         const isToday = currentDate.toDateString() === today.toDateString();
 
                         // この日付に関連するToDoを取得
                         const dayTodos = todos.filter(todo => {
                             if (!todo.period) return false;
-                            const start = todo.period.start ? new Date(todo.period.start) : null;
-                            const end = todo.period.end ? new Date(todo.period.end) : null;
+                            // 'YYYY-MM-DD' 形式の文字列をローカル日付として復元する
+                            const start = todo.period.start ? (function(){ const p = todo.period.start.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
+                            const end = todo.period.end ? (function(){ const p = todo.period.end.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
 
                             if (start && end) {
                                 return currentDate >= start && currentDate <= end;
@@ -5816,7 +5818,10 @@
                     overlay.classList.add('show');
                     dropdown.classList.add('show');
 
-                    renderDatePicker(type, datePickerCurrentDate[type] || new Date());
+                    // 開いたときは現在の月情報を1日に正規化しておく（例: 1月31日の状態から月移動で2月を表示した際の不整合を防ぐ）
+                    if (!datePickerCurrentDate[type]) datePickerCurrentDate[type] = new Date();
+                    datePickerCurrentDate[type] = new Date(datePickerCurrentDate[type].getFullYear(), datePickerCurrentDate[type].getMonth(), 1);
+                    renderDatePicker(type, datePickerCurrentDate[type]);
                 }
 
                 function closeAllDatePickers() {
@@ -5837,7 +5842,10 @@
                     const daysInMonth = lastDay.getDate();
 
                     const today = new Date();
-                    const currentSelected = selectedDate[type] ? new Date(selectedDate[type]) : null;
+                    // selectedDate は 'YYYY-MM-DD' 文字列で保存されるため、UTC解釈を避けてローカル日付として復元する
+                    const currentSelected = selectedDate[type]
+                        ? (function(){ const parts = selectedDate[type].split('-').map(Number); return new Date(parts[0], parts[1] - 1, parts[2]); })()
+                        : null;
 
                     let html = `
                         <div class="date-picker-header">
@@ -5865,7 +5873,8 @@
                     // 日付セル
                     for (let day = 1; day <= daysInMonth; day++) {
                         const currentDate = new Date(year, month, day);
-                        const dateStr = currentDate.toISOString().split('T')[0];
+                        // toISOString() は UTC に変換されて日付ズレを起こすため、ローカル日付を手動で組み立てる
+                        const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
                         const isToday = currentDate.toDateString() === today.toDateString();
                         const isSelected = currentSelected && currentDate.toDateString() === currentSelected.toDateString();
 
@@ -5884,7 +5893,8 @@
 
                 function changeDatePickerMonth(delta, type) {
                     if (!datePickerCurrentDate[type]) datePickerCurrentDate[type] = new Date();
-                    datePickerCurrentDate[type].setMonth(datePickerCurrentDate[type].getMonth() + delta);
+                    // 日付オーバーフローの副作用を避けるため、常に対象月の1日に切り替える
+                    datePickerCurrentDate[type] = new Date(datePickerCurrentDate[type].getFullYear(), datePickerCurrentDate[type].getMonth() + delta, 1);
                     renderDatePicker(type, datePickerCurrentDate[type]);
                 }
 
@@ -5928,7 +5938,8 @@
                 }
 
                 function renderCalendarDayTodos(date) {
-                    const dateStr = date.toISOString().split('T')[0];
+                    // ローカル日付を 'YYYY-MM-DD' 形式で生成（toISOString() はUTC変換で日付がずれる）
+                    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
 
@@ -5936,8 +5947,9 @@
                     const dayTodos = todos.filter((todo, index) => {
                         todo._index = index;  // インデックスを保持
                         if (!todo.period) return false;
-                        const start = todo.period.start ? new Date(todo.period.start) : null;
-                        const end = todo.period.end ? new Date(todo.period.end) : null;
+                        // Stored 'YYYY-MM-DD' をローカル日付として復元して比較する
+                        const start = todo.period.start ? (function(){ const p = todo.period.start.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
+                        const end = todo.period.end ? (function(){ const p = todo.period.end.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); })() : null;
 
                         if (start && end) {
                             return date >= start && date <= end;
@@ -5976,7 +5988,7 @@
                     const text = input.value.trim();
                     if (!text || !currentCalendarDate) return;
 
-                    const dateStr = currentCalendarDate.toISOString().split('T')[0];
+                    const dateStr = `${currentCalendarDate.getFullYear()}-${String(currentCalendarDate.getMonth() + 1).padStart(2, '0')}-${String(currentCalendarDate.getDate()).padStart(2, '0')}`;
 
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
