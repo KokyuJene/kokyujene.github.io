@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>勉強時間管理</title>
+    <title data-i18n="title">勉強時間管理</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="shortcut icon" type="image/webp" href="favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -2437,30 +2437,42 @@
         }
 
         .calendar-day.today {
-            border-width: 2px;
+            /* 枠線は廃止し、数字の強調のみにする */
+            border-width: 1px;
         }
 
         .light .calendar-day.today {
-            border-color: var(--primary-color);
+            border-color: rgba(0, 0, 0, 0.1);
         }
 
         .dark .calendar-day.today {
-            border-color: var(--primary-color-dark);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .calendar-day.today::after {
-            content: '';
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
+            display: none;
         }
 
-        .dark .calendar-day.today::after {
+        /* 今日の日付数字を丸く囲む */
+        .calendar-day.today .calendar-day-number {
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            line-height: 1;
+            /* 垂直位置調整 */
+            padding-top: 1px;
+            /* フォントによる微調整 */
+        }
+
+        .dark .calendar-day.today .calendar-day-number {
             background-color: var(--primary-color-dark);
+            color: #fff;
         }
 
         .calendar-day.has-todos {
@@ -2502,6 +2514,15 @@
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            .calendar-day.today .calendar-day-number {
+                width: 20px;
+                height: 20px;
+                font-size: 0.75rem;
+                margin-bottom: 2px;
+            }
         }
 
         .light .calendar-todo-badge {
@@ -2677,13 +2698,18 @@
 
         .date-picker-day {
             aspect-ratio: 1;
-            border-radius: 6px;
+            border-radius: 50%;
+            /* 丸に変更 */
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
             font-size: 0.9rem;
+            line-height: 1;
+            /* 垂直位置調整 */
+            padding-top: 1px;
+            /* 微調整 */
         }
 
         .light .date-picker-day {
@@ -2715,11 +2741,13 @@
         }
 
         .light .date-picker-day.today {
-            color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
         }
 
         .dark .date-picker-day.today {
-            color: var(--primary-color-dark);
+            background-color: var(--primary-color-dark);
+            color: white;
         }
 
         .date-picker-day.selected {
@@ -3055,13 +3083,13 @@
     <div class="custom-confirm-overlay" id="customConfirmOverlay">
         <div class="custom-confirm-dialog">
             <div class="custom-confirm-icon" id="confirmIcon">
-                <img id="confirmIconImg" src="warning.webp" alt="確認">
+                <img id="confirmIconImg" src="warning.webp" alt="確認" data-i18n-alt="confirmIconAlt">
             </div>
-            <div class="custom-confirm-title" id="confirmTitle">確認</div>
-            <div class="custom-confirm-message" id="confirmMessage">この操作を実行しますか?</div>
+            <div class="custom-confirm-title" id="confirmTitle" data-i18n="confirmDefaultTitle">確認</div>
+            <div class="custom-confirm-message" id="confirmMessage" data-i18n="confirmMessage">この操作を実行しますか?</div>
             <div class="custom-confirm-buttons">
-                <button class="custom-confirm-cancel" id="confirmCancel">キャンセル</button>
-                <button class="custom-confirm-ok" id="confirmOk">OK</button>
+                <button class="custom-confirm-cancel" id="confirmCancel" data-i18n="cancelButton">キャンセル</button>
+                <button class="custom-confirm-ok" id="confirmOk" data-i18n="okButton">OK</button>
             </div>
         </div>
     </div>
@@ -3081,18 +3109,18 @@
     <!-- ToDo Ver.2 ポップアップ -->
     <div class="todo-v2-popup-overlay" id="todoV2PopupOverlay">
         <div class="todo-v2-popup">
-            <div class="todo-v2-popup-title">ToDo Ver.2を有効にしますか?</div>
-            <div class="todo-v2-popup-message">
+            <div class="todo-v2-popup-title" data-i18n="todoV2PopupTitle">ToDo Ver.2を有効にしますか?</div>
+            <div class="todo-v2-popup-message" data-i18n="todoV2PopupMessage">
                 新しいToDo Ver.2では、段階的完了機能、期間設定、カレンダービューなどの高度な機能が利用できます。
             </div>
             <div class="todo-v2-popup-toggle">
-                <span class="todo-v2-popup-toggle-label">ToDo Ver.2を有効にする</span>
+                <span class="todo-v2-popup-toggle-label" data-i18n="todoV2ToggleLabel">ToDo Ver.2を有効にする</span>
                 <div class="toggle-switch" id="todoV2Toggle" onclick="toggleTodoV2Popup()">
                     <div class="toggle-slider"></div>
                 </div>
             </div>
             <div class="todo-v2-popup-buttons">
-                <button class="secondary" onclick="closeTodoV2Popup()">決定</button>
+                <button class="secondary" onclick="closeTodoV2Popup()" data-i18n="todoV2Confirm">決定</button>
             </div>
         </div>
     </div>
@@ -3103,18 +3131,18 @@
     <div class="calendar-day-dialog-overlay" id="calendarDayDialog">
         <div class="calendar-day-dialog">
             <div class="calendar-day-dialog-header">
-                <div class="calendar-day-dialog-title" id="calendarDayDialogTitle">2026年1月29日</div>
-                <button class="secondary calendar-day-dialog-close" onclick="closeCalendarDayDialog()">閉じる</button>
+                <div class="calendar-day-dialog-title" id="calendarDayDialogTitle"></div>
+                <button class="secondary calendar-day-dialog-close" onclick="closeCalendarDayDialog()" data-i18n="closeButton">閉じる</button>
             </div>
             <div class="calendar-day-todos" id="calendarDayTodos">
                 <!-- ToDoリストがここに表示される -->
             </div>
             <div class="calendar-day-add-form">
-                <h4 style="margin: 0 0 15px 0; font-size: 1rem;">新しいToDoを追加</h4>
+                <h4 style="margin: 0 0 15px 0; font-size: 1rem;" data-i18n="calendarAddTodoTitle">新しいToDoを追加</h4>
                 <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <input type="text" id="calendarAddTodoInput" placeholder="タスクを入力"
+                    <input type="text" id="calendarAddTodoInput" placeholder="タスクを入力" data-i18n="calendarAddTodoPlaceholder"
                         style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-family: inherit;">
-                    <button class="primary" onclick="addTodoFromCalendar()">追加</button>
+                    <button class="primary" onclick="addTodoFromCalendar()" data-i18n="addButton">追加</button>
                 </div>
             </div>
         </div>
@@ -3125,33 +3153,33 @@
         <div class="tutorial-overlay" id="tutorialOverlay"></div>
         <div class="tutorial-welcome" id="tutorialWelcome" style="display: none;">
             <h3>
-                <img src="guide.webp" alt="ガイド" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;">
-                使い方を説明しますか?
+                <img src="guide.webp" alt="ガイド" data-i18n-alt="guideAlt" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;">
+                <span data-i18n="tutorialWelcome">使い方を説明しますか?</span>
             </h3>
-            <p>初めての方向けに、このサイトの使い方を順番に説明します。</p>
+            <p data-i18n="tutorialWelcomeMessage">初めての方向けに、このサイトの使い方を順番に説明します。</p>
             <div class="tutorial-welcome-buttons">
                 <button class="secondary" onclick="closeTutorial()" data-i18n="closeButton">閉じる</button>
                 <button class="primary" onclick="startTutorial()" data-i18n="tutorialYes">はい</button>
             </div>
         </div>
         <div class="tutorial-box" id="tutorialBox" style="display: none;">
-            <div class="tutorial-step-info" id="tutorialStepInfo">ステップ 1/7</div>
-            <h3 id="tutorialTitle">タイトル</h3>
-            <p id="tutorialMessage">メッセージ</p>
+            <div class="tutorial-step-info" id="tutorialStepInfo"></div>
+            <h3 id="tutorialTitle" data-i18n="tutorialPlaceholderTitle">タイトル</h3>
+            <p id="tutorialMessage" data-i18n="tutorialPlaceholderMessage">メッセージ</p>
             <div class="tutorial-buttons">
                 <button class="secondary" onclick="skipTutorial()" data-i18n="skipButton">スキップ</button>
                 <div style="display: flex; gap: 10px;">
-                    <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()">戻る</button>
-                    <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()">次へ</button>
+                    <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()" data-i18n="tutorialPrev">戻る</button>
+                    <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()" data-i18n="tutorialNext">次へ</button>
                 </div>
             </div>
         </div>
         <div class="tutorial-arrow" id="tutorialArrow"></div>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え">
-            <img id="themeIcon" src="moon.webp" alt="テーマ切り替え">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え" data-i18n-aria="themeToggleAlt">
+            <img id="themeIcon" src="moon.webp" alt="テーマ切り替え" data-i18n-alt="themeToggleAlt">
         </button>
-        <button id="settingsBtn" class="settings-btn" onclick="showPage('settings')" aria-label="設定">
-            <img id="settingsIcon" src="settings.webp" alt="設定">
+        <button id="settingsBtn" class="settings-btn" onclick="showPage('settings')" aria-label="設定" data-i18n-aria="settingsAlt">
+            <img id="settingsIcon" src="settings.webp" alt="設定" data-i18n-alt="settingsAlt">
         </button>
     </div>
 
@@ -3190,7 +3218,7 @@
         <div id="listPage" class="page">
             <div class="group-selector">
                 <div class="custom-select">
-                    <select id="groupFilter" onchange="loadHistory()" aria-label="グループで絞り込む">
+                    <select id="groupFilter" onchange="loadHistory()" aria-label="グループで絞り込む" data-i18n-aria="filterByGroup">
                         <option value="" data-i18n="allGroupsFilter">すべてのグループ</option>
                     </select>
                     <div class="select-arrow">▾</div>
@@ -3221,7 +3249,7 @@
             <div class="move-group-container" id="moveGroupContainer">
                 <div class="move-count" id="moveCount"></div>
                 <div class="custom-select" style="display:inline-block; margin-right:8px;">
-                    <select id="moveGroupSelect" aria-label="移動先のグループを選択">
+                    <select id="moveGroupSelect" aria-label="移動先のグループを選択" data-i18n-aria="moveDestination">
                         <option value="" data-i18n="moveDestination">移動先を選択</option>
                     </select>
                     <div class="select-arrow">▾</div>
@@ -3246,7 +3274,7 @@
                     <div class="file-select-group">
                         <label class="file-select-label" id="musicFileLabel" tabindex="0" role="button"
                             aria-haspopup="true">
-                            <img id="musicDropdownArrow" class="file-select-arrow" src="arrow_down.webp" alt="メニュー">
+                            <img id="musicDropdownArrow" class="file-select-arrow" src="arrow_down.webp" alt="メニュー" data-i18n-alt="menu">
                             <span class="file-select-text" data-i18n="selectFile">ファイルを選択</span>
                         </label>
                         <input type="file" id="musicFileInput" accept=".mp3,.wav,.flac,.m4a,.aac,.ogg,.webm,audio/*"
@@ -3276,7 +3304,7 @@
                         <div style="width:36px; text-align:right;">
                             <button class="secondary" id="volumeBtn"
                                 style="background:transparent;border:none;cursor:pointer;padding:4px;">
-                                <img id="volumeBtnImg" src="volume.webp" alt="音量" style="width:20px;height:20px;">
+                                <img id="volumeBtnImg" src="volume.webp" alt="音量" style="width:20px;height:20px;" data-i18n-alt="volume">
                             </button>
                         </div>
                     </div>
@@ -3284,20 +3312,20 @@
                         style="width:100%; margin-top:8px; display:none;">
                 </div>
                 <div class="player-controls">
-                    <button class="secondary" onclick="playPrevious()" aria-label="前へ">
-                        <img id="prevBtnImg" src="prev.webp" alt="前へ" style="width:24px;height:24px;">
+                    <button class="secondary" onclick="playPrevious()" aria-label="前へ" data-i18n-aria="previous">
+                        <img id="prevBtnImg" src="prev.webp" alt="前へ" style="width:24px;height:24px;" data-i18n-alt="previous">
                     </button>
-                    <button class="secondary" onclick="togglePlay()" aria-label="再生/一時停止">
-                        <img id="playIconImg" src="play.webp" alt="再生" style="width:24px;height:24px;">
+                    <button class="secondary" onclick="togglePlay()" aria-label="再生/一時停止" data-i18n-aria="playPause">
+                        <img id="playIconImg" src="play.webp" alt="再生" style="width:24px;height:24px;" data-i18n-alt="play">
                     </button>
-                    <button class="secondary" onclick="playNext()" aria-label="次へ">
-                        <img id="nextBtnImg" src="next.webp" alt="次へ" style="width:24px;height:24px;">
+                    <button class="secondary" onclick="playNext()" aria-label="次へ" data-i18n-aria="next">
+                        <img id="nextBtnImg" src="next.webp" alt="次へ" style="width:24px;height:24px;" data-i18n-alt="next">
                     </button>
-                    <button class="secondary" onclick="toggleLoop()" id="loopBtn" aria-label="ループ">
-                        <img id="loopBtnImg" src="loop_off.webp" alt="ループオフ" style="width:24px;height:24px;">
+                    <button class="secondary" onclick="toggleLoop()" id="loopBtn" aria-label="ループ" data-i18n-aria="loop">
+                        <img id="loopBtnImg" src="loop_off.webp" alt="ループオフ" style="width:24px;height:24px;" data-i18n-alt="loopOff">
                     </button>
-                    <button class="secondary" onclick="toggleShuffle()" id="shuffleBtn" aria-label="シャッフル">
-                        <img id="shuffleBtnImg" src="shuffle_off.webp" alt="シャッフルオフ" style="width:24px;height:24px;">
+                    <button class="secondary" onclick="toggleShuffle()" id="shuffleBtn" aria-label="シャッフル" data-i18n-aria="shuffle">
+                        <img id="shuffleBtnImg" src="shuffle_off.webp" alt="シャッフルオフ" style="width:24px;height:24px;" data-i18n-alt="shuffleOff">
                     </button>
                 </div>
                 <div class="playlist" id="playlist"></div>
@@ -3306,8 +3334,8 @@
         <div id="todoPage" class="page">
             <!-- ビュー切り替えメニュー -->
             <div class="todo-view-menu">
-                <button class="todo-view-btn active" onclick="switchTodoView('list')" id="todoViewList">ToDoリスト</button>
-                <button class="todo-view-btn" onclick="switchTodoView('calendar')" id="todoViewCalendar">カレンダー</button>
+                <button class="todo-view-btn active" onclick="switchTodoView('list')" id="todoViewList" data-i18n="todoViewList">ToDoリスト</button>
+                <button class="todo-view-btn" onclick="switchTodoView('calendar')" id="todoViewCalendar" data-i18n="todoViewCalendar">カレンダー</button>
             </div>
 
             <!-- ToDoリストビュー -->
@@ -3351,17 +3379,17 @@
                         style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 140px;">
                             <label
-                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;">開始日(任意)</label>
+                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;" data-i18n="startOptional">開始日(任意)</label>
                             <div class="custom-date-picker">
-                                <input type="text" id="todoPeriodStart" class="custom-date-input" placeholder="日付を選択"
+                                <input type="text" id="todoPeriodStart" class="custom-date-input" placeholder="日付を選択" data-i18n="selectStartDate"
                                     readonly onclick="openDatePicker('start')">
                             </div>
                         </div>
                         <div style="flex: 1; min-width: 140px;">
                             <label
-                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;">終了日(任意)</label>
+                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;" data-i18n="endOptional">終了日(任意)</label>
                             <div class="custom-date-picker">
-                                <input type="text" id="todoPeriodEnd" class="custom-date-input" placeholder="日付を選択"
+                                <input type="text" id="todoPeriodEnd" class="custom-date-input" placeholder="日付を選択" data-i18n="selectEndDate"
                                     readonly onclick="openDatePicker('end')">
                             </div>
                         </div>
@@ -3387,9 +3415,9 @@
             <!-- カレンダービュー -->
             <div id="todoCalendarView" class="calendar-view" style="display: none;">
                 <div class="calendar-header">
-                    <button class="secondary" onclick="changeCalendarMonth(-1)">◀ 前月</button>
-                    <div class="calendar-month-year" id="calendarMonthYear">2026年1月</div>
-                    <button class="secondary" onclick="changeCalendarMonth(1)">次月 ▶</button>
+                    <button class="secondary" onclick="changeCalendarMonth(-1)" data-i18n="prevMonth">◀ 前月</button>
+                    <div class="calendar-month-year" id="calendarMonthYear"></div>
+                    <button class="secondary" onclick="changeCalendarMonth(1)" data-i18n="nextMonth">次月 ▶</button>
                 </div>
                 <div class="calendar-grid" id="calendarGrid"></div>
             </div>
@@ -3465,11 +3493,11 @@
                             <option value="Noto Sans JP">Noto Sans JP</option>
                             <option value="Sawarabi Gothic">Sawarabi Gothic</option>
                             <option value="Hina Mincho">Hina Mincho</option>
-                            <option value="Mushin">無心</option>
-                            <option value="Utsukushi Font">うつくし明朝体</option>
-                            <option value="Misaki Gothic">美咲ゴシック</option>
-                            <option value="Kodenmachou">小伝馬町</option>
-                            <option value="Shirokuma">しろくまフォント</option>
+                            <option value="Mushin" data-i18n="fontMushin">無心</option>
+                            <option value="Utsukushi Font" data-i18n="fontUtsukushi">うつくし明朝体</option>
+                            <option value="Misaki Gothic" data-i18n="fontMisaki">美咲ゴシック</option>
+                            <option value="Kodenmachou" data-i18n="fontKodenmachou">小伝馬町</option>
+                            <option value="Shirokuma" data-i18n="fontShirokuma">しろくまフォント</option>
                         </select>
                         <div class="select-arrow">▾</div>
                     </div>
@@ -3610,12 +3638,12 @@
                 <h2 data-i18n="dataManagement">データ管理</h2>
                 <div class="data-management">
                     <button class="secondary" onclick="exportData()">
-                        <img src="export.webp" alt="エクスポート"
+                        <img src="export.webp" alt="エクスポート" data-i18n-alt="exportData"
                             style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
                         <span data-i18n="exportData">データをエクスポート</span>
                     </button>
                     <button class="secondary" onclick="document.getElementById('importFile').click()">
-                        <img src="import.webp" alt="インポート"
+                        <img src="import.webp" alt="インポート" data-i18n-alt="importData"
                             style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
                         <span data-i18n="importData">データをインポート</span>
                     </button>
@@ -3627,16 +3655,16 @@
             <div class="settings-section">
                 <h2 data-i18n="helpSection">ヘルプ</h2>
                 <button class="secondary" onclick="restartTutorial()" style="width: 100%; padding: 12px 20px;">
-                    <img src="guide.webp" alt="ガイド"
+                    <img src="guide.webp" alt="ガイド" data-i18n-alt="guideAlt"
                         style="width:16px;height:16px;margin-right:6px;vertical-align:middle;">
                     <span data-i18n="showGuide">使い方ガイドを再表示</span>
                 </button>
             </div>
 
-            <div class="copyright">© 高級ジェネ™ All rights reserved.</div>
+            <div class="copyright" data-i18n="copyright">© 高級ジェネ™ All rights reserved.</div>
 
             <div class="about-link">
-                <button class="about-button" onclick="showAboutModal()" aria-label="このサイトについて">
+                <button class="about-button" onclick="showAboutModal()" aria-label="このサイトについて" data-i18n-aria="aboutButton">
                     <span class="about-icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                             focusable="false">
@@ -3651,7 +3679,7 @@
             </div>
 
             <div class="about-link" style="margin-top: 8px;">
-                <button class="about-button" onclick="showQAModal()" aria-label="よくある質問">
+                <button class="about-button" onclick="showQAModal()" aria-label="よくある質問" data-i18n-aria="qaButton">
                     <span class="about-icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                             focusable="false">
@@ -3666,7 +3694,7 @@
             </div>
 
             <div class="about-link" style="margin-top: 8px;">
-                <button class="about-button" onclick="showLicenseModal()" aria-label="ライセンス">
+                <button class="about-button" onclick="showLicenseModal()" aria-label="ライセンス" data-i18n-aria="licenseButton">
                     <span class="about-icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor"
@@ -3800,6 +3828,11 @@
                         fontJapanese: '日本語･その他用フォント',
                         fontEnglish: '英数字用フォント(アルファベット･数字)',
                         fontNone: '未設定',
+                        fontMushin: '無心',
+                        fontUtsukushi: 'うつくし明朝体',
+                        fontMisaki: '美咲ゴシック',
+                        fontKodenmachou: '小伝馬町',
+                        fontShirokuma: 'しろくまフォント',
                         licenseButton: 'ライセンス',
                         licenseTitle: 'フォントライセンス',
 
@@ -3837,6 +3870,7 @@
                         monthTime: '今月の勉強時間',
                         averageTime: '平均勉強時間/日',
                         selectGroup: 'グループを選択',
+                        filterByGroup: 'グループで絞り込む',
                         allGroups: 'すべてのグループ',
 
                         // リストページ
@@ -3886,6 +3920,30 @@
                         // ToDoリスト
                         todoPlaceholder: '新しいタスクを入力',
                         todoAddButton: '追加',
+                        // 追加翻訳: ToDo Ver2 / カレンダー関連
+                        todoV2PopupTitle: 'ToDo Ver.2を有効にしますか?',
+                        todoV2PopupMessage: '新しいToDo Ver.2では、段階的完了機能、期間設定、カレンダービューなどの高度な機能が利用できます。',
+                        todoV2ToggleLabel: 'ToDo Ver.2を有効にする',
+                        todoV2Confirm: '決定',
+                        calendarAddTodoTitle: '新しいToDoを追加',
+                        calendarAddTodoPlaceholder: 'タスクを入力',
+                        todoViewList: 'ToDoリスト',
+                        todoViewCalendar: 'カレンダー',
+                        prevMonth: '◀ 前月',
+                        nextMonth: '次月 ▶',
+                        confirmMessage: 'この操作を実行しますか?',
+                        confirmIconAlt: '確認',
+                        okButton: 'OK',
+                        // 追加訳: UIの汎用ラベル
+                        menu: 'メニュー',
+                        startOptional: '開始日(任意)',
+                        endOptional: '終了日(任意)',
+                        tutorialPlaceholderTitle: 'タイトル',
+                        tutorialPlaceholderMessage: 'メッセージ',
+                        playPause: '再生/一時停止',
+                        guideAlt: 'ガイド',
+                        themeToggleAlt: 'テーマ切替',
+                        settingsAlt: '設定',
                         repeat: '繰り返し',
                         repeatNone: 'なし',
                         repeatDaily: '毎日',
@@ -3938,6 +3996,7 @@
                         importData: 'データをインポート',
                         helpSection: 'ヘルプ',
                         showGuide: '使い方ガイドを再表示',
+                        copyright: '© 高級ジェネ™ All rights reserved.',
                         languageSettings: '言語設定',
                         japanese: '日本語',
                         english: 'English',
@@ -3967,6 +4026,8 @@
                         tutorialStep: 'ステップ',
                         tutorialComplete: 'チュートリアル完了!',
                         tutorialCompleteMessage: 'お疲れ様でした!これで基本的な使い方の説明は終了です。また分からなくなったら、設定画面の「使い方ガイドを再表示」からいつでも確認できます。',
+                        // アクセシビリティ用ラベル
+                        dragHandle: '並べ替えハンドル',
 
                         // チュートリアル
                         tutorialStartTitle: 'ストップウォッチの開始',
@@ -4040,6 +4101,20 @@
                         month: '月',
                         day: '日',
 
+                        notSet: '未設定',
+                        periodLabel: '期間',
+                        rangeSeparator: '〜',
+                        selectStartDate: '開始日を選択',
+                        selectEndDate: '終了日を選択',
+                        weekday_sun: '日',
+                        weekday_mon: '月',
+                        weekday_tue: '火',
+                        weekday_wed: '水',
+                        weekday_thu: '木',
+                        weekday_fri: '金',
+                        weekday_sat: '土',
+                        noTodosOnThisDay: 'この日にToDoはありません',
+
                         // 統計ページ - 追加
                         totalStudyTime: '総勉強時間',
                         consecutiveDays: '連続日数',
@@ -4062,6 +4137,8 @@
                         // ToDoリスト - 追加
                         noTasks: 'タスクがありません',
                         newTask: '新しいタスクを入力',
+
+                        sinchokudo: '進捗度',
 
                         // チュートリアルステップ
                         tutorialStep1Title: 'メインメニュー',
@@ -4087,6 +4164,11 @@
                         fontJapanese: 'Font for Japanese & Others',
                         fontEnglish: 'Font for Alphanumeric',
                         fontNone: 'None (Unset)',
+                        fontMushin: 'Mushin',
+                        fontUtsukushi: 'Utsukushi Mincho',
+                        fontMisaki: 'Misaki Gothic',
+                        fontKodenmachou: 'Kodenmachou',
+                        fontShirokuma: 'Shirokuma',
                         licenseButton: 'License',
                         licenseTitle: 'Font Licenses',
 
@@ -4121,6 +4203,7 @@
                         monthTime: 'This Month\'s Study Time',
                         averageTime: 'Average Study Time/Day',
                         selectGroup: 'Select Group',
+                        filterByGroup: 'Filter by group',
                         allGroups: 'All Groups',
 
                         // List Page
@@ -4247,10 +4330,34 @@
                         tutorialStep: 'Step',
                         tutorialComplete: 'Tutorial Complete!',
                         tutorialCompleteMessage: 'Great job! You\'ve completed the basic tutorial. If you need help again, you can access the guide anytime from "Show User Guide" in the settings.',
+                        // Accessibility labels
+                        dragHandle: 'Drag handle',
+                        copyright: '© 高級ジェネ™ All rights reserved.',
                         // Date format
-                        year: '',
+                        year: '/',
                         month: '/',
                         day: '',
+
+                        notSet: 'Not set',
+                        periodLabel: 'Period',
+                        rangeSeparator: 'to',
+                        selectStartDate: 'Select start date',
+                        selectEndDate: 'Select end date',
+                        weekday_sun: 'Sun',
+                        weekday_mon: 'Mon',
+                        weekday_tue: 'Tue',
+                        weekday_wed: 'Wed',
+                        weekday_thu: 'Thu',
+                        weekday_fri: 'Fri',
+                        weekday_sat: 'Sat',
+                        noTodosOnThisDay: 'No ToDos on this day',
+                        // Additional UI labels
+                        menu: 'Menu',
+                        startOptional: 'Start date (optional)',
+                        endOptional: 'End date (optional)',
+                        tutorialPlaceholderTitle: 'Title',
+                        tutorialPlaceholderMessage: 'Message',
+                        playPause: 'Play/Pause',
 
                         // Stats Page - Additional
                         totalStudyTime: 'Total Study Time',
@@ -4280,6 +4387,8 @@
                         // ToDo List - Additional
                         noTasks: 'No tasks',
                         newTask: 'Enter a new task',
+
+                        sinchokudo: 'Progress',
 
                         // Tutorial Steps
                         tutorialStep1Title: 'Main Menu',
@@ -4375,6 +4484,22 @@
                         // ToDo List
                         todoPlaceholder: 'Enter a new task',
                         todoAddButton: 'Add',
+                        todoV2PopupTitle: 'Enable ToDo Ver.2?',
+                        todoV2PopupMessage: 'The new ToDo Ver.2 introduces advanced features such as incremental completion, period settings, and a calendar view.',
+                        todoV2ToggleLabel: 'Enable ToDo Ver.2',
+                        todoV2Confirm: 'Confirm',
+                        calendarAddTodoTitle: 'Add New ToDo',
+                        calendarAddTodoPlaceholder: 'Enter a task',
+                        todoViewList: 'ToDo List',
+                        todoViewCalendar: 'Calendar',
+                        prevMonth: '◀ Prev',
+                        nextMonth: 'Next ▶',
+                        confirmMessage: 'Are you sure you want to perform this action?',
+                        confirmIconAlt: 'Confirm',
+                        okButton: 'OK',
+                        guideAlt: 'Guide',
+                        themeToggleAlt: 'Toggle theme',
+                        settingsAlt: 'Settings',
                     }
                 };
 
@@ -4424,6 +4549,24 @@
                     document.querySelectorAll('[data-i18n-html]').forEach(element => {
                         const key = element.getAttribute('data-i18n-html');
                         element.innerHTML = getText(key);
+                    });
+
+                    // meta description を更新
+                    const metaDesc = document.querySelector('meta[name="description"]');
+                    if (metaDesc) metaDesc.setAttribute('content', getText('description'));
+                    const ogDesc = document.querySelector('meta[property="og:description"]');
+                    if (ogDesc) ogDesc.setAttribute('content', getText('description'));
+
+                    // data-i18n-alt を持つ要素は alt 属性を更新
+                    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+                        const key = el.getAttribute('data-i18n-alt');
+                        el.alt = getText(key);
+                    });
+
+                    // data-i18n-aria を持つ要素は aria-label を更新
+                    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                        const key = el.getAttribute('data-i18n-aria');
+                        el.setAttribute('aria-label', getText(key));
                     });
 
                     // 言語切り替えボタンの状態を更新
@@ -4940,7 +5083,7 @@
                     playlistDiv.innerHTML = musicFiles.map((item, index) => `
         <div class="playlist-item ${index === currentMusicIndex ? 'playing' : ''}" data-index="${index}">
             <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:0;">
-                <img src="drag_handle.webp" class="drag-handle" data-index="${index}" aria-label="並べ替えハンドル" style="width: 24px; height: 24px; cursor: grab; touch-action: none;" alt="">
+                <img src="drag_handle.webp" class="drag-handle" data-index="${index}" aria-label="並べ替えハンドル" data-i18n-aria="dragHandle" style="width: 24px; height: 24px; cursor: grab; touch-action: none;" alt="">
                 <div class="playlist-item-info" style="flex:1; min-width:0;">
                     <div class="playlist-item-title">
                         <span class="title-text">${escapeHtml(item.title)}</span>
@@ -5492,9 +5635,9 @@
                         // Ver.2: 期間表示
                         let periodDisplay = '';
                         if (todoV2Enabled && todo.period && (todo.period.start || todo.period.end)) {
-                            const startStr = todo.period.start || '未設定';
-                            const endStr = todo.period.end || '未設定';
-                            periodDisplay = `<div class="todo-period">期間: ${startStr} 〜 ${endStr}</div>`;
+                            const startStr = todo.period.start || getText('notSet');
+                            const endStr = todo.period.end || getText('notSet');
+                            periodDisplay = `<div class="todo-period">${getText('periodLabel')}: ${startStr} ${getText('rangeSeparator')} ${endStr}</div>`;
                         }
 
                         // Ver.2: 段階的完了とプログレス表示の統合
@@ -5514,9 +5657,9 @@
                             v2Details = `
                                 <div class="todo-v2-details">
                                     <div class="todo-stage-row">
-                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s1} onchange="toggleTodoStage(${index}, 1)"> Step 1</label>
-                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s2} onchange="toggleTodoStage(${index}, 2)"> Step 2</label>
-                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s3} onchange="toggleTodoStage(${index}, 3)"> Step 3</label>
+                                        <p>${getText('sinchokudo')}</p><label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s1} onchange="toggleTodoStage(${index}, 1)"></label>
+                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s2} onchange="toggleTodoStage(${index}, 2)"></label>
+                                        <label class="todo-stage-label"><input type="checkbox" class="todo-stage-checkbox" ${s3} onchange="toggleTodoStage(${index}, 3)"></label>
                                     </div>
                                     <div class="todo-progress-container">
                                         <div class="todo-progress-bar">
@@ -5724,7 +5867,7 @@
                     const gridDiv = document.getElementById('calendarGrid');
 
                     // 月年表示
-                    monthYearDiv.textContent = `${year}年${month + 1}月`;
+                    monthYearDiv.textContent = `${year}${getText('year')}${month + 1}${getText('month')}`;
 
                     // カレンダーグリッド生成
                     const firstDay = new Date(year, month, 1);
@@ -5886,25 +6029,25 @@
                     const today = new Date();
                     // selectedDate は 'YYYY-MM-DD' 文字列で保存されるため、UTC解釈を避けてローカル日付として復元する
                     const currentSelected = selectedDate[type]
-                        ? (function(){ const parts = selectedDate[type].split('-').map(Number); return new Date(parts[0], parts[1] - 1, parts[2]); })()
+                        ? (function () { const parts = selectedDate[type].split('-').map(Number); return new Date(parts[0], parts[1] - 1, parts[2]); })()
                         : null;
 
                     let html = `
                         <div class="date-picker-header">
-                            <h3 style="margin: 0; font-size: 1rem;">${type === 'start' ? '開始日' : '終了日'}を選択</h3>
-                            <button type="button" class="secondary" onclick="closeAllDatePickers()" style="padding: 4px 10px; font-size: 0.8rem;">閉じる</button>
+                            <h3 style="margin: 0; font-size: 1rem;">${type === 'start' ? getText('selectStartDate') : getText('selectEndDate')}</h3>
+                            <button type="button" class="secondary" onclick="closeAllDatePickers()" style="padding: 4px 10px; font-size: 0.8rem;">${getText('closeButton')}</button>
                         </div>
                         <div class="date-picker-month-selector" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                             <button class="secondary" onclick="changeDatePickerMonth(-1, '${type}')" type="button">◀</button>
-                            <div class="date-picker-month-year" style="font-weight: 500;">${year}年${month + 1}月</div>
+                            <div class="date-picker-month-year" style="font-weight: 500;">${year}${getText('year')}${month + 1}${getText('month')}</div>
                             <button class="secondary" onclick="changeDatePickerMonth(1, '${type}')" type="button">▶</button>
                         </div>
                         <div class="date-picker-grid">
                     `;
 
                     // 曜日ヘッダー
-                    ['日', '月', '火', '水', '木', '金', '土'].forEach(day => {
-                        html += `<div class="date-picker-day-header">${day}</div>`;
+                    ['sun','mon','tue','wed','thu','fri','sat'].forEach(d => {
+                        html += `<div class="date-picker-day-header">${getText('weekday_' + d)}</div>`;
                     });
 
                     // 空白セル
@@ -5973,8 +6116,8 @@
                     const dialog = document.getElementById('calendarDayDialog');
                     const titleDiv = document.getElementById('calendarDayDialogTitle');
 
-                    // 日付フォーマット
-                    titleDiv.textContent = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+                    // 日付フォーマット（言語対応）
+                    titleDiv.textContent = `${date.getFullYear()}${getText('year')}${date.getMonth() + 1}${getText('month')}${date.getDate()}${getText('day')}`; 
 
                     // その日のToDoを表示
                     renderCalendarDayTodos(date);
@@ -6015,7 +6158,7 @@
                     const todosDiv = document.getElementById('calendarDayTodos');
 
                     if (dayTodos.length === 0) {
-                        todosDiv.innerHTML = `<div style="opacity: 0.7; text-align: center; padding: 20px;">この日にToDoはありません</div>`;
+                        todosDiv.innerHTML = `<div style="opacity: 0.7; text-align: center; padding: 20px;">${getText('noTodosOnThisDay')}</div>`;
                     } else {
                         const todoV2Enabled = getData('todo_v2_enabled') === 'true';
 
@@ -6027,7 +6170,7 @@
                                 <div class="calendar-day-todo-item">
                                     <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodoFromCalendar(${index})">
                                     <div style="flex: 1;" ${completedClass}>${todo.text}</div>
-                                    <button class="delete-btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="deleteTodoFromCalendar(${index})">削除</button>
+                                    <button class="delete-btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="deleteTodoFromCalendar(${index})">${getText('deleteButton')}</button>
                                 </div>
                             `;
                         }).join('');
@@ -6087,7 +6230,7 @@
                 }
 
                 async function deleteTodoFromCalendar(index) {
-                    const confirmed = await customConfirm('このToDoを削除しますか?', '確認', 'delete.webp');
+                    const confirmed = await customConfirm(getText('deleteTaskConfirm'), getText('confirmDelete'), 'delete.webp');
                     if (confirmed) {
                         let todos = getData('todos');
                         todos = todos ? JSON.parse(todos) : [];
@@ -7016,7 +7159,7 @@
                         document.getElementById('startBtn').classList.add('hidden');
                         document.getElementById('pauseBtn').classList.remove('hidden');
                         document.getElementById('endBtn').classList.remove('hidden');
-                        document.getElementById('sessionInfo').textContent = `開始時刻: ${formatDateTime(startDate)}`;
+                        document.getElementById('sessionInfo').textContent = `${getText('startTime')}: ${formatDateTime(startDate)}`;
                         // 変数復元
                         startTime = startTime_ms;
                         pausedTime = pausedAccum;
