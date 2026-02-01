@@ -4792,6 +4792,10 @@
                 function saveData(key, value) {
                     try {
                         localStorage.setItem(key, value);
+                        if (key === 'theme') {
+                            console.log('[DEBUG] saveData theme ->', value);
+                            console.trace();
+                        }
                         // 古いCookieデータを削除して容量を確保・競合を防止
                         // 複数の path パターンで削除を試みる
                         document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
@@ -5277,9 +5281,9 @@
                         artist: 'Study Time Manager - Music',
                         album: 'Local Playlist',
                         artwork: [
-                            { src: 'music.webp', sizes: '96x96', type: 'image/webp' },
-                            { src: 'music.webp', sizes: '180x180', type: 'image/webp' },
-                            { src: 'music.webp', sizes: '512x512', type: 'image/webp' }
+                            { src: 'music.png', sizes: '96x96', type: 'image/webp' },
+                            { src: 'music.png', sizes: '180x180', type: 'image/webp' },
+                            { src: 'music.png', sizes: '512x512', type: 'image/webp' }
                         ]
                     });
 
@@ -7090,6 +7094,30 @@
                     applyTranslations();
                     applyFonts();
 
+                    // Debug helpers for theme persistence (enable to trace where theme changes come from)
+                    const DEBUG_THEME = true;
+                    if (DEBUG_THEME) {
+                        window.addEventListener('storage', (e) => {
+                            if (e.key === 'theme') {
+                                console.log('[DEBUG] storage event theme changed:', e.oldValue, '=>', e.newValue);
+                                const newTheme = (e.newValue || '').trim();
+                                if (newTheme) changeTheme(newTheme);
+                            }
+                        });
+
+                        const bodyObserver = new MutationObserver(mutations => {
+                            for (const m of mutations) {
+                                if (m.type === 'attributes' && m.attributeName === 'data-theme') {
+                                    console.log('[DEBUG] body data-theme changed to', document.body.getAttribute('data-theme'));
+                                    console.trace();
+                                }
+                            }
+                        });
+                        bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+
+                        console.log('[DEBUG] initial stored theme:', getData('theme'));
+                    }
+
                     const mode = getData('mode');
                     const theme = (getData('theme') || '').trim();
                     const themeIcon = document.getElementById('themeIcon');
@@ -7104,9 +7132,65 @@
                         document.querySelectorAll('.theme-option').forEach(option => { option.classList.remove('selected'); });
                         const matchedThemeOption = document.querySelector(`.theme-option[data-theme="${theme}"]`);
                         if (matchedThemeOption) matchedThemeOption.classList.add('selected');
+                    } else {
+                        // No stored theme found — persist the current body theme to avoid reverting to default unexpectedly
+                        const currentTheme = document.body.getAttribute('data-theme') || 'blue';
+                        console.log('[DEBUG] No stored theme found on load. Saving current body theme ->', currentTheme);
+                        saveData('theme', currentTheme);
                     }
                     const musicEnabled = getData('feature_music') === 'true';
                     const todoEnabled = getData('feature_todo') === 'true';
+
+                    // Persist current theme on visibility change and beforeunload to avoid lost writes
+                    window.addEventListener('visibilitychange', () => {
+                        if (document.visibilityState === 'hidden') {
+                            const t = document.body.getAttribute('data-theme') || 'blue';
+                            console.log('[DEBUG] visibilitychange hidden -> saving theme', t);
+                            saveData('theme', t);
+                        }
+                    });
+                    window.addEventListener('beforeunload', () => {
+                        const t = document.body.getAttribute('data-theme') || 'blue';
+                        console.log('[DEBUG] beforeunload -> saving theme', t);
+                        try { saveData('theme', t); } catch (e) { console.warn('[DEBUG] beforeunload save failed', e); }
+                    });
+
+                    // Periodic sync to detect/repair mismatches between storage and body attribute (defensive)
+                    let lastThemeCheck = null;
+                    setInterval(() => {
+                        const stored = (getData('theme') || '').trim();
+                        const bodyTheme = document.body.getAttribute('data-theme') || '';
+                        if (stored && stored !== bodyTheme) {
+                            console.log('[DEBUG] Stored theme differs from body. Applying stored ->', stored, 'was', bodyTheme);
+                            changeTheme(stored);
+                        } else if (!stored && bodyTheme) {
+                            console.log('[DEBUG] No stored theme but body has theme. Saving ->', bodyTheme);
+                            saveData('theme', bodyTheme);
+                        }
+                        lastThemeCheck = Date.now();
+                    }, 2000);
+
+                    // Defensive: ignore programmatic (synthetic) clicks on theme options which may be triggered by other scripts
+                    document.querySelectorAll('.theme-option').forEach(option => {
+                        const themeName = option.getAttribute('data-theme');
+                        // Remove inline onclick to avoid duplicate handlers and replace with a trusted-only handler
+                        try { option.onclick = null; } catch (e) { /* ignore */ }
+                        option.setAttribute('role', 'button');
+                        option.tabIndex = 0;
+                        option.addEventListener('click', (e) => {
+                            if (!e.isTrusted) {
+                                console.log('[DEBUG] Ignored synthetic click on theme-option', themeName);
+                                return;
+                            }
+                            changeTheme(themeName);
+                        });
+                        option.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                changeTheme(themeName);
+                            }
+                        });
+                    });
+
                     if (musicEnabled) {
                         document.getElementById('toggleMusic').classList.add('active');
                         addMenuButton('music');
