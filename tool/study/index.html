@@ -4830,7 +4830,10 @@
                     document.querySelectorAll('.theme-option').forEach(option => {
                         option.classList.remove('selected');
                     });
-                    document.querySelector(`[data-theme="${themeName}"]`).classList.add('selected');
+                    const matchedThemeOption = document.querySelector(`.theme-option[data-theme="${themeName}"]`);
+                    if (matchedThemeOption) {
+                        matchedThemeOption.classList.add('selected');
+                    }
 
                     if (getData('graph_enabled') === 'true') {
                         setTimeout(() => updateGraphs(), 100);
@@ -7088,7 +7091,7 @@
                     applyFonts();
 
                     const mode = getData('mode');
-                    const theme = getData('theme');
+                    const theme = (getData('theme') || '').trim();
                     const themeIcon = document.getElementById('themeIcon');
                     if (mode === 'dark') {
                         document.body.classList.remove('light');
@@ -7099,7 +7102,8 @@
                     if (theme) {
                         document.body.setAttribute('data-theme', theme);
                         document.querySelectorAll('.theme-option').forEach(option => { option.classList.remove('selected'); });
-                        document.querySelector(`[data-theme="${theme}"]`)?.classList.add('selected');
+                        const matchedThemeOption = document.querySelector(`.theme-option[data-theme="${theme}"]`);
+                        if (matchedThemeOption) matchedThemeOption.classList.add('selected');
                     }
                     const musicEnabled = getData('feature_music') === 'true';
                     const todoEnabled = getData('feature_todo') === 'true';
