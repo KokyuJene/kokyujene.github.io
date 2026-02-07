@@ -64,7 +64,7 @@
 
         body.light {
             background-color: var(--bg-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         body.dark {
@@ -128,7 +128,7 @@
             padding: 10px 25px;
             font-size: 0.95rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.2s;
             font-weight: 400;
@@ -136,7 +136,7 @@
 
         .light .menu button {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .light .menu button.active {
@@ -187,7 +187,7 @@
             padding: 15px 30px;
             font-size: 1rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.2s;
             font-weight: 400;
@@ -209,7 +209,7 @@
 
         .light button.secondary {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
 
@@ -234,7 +234,7 @@
         .settings-btn {
             width: 50px;
             height: 50px;
-            border-radius: 12px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -278,7 +278,7 @@
         .history-item {
             padding: 20px;
             margin-bottom: 15px;
-            border-radius: 8px;
+            border-radius: 24px;
             text-align: left;
             position: relative;
             transition: all 0.2s;
@@ -361,16 +361,16 @@
         .search-box input {
             flex: 1;
             min-width: 200px;
-            padding: 12px 15px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px;
             font-size: 0.95rem;
             font-family: inherit;
         }
 
         .light .search-box input {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .search-box input {
@@ -407,7 +407,7 @@
 
         .stat-card {
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 24px;
             text-align: center;
         }
 
@@ -446,7 +446,7 @@
             width: 100%;
             padding: 12px 15px;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px;
             font-size: 0.95rem;
             font-family: inherit;
             cursor: pointer;
@@ -454,7 +454,7 @@
 
         .light .group-selector select {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .group-selector select {
@@ -472,14 +472,14 @@
             flex: 1;
             padding: 12px 15px;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px;
             font-size: 0.95rem;
             font-family: inherit;
         }
 
         .light .group-input input {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .group-input input {
@@ -490,7 +490,7 @@
         .group-badge {
             display: inline-block;
             padding: 4px 12px;
-            border-radius: 12px;
+            border-radius: 24px;
             font-size: 0.85rem;
             margin-top: 8px;
             font-weight: 400;
@@ -560,7 +560,7 @@
 
         .light .move-group-container input {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .move-group-container input {
@@ -591,7 +591,7 @@
         .move-group-container button {
             padding: 14px 24px;
             white-space: nowrap;
-            border-radius: 10px;
+            border-radius: 24px;
         }
 
         .move-group-buttons {
@@ -604,7 +604,7 @@
         .move-group-buttons button {
             padding: 10px 16px;
             white-space: nowrap;
-            border-radius: 10px;
+            border-radius: 24px;
         }
 
         .modal {
@@ -624,7 +624,7 @@
 
         .theme-option {
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.2s;
             border: 3px solid transparent;
@@ -652,7 +652,7 @@
         .theme-option-preview {
             width: 100%;
             height: 40px;
-            border-radius: 6px;
+            border-radius: 12px;
             display: flex;
             gap: 3px;
             padding: 5px;
@@ -660,7 +660,7 @@
 
         .theme-option-preview div {
             flex: 1;
-            border-radius: 3px;
+            border-radius: 8px;
         }
 
         .copyright {
@@ -688,7 +688,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 24px;
             margin-bottom: 10px;
         }
 
@@ -705,7 +705,7 @@
             width: 50px;
             height: 26px;
             background-color: #ccc;
-            border-radius: 13px;
+            border-radius: 24px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -728,6 +728,8 @@
         .toggle-switch.active .toggle-slider {
             transform: translateX(24px);
         }
+
+        /* Focus mode toggle removed - uses standard toggle-item styling */
 
         .music-player {
             margin-bottom: 35px;
@@ -758,7 +760,7 @@
             padding: 12px 15px;
             padding-right: 44px;
             /* space for right arrow */
-            border-radius: 8px;
+            border-radius: 24px;
             font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s;
@@ -793,8 +795,8 @@
             right: 0;
             min-width: 160px;
             background: var(--panel-light);
-            color: #3a3a3a;
-            border-radius: 8px;
+            color: #323232;
+            border-radius: 24px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
             z-index: 60;
             display: none;
@@ -817,7 +819,7 @@
 
         .light .music-controls label {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .music-controls label {
@@ -858,7 +860,7 @@
 
         .playlist-item {
             padding: 12px 15px;
-            border-radius: 8px;
+            border-radius: 24px;
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
@@ -892,7 +894,7 @@
         .filter-control-btn {
             padding: 8px 16px;
             font-size: 0.85rem;
-            border-radius: 10px;
+            border-radius: 24px;
             transition: all 0.2s;
         }
 
@@ -946,14 +948,14 @@
             flex: 1;
             padding: 12px 15px;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px;
             font-size: 0.95rem;
             font-family: inherit;
         }
 
         .light .todo-input input {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .todo-input input {
@@ -968,7 +970,7 @@
 
         .todo-item {
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 24px;
             margin-bottom: 10px;
             /* 中央カラムを持つ grid レイアウトにして、タイトルを中央揃えにする */
             display: grid;
@@ -1012,7 +1014,7 @@
             background-color: #d66;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -1076,7 +1078,7 @@
         }
 
         .custom-confirm-dialog {
-            border-radius: 16px;
+            border-radius: 24px;
             padding: 30px;
             max-width: 420px;
             width: 90%;
@@ -1086,7 +1088,7 @@
 
         .light .custom-confirm-dialog {
             background-color: var(--bg-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .custom-confirm-dialog {
@@ -1338,7 +1340,7 @@
             --bg-light: #f8f9fb;
             --bg-dark: #2d3142;
             /* Panel colors - soft/pale defaults */
-            --panel-dark: #252a38;
+            --panel-dark: #474654;
             --panel-dark-2: #3d4454;
             --panel-light: #f0f2f7;
             /* Light-mode helpers (theme-aware) */
@@ -1363,9 +1365,9 @@
 
         body[data-theme="purple"] {
             --primary-color: #b8a8c9;
-            --primary-hover: #a896b9;
+            --primary-hover: #9f8ff2;
             --primary-color-dark: #9a88ab;
-            --primary-hover-dark: #8a789b;
+            --primary-hover-dark: #9f8ff2;
             --bg-light: #faf7fb;
             --bg-dark: #332d3a;
             --panel-dark: #2c2430;
@@ -1414,14 +1416,14 @@
         }
 
         body[data-theme="white"] {
-            --primary-color: #b3b3b3;
+            --primary-color: rgba(178, 178, 178);
             --primary-hover: #dadada;
-            --primary-color-dark: #999;
+            --primary-color-dark: rgba(178, 178, 178);
             --primary-hover-dark: #bbb;
             --bg-light: #fdfdfd;
             --bg-dark: #0a0a0a;
             --panel-dark: #151515;
-            --panel-dark-2: #252525;
+            --panel-dark-2: #323232;
             --panel-light: #f5f5f5;
             --panel-light-2: #f5f5f5;
         }
@@ -1515,7 +1517,7 @@
             flex-direction: column;
             background: var(--panel-light);
             color: inherit;
-            border-radius: 14px;
+            border-radius: 24px;
             padding: 22px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
             transform: translateY(6px);
@@ -1624,7 +1626,7 @@
             min-width: 160px;
             padding: 12px 20px;
             font-size: 0.9rem;
-            border-radius: 10px;
+            border-radius: 24px;
         }
 
         /* チュートリアル関連スタイル */
@@ -1650,7 +1652,7 @@
             max-width: calc(100vw - 40px);
             background: var(--panel-light);
             color: inherit;
-            border-radius: 12px;
+            border-radius: 24px;
             padding: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             z-index: 10001;
@@ -1696,14 +1698,14 @@
             flex: 1;
             padding: 10px 16px;
             font-size: 0.9rem;
-            border-radius: 8px;
+            border-radius: 24px;
         }
 
         .tutorial-box {
             position: fixed;
             background: var(--panel-light);
             color: inherit;
-            border-radius: 12px;
+            border-radius: 24px;
             padding: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             z-index: 10002;
@@ -1745,21 +1747,21 @@
         .tutorial-buttons button {
             padding: 10px 20px;
             font-size: 0.9rem;
-            border-radius: 8px;
+            border-radius: 24px;
         }
 
         .tutorial-highlight {
             position: relative;
             z-index: 10001 !important;
             box-shadow: 0 0 0 4px rgba(157, 180, 200, 0.5) !important;
-            border-radius: 12px !important;
+            border-radius: 24px !important;
         }
 
         .tutorial-click-area {
             position: fixed;
             z-index: 10001;
             cursor: pointer;
-            border-radius: 12px;
+            border-radius: 24px;
         }
 
         .tutorial-arrow {
@@ -1843,7 +1845,7 @@
 
             .todo-item {
                 padding: 16px;
-                border-radius: 12px;
+                border-radius: 24px;
                 margin-bottom: 10px;
                 display: flex;
                 align-items: flex-start;
@@ -1921,7 +1923,7 @@
         .todo-repeat-badge {
             display: inline-block;
             padding: 3px 8px;
-            border-radius: 10px;
+            border-radius: 24px;
             font-size: 0.75rem;
             margin-left: 8px;
             font-weight: 500;
@@ -1942,7 +1944,7 @@
         .todo-category-badge {
             display: inline-block;
             padding: 3px 8px;
-            border-radius: 10px;
+            border-radius: 24px;
             font-size: 0.75rem;
             margin-left: 8px;
             font-weight: 500;
@@ -1995,7 +1997,7 @@
         /* グラフ設定の追加スタイル */
         #graphSettings {
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 24px;
             margin-top: 15px;
         }
 
@@ -2010,7 +2012,7 @@
         #studyGraphContainer,
         #statsGraphContainer {
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 24px;
         }
 
         .light #studyGraphContainer,
@@ -2135,7 +2137,7 @@
             background-color: #d66;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -2188,7 +2190,7 @@
         }
 
         .todo-v2-popup {
-            border-radius: 16px;
+            border-radius: 24px;
             padding: 40px;
             max-width: 500px;
             width: 90%;
@@ -2199,7 +2201,7 @@
 
         .light .todo-v2-popup {
             background-color: var(--bg-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .todo-v2-popup {
@@ -2247,7 +2249,7 @@
             margin-top: 12px;
             padding: 12px;
             background: rgba(0, 0, 0, 0.04);
-            border-radius: 12px;
+            border-radius: 24px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -2292,7 +2294,7 @@
         .todo-progress-bar {
             height: 4px;
             background: #ddd;
-            border-radius: 2px;
+            border-radius: 24px;
             overflow: hidden;
             width: 100%;
         }
@@ -2309,7 +2311,7 @@
             height: 100%;
             background: var(--primary-color);
             transition: width 0.3s ease;
-            border-radius: 2px;
+            border-radius: 24px;
         }
 
         .dark .todo-progress-fill {
@@ -2377,7 +2379,7 @@
         .calendar-day {
             aspect-ratio: 1;
             border: 1px solid;
-            border-radius: 8px;
+            border-radius: 16px;
             padding: 8px;
             cursor: pointer;
             transition: all 0.2s;
@@ -2463,7 +2465,8 @@
             border-radius: 50%;
             align-items: center;
             justify-content: center;
-            margin-bottom: 4px;
+            margin: 0 auto 4px auto;
+            /* 中央寄せに変更 */
             line-height: 1;
             /* 垂直位置調整 */
             padding-top: 1px;
@@ -2552,14 +2555,14 @@
             padding: 10px 20px;
             font-size: 0.9rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .light .todo-view-btn {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .todo-view-btn {
@@ -2587,7 +2590,7 @@
             width: 100%;
             padding: 12px 15px;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px;
             font-size: 0.95rem;
             font-family: inherit;
             cursor: pointer;
@@ -2596,7 +2599,7 @@
 
         .light .custom-date-input {
             background-color: var(--panel-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .custom-date-input {
@@ -2614,7 +2617,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 16px;
+            border-radius: 24px;
             padding: 25px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             z-index: 10001;
@@ -2653,7 +2656,7 @@
         .light .date-picker-dropdown {
             background-color: var(--bg-light);
             border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .date-picker-dropdown {
@@ -2785,7 +2788,7 @@
         }
 
         .calendar-day-dialog {
-            border-radius: 16px;
+            border-radius: 24px;
             padding: 30px;
             max-width: 500px;
             width: 90%;
@@ -2797,7 +2800,7 @@
 
         .light .calendar-day-dialog {
             background-color: var(--bg-light);
-            color: #3a3a3a;
+            color: #323232;
         }
 
         .dark .calendar-day-dialog {
@@ -2829,7 +2832,7 @@
 
         .calendar-day-todo-item {
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 24px;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -2866,7 +2869,7 @@
             margin: 0;
             padding: 0;
             border: 2px solid rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             position: relative;
             display: inline-block;
@@ -2939,7 +2942,7 @@
             animation: checkAnim 0.2s forwards;
         }
 
-        /* ToDo 用にさらに細かく補正（小さいボックスでの縦ずれ対策） */
+        /* ToDo 用にさらに細かく補正(小さいボックスでの縦ずれ対策) */
         .todo-checkbox:checked::after {
             top: 50%;
             transform: translate(-50%, -52%) rotate(45deg);
@@ -3044,7 +3047,7 @@
             .calendar-day {
                 padding: 4px;
                 min-height: 50px;
-                border-radius: 6px;
+                border-radius: 20px;
             }
 
             .calendar-day-number {
@@ -3078,6 +3081,15 @@
 </head>
 
 <body class="light" data-theme="blue">
+    <script>
+        // Apply saved theme/mode immediately before first paint to prevent flash
+        try {
+            var _m = localStorage.getItem('mode');
+            var _t = localStorage.getItem('theme');
+            if (_m === 'dark') { document.body.className = 'dark'; }
+            if (_t) { document.body.setAttribute('data-theme', _t.trim()); }
+        } catch(e) {}
+    </script>
     <div id="loadingOverlay"></div>
 
     <div class="custom-confirm-overlay" id="customConfirmOverlay">
@@ -3098,7 +3110,7 @@
         <div class="custom-confirm-dialog">
             <div class="custom-confirm-title" id="renameTitle" data-i18n="renameSong">曲名を変更</div>
             <input type="text" id="renameInput" placeholder="曲名を入力" data-i18n="songNamePlaceholder"
-                style="width:100%; padding:12px 15px; border:none; border-radius:8px; font-size:0.95rem; font-family:inherit; margin-bottom:20px;">
+                style="width:100%; padding:12px 15px; border:none; border-radius:24px; font-size:0.95rem; font-family:inherit; margin-bottom:20px;">
             <div class="custom-confirm-buttons">
                 <button class="custom-confirm-cancel" id="renameCancelBtn" data-i18n="cancelButton">キャンセル</button>
                 <button class="custom-confirm-ok" id="renameOkBtn" data-i18n="saveButton">保存</button>
@@ -3132,7 +3144,8 @@
         <div class="calendar-day-dialog">
             <div class="calendar-day-dialog-header">
                 <div class="calendar-day-dialog-title" id="calendarDayDialogTitle"></div>
-                <button class="secondary calendar-day-dialog-close" onclick="closeCalendarDayDialog()" data-i18n="closeButton">閉じる</button>
+                <button class="secondary calendar-day-dialog-close" onclick="closeCalendarDayDialog()"
+                    data-i18n="closeButton">閉じる</button>
             </div>
             <div class="calendar-day-todos" id="calendarDayTodos">
                 <!-- ToDoリストがここに表示される -->
@@ -3140,8 +3153,9 @@
             <div class="calendar-day-add-form">
                 <h4 style="margin: 0 0 15px 0; font-size: 1rem;" data-i18n="calendarAddTodoTitle">新しいToDoを追加</h4>
                 <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <input type="text" id="calendarAddTodoInput" placeholder="タスクを入力" data-i18n="calendarAddTodoPlaceholder"
-                        style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-family: inherit;">
+                    <input type="text" id="calendarAddTodoInput" placeholder="タスクを入力"
+                        data-i18n="calendarAddTodoPlaceholder"
+                        style="flex: 1; padding: 10px; border: none; border-radius: 24px; font-family: inherit;">
                     <button class="primary" onclick="addTodoFromCalendar()" data-i18n="addButton">追加</button>
                 </div>
             </div>
@@ -3153,7 +3167,8 @@
         <div class="tutorial-overlay" id="tutorialOverlay"></div>
         <div class="tutorial-welcome" id="tutorialWelcome" style="display: none;">
             <h3>
-                <img src="guide.webp" alt="ガイド" data-i18n-alt="guideAlt" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;">
+                <img src="guide.webp" alt="ガイド" data-i18n-alt="guideAlt"
+                    style="width:20px;height:20px;margin-right:6px;vertical-align:middle;">
                 <span data-i18n="tutorialWelcome">使い方を説明しますか?</span>
             </h3>
             <p data-i18n="tutorialWelcomeMessage">初めての方向けに、このサイトの使い方を順番に説明します。</p>
@@ -3169,8 +3184,10 @@
             <div class="tutorial-buttons">
                 <button class="secondary" onclick="skipTutorial()" data-i18n="skipButton">スキップ</button>
                 <div style="display: flex; gap: 10px;">
-                    <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()" data-i18n="tutorialPrev">戻る</button>
-                    <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()" data-i18n="tutorialNext">次へ</button>
+                    <button class="secondary" id="tutorialPrevBtn" onclick="prevTutorialStep()"
+                        data-i18n="tutorialPrev">戻る</button>
+                    <button class="primary" id="tutorialNextBtn" onclick="nextTutorialStep()"
+                        data-i18n="tutorialNext">次へ</button>
                 </div>
             </div>
         </div>
@@ -3178,7 +3195,8 @@
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切り替え" data-i18n-aria="themeToggleAlt">
             <img id="themeIcon" src="moon.webp" alt="テーマ切り替え" data-i18n-alt="themeToggleAlt">
         </button>
-        <button id="settingsBtn" class="settings-btn" onclick="showPage('settings')" aria-label="設定" data-i18n-aria="settingsAlt">
+        <button id="settingsBtn" class="settings-btn" onclick="showPage('settings')" aria-label="設定"
+            data-i18n-aria="settingsAlt">
             <img id="settingsIcon" src="settings.webp" alt="設定" data-i18n-alt="settingsAlt">
         </button>
     </div>
@@ -3194,10 +3212,21 @@
 
         <div id="timerPage" class="page active">
             <div class="timer" id="timer" style="font-weight: 300;">00:00:00</div>
+            <div class="timer-display-sub" id="totalTimerDisplay"
+                style="font-size: 1.5rem; opacity: 0.6; margin-top: -30px; margin-bottom: 20px; display: none;">00:00:00
+            </div>
             <div class="group-input">
                 <input type="text" id="groupInput" placeholder="グループ名(任意)" data-i18n="groupPlaceholder">
             </div>
             <div class="session-info" id="sessionInfo" data-i18n="sessionStart">開始ボタンを押して学習を始めましょう</div>
+            <div id="focusModeToggleContainer" style="display: none; margin-bottom: 15px;">
+                <div class="toggle-item" style="margin-bottom: 0;">
+                    <span data-i18n="focusMode">フォーカスモード</span>
+                    <div class="toggle-switch" id="toggleFocusModeMain" onclick="toggleFocusModeMain()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
             <div class="controls">
                 <button id="startBtn" class="primary" onclick="startStudy()" data-i18n="startButton">勉強開始</button>
                 <button id="pauseBtn" class="secondary hidden" onclick="pauseStudy()"
@@ -3218,7 +3247,8 @@
         <div id="listPage" class="page">
             <div class="group-selector">
                 <div class="custom-select">
-                    <select id="groupFilter" onchange="loadHistory()" aria-label="グループで絞り込む" data-i18n-aria="filterByGroup">
+                    <select id="groupFilter" onchange="loadHistory()" aria-label="グループで絞り込む"
+                        data-i18n-aria="filterByGroup">
                         <option value="" data-i18n="allGroupsFilter">すべてのグループ</option>
                     </select>
                     <div class="select-arrow">▾</div>
@@ -3274,7 +3304,8 @@
                     <div class="file-select-group">
                         <label class="file-select-label" id="musicFileLabel" tabindex="0" role="button"
                             aria-haspopup="true">
-                            <img id="musicDropdownArrow" class="file-select-arrow" src="arrow_down.webp" alt="メニュー" data-i18n-alt="menu">
+                            <img id="musicDropdownArrow" class="file-select-arrow" src="arrow_down.webp" alt="メニュー"
+                                data-i18n-alt="menu">
                             <span class="file-select-text" data-i18n="selectFile">ファイルを選択</span>
                         </label>
                         <input type="file" id="musicFileInput" accept=".mp3,.wav,.flac,.m4a,.aac,.ogg,.webm,audio/*"
@@ -3293,9 +3324,9 @@
                     <div style="display:flex; align-items:center; gap:12px;">
                         <div id="timeDisplay" style="min-width:110px; font-size:0.95rem;">0:00 / 0:00</div>
                         <div id="progressContainer"
-                            style="flex:1; height:10px; background:#ddd; border-radius:6px; position:relative; cursor:pointer;">
+                            style="flex:1; height:10px; background:#ddd; border-radius:24px; position:relative; cursor:pointer;">
                             <div id="progressBar"
-                                style="position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--primary-color); border-radius:6px;">
+                                style="position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--primary-color); border-radius:24px;">
                             </div>
                             <div id="progressHandle"
                                 style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%); width:12px; height:12px; border-radius:50%; background:#fff; box-shadow:0 0 2px rgba(0,0,0,0.2); display:none;">
@@ -3304,7 +3335,8 @@
                         <div style="width:36px; text-align:right;">
                             <button class="secondary" id="volumeBtn"
                                 style="background:transparent;border:none;cursor:pointer;padding:4px;">
-                                <img id="volumeBtnImg" src="volume.webp" alt="音量" style="width:20px;height:20px;" data-i18n-alt="volume">
+                                <img id="volumeBtnImg" src="volume.webp" alt="音量" style="width:20px;height:20px;"
+                                    data-i18n-alt="volume">
                             </button>
                         </div>
                     </div>
@@ -3313,19 +3345,26 @@
                 </div>
                 <div class="player-controls">
                     <button class="secondary" onclick="playPrevious()" aria-label="前へ" data-i18n-aria="previous">
-                        <img id="prevBtnImg" src="prev.webp" alt="前へ" style="width:24px;height:24px;" data-i18n-alt="previous">
+                        <img id="prevBtnImg" src="prev.webp" alt="前へ" style="width:24px;height:24px;"
+                            data-i18n-alt="previous">
                     </button>
                     <button class="secondary" onclick="togglePlay()" aria-label="再生/一時停止" data-i18n-aria="playPause">
-                        <img id="playIconImg" src="play.webp" alt="再生" style="width:24px;height:24px;" data-i18n-alt="play">
+                        <img id="playIconImg" src="play.webp" alt="再生" style="width:24px;height:24px;"
+                            data-i18n-alt="play">
                     </button>
                     <button class="secondary" onclick="playNext()" aria-label="次へ" data-i18n-aria="next">
-                        <img id="nextBtnImg" src="next.webp" alt="次へ" style="width:24px;height:24px;" data-i18n-alt="next">
+                        <img id="nextBtnImg" src="next.webp" alt="次へ" style="width:24px;height:24px;"
+                            data-i18n-alt="next">
                     </button>
-                    <button class="secondary" onclick="toggleLoop()" id="loopBtn" aria-label="ループ" data-i18n-aria="loop">
-                        <img id="loopBtnImg" src="loop_off.webp" alt="ループオフ" style="width:24px;height:24px;" data-i18n-alt="loopOff">
+                    <button class="secondary" onclick="toggleLoop()" id="loopBtn" aria-label="ループ"
+                        data-i18n-aria="loop">
+                        <img id="loopBtnImg" src="loop_off.webp" alt="ループオフ" style="width:24px;height:24px;"
+                            data-i18n-alt="loopOff">
                     </button>
-                    <button class="secondary" onclick="toggleShuffle()" id="shuffleBtn" aria-label="シャッフル" data-i18n-aria="shuffle">
-                        <img id="shuffleBtnImg" src="shuffle_off.webp" alt="シャッフルオフ" style="width:24px;height:24px;" data-i18n-alt="shuffleOff">
+                    <button class="secondary" onclick="toggleShuffle()" id="shuffleBtn" aria-label="シャッフル"
+                        data-i18n-aria="shuffle">
+                        <img id="shuffleBtnImg" src="shuffle_off.webp" alt="シャッフルオフ" style="width:24px;height:24px;"
+                            data-i18n-alt="shuffleOff">
                     </button>
                 </div>
                 <div class="playlist" id="playlist"></div>
@@ -3334,8 +3373,10 @@
         <div id="todoPage" class="page">
             <!-- ビュー切り替えメニュー -->
             <div class="todo-view-menu">
-                <button class="todo-view-btn active" onclick="switchTodoView('list')" id="todoViewList" data-i18n="todoViewList">ToDoリスト</button>
-                <button class="todo-view-btn" onclick="switchTodoView('calendar')" id="todoViewCalendar" data-i18n="todoViewCalendar">カレンダー</button>
+                <button class="todo-view-btn active" onclick="switchTodoView('list')" id="todoViewList"
+                    data-i18n="todoViewList">ToDoリスト</button>
+                <button class="todo-view-btn" onclick="switchTodoView('calendar')" id="todoViewCalendar"
+                    data-i18n="todoViewCalendar">カレンダー</button>
             </div>
 
             <!-- ToDoリストビュー -->
@@ -3378,19 +3419,19 @@
                     <div id="todoPeriodSettings"
                         style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 140px;">
-                            <label
-                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;" data-i18n="startOptional">開始日(任意)</label>
+                            <label style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;"
+                                data-i18n="startOptional">開始日(任意)</label>
                             <div class="custom-date-picker">
-                                <input type="text" id="todoPeriodStart" class="custom-date-input" placeholder="日付を選択" data-i18n="selectStartDate"
-                                    readonly onclick="openDatePicker('start')">
+                                <input type="text" id="todoPeriodStart" class="custom-date-input" placeholder="日付を選択"
+                                    data-i18n="selectStartDate" readonly onclick="openDatePicker('start')">
                             </div>
                         </div>
                         <div style="flex: 1; min-width: 140px;">
-                            <label
-                                style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;" data-i18n="endOptional">終了日(任意)</label>
+                            <label style="font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 6px;"
+                                data-i18n="endOptional">終了日(任意)</label>
                             <div class="custom-date-picker">
-                                <input type="text" id="todoPeriodEnd" class="custom-date-input" placeholder="日付を選択" data-i18n="selectEndDate"
-                                    readonly onclick="openDatePicker('end')">
+                                <input type="text" id="todoPeriodEnd" class="custom-date-input" placeholder="日付を選択"
+                                    data-i18n="selectEndDate" readonly onclick="openDatePicker('end')">
                             </div>
                         </div>
                     </div>
@@ -3497,7 +3538,6 @@
                             <option value="Utsukushi Font" data-i18n="fontUtsukushi">うつくし明朝体</option>
                             <option value="Misaki Gothic" data-i18n="fontMisaki">美咲ゴシック</option>
                             <option value="Kodenmachou" data-i18n="fontKodenmachou">小伝馬町</option>
-                            <option value="Shirokuma" data-i18n="fontShirokuma">しろくまフォント</option>
                         </select>
                         <div class="select-arrow">▾</div>
                     </div>
@@ -3582,6 +3622,48 @@
                 </div>
             </div>
             <div class="settings-section">
+                <h2 data-i18n="focusModeSettings">フォーカスモード設定</h2>
+                <div class="toggle-item">
+                    <span data-i18n="showFocusModeToggle">フォーカスモード切替を表示</span>
+                    <div class="toggle-switch active" id="toggleFocusDisplay" onclick="toggleFocusDisplaySetting()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <!-- <div class="toggle-item" style="margin-top: 12px;"> -->
+                    <!-- <span style="font-size: 0.9rem; opacity: 0.7;">開発者モード</span> -->
+                    <!-- <div class="toggle-switch" id="toggleDevMode" onclick="toggleDevMode()"> -->
+                        <!-- <div class="toggle-slider"></div> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+                <div style="margin-top: 15px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
+                            data-i18n="focusDuration">集中時間</label>
+                        <div class="custom-select" style="width: 100%;">
+                            <select id="focusDurationSelect" onchange="saveFocusSettings()">
+                                <option value="20">20分</option>
+                                <option value="25" selected>25分</option>
+                                <option value="30">30分</option>
+                            </select>
+                            <div class="select-arrow">▾</div>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 8px;"
+                            data-i18n="breakDuration">休憩時間</label>
+                        <div class="custom-select" style="width: 100%;">
+                            <select id="breakDurationSelect" onchange="saveFocusSettings()">
+                                <option value="1">1分</option>
+                                <option value="5" selected>5分</option>
+                                <option value="10">10分</option>
+                            </select>
+                            <div class="select-arrow">▾</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
                 <h2 data-i18n="graphDisplay">グラフ表示</h2>
                 <div class="toggle-item">
                     <span data-i18n="studyGraph">勉強時間のグラフ表示</span>
@@ -3664,7 +3746,8 @@
             <div class="copyright" data-i18n="copyright">© 高級ジェネ™ All rights reserved.</div>
 
             <div class="about-link">
-                <button class="about-button" onclick="showAboutModal()" aria-label="このサイトについて" data-i18n-aria="aboutButton">
+                <button class="about-button" onclick="showAboutModal()" aria-label="このサイトについて"
+                    data-i18n-aria="aboutButton">
                     <span class="about-icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                             focusable="false">
@@ -3694,7 +3777,8 @@
             </div>
 
             <div class="about-link" style="margin-top: 8px;">
-                <button class="about-button" onclick="showLicenseModal()" aria-label="ライセンス" data-i18n-aria="licenseButton">
+                <button class="about-button" onclick="showLicenseModal()" aria-label="ライセンス"
+                    data-i18n-aria="licenseButton">
                     <span class="about-icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor"
@@ -3744,55 +3828,57 @@
                     <h2 id="licenseTitle" data-i18n="licenseTitle">フォントライセンス</h2>
                     <div id="licenseContent" class="about-content"
                         style="font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
-                        <p><b><strong>Jost</strong></b><br>by Indestructible Type is licensed under the SIL Open Font
-                            License,
-                            Version 1.1.</p>
-                        <p><b><strong>Zen Kaku Gothic Antique</strong></b><br>by Astrolab Inc. is licensed under the SIL
-                            Open
-                            Font License, Version 1.1.</p>
-                        <p><b><strong>JetBrains Mono</strong></b><br>by JetBrains s.r.o. is licensed under the SIL Open
-                            Font
-                            License, Version 1.1.</p>
-                        <p><b><strong>Montserrat</strong></b><br>by Julieta Ulanovsky is licensed under the SIL Open
-                            Font
-                            License, Version 1.1.</p>
-                        <p><b><strong>Lora</strong></b><br>by Cyreal is licensed under the SIL Open Font License,
-                            Version 1.1.
-                        </p>
-                        <p><b><strong>Quicksand</strong></b><br>by Andrew Paglinawan is licensed under the SIL Open Font
-                            License, Version 1.1.</p>
-                        <p><b><strong>Klee One</strong></b><br>by Fontworks Inc. is licensed under the SIL Open Font
-                            License,
-                            Version 1.1.</p>
-                        <p><b><strong>BIZ UDPGothic</strong></b><br>by Morisawa Inc. is licensed under the SIL Open Font
-                            License, Version 1.1.</p>
-                        <p><b><strong>Zen Maru Gothic</strong></b><br>by Yoshimichi Ohira is licensed under the SIL Open
-                            Font
-                            License, Version 1.1.</p>
-                        <p><b><strong>Noto Sans JP</strong></b><br>by Google is licensed under the SIL Open Font
-                            License,
-                            Version 1.1.</p>
-                        <p><b><strong>Sawarabi Gothic</strong></b><br>by mplus-fonts-dev is licensed under the Creative
-                            Commons
-                            Attribution 4.0 International License / SIL Open Font License.</p>
-                        <p><b><strong>Hina Mincho</strong></b><br>by Shujiro Sano is licensed under the SIL Open Font
-                            License,
-                            Version 1.1.</p>
-                        <p><b><strong>うつくし明朝体 (Utsukushi Font)</strong></b><br>by FLOP DESIGN is licensed under the
-                            Apache
-                            License, Version 2.0.</p>
-                        <p><b><strong>美咲ゴシック (Misaki Gothic)</strong></b><br>by 門真 なむ (Little Limit) is licensed under
-                            the
-                            Public Domain (or equivalent free license).</p>
-                        <p><b><strong>小伝馬町 (Kodenmachou)</strong></b><br>by 自家製フォント工房 is licensed under the SIL Open
-                            Font
-                            License, Version 1.1.</p>
-                        <p><b><strong>しろくまフォント (Shirokuma)</strong></b><br>by しろくまはなこ is free for personal and
-                            commercial use.
-                        </p>
-                        <p><b><strong>無心 (Mushin)</strong></b><br>by Maniackers Design is licensed under the SIL Open
-                            Font
-                            License, Version 1.1.</p>
+                        <b>[Google Fonts]</b><br>
+                        <b>Jost</b><br>
+                        by Indestructible Type (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Zen Kaku Gothic Antique</b><br>
+                        by Astrolab Inc. (SIL OFL 1.1)<br>
+                        <br>
+                        <b>JetBrains Mono</b><br>
+                        by JetBrains s.r.o. (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Montserrat</b><br>
+                        by Julieta Ulanovsky (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Lora</b><br>
+                        by Cyreal (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Quicksand</b><br>
+                        by Andrew Paglinawan (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Klee One</b><br>
+                        by Fontworks Inc. (SIL OFL 1.1)<br>
+                        <br>
+                        <b>BIZ UDPGothic</b><br>
+                        by Morisawa Inc. (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Zen Maru Gothic</b><br>
+                        by Yoshimichi Ohira (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Noto Sans JP</b><br>
+                        by Google (SIL OFL 1.1)<br>
+                        <br>
+                        <b>Sawarabi Gothic</b><br>
+                        by mplus-fonts-dev (SIL OFL 1.1 / CC BY 4.0)<br>
+                        <br>
+                        <b>Hina Mincho</b><br>
+                        by Shujiro Sano (SIL OFL 1.1)<br>
+                        <br>
+                        <hr style="opacity: 0.2; margin: 15px 0;">
+                        <br>
+                        <b>[Local Fonts]</b><br>
+                        <b>うつくし明朝体 (Utsukushi Font)</b><br>
+                        by FLOP DESIGN (IPA Font License v1.0)<br>
+                        <br>
+                        <b>美咲ゴシック (Misaki Gothic)</b><br>
+                        by 門真 なむ / Little Limit (Free License)<br>
+                        <br>
+                        <b>小伝馬町 (Kodenmachou)</b><br>
+                        by 自家製フォント工房 (SIL OFL 1.1)<br>
+                        <br>
+                        <b>無心 (Mushin)</b><br>
+                        by Maniackers Design (SIL OFL 1.1)
                     </div>
                     <div class="about-actions">
                         <button class="primary" id="licenseOkBtn" data-i18n="closeButton">閉じる</button>
@@ -3832,7 +3918,6 @@
                         fontUtsukushi: 'うつくし明朝体',
                         fontMisaki: '美咲ゴシック',
                         fontKodenmachou: '小伝馬町',
-                        fontShirokuma: 'しろくまフォント',
                         licenseButton: 'ライセンス',
                         licenseTitle: 'フォントライセンス',
 
@@ -3920,6 +4005,7 @@
                         // ToDoリスト
                         todoPlaceholder: '新しいタスクを入力',
                         todoAddButton: '追加',
+                        addButton: '追加',
                         // 追加翻訳: ToDo Ver2 / カレンダー関連
                         todoV2PopupTitle: 'ToDo Ver.2を有効にしますか?',
                         todoV2PopupMessage: '新しいToDo Ver.2では、段階的完了機能、期間設定、カレンダービューなどの高度な機能が利用できます。',
@@ -4148,7 +4234,15 @@
                         tutorialStep3Title: '勉強開始',
                         tutorialStep3Desc: 'このボタンを押すと勉強時間の計測が開始されます。',
                         tutorialStep4Title: 'グループ名',
-                        tutorialStep4Desc: 'ここにグループ名を入力すると、後で統計やリストで分類できます（任意）。',
+
+                        // Focus Mode
+                        focusMode: 'フォーカスモード',
+                        focusModeSettings: 'フォーカスモード設定',
+                        showFocusModeToggle: 'フォーカスモード切替を表示',
+                        focusDuration: '集中時間',
+                        breakDuration: '休憩時間',
+                        tutorialFocusModeMessage: '集中時間と休憩時間を交互に切り替えるフォーカスモード（ポモドーロテクニック）を利用できます。',
+                        tutorialStep4Desc: 'ここにグループ名を入力すると、後で統計やリストで分類できます(任意)。',
                         tutorialStep5Title: '統計',
                         tutorialStep5Desc: '統計画面では、今日・今週・今月の勉強時間や、グループごとの統計を確認できます。',
                         tutorialStep6Title: '履歴リスト',
@@ -4398,6 +4492,14 @@
                         tutorialStep3Title: 'Start Studying',
                         tutorialStep3Desc: 'Click this button to start tracking your study time.',
                         tutorialStep4Title: 'Group Name',
+
+                        // Focus Mode
+                        focusMode: 'Focus Mode',
+                        focusModeSettings: 'Focus Mode Settings',
+                        showFocusModeToggle: 'Show Focus Mode Toggle',
+                        focusDuration: 'Focus Duration',
+                        breakDuration: 'Break Duration',
+                        tutorialFocusModeMessage: 'You can use Focus Mode (Pomodoro technique) to alternate between focus and break times.',
                         tutorialStep4Desc: 'Enter a group name here to categorize your sessions in stats and lists (optional).',
                         tutorialStep5Title: 'Statistics',
                         tutorialStep5Desc: 'View study time for today, this week, this month, and statistics by group.',
@@ -4545,7 +4647,7 @@
                         }
                     });
 
-                    // data-i18n-html属性を持つ要素を更新（HTML含む）
+                    // data-i18n-html属性を持つ要素を更新(HTML含む)
                     document.querySelectorAll('[data-i18n-html]').forEach(element => {
                         const key = element.getAttribute('data-i18n-html');
                         element.innerHTML = getText(key);
@@ -4922,6 +5024,146 @@
                     }
                 }
 
+                // Focus Mode Variables
+                let focusEnabled = false;
+                let devModeEnabled = false; // Developer mode for testing (Shift+J/F to add/remove time)
+                let focusState = 'focus'; // 'focus' or 'break' — only used to detect transitions for sound
+
+                // Developer Mode Functions
+                function toggleDevMode() {
+                    const toggle = document.getElementById('toggleDevMode');
+                    if (!toggle) return;
+                    devModeEnabled = !devModeEnabled;
+                    toggle.classList.toggle('active', devModeEnabled);
+                    saveData('dev_mode_enabled', devModeEnabled ? 'true' : 'false');
+                    if (devModeEnabled) {
+                        console.log('[DEBUG] Developer Mode enabled. Shift+J to add 1 min, Shift+F to remove 1 min (hold for continuous)');
+                    }
+                }
+
+                function addTime(minutes) {
+                    if (!startTime || isPaused) return; // Only when timer is running
+                    startTime -= minutes * 60 * 1000;
+                    console.log(`[DEBUG] Time adjusted +${minutes}min. Total elapsed now ~${formatTime(Date.now() - startTime + pausedTime)}`);
+                }
+
+                function removeTime(minutes) {
+                    if (!startTime || isPaused) return; // Only when timer is running
+                    startTime += minutes * 60 * 1000;
+                    console.log(`[DEBUG] Time adjusted -${minutes}min. Total elapsed now ~${formatTime(Date.now() - startTime + pausedTime)}`);
+                }
+
+                // Developer Mode Keyboard Handler
+                let devModeKeyIntervals = {}; // Track active continuous key presses
+                window.addEventListener('keydown', (e) => {
+                    if (!devModeEnabled || !startTime) return;
+                    if (e.code === 'KeyJ' && e.shiftKey && !devModeKeyIntervals['KeyJ']) {
+                        addTime(1);
+                        devModeKeyIntervals['KeyJ'] = setInterval(() => addTime(1), 200); // Repeat every 200ms on hold
+                        e.preventDefault();
+                    } else if (e.code === 'KeyF' && e.shiftKey && !devModeKeyIntervals['KeyF']) {
+                        removeTime(1);
+                        devModeKeyIntervals['KeyF'] = setInterval(() => removeTime(1), 200);
+                        e.preventDefault();
+                    }
+                });
+                window.addEventListener('keyup', (e) => {
+                    if (e.code === 'KeyJ' && devModeKeyIntervals['KeyJ']) {
+                        clearInterval(devModeKeyIntervals['KeyJ']);
+                        delete devModeKeyIntervals['KeyJ'];
+                    } else if (e.code === 'KeyF' && devModeKeyIntervals['KeyF']) {
+                        clearInterval(devModeKeyIntervals['KeyF']);
+                        delete devModeKeyIntervals['KeyF'];
+                    }
+                });
+
+                function formatTimeShort(ms) {
+                    const totalSeconds = Math.floor(ms / 1000);
+                    const minutes = Math.floor(totalSeconds / 60);
+                    const seconds = totalSeconds % 60;
+                    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                }
+
+                function toggleFocusDisplaySetting() {
+                    const toggle = document.getElementById('toggleFocusDisplay');
+                    const isActive = toggle.classList.contains('active');
+                    if (isActive) {
+                        toggle.classList.remove('active');
+                        saveData('feature_focus_mode_display', 'false');
+                        document.getElementById('focusModeToggleContainer').style.display = 'none';
+                    } else {
+                        toggle.classList.add('active');
+                        saveData('feature_focus_mode_display', 'true');
+                        document.getElementById('focusModeToggleContainer').style.display = 'block';
+                    }
+                }
+
+                function saveFocusSettings() {
+                    const focusDuration = document.getElementById('focusDurationSelect').value;
+                    const breakDuration = document.getElementById('breakDurationSelect').value;
+                    saveData('focus_duration', focusDuration);
+                    saveData('break_duration', breakDuration);
+                }
+
+                function toggleFocusModeMain(isPageLoad = false) {
+                    const toggle = document.getElementById('toggleFocusModeMain');
+                    const timer = document.getElementById('timer');
+                    const subTimer = document.getElementById('totalTimerDisplay');
+
+                    // Determine desired state (load or toggle)
+                    let newState = !toggle.classList.contains('active');
+                    if (isPageLoad) {
+                        const savedState = getData('focus_mode_enabled');
+                        newState = savedState === 'true';
+                    }
+
+                    if (newState) {
+                        toggle.classList.add('active');
+                        focusEnabled = true;
+                        focusState = 'focus'; // reset transition detector
+                        saveData('focus_mode_enabled', 'true');
+                        subTimer.style.display = 'block';
+                        timer.style.fontSize = '3.5rem';
+
+                        if (!startTime) {
+                            const fd = getFocusDurationMs();
+                            timer.textContent = `${formatTimeShort(fd)} / 00:00`;
+                            subTimer.textContent = '00:00:00';
+                        } else {
+                            updateTimer();
+                        }
+                    } else {
+                        toggle.classList.remove('active');
+                        focusEnabled = false;
+                        saveData('focus_mode_enabled', 'false');
+                        subTimer.style.display = 'none';
+                        timer.style.fontSize = '4rem';
+
+                        if (!startTime) {
+                            timer.textContent = '00:00:00';
+                        } else {
+                            updateTimer();
+                        }
+                    }
+                }
+
+                function getFocusDurationMs() {
+                    return parseInt(getData('focus_duration') || '25') * 60 * 1000;
+                }
+
+                function getBreakDurationMs() {
+                    return parseInt(getData('break_duration') || '5') * 60 * 1000;
+                }
+
+                async function playFocusSound() {
+                    try {
+                        const audio = new Audio('tuuti.mp3');
+                        await audio.play();
+                    } catch (e) {
+                        console.log('Notification sound not found or blocked', e);
+                    }
+                }
+
                 function formatTime(ms) {
                     const totalSeconds = Math.floor(ms / 1000);
                     const hours = Math.floor(totalSeconds / 3600);
@@ -4951,25 +5193,69 @@
                     return `${year}${getText('year')}${month}${getText('month')}${day}${getText('day')}`;
                 }
 
-                function updateTimer() {
-                    if (!isPaused && startTime) {
-                        const elapsed = Date.now() - startTime + pausedTime;
-                        const timeStr = formatTime(elapsed);
-                        document.getElementById('timer').textContent = timeStr;
+                // Compute focus mode breakdown from wall elapsed (stateless — no circular dependency)
+                function computeFocusCycle(wallElapsed) {
+                    const focusDur = getFocusDurationMs();
+                    const breakDur = getBreakDurationMs();
+                    const cycleDur = focusDur + breakDur;
 
-                        // 設定に基づいてタイトルを更新
-                        if (getData('feature_title_time') !== 'false') {
-                            document.title = `${timeStr} - ${getText('studyTimeManagement')}`;
-                        } else {
-                            document.title = getText('studyTimeManagement'); // OFFの場合は固定
+                    const completedCycles = Math.floor(wallElapsed / cycleDur);
+                    const posInCycle = wallElapsed - completedCycles * cycleDur; // avoid floating point issues with %
+
+                    let currentState, cycleElapsed, targetDuration, totalBreakTime;
+
+                    if (posInCycle < focusDur) {
+                        currentState = 'focus';
+                        cycleElapsed = posInCycle;
+                        targetDuration = focusDur;
+                        totalBreakTime = completedCycles * breakDur;
+                    } else {
+                        currentState = 'break';
+                        cycleElapsed = posInCycle - focusDur;
+                        targetDuration = breakDur;
+                        totalBreakTime = completedCycles * breakDur + cycleElapsed;
+                    }
+
+                    return { currentState, cycleElapsed, targetDuration, totalBreakTime, netStudyTime: wallElapsed - totalBreakTime };
+                }
+
+                function updateTimer() {
+                    if (!startTime) return;
+
+                    const wallElapsed = Date.now() - startTime + pausedTime;
+
+                    if (focusEnabled) {
+                        const fc = computeFocusCycle(wallElapsed);
+
+                        // Detect state transition → play sound
+                        if (fc.currentState !== focusState) {
+                            playFocusSound();
+                            focusState = fc.currentState;
                         }
+
+                        const targetStr = formatTimeShort(fc.targetDuration);
+                        const currentStr = formatTimeShort(fc.cycleElapsed);
+                        const totalStr = formatTime(fc.netStudyTime);
+
+                        document.getElementById('timer').textContent = `${targetStr} / ${currentStr}`;
+                        document.getElementById('totalTimerDisplay').textContent = totalStr;
+                        document.title = `${totalStr} - ${getText('studyTimeManagement')}`;
+                    } else {
+                        const timeStr = formatTime(wallElapsed);
+                        document.getElementById('timer').textContent = timeStr;
+                        document.title = `${timeStr} - ${getText('studyTimeManagement')}`;
                     }
                 }
+                
 
                 function startStudy() {
                     startTime = Date.now();
                     pausedTime = 0;
                     isPaused = false;
+
+                    // Focus Mode Init
+                    focusState = 'focus';
+
                     const startTimeStr = new Date().toISOString();
                     saveData('studyStartTime', startTimeStr);
                     saveData('studyPaused', 'false');
@@ -4980,6 +5266,13 @@
                     document.getElementById('sessionInfo').textContent = `${getText('startTime')}: ${formatDateTime(new Date())}`;
                     timerInterval = setInterval(updateTimer, 100);
                     updateSettingsButtonState();
+
+                    // Update Focus Mode UI state if enabled
+                    if (focusEnabled) {
+                        document.getElementById('totalTimerDisplay').style.display = 'block';
+                        document.getElementById('timer').style.fontSize = '3.5rem';
+                        updateTimer(); // Initial update
+                    }
                 }
 
                 function pauseStudy() {
@@ -5015,8 +5308,14 @@
                         if (isNaN(start.getTime())) {
                             console.warn('Invalid stored start time:', startCookie);
                         } else {
-                            // 終了時刻 - 保存された開始時刻 を使って計算（startTime 変数に依存しない）
-                            const actualStudyTime = isPaused ? pausedTime : (endTime.getTime() - start.getTime() + pausedTime);
+                            // 終了時刻 - 保存された開始時刻 を使って計算
+                            const rawWallTime = isPaused ? pausedTime : (endTime.getTime() - start.getTime() + pausedTime);
+                            // フォーカスモード有効時は休憩時間を除外
+                            let actualStudyTime = rawWallTime;
+                            if (focusEnabled) {
+                                const fc = computeFocusCycle(rawWallTime);
+                                actualStudyTime = fc.netStudyTime;
+                            }
                             let history = getData('studyHistory');
                             history = history ? JSON.parse(history) : [];
                             history.unshift({ start: start.toISOString(), end: endTime.toISOString(), duration: actualStudyTime, group: groupName });
@@ -5277,7 +5576,7 @@
 
                     navigator.mediaSession.metadata = new MediaMetadata({
                         title: file.title,
-                        // ユーザー要望のサブタイトル（Artist フィールドを利用）
+                        // ユーザー要望のサブタイトル(Artist フィールドを利用)
                         artist: 'Study Time Manager - Music',
                         album: 'Local Playlist',
                         artwork: [
@@ -5447,8 +5746,8 @@
                     // ユーザーが明示的に一時停止した場合は復帰しない
                     if (userInitiatedPause) return;
 
-                    // ドキュメントが非表示（バックグラウンド）または iOS の取り扱いで一時停止された可能性がある
-                    // 少し間をおいて再生を試みる（最大3回）
+                    // ドキュメントが非表示(バックグラウンド)または iOS の取り扱いで一時停止された可能性がある
+                    // 少し間をおいて再生を試みる(最大3回)
                     if (document.hidden || /iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                         const audio = document.getElementById('audioPlayer');
                         attemptPlay(audio, 3, 600).then(() => {
@@ -5903,14 +6202,14 @@
                     const today = new Date();
                     for (let day = 1; day <= daysInMonth; day++) {
                         const currentDate = new Date(year, month, day);
-                        // ローカル日付を 'YYYY-MM-DD' 形式で生成（toISOString() はUTC変換で日付がずれる）
+                        // ローカル日付を 'YYYY-MM-DD' 形式で生成(toISOString() はUTC変換で日付がずれる)
                         const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
                         const isToday = currentDate.toDateString() === today.toDateString();
 
                         // この日付に関連するToDoを取得
                         const dayTodos = todos.filter(todo => {
                             if (!todo.period) return false;
-                            // 保存された文字列をローカル日付として復元（'YYYY-MM-DD' や ISO を扱う）
+                            // 保存された文字列をローカル日付として復元('YYYY-MM-DD' や ISO を扱う)
                             const start = todo.period.start ? parseLocalDate(todo.period.start) : null;
                             const end = todo.period.end ? parseLocalDate(todo.period.end) : null;
 
@@ -5950,7 +6249,7 @@
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
 
-                    // 新規ユーザー（ToDoが一つもない場合）は確認なしで自動的にV2をONにする
+                    // 新規ユーザー(ToDoが一つもない場合)は確認なしで自動的にV2をONにする
                     if (todos.length === 0 && getData('todo_v2_prompt_shown') !== 'true') {
                         saveData('todo_v2_enabled', 'true');
                         saveData('todo_v2_prompt_shown', 'true');
@@ -5958,7 +6257,7 @@
                         return;
                     }
 
-                    // 初回表示チェック（既存ユーザー向け）
+                    // 初回表示チェック(既存ユーザー向け)
                     if (getData('todo_v2_prompt_shown') === 'true') return;
 
                     const overlay = document.getElementById('todoV2PopupOverlay');
@@ -6010,7 +6309,7 @@
                     overlay.classList.add('show');
                     dropdown.classList.add('show');
 
-                    // 開いたときは現在の月情報を1日に正規化しておく（例: 1月31日の状態から月移動で2月を表示した際の不整合を防ぐ）
+                    // 開いたときは現在の月情報を1日に正規化しておく(例: 1月31日の状態から月移動で2月を表示した際の不整合を防ぐ)
                     if (!datePickerCurrentDate[type]) datePickerCurrentDate[type] = new Date();
                     datePickerCurrentDate[type] = new Date(datePickerCurrentDate[type].getFullYear(), datePickerCurrentDate[type].getMonth(), 1);
                     renderDatePicker(type, datePickerCurrentDate[type]);
@@ -6053,7 +6352,7 @@
                     `;
 
                     // 曜日ヘッダー
-                    ['sun','mon','tue','wed','thu','fri','sat'].forEach(d => {
+                    ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].forEach(d => {
                         html += `<div class="date-picker-day-header">${getText('weekday_' + d)}</div>`;
                     });
 
@@ -6083,7 +6382,7 @@
 
                 let datePickerCurrentDate = { start: new Date(), end: new Date() };
 
-                // 文字列からローカル日付を復元するヘルパー（'YYYY-MM-DD' または ISO 全体を扱う）
+                // 文字列からローカル日付を復元するヘルパー('YYYY-MM-DD' または ISO 全体を扱う)
                 function parseLocalDate(dateStr) {
                     if (!dateStr) return null;
                     const dateOnly = String(dateStr).split('T')[0];
@@ -6123,8 +6422,8 @@
                     const dialog = document.getElementById('calendarDayDialog');
                     const titleDiv = document.getElementById('calendarDayDialogTitle');
 
-                    // 日付フォーマット（言語対応）
-                    titleDiv.textContent = `${date.getFullYear()}${getText('year')}${date.getMonth() + 1}${getText('month')}${date.getDate()}${getText('day')}`; 
+                    // 日付フォーマット(言語対応)
+                    titleDiv.textContent = `${date.getFullYear()}${getText('year')}${date.getMonth() + 1}${getText('month')}${date.getDate()}${getText('day')}`;
 
                     // その日のToDoを表示
                     renderCalendarDayTodos(date);
@@ -6139,7 +6438,7 @@
                 }
 
                 function renderCalendarDayTodos(date) {
-                    // ローカル日付を 'YYYY-MM-DD' 形式で生成（toISOString() はUTC変換で日付がずれる）
+                    // ローカル日付を 'YYYY-MM-DD' 形式で生成(toISOString() はUTC変換で日付がずれる)
                     const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                     let todos = getData('todos');
                     todos = todos ? JSON.parse(todos) : [];
@@ -6508,6 +6807,7 @@
                         mode: getData('mode') || 'light',
                         feature_music: getData('feature_music') || 'false',
                         feature_todo: getData('feature_todo') || 'false',
+                        focus_mode_enabled: getData('focus_mode_enabled') || 'false',
                     };
 
                     const json = JSON.stringify(data, null, 2);
@@ -6561,6 +6861,10 @@
                                     const themeIcon = document.getElementById('themeIcon');
                                     if (themeIcon) themeIcon.src = data.mode === 'dark' ? 'sun.webp' : 'moon.webp';
                                 }
+                                if (typeof data.focus_mode_enabled !== 'undefined') {
+                                    saveData('focus_mode_enabled', data.focus_mode_enabled);
+                                }
+                                // break_time_accum and focus_cycle_base are no longer needed (stateless computation)
 
                                 // 表示設定を復元
                                 if (data.feature_music !== undefined) {
@@ -6642,6 +6946,14 @@
                         target: '#endBtn',
                         position: 'top',
                         action: 'click',
+                        page: 'timer'
+                    },
+                    {
+                        titleKey: 'focusMode',
+                        messageKey: 'tutorialFocusModeMessage',
+                        target: '#focusModeToggleContainer',
+                        position: 'bottom',
+                        action: 'view',
                         page: 'timer'
                     },
                     {
@@ -7030,12 +7342,16 @@
                     const overlay = document.getElementById('licenseOverlay');
                     overlay.classList.add('show');
                     overlay.setAttribute('aria-hidden', 'false');
+                    document.body.classList.add('no-scroll');
+                    const okBtn = document.getElementById('licenseOkBtn');
+                    try { if (okBtn) okBtn.focus(); } catch (e) {}
                 }
 
                 function hideLicenseModal() {
                     const overlay = document.getElementById('licenseOverlay');
                     overlay.classList.remove('show');
                     overlay.setAttribute('aria-hidden', 'true');
+                    document.body.classList.remove('no-scroll');
                 }
 
                 document.getElementById('licenseOkBtn').addEventListener('click', hideLicenseModal);
@@ -7141,34 +7457,45 @@
                     const musicEnabled = getData('feature_music') === 'true';
                     const todoEnabled = getData('feature_todo') === 'true';
 
-                    // Persist current theme on visibility change and beforeunload to avoid lost writes
-                    window.addEventListener('visibilitychange', () => {
-                        if (document.visibilityState === 'hidden') {
-                            const t = document.body.getAttribute('data-theme') || 'blue';
-                            console.log('[DEBUG] visibilitychange hidden -> saving theme', t);
-                            saveData('theme', t);
-                        }
-                    });
-                    window.addEventListener('beforeunload', () => {
-                        const t = document.body.getAttribute('data-theme') || 'blue';
-                        console.log('[DEBUG] beforeunload -> saving theme', t);
-                        try { saveData('theme', t); } catch (e) { console.warn('[DEBUG] beforeunload save failed', e); }
-                    });
+                    // Initialize Focus Mode Settings
+                    const focusInfoEnabled = getData('feature_focus_mode_display') !== 'false'; // Default to true
+                    if (focusInfoEnabled) {
+                        document.getElementById('toggleFocusDisplay').classList.add('active');
+                        document.getElementById('focusModeToggleContainer').style.display = 'block';
+                    } else {
+                        document.getElementById('toggleFocusDisplay').classList.remove('active');
+                        document.getElementById('focusModeToggleContainer').style.display = 'none';
+                    }
 
-                    // Periodic sync to detect/repair mismatches between storage and body attribute (defensive)
-                    let lastThemeCheck = null;
-                    setInterval(() => {
-                        const stored = (getData('theme') || '').trim();
-                        const bodyTheme = document.body.getAttribute('data-theme') || '';
-                        if (stored && stored !== bodyTheme) {
-                            console.log('[DEBUG] Stored theme differs from body. Applying stored ->', stored, 'was', bodyTheme);
-                            changeTheme(stored);
-                        } else if (!stored && bodyTheme) {
-                            console.log('[DEBUG] No stored theme but body has theme. Saving ->', bodyTheme);
-                            saveData('theme', bodyTheme);
-                        }
-                        lastThemeCheck = Date.now();
-                    }, 2000);
+                    const savedFocusDuration = getData('focus_duration');
+                    if (savedFocusDuration) {
+                        document.getElementById('focusDurationSelect').value = savedFocusDuration;
+                    }
+
+                    const savedBreakDuration = getData('break_duration');
+                    if (savedBreakDuration) {
+                        document.getElementById('breakDurationSelect').value = savedBreakDuration;
+                    }
+
+                    // Restore focus mode state
+                    const savedFocusState = getData('focus_mode_enabled');
+                    if (savedFocusState === 'true') {
+                        // Initialize UI for focus mode without forcing a cycle advance
+                        toggleFocusModeMain(true);
+                    } else {
+                        toggleFocusModeMain(true);
+                    }
+
+                    // Load developer mode state
+                    const savedDevMode = getData('dev_mode_enabled');
+                    if (savedDevMode === 'true') {
+                        devModeEnabled = true;
+                        const devToggle = document.getElementById('toggleDevMode');
+                        if (devToggle) devToggle.classList.add('active');
+                    }
+
+                    // Persist current theme on visibility change and beforeunload to avoid lost writes
+
 
                     // Defensive: ignore programmatic (synthetic) clicks on theme options which may be triggered by other scripts
                     document.querySelectorAll('.theme-option').forEach(option => {
@@ -7693,7 +8020,7 @@
                     }
 
                     const isDark = document.body.classList.contains('dark');
-                    const textColor = isDark ? '#e8e8e8' : '#3a3a3a';
+                    const textColor = isDark ? '#e8e8e8' : '#323232';
                     const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
                     const primaryColor = getPrimaryColor();
 
