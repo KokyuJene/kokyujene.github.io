@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="title">勉強時間管理</title>
+    <title data-i18n="title">ツミキ | 勉強時間管理ツール - 自分好みにカスタマイズできる勉強時間管理ツール</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="shortcut icon" type="image/webp" href="favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -1506,6 +1506,156 @@
 
         .about-overlay.show {
             display: flex;
+        }
+
+        .migration-notice-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1000001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .migration-notice-overlay.show {
+            display: flex;
+        }
+
+        .migration-notice-dialog {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 32px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .light .migration-notice-dialog {
+            background: var(--bg-light);
+            color: #323232;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .migration-notice-dialog {
+            background: var(--panel-dark);
+            color: #e8e8e8;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .migration-notice-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            background: rgba(217, 180, 160, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .migration-notice-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .migration-notice-title {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .migration-notice-message {
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.85;
+            margin-bottom: 32px;
+        }
+
+        .migration-notice-url {
+            display: inline-block;
+            margin: 12px 0;
+            padding: 8px 16px;
+            background: rgba(157, 180, 200, 0.1);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            color: var(--primary-color-dark);
+        }
+
+        .migration-notice-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .migration-notice-actions-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .migration-notice-actions button {
+            padding: 16px 24px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .migration-notice-actions button.primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 8px 20px rgba(157, 180, 200, 0.3);
+        }
+
+        .dark .migration-notice-actions button.primary {
+            background: var(--primary-color-dark);
+        }
+
+        .migration-notice-actions button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(157, 180, 200, 0.4);
+        }
+
+        .migration-notice-checkbox {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            opacity: 0.7;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .migration-notice-checkbox input {
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .migration-notice-dialog {
+                padding: 30px 20px;
+            }
+
+            .migration-notice-title {
+                font-size: 1.3rem;
+            }
+
+            .migration-notice-actions-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         .about-dialog {
@@ -3085,11 +3235,46 @@
         try {
             var _m = localStorage.getItem('mode');
             var _t = localStorage.getItem('theme');
+            var _normalizedTheme = (_t || '').trim().toLowerCase();
+            var _validThemes = ['blue', 'green', 'purple', 'orange', 'pink', 'teal', 'white'];
             if (_m === 'dark') { document.body.className = 'dark'; }
-            if (_t) { document.body.setAttribute('data-theme', _t.trim()); }
+            if (_normalizedTheme === 'light' || _normalizedTheme === 'dark') {
+                localStorage.setItem('mode', _normalizedTheme);
+            } else if (_validThemes.includes(_normalizedTheme)) {
+                document.body.setAttribute('data-theme', _normalizedTheme);
+                localStorage.setItem('last_valid_theme', _normalizedTheme);
+            }
         } catch(e) {}
     </script>
     <div id="loadingOverlay"></div>
+    <canvas id="pipCanvas" width="960" height="540" style="display:none;"></canvas>
+    <video id="pipVideo" style="display:none;" muted playsinline></video>
+
+    <div class="migration-notice-overlay" id="migrationNoticeOverlay" aria-hidden="true">
+        <div class="migration-notice-dialog" role="dialog" aria-modal="true" aria-labelledby="migrationNoticeTitle">
+            <div class="migration-notice-icon">
+                <img src="warning.webp" alt="警告">
+            </div>
+            <h2 class="migration-notice-title" id="migrationNoticeTitle">このURLは移行されました。</h2>
+            <div class="migration-notice-message">
+                このサイトは今後アップデートが適用されません。<br>
+                最新版を使用するには、まず下のボタンから設定をダウンロードしてください。<br>
+                <div class="migration-notice-url">https://tools.super-hiko14.com/study/</div><br>
+                にアクセスし、設定からインポートすることでデータを引き継げます。
+            </div>
+            <div class="migration-notice-actions">
+                <button class="primary" id="migrationGoBtn">最新版 (tools.super-hiko14.com) へ移動</button>
+                <div class="migration-notice-actions-row">
+                    <button class="secondary" id="migrationExportBtn">データのエクスポート</button>
+                    <button class="secondary" id="migrationContinueBtn">このURLで続ける</button>
+                </div>
+            </div>
+            <label class="migration-notice-checkbox" for="migrationDontShowAgain">
+                <input type="checkbox" id="migrationDontShowAgain">
+                <span>次回から表示しない</span>
+            </label>
+        </div>
+    </div>
 
     <div class="custom-confirm-overlay" id="customConfirmOverlay">
         <div class="custom-confirm-dialog">
@@ -3201,7 +3386,7 @@
     </div>
 
     <div class="container">
-        <h1 data-i18n="studyTimeManagement">勉強時間管理</h1>
+        <h1 data-i18n="studyTimeManagement">ツミキ | 勉強時間管理</h1>
 
         <div class="menu" id="mainMenu">
             <button class="active" onclick="showPage('timer')" data-page="timer" data-i18n="menuTimer">タイマー</button>
@@ -3498,6 +3683,12 @@
                 <div class="toggle-item">
                     <span data-i18n="loadingAnimSetting">ローディングアニメーション表示</span>
                     <div class="toggle-switch" id="toggleLoadingAnim" onclick="toggleLoadingAnim()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="toggle-item">
+                    <span data-i18n="autoPiP">自動ミニモード (PiP)</span>
+                    <div class="toggle-switch" id="toggleAutoPiP" onclick="toggleAutoPiP()">
                         <div class="toggle-slider"></div>
                     </div>
                 </div>
@@ -3825,60 +4016,64 @@
             <div class="about-overlay" id="licenseOverlay" aria-hidden="true">
                 <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="licenseTitle">
                     <h2 id="licenseTitle" data-i18n="licenseTitle">フォントライセンス</h2>
-                    <div id="licenseContent" class="about-content"
-                        style="font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
-                        <b>[Google Fonts]</b><br>
-                        <b>Jost</b><br>
-                        by Indestructible Type (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Zen Kaku Gothic Antique</b><br>
-                        by Astrolab Inc. (SIL OFL 1.1)<br>
-                        <br>
-                        <b>JetBrains Mono</b><br>
-                        by JetBrains s.r.o. (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Montserrat</b><br>
-                        by Julieta Ulanovsky (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Lora</b><br>
-                        by Cyreal (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Quicksand</b><br>
-                        by Andrew Paglinawan (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Klee One</b><br>
-                        by Fontworks Inc. (SIL OFL 1.1)<br>
-                        <br>
-                        <b>BIZ UDPGothic</b><br>
-                        by Morisawa Inc. (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Zen Maru Gothic</b><br>
-                        by Yoshimichi Ohira (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Noto Sans JP</b><br>
-                        by Google (SIL OFL 1.1)<br>
-                        <br>
-                        <b>Sawarabi Gothic</b><br>
-                        by mplus-fonts-dev (SIL OFL 1.1 / CC BY 4.0)<br>
-                        <br>
-                        <b>Hina Mincho</b><br>
-                        by Shujiro Sano (SIL OFL 1.1)<br>
-                        <br>
-                        <hr style="opacity: 0.2; margin: 15px 0;">
-                        <br>
-                        <b>[Local Fonts]</b><br>
-                        <b>うつくし明朝体 (Utsukushi Font)</b><br>
-                        by FLOP DESIGN (IPA Font License v1.0)<br>
-                        <br>
-                        <b>美咲ゴシック (Misaki Gothic)</b><br>
-                        by 門真 なむ / Little Limit (Free License)<br>
-                        <br>
-                        <b>小伝馬町 (Kodenmachou)</b><br>
-                        by 自家製フォント工房 (SIL OFL 1.1)<br>
-                        <br>
-                        <b>無心 (Mushin)</b><br>
-                        by Maniackers Design (SIL OFL 1.1)
-                    </div>
+<div id="licenseContent" class="about-content"
+    style="font-size: 0.85rem; max-height: 60vh; overflow-y: auto; text-align: left;">
+    <b>[Google Fonts]</b><br>
+    
+    <a href="https://fonts.google.com/specimen/Jost" target="_blank" style="color: inherit; text-decoration: underline;"><b>Jost</b></a><br>
+    by Indestructible Type (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Zen+Kaku+Gothic+Antique" target="_blank" style="color: inherit; text-decoration: underline;"><b>Zen Kaku Gothic Antique</b></a><br>
+    by Astrolab Inc. (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank" style="color: inherit; text-decoration: underline;"><b>JetBrains Mono</b></a><br>
+    by JetBrains s.r.o. (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" style="color: inherit; text-decoration: underline;"><b>Montserrat</b></a><br>
+    by Julieta Ulanovsky (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Lora" target="_blank" style="color: inherit; text-decoration: underline;"><b>Lora</b></a><br>
+    by Cyreal (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Quicksand" target="_blank" style="color: inherit; text-decoration: underline;"><b>Quicksand</b></a><br>
+    by Andrew Paglinawan (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Klee+One" target="_blank" style="color: inherit; text-decoration: underline;"><b>Klee One</b></a><br>
+    by Fontworks Inc. (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/BIZ+UDPGothic" target="_blank" style="color: inherit; text-decoration: underline;"><b>BIZ UDPGothic</b></a><br>
+    by Morisawa Inc. (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Zen+Maru+Gothic" target="_blank" style="color: inherit; text-decoration: underline;"><b>Zen Maru Gothic</b></a><br>
+    by Yoshimichi Ohira (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Noto+Sans+JP" target="_blank" style="color: inherit; text-decoration: underline;"><b>Noto Sans JP</b></a><br>
+    by Google (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Sawarabi+Gothic" target="_blank" style="color: inherit; text-decoration: underline;"><b>Sawarabi Gothic</b></a><br>
+    by mplus-fonts-dev (SIL OFL 1.1 / CC BY 4.0)<br>
+    <br>
+    <a href="https://fonts.google.com/specimen/Hina+Mincho" target="_blank" style="color: inherit; text-decoration: underline;"><b>Hina Mincho</b></a><br>
+    by Shujiro Sano (SIL OFL 1.1)<br>
+    <br>
+    
+    <hr style="opacity: 0.2; margin: 15px 0;">
+    <br>
+    
+    <b>[Local Fonts]</b><br>
+    
+    <a href="https://flopdesign.com/blog/font/58/" target="_blank" style="color: inherit; text-decoration: underline;"><b>うつくし明朝体 (Utsukushi Font)</b></a><br>
+    by FLOP DESIGN (IPA Font License v1.0)<br>
+    <br>
+    <a href="https://littlelimit.net/misaki.htm" target="_blank" style="color: inherit; text-decoration: underline;"><b>美咲ゴシック (Misaki Gothic)</b></a><br>
+    by 門真 なむ / Little Limit (MIT License)<br>
+    <br>
+    <a href="http://jikasei.me/font/kh-dotfont/" target="_blank" style="color: inherit; text-decoration: underline;"><b>小伝馬町 (Kodenmachou)</b></a><br>
+    by 自家製フォント工房 (SIL OFL 1.1)<br>
+    <br>
+    <a href="https://modi.jpn.org/font_mushin.php" target="_blank" style="color: inherit; text-decoration: underline;"><b>無心 (Mushin)</b></a><br>
+    by Maniackers Design (IPA Font License v1.0)
+</div>
                     <div class="about-actions">
                         <button class="primary" id="licenseOkBtn" data-i18n="closeButton">閉じる</button>
                     </div>
@@ -3897,6 +4092,11 @@
                 let isLoop = false;
                 let isShuffle = false;
                 let _musicDB = null;
+                let pipCanvas = null;
+                let pipCtx = null;
+                let pipVideo = null;
+                let pipStream = null;
+                let pipDrawInterval = null;
 
                 // 多言語対応システム
                 let currentLanguage = 'ja'; // デフォルトは日本語
@@ -3904,7 +4104,7 @@
                 const translations = {
                     ja: {
                         // メタ
-                        title: '勉強時間管理',
+                        title: 'ツミキ | 勉強時間管理',
                         description: '勉強とともにタイマーをスタートし、作業時間を記録しましょう。',
 
 
@@ -4059,6 +4259,7 @@
                         themeWhite: 'ホワイト/ブラック',
                         lockSettingsDuringTimer: 'タイマー作動中は設定を無効化',
                         loadingAnimSetting: 'ローディングアニメーション表示',
+                        autoPiP: '自動ミニモード (PiP)',
                         graphDisplay: 'グラフ表示',
                         studyGraph: '勉強時間のグラフ表示',
                         graphType: 'グラフの種類',
@@ -4150,15 +4351,20 @@
 
                         // 汎用
                         confirmDefaultTitle: '確認',
-                        studyTimeManagement: '勉強時間管理',
+                        studyTimeManagement: 'ツミキ | 勉強時間管理',
                         cancelButton: 'キャンセル',
+                        errorTitle: 'エラー',
+                        invalidFileFormat: '無効なファイル形式です。',
+                        importDataTitle: 'データをインポート',
+                        importConfirm: 'このデータを読み込みますか？\n履歴: {historyCount}件\nToDo: {todoCount}件',
+                        importFailed: 'インポートに失敗しました',
 
                         // About & QA
                         aboutContent: `<div style="text-align: center; margin-bottom: 20px;">
                         <div><img src="guide.webp" style="width: 3rem; height: 3rem;"></div>
-                        <h3 style="margin-top: 0;">Study Time Manager</h3>
+                        <h3 style="margin-top: 0;">Tsumiki | Study Time Manager</h3>
                         <p>シンプルで使いやすい勉強時間管理ツール。</p>
-                        このサイトは<a href="https://kokyujene.github.io/members/super-hiko14/">Super Hiko14</a>が開発しました。<div class="tyuui-mini-text">※ 一部AIが使用されています。</div>
+                        このサイトは<a href="https://kokyujene.super-hiko14.com/members/super-hiko14/">Super Hiko14</a>が開発しました。<div class="tyuui-mini-text">※ 一部AIが使用されています。</div>
                         </div>`,
                         qaContent: `<div style="text-align: left;">
                             <p style="margin-left: 15px;">A. すべてのデータはブラウザのローカルストレージに保存されます。サーバーには一切送信されません。</p>
@@ -4266,7 +4472,7 @@
                         licenseTitle: 'Font Licenses',
 
                         // Meta
-                        title: 'Study Time Manager',
+                        title: 'Tsumiki | Study Time Manager',
                         description: 'Start the timer with your study session and track your work time.',
 
                         // Main Menu
@@ -4372,6 +4578,7 @@
                         themeWhite: 'White/Black',
                         lockSettingsDuringTimer: 'Lock Settings during Timer',
                         loadingAnimSetting: 'Show Loading Animation on Start',
+                        autoPiP: 'Auto Mini Mode (PiP)',
                         graphDisplay: 'Graph Display',
                         studyGraph: 'Show Study Time Graph',
                         graphType: 'Graph Type',
@@ -4383,6 +4590,7 @@
                         period14days: 'Last 14 Days',
                         period30days: 'Last 30 Days',
                         period90days: 'Last 90 Days',
+                        autoPiP: 'Auto Mini Mode (PiP)',
                         period1year: 'Last Year',
                         periodAll: 'All Time',
                         displayLocation: 'Display Location',
@@ -4430,6 +4638,11 @@
                         year: '/',
                         month: '/',
                         day: '',
+                        errorTitle: 'Error',
+                        invalidFileFormat: 'Invalid file format.',
+                        importDataTitle: 'Import Data',
+                        importConfirm: 'Import this data?\nHistory: {historyCount}\nToDo: {todoCount}',
+                        importFailed: 'Import failed',
 
                         notSet: 'Not set',
                         periodLabel: 'Period',
@@ -4545,15 +4758,15 @@
 
                         // General
                         confirmDefaultTitle: 'Confirm',
-                        studyTimeManagement: 'Study Time Manager',
+                        studyTimeManagement: 'Tsumiki | Study Time Manager',
                         cancelButton: 'Cancel',
 
                         // About & QA
                         aboutContent: `<div style="text-align: center; margin-bottom: 20px;">
                         <div><img src="guide.webp" style="width: 3rem; height: 3rem;"></div>
-                        <h3 style="margin-top: 0;">Study Time Manager</h3>
+                        <h3 style="margin-top: 0;">Tsumiki | Study Time Manager</h3>
                         <p>Simple and easy-to-use study time management tool.</p>
-                        Developed by <a href="https://kokyujene.github.io/members/super-hiko14/">Super Hiko14</a>.<div class="tyuui-mini-text">* AI is used in some parts.</div>
+                        Developed by <a href="https://kokyujene.super-hiko14.com/members/super-hiko14/">Super Hiko14</a>.<div class="tyuui-mini-text">* AI is used in some parts.</div>
                         </div>`,
                         qaContent: `<div style="text-align: left;">
                             <h3 style="font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Q. Where is data saved?</h3>
@@ -4623,6 +4836,7 @@
                     loadStats();
                     loadPlaylist();
                     loadTodos();
+                    drawPiPCanvas();
                 }
 
                 // すべての翻訳を適用
@@ -4687,6 +4901,54 @@
 
                 // カスタム確認ダイアログ
                 let confirmResolve = null;
+
+                const MIGRATION_NOTICE_KEY = 'migration_notice_hidden';
+                const MIGRATION_TARGET_URL = 'https://tools.super-hiko14.com/study/';
+
+                function isLegacyStudyUrl() {
+                    const host = (window.location.hostname || '').toLowerCase();
+                    return host !== 'tools.super-hiko14.com';
+                }
+
+                function shouldShowMigrationNotice() {
+                    return isLegacyStudyUrl() && getData(MIGRATION_NOTICE_KEY) !== 'true';
+                }
+
+                function persistMigrationNoticePreference() {
+                    const hideCheckbox = document.getElementById('migrationDontShowAgain');
+                    const shouldHide = !!(hideCheckbox && hideCheckbox.checked);
+                    saveData(MIGRATION_NOTICE_KEY, shouldHide ? 'true' : 'false');
+                }
+
+                function showMigrationNotice() {
+                    const overlay = document.getElementById('migrationNoticeOverlay');
+                    if (!overlay) return;
+                    overlay.classList.add('show');
+                    overlay.setAttribute('aria-hidden', 'false');
+                    document.body.classList.add('no-scroll');
+                }
+
+                function hideMigrationNotice() {
+                    const overlay = document.getElementById('migrationNoticeOverlay');
+                    if (!overlay) return;
+                    overlay.classList.remove('show');
+                    overlay.setAttribute('aria-hidden', 'true');
+                    document.body.classList.remove('no-scroll');
+                }
+
+                document.getElementById('migrationExportBtn')?.addEventListener('click', () => {
+                    exportData();
+                });
+
+                document.getElementById('migrationContinueBtn')?.addEventListener('click', () => {
+                    persistMigrationNoticePreference();
+                    hideMigrationNotice();
+                });
+
+                document.getElementById('migrationGoBtn')?.addEventListener('click', () => {
+                    persistMigrationNoticePreference();
+                    window.location.href = MIGRATION_TARGET_URL;
+                });
 
 
                 function customConfirm(message, title = null, iconSrc = 'warning.webp') {
@@ -4927,15 +5189,31 @@
                     if (getData('graph_enabled') === 'true') {
                         setTimeout(() => updateGraphs(), 100);
                     }
+
+                    drawPiPCanvas();
+                }
+
+                const VALID_THEME_NAMES = ['blue', 'green', 'purple', 'orange', 'pink', 'teal', 'white'];
+
+                function normalizeThemeName(themeName) {
+                    const normalized = (themeName || '').trim().toLowerCase();
+                    return VALID_THEME_NAMES.includes(normalized) ? normalized : '';
                 }
 
                 function changeTheme(themeName) {
-                    document.body.setAttribute('data-theme', themeName);
-                    saveData('theme', themeName);
+                    const normalizedTheme = normalizeThemeName(themeName);
+                    if (!normalizedTheme) {
+                        console.warn('[Theme] Ignored invalid theme value:', themeName);
+                        return;
+                    }
+
+                    document.body.setAttribute('data-theme', normalizedTheme);
+                    saveData('theme', normalizedTheme);
+                    saveData('last_valid_theme', normalizedTheme);
                     document.querySelectorAll('.theme-option').forEach(option => {
                         option.classList.remove('selected');
                     });
-                    const matchedThemeOption = document.querySelector(`.theme-option[data-theme="${themeName}"]`);
+                    const matchedThemeOption = document.querySelector(`.theme-option[data-theme="${normalizedTheme}"]`);
                     if (matchedThemeOption) {
                         matchedThemeOption.classList.add('selected');
                     }
@@ -4943,6 +5221,143 @@
                     if (getData('graph_enabled') === 'true') {
                         setTimeout(() => updateGraphs(), 100);
                     }
+
+                    drawPiPCanvas();
+                }
+
+                function ensurePiPElements() {
+                    if (!pipCanvas) pipCanvas = document.getElementById('pipCanvas');
+                    if (!pipVideo) pipVideo = document.getElementById('pipVideo');
+                    if (pipCanvas && !pipCtx) pipCtx = pipCanvas.getContext('2d');
+                    if (pipVideo && !pipVideo.__pipBound) {
+                        pipVideo.addEventListener('leavepictureinpicture', cleanupPiPState);
+                        pipVideo.__pipBound = true;
+                    }
+                }
+
+                function isPiPSupported() {
+                    return !!(document.pictureInPictureEnabled && HTMLVideoElement.prototype.requestPictureInPicture && HTMLCanvasElement.prototype.captureStream);
+                }
+
+                function getActiveMusicTitle() {
+                    if (currentMusicIndex >= 0 && musicFiles[currentMusicIndex]) {
+                        return musicFiles[currentMusicIndex].title || 'Unknown track';
+                    }
+                    return currentLanguage === 'en' ? 'No music selected' : '音楽は選択されていません';
+                }
+
+                function getCssVar(name, fallback) {
+                    const value = getComputedStyle(document.body).getPropertyValue(name).trim();
+                    return value || fallback;
+                }
+
+                function trimCanvasText(ctx, text, maxWidth) {
+                    if (ctx.measureText(text).width <= maxWidth) return text;
+                    let out = text;
+                    while (out.length > 1 && ctx.measureText(`${out}…`).width > maxWidth) {
+                        out = out.slice(0, -1);
+                    }
+                    return `${out}…`;
+                }
+
+                function drawPiPCanvas() {
+                    ensurePiPElements();
+                    if (!pipCtx || !pipCanvas) return;
+
+                    const width = pipCanvas.width;
+                    const height = pipCanvas.height;
+                    const isDark = document.body.classList.contains('dark');
+                    const bg = isDark ? getCssVar('--panel-dark', '#2d3142') : getCssVar('--panel-light', '#f0f2f7');
+                    const panel = isDark ? getCssVar('--panel-dark-2', '#3d4454') : getCssVar('--bg-light', '#f8f9fb');
+                    const primary = isDark ? getCssVar('--primary-color-dark', '#7a95ab') : getCssVar('--primary-color', '#9db4c8');
+                    const textColor = isDark ? '#e8e8e8' : '#323232';
+                    const subText = isDark ? 'rgba(232,232,232,0.72)' : 'rgba(50,50,50,0.72)';
+                    const fontFamily = getComputedStyle(document.body).fontFamily || 'system-ui, sans-serif';
+                    
+                    let timerText = '00:00:00';
+                    const timerEl = document.getElementById('timer');
+                    if (timerEl) {
+                        timerText = timerEl.textContent.trim();
+                    }
+                    
+                    const songTitle = getActiveMusicTitle();
+
+                    pipCtx.clearRect(0, 0, width, height);
+                    pipCtx.fillStyle = bg;
+                    pipCtx.fillRect(0, 0, width, height);
+
+                    const bottomPanelHeight = Math.round(height * 0.24);
+                    pipCtx.fillStyle = panel;
+                    pipCtx.fillRect(0, height - bottomPanelHeight, width, bottomPanelHeight);
+
+                    pipCtx.fillStyle = textColor;
+                    pipCtx.textAlign = 'center';
+                    pipCtx.textBaseline = 'middle';
+                    pipCtx.font = `500 ${Math.round(height * 0.2)}px ${fontFamily}`;
+                    pipCtx.fillText(timerText, width / 2, Math.round(height * 0.42));
+
+                    pipCtx.fillStyle = primary;
+                    pipCtx.fillRect(Math.round(width * 0.1), height - bottomPanelHeight - 2, Math.round(width * 0.8), 2);
+
+                    pipCtx.textAlign = 'left';
+                    pipCtx.fillStyle = subText;
+                    pipCtx.font = `400 ${Math.round(height * 0.04)}px ${fontFamily}`;
+                    pipCtx.fillText('Now Playing', Math.round(width * 0.08), height - Math.round(bottomPanelHeight * 0.62));
+
+                    pipCtx.fillStyle = textColor;
+                    pipCtx.font = `500 ${Math.round(height * 0.052)}px ${fontFamily}`;
+                    const songAreaLeft = Math.round(width * 0.08);
+                    const songAreaWidth = Math.round(width * 0.84);
+                    const fitted = trimCanvasText(pipCtx, songTitle, songAreaWidth);
+                    pipCtx.fillText(fitted, songAreaLeft, height - Math.round(bottomPanelHeight * 0.34));
+                }
+
+                function cleanupPiPState() {
+                    if (pipDrawInterval) {
+                        clearInterval(pipDrawInterval);
+                        pipDrawInterval = null;
+                    }
+                    if (pipStream) {
+                        pipStream.getTracks().forEach(track => track.stop());
+                        pipStream = null;
+                    }
+                    if (pipVideo) {
+                        pipVideo.pause();
+                        pipVideo.srcObject = null;
+                    }
+                }
+
+                async function enterMiniModePiP() {
+                    ensurePiPElements();
+
+                    if (!isPiPSupported()) return;
+
+                    try {
+                        if (document.pictureInPictureElement === pipVideo) return;
+
+                        drawPiPCanvas();
+                        if (!pipStream) {
+                            pipStream = pipCanvas.captureStream(24);
+                            pipVideo.srcObject = pipStream;
+                        }
+                        await pipVideo.play();
+                        await pipVideo.requestPictureInPicture();
+
+                        if (pipDrawInterval) clearInterval(pipDrawInterval);
+                        pipDrawInterval = setInterval(drawPiPCanvas, 250);
+                    } catch (err) {
+                        console.error('Failed to launch PiP:', err);
+                        cleanupPiPState();
+                    }
+                }
+
+                async function exitMiniModePiP() {
+                    if (document.pictureInPictureElement === pipVideo) {
+                        try {
+                            await document.exitPictureInPicture();
+                        } catch (e) {}
+                    }
+                    cleanupPiPState();
                 }
 
                 function toggleFeature(feature) {
@@ -5244,6 +5659,8 @@
                         document.getElementById('timer').textContent = timeStr;
                         document.title = `${timeStr} - ${getText('studyTimeManagement')}`;
                     }
+
+                    drawPiPCanvas();
                 }
                 
 
@@ -5297,6 +5714,7 @@
 
                 function endStudy() {
                     if (timerInterval) clearInterval(timerInterval);
+                    exitMiniModePiP();
                     document.title = getText('studyTimeManagement');
                     const endTime = new Date();
                     const startCookie = getData('studyStartTime');
@@ -5383,6 +5801,7 @@
                     const playlistDiv = document.getElementById('playlist');
                     if (musicFiles.length === 0) {
                         playlistDiv.innerHTML = `<div class="empty-state">${getText('emptyPlaylist')}</div>`;
+                        drawPiPCanvas();
                         return;
                     }
                     playlistDiv.innerHTML = musicFiles.map((item, index) => `
@@ -5402,6 +5821,7 @@
         </div>
     `).join('');
                     attachPlaylistHandlers();
+                    drawPiPCanvas();
                 }
 
                 // エスケープ用(簡易)
@@ -5564,6 +5984,7 @@
                         if (playImg) { playImg.src = 'pause.webp'; playImg.alt = '一時停止'; }
                         loadPlaylist();
                         updateMediaSession(); // Media Session API更新
+                        drawPiPCanvas();
                     }
                 }
 
@@ -5576,7 +5997,7 @@
                     navigator.mediaSession.metadata = new MediaMetadata({
                         title: file.title,
                         // ユーザー要望のサブタイトル(Artist フィールドを利用)
-                        artist: 'Study Time Manager - Music',
+                        artist: 'Tsumiki | Study Time Manager - Music',
                         album: 'Local Playlist',
                         artwork: [
                             { src: 'music.png', sizes: '96x96', type: 'image/webp' },
@@ -5629,6 +6050,7 @@
                     }
                     // リスト上のplayingクラスは再生中も一時停止中もactiveで良いならそのままだが、
                     // 一時停止中にスタイルを変えたい場合はここで制御。今回は変更なし。
+                    drawPiPCanvas();
                 }
 
                 function togglePlay() {
@@ -6796,17 +7218,151 @@
                     }
                 }
 
+                const EXPORT_SCHEMA_VERSION = 2;
+                const BACKUP_SETTING_KEYS = [
+                    'theme',
+                    'last_valid_theme',
+                    'mode',
+                    'app_language',
+                    'font_ja',
+                    'font_en',
+                    'feature_music',
+                    'feature_todo',
+                    'feature_title_time',
+                    'feature_loading_anim',
+                    'feature_auto_pip',
+                    'lock_settings_during_timer',
+                    'feature_focus_mode_display',
+                    'focus_mode_enabled',
+                    'focus_duration',
+                    'break_duration',
+                    'graph_enabled',
+                    'graph_type',
+                    'graph_period',
+                    'graph_location',
+                    'todo_v2_enabled',
+                    'todo_v2_prompt_shown',
+                    'tutorial_completed',
+                    'dev_mode_enabled'
+                ];
+
+                const IMPORT_BOOLEAN_SETTING_KEYS = [
+                    'feature_music',
+                    'feature_todo',
+                    'feature_title_time',
+                    'feature_loading_anim',
+                    'feature_auto_pip',
+                    'lock_settings_during_timer',
+                    'feature_focus_mode_display',
+                    'focus_mode_enabled',
+                    'graph_enabled',
+                    'todo_v2_enabled',
+                    'todo_v2_prompt_shown',
+                    'tutorial_completed',
+                    'dev_mode_enabled'
+                ];
+
+                function safeJsonParse(raw, fallback) {
+                    if (typeof raw !== 'string') return fallback;
+                    try {
+                        const parsed = JSON.parse(raw);
+                        return parsed ?? fallback;
+                    } catch {
+                        return fallback;
+                    }
+                }
+
+                function normalizeBooleanString(value, fallback = 'false') {
+                    if (typeof value === 'boolean') return value ? 'true' : 'false';
+                    if (typeof value === 'string') {
+                        const normalized = value.trim().toLowerCase();
+                        if (normalized === 'true' || normalized === 'false') return normalized;
+                    }
+                    return fallback;
+                }
+
+                function normalizePositiveIntString(value, fallback) {
+                    const num = Number(value);
+                    if (!Number.isFinite(num)) return fallback;
+                    const intValue = Math.floor(num);
+                    if (intValue <= 0) return fallback;
+                    return String(intValue);
+                }
+
+                function collectExportSettings() {
+                    const settings = {};
+                    for (const key of BACKUP_SETTING_KEYS) {
+                        const value = getData(key);
+                        if (value !== null && value !== undefined && value !== '') {
+                            settings[key] = value;
+                        }
+                    }
+                    return settings;
+                }
+
+                function buildNormalizedImportData(parsedData) {
+                    if (!parsedData || typeof parsedData !== 'object' || Array.isArray(parsedData)) {
+                        throw new Error(getText('invalidFileFormat'));
+                    }
+
+                    const hasLegacyShape = (
+                        Object.prototype.hasOwnProperty.call(parsedData, 'studyHistory') ||
+                        Object.prototype.hasOwnProperty.call(parsedData, 'todos') ||
+                        Object.prototype.hasOwnProperty.call(parsedData, 'theme') ||
+                        Object.prototype.hasOwnProperty.call(parsedData, 'mode')
+                    );
+
+                    const hasSchemaMeta = typeof parsedData.version === 'number' || typeof parsedData.version === 'string';
+                    if (!hasLegacyShape && !hasSchemaMeta) {
+                        throw new Error(getText('invalidFileFormat'));
+                    }
+
+                    const settings = (parsedData.settings && typeof parsedData.settings === 'object' && !Array.isArray(parsedData.settings))
+                        ? parsedData.settings
+                        : {};
+
+                    const studyHistory = Array.isArray(parsedData.studyHistory) ? parsedData.studyHistory : [];
+                    const todos = Array.isArray(parsedData.todos) ? parsedData.todos : [];
+
+                    return {
+                        studyHistory,
+                        todos,
+                        settings,
+                        legacy: parsedData
+                    };
+                }
+
+                function applyMode(mode) {
+                    const normalizedMode = mode === 'dark' ? 'dark' : 'light';
+                    saveData('mode', normalizedMode);
+                    document.body.classList.toggle('dark', normalizedMode === 'dark');
+                    document.body.classList.toggle('light', normalizedMode !== 'dark');
+                    const themeIcon = document.getElementById('themeIcon');
+                    if (themeIcon) {
+                        themeIcon.src = normalizedMode === 'dark' ? 'sun.webp' : 'moon.webp';
+                        themeIcon.alt = normalizedMode === 'dark' ? getText('toggleLightMode') : getText('toggleDarkMode');
+                    }
+                }
+
+                function setToggleActive(toggleId, isActive) {
+                    const toggle = document.getElementById(toggleId);
+                    if (!toggle) return;
+                    toggle.classList.toggle('active', isActive);
+                }
+
                 function exportData() {
+                    const studyHistory = safeJsonParse(getData('studyHistory') || '[]', []);
+                    const todos = safeJsonParse(getData('todos') || '[]', []);
+                    const settings = collectExportSettings();
+
                     const data = {
-                        version: 1,
+                        version: EXPORT_SCHEMA_VERSION,
+                        app: 'tsumiki-study',
                         exportedAt: new Date().toISOString(),
-                        studyHistory: JSON.parse(getData('studyHistory') || '[]'),
-                        todos: JSON.parse(getData('todos') || '[]'),
-                        theme: getData('theme') || 'blue',
-                        mode: getData('mode') || 'light',
-                        feature_music: getData('feature_music') || 'false',
-                        feature_todo: getData('feature_todo') || 'false',
-                        focus_mode_enabled: getData('focus_mode_enabled') || 'false',
+                        studyHistory: Array.isArray(studyHistory) ? studyHistory : [],
+                        todos: Array.isArray(todos) ? todos : [],
+                        settings,
+                        excludes: ['musicPlaylist', 'indexedDB:study_music_db']
                     };
 
                     const json = JSON.stringify(data, null, 2);
@@ -6828,71 +7384,144 @@
                     const reader = new FileReader();
                     reader.onload = async (e) => {
                         try {
-                            const data = JSON.parse(e.target.result);
-
-                            // バージョン確認
-                            if (!data.version) throw new Error(getText('invalidFileFormat'));
+                            const parsedData = JSON.parse(e.target.result);
+                            const normalized = buildNormalizedImportData(parsedData);
+                            const { studyHistory, todos, settings, legacy } = normalized;
 
                             // 確認ダイアログを表示
                             const confirmed = await customConfirm(
-                                getText('importConfirm').replace('{historyCount}', data.studyHistory?.length || 0).replace('{todoCount}', data.todos?.length || 0),
+                                getText('importConfirm').replace('{historyCount}', studyHistory.length || 0).replace('{todoCount}', todos.length || 0),
                                 getText('importDataTitle'),
                                 'warning.webp'
                             );
 
                             if (confirmed) {
                                 // データを復元
-                                if (data.studyHistory) saveData('studyHistory', JSON.stringify(data.studyHistory));
-                                if (data.todos) saveData('todos', JSON.stringify(data.todos));
-                                if (data.theme) {
-                                    saveData('theme', data.theme);
-                                    changeTheme(data.theme);
-                                }
-                                if (data.mode) {
-                                    saveData('mode', data.mode);
-                                    if (data.mode === 'dark') {
-                                        document.body.classList.remove('light');
-                                        document.body.classList.add('dark');
-                                    } else {
-                                        document.body.classList.remove('dark');
-                                        document.body.classList.add('light');
-                                    }
-                                    const themeIcon = document.getElementById('themeIcon');
-                                    if (themeIcon) themeIcon.src = data.mode === 'dark' ? 'sun.webp' : 'moon.webp';
-                                }
-                                if (typeof data.focus_mode_enabled !== 'undefined') {
-                                    saveData('focus_mode_enabled', data.focus_mode_enabled);
-                                }
-                                // break_time_accum and focus_cycle_base are no longer needed (stateless computation)
+                                saveData('studyHistory', JSON.stringify(studyHistory));
+                                saveData('todos', JSON.stringify(todos));
 
-                                // 表示設定を復元
-                                if (data.feature_music !== undefined) {
-                                    saveData('feature_music', data.feature_music);
-                                    const toggle = document.getElementById('toggleMusic');
-                                    if (data.feature_music === 'true') {
-                                        toggle.classList.add('active');
-                                        addMenuButton('music');
-                                    } else {
-                                        toggle.classList.remove('active');
-                                        removeMenuButton('music');
+                                for (const key of IMPORT_BOOLEAN_SETTING_KEYS) {
+                                    const rawValue = settings[key] ?? legacy[key];
+                                    if (typeof rawValue !== 'undefined') {
+                                        saveData(key, normalizeBooleanString(rawValue));
                                     }
                                 }
-                                if (data.feature_todo !== undefined) {
-                                    saveData('feature_todo', data.feature_todo);
-                                    const toggle = document.getElementById('toggleTodo');
-                                    if (data.feature_todo === 'true') {
-                                        toggle.classList.add('active');
-                                        addMenuButton('todo');
-                                    } else {
-                                        toggle.classList.remove('active');
-                                        removeMenuButton('todo');
+
+                                const importedFocusDuration = settings.focus_duration ?? legacy.focus_duration;
+                                if (typeof importedFocusDuration !== 'undefined') {
+                                    saveData('focus_duration', normalizePositiveIntString(importedFocusDuration, '25'));
+                                }
+
+                                const importedBreakDuration = settings.break_duration ?? legacy.break_duration;
+                                if (typeof importedBreakDuration !== 'undefined') {
+                                    saveData('break_duration', normalizePositiveIntString(importedBreakDuration, '5'));
+                                }
+
+                                const importedGraphType = String(settings.graph_type ?? legacy.graph_type ?? '').trim();
+                                if (['bar', 'line', 'area'].includes(importedGraphType)) {
+                                    saveData('graph_type', importedGraphType);
+                                }
+
+                                const importedGraphPeriod = String(settings.graph_period ?? legacy.graph_period ?? '').trim();
+                                if (['7', '14', '30', '90', '365', 'all'].includes(importedGraphPeriod)) {
+                                    saveData('graph_period', importedGraphPeriod);
+                                }
+
+                                const importedGraphLocation = String(settings.graph_location ?? legacy.graph_location ?? '').trim();
+                                if (['list', 'stats', 'both'].includes(importedGraphLocation)) {
+                                    saveData('graph_location', importedGraphLocation);
+                                }
+
+                                const importedThemeRaw = settings.theme ?? legacy.theme;
+                                if (typeof importedThemeRaw === 'string') {
+                                    const importedTheme = normalizeThemeName(importedThemeRaw);
+                                    if (importedTheme) {
+                                        saveData('theme', importedTheme);
+                                        saveData('last_valid_theme', importedTheme);
+                                        changeTheme(importedTheme);
                                     }
                                 }
+
+                                const importedModeRaw = settings.mode ?? legacy.mode;
+                                if (typeof importedModeRaw === 'string') {
+                                    applyMode(importedModeRaw.trim().toLowerCase() === 'dark' ? 'dark' : 'light');
+                                }
+
+                                const importedLanguage = String(settings.app_language ?? legacy.app_language ?? '').trim().toLowerCase();
+                                if (importedLanguage === 'ja' || importedLanguage === 'en') {
+                                    saveData('app_language', importedLanguage);
+                                }
+
+                                const importedFontJa = settings.font_ja ?? legacy.font_ja;
+                                if (typeof importedFontJa === 'string' && importedFontJa.trim() !== '') {
+                                    saveData('font_ja', importedFontJa.trim());
+                                }
+
+                                const importedFontEn = settings.font_en ?? legacy.font_en;
+                                if (typeof importedFontEn === 'string') {
+                                    saveData('font_en', importedFontEn.trim());
+                                }
+
+                                const featureMusicEnabled = getData('feature_music') === 'true';
+                                setToggleActive('toggleMusic', featureMusicEnabled);
+                                if (featureMusicEnabled) addMenuButton('music');
+                                else removeMenuButton('music');
+
+                                const featureTodoEnabled = getData('feature_todo') === 'true';
+                                setToggleActive('toggleTodo', featureTodoEnabled);
+                                if (featureTodoEnabled) addMenuButton('todo');
+                                else removeMenuButton('todo');
+
+                                setToggleActive('toggleTitleTime', getData('feature_title_time') !== 'false');
+                                setToggleActive('toggleLoadingAnim', getData('feature_loading_anim') !== 'false');
+                                setToggleActive('toggleAutoPiP', getData('feature_auto_pip') !== 'false');
+                                setToggleActive('toggleLockSettings', getData('lock_settings_during_timer') === 'true');
+                                setToggleActive('toggleFocusDisplay', getData('feature_focus_mode_display') !== 'false');
+
+                                const focusDisplayEnabled = getData('feature_focus_mode_display') !== 'false';
+                                const focusModeToggleContainer = document.getElementById('focusModeToggleContainer');
+                                if (focusModeToggleContainer) {
+                                    focusModeToggleContainer.style.display = focusDisplayEnabled ? 'block' : 'none';
+                                }
+
+                                const graphEnabled = getData('graph_enabled') === 'true';
+                                setToggleActive('toggleGraph', graphEnabled);
+                                const graphSettings = document.getElementById('graphSettings');
+                                if (graphSettings) {
+                                    graphSettings.style.display = graphEnabled ? 'block' : 'none';
+                                }
+
+                                const graphTypeEl = document.getElementById('graphType');
+                                if (graphTypeEl && getData('graph_type')) graphTypeEl.value = getData('graph_type');
+                                const graphPeriodEl = document.getElementById('graphPeriod');
+                                if (graphPeriodEl && getData('graph_period')) graphPeriodEl.value = getData('graph_period');
+                                const graphLocationEl = document.getElementById('graphLocation');
+                                if (graphLocationEl && getData('graph_location')) graphLocationEl.value = getData('graph_location');
+
+                                const focusDurationEl = document.getElementById('focusDurationSelect');
+                                if (focusDurationEl && getData('focus_duration')) focusDurationEl.value = getData('focus_duration');
+                                const breakDurationEl = document.getElementById('breakDurationSelect');
+                                if (breakDurationEl && getData('break_duration')) breakDurationEl.value = getData('break_duration');
+
+                                applyFonts();
+
+                                const languageAfterImport = getData('app_language');
+                                if (languageAfterImport === 'ja' || languageAfterImport === 'en') {
+                                    currentLanguage = languageAfterImport;
+                                }
+                                applyTranslations();
 
                                 // 履歴をリロード
                                 if (document.getElementById('historyList')) loadHistory();
                                 if (document.getElementById('todoItems')) loadTodos();
                                 if (document.getElementById('statsContainer')) loadStats();
+                                if (getData('graph_enabled') === 'true') {
+                                    setTimeout(() => updateGraphs(), 80);
+                                } else {
+                                    hideGraphs();
+                                }
+                                toggleFocusModeMain(true);
+                                updateSettingsButtonState();
                             }
                         } catch (error) {
                             await customConfirm(`${getText('importFailed')}: ${error.message}`, getText('errorTitle'), 'warning.webp');
@@ -6906,6 +7535,7 @@
 
                 // チュートリアル関連
                 let currentTutorialStep = 0;
+                let tutorialTimer = null;
                 const tutorialSteps = [
                     {
                         titleKey: 'tutorialStartTitle',
@@ -7014,7 +7644,7 @@
                     {
                         titleKey: 'tutorialGraphDisplayTitle',
                         messageKey: 'tutorialGraphDisplayMessage',
-                        target: '.settings-section:nth-child(3)',
+                        target: '.settings-section:nth-child(6)',
                         position: 'top',
                         action: 'view',
                         page: 'settings'
@@ -7022,7 +7652,7 @@
                     {
                         titleKey: 'tutorialDataManagementTitle',
                         messageKey: 'tutorialDataManagementMessage',
-                        target: '.settings-section:nth-child(4)',
+                        target: '.settings-section:nth-child(7)',
                         position: 'top',
                         action: 'view',
                         page: 'settings'
@@ -7056,11 +7686,13 @@
                 }
 
                 function restartTutorial() {
+                    hideTutorialStep();
                     currentTutorialStep = 0;
                     showPage('timer');
-                    setTimeout(() => {
+                    if (tutorialTimer) clearTimeout(tutorialTimer);
+                    tutorialTimer = setTimeout(() => {
                         showTutorialStep();
-                    }, 300);
+                    }, 500);
                 }
 
                 function skipTutorial() {
@@ -7092,9 +7724,10 @@
                         if (prevStep.page) {
                             showPage(prevStep.page);
                         }
-                        setTimeout(() => {
+                        if (tutorialTimer) clearTimeout(tutorialTimer);
+                        tutorialTimer = setTimeout(() => {
                             showTutorialStep();
-                        }, 300);
+                        }, 500);
                     }
                 }
 
@@ -7106,16 +7739,17 @@
 
                     // ページ切替が必要な場合
                     if (step.page) {
-                        const pages = { 'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'settings': 'settingsPage' };
+                        const pages = { 'timer': 'timerPage', 'stats': 'statsPage', 'list': 'listPage', 'music': 'musicPage', 'todo': 'todoPage', 'settings': 'settingsPage' };
                         const currentActivePage = document.querySelector('.page.active');
                         const targetPageId = pages[step.page];
 
                         if (currentActivePage && currentActivePage.id !== targetPageId) {
                             showPage(step.page);
                             // ページ切替後に少し待つ
-                            setTimeout(() => {
+                            if (tutorialTimer) clearTimeout(tutorialTimer);
+                            tutorialTimer = setTimeout(() => {
                                 continueShowingStep();
-                            }, 400);
+                            }, 500);
                             return;
                         }
                     }
@@ -7123,11 +7757,14 @@
                     continueShowingStep();
 
                     function continueShowingStep() {
+                        if (tutorialTimer) clearTimeout(tutorialTimer);
+                        
                         // 完了画面の場合
                         if (step.action === 'finish') {
                             overlay.classList.add('show');
                             box.style.display = 'block';
                             arrow.style.display = 'none';
+                            // ... (rest is same)
 
                             document.getElementById('tutorialStepInfo').textContent = '';
                             document.getElementById('tutorialStepInfo').textContent = '';
@@ -7172,11 +7809,26 @@
                         // ターゲットが表示されるまで待つ
                         const targetVisible = target.offsetParent !== null;
                         if (!targetVisible) {
-                            setTimeout(() => {
-                                showTutorialStep();
-                            }, 200);
+                            // タイマー起動中などで元々隠れている要素なら、延々と待たずに次へ
+                            if (target.classList.contains('hidden') || target.style.display === 'none') {
+                                nextTutorialStep();
+                                return;
+                            }
+                            
+                            if (tutorialTimer) clearTimeout(tutorialTimer);
+                            if (!step._retryCount) step._retryCount = 0;
+                            if (step._retryCount < 5) {
+                                step._retryCount++;
+                                tutorialTimer = setTimeout(() => {
+                                    showTutorialStep();
+                                }, 300);
+                            } else {
+                                step._retryCount = 0;
+                                nextTutorialStep();
+                            }
                             return;
                         }
+                        step._retryCount = 0;
 
                         overlay.classList.add('show');
                         box.style.display = 'block';
@@ -7325,6 +7977,10 @@
                 }
 
                 function hideTutorialStep() {
+                    if (tutorialTimer) {
+                        clearTimeout(tutorialTimer);
+                        tutorialTimer = null;
+                    }
                     document.getElementById('tutorialOverlay').classList.remove('show');
                     document.getElementById('tutorialBox').style.display = 'none';
                     document.getElementById('tutorialArrow').style.display = 'none';
@@ -7416,7 +8072,14 @@
                             if (e.key === 'theme') {
                                 console.log('[DEBUG] storage event theme changed:', e.oldValue, '=>', e.newValue);
                                 const newTheme = (e.newValue || '').trim();
-                                if (newTheme) changeTheme(newTheme);
+                                const normalizedTheme = normalizeThemeName(newTheme);
+                                if (normalizedTheme) {
+                                    changeTheme(normalizedTheme);
+                                } else if (newTheme === 'light' || newTheme === 'dark') {
+                                    saveData('mode', newTheme);
+                                    document.body.classList.toggle('dark', newTheme === 'dark');
+                                    document.body.classList.toggle('light', newTheme !== 'dark');
+                                }
                             }
                         });
 
@@ -7434,7 +8097,8 @@
                     }
 
                     const mode = getData('mode');
-                    const theme = (getData('theme') || '').trim();
+                    const rawTheme = (getData('theme') || '').trim();
+                    const theme = normalizeThemeName(rawTheme) || normalizeThemeName(getData('last_valid_theme'));
                     const themeIcon = document.getElementById('themeIcon');
                     if (mode === 'dark') {
                         document.body.classList.remove('light');
@@ -7442,8 +8106,13 @@
                         themeIcon.src = 'sun.webp';
                         themeIcon.alt = getText('toggleLightMode');
                     }
+                    if (rawTheme === 'light' || rawTheme === 'dark') {
+                        saveData('mode', rawTheme);
+                    }
                     if (theme) {
                         document.body.setAttribute('data-theme', theme);
+                        saveData('theme', theme);
+                        saveData('last_valid_theme', theme);
                         document.querySelectorAll('.theme-option').forEach(option => { option.classList.remove('selected'); });
                         const matchedThemeOption = document.querySelector(`.theme-option[data-theme="${theme}"]`);
                         if (matchedThemeOption) matchedThemeOption.classList.add('selected');
@@ -7611,6 +8280,11 @@
                         if (toggle) toggle.classList.add('active');
                     }
 
+                    if (getData('feature_auto_pip') !== 'false') { // デフォルトON
+                        const toggle = document.getElementById('toggleAutoPiP');
+                        if (toggle) toggle.classList.add('active');
+                    }
+
                     const loopImg = document.getElementById('loopBtnImg');
                     if (loopImg) {
                         loopImg.src = isLoop ? 'loop_on.webp' : 'loop_off.webp';
@@ -7681,6 +8355,47 @@
                         }
                     });
 
+                    // 閲覧タブやウィンドウが切り替わった時に自動でミニモード（PiP）を起動
+                    document.addEventListener('visibilitychange', () => {
+                        if (document.visibilityState === 'hidden') {
+                            // 設定で有効な場合のみ自動起動
+                            if (getData('feature_auto_pip') !== 'false') {
+                                // タブが非表示になった時：タイマーが動いていて一時停止中でなければPiP起動
+                                if (startTime && !isPaused) {
+                                    enterMiniModePiP().catch(err => {
+                                        console.warn('Auto PiP blocked by browser security:', err);
+                                    });
+                                }
+                            }
+                        } else {
+                            // タブに戻ってきた時：PiPを終了
+                            if (document.pictureInPictureElement === pipVideo) {
+                                exitMiniModePiP();
+                            }
+                        }
+                    });
+
+                    // ウィンドウフォーカスが外れた時（別ウィンドウをクリックした時など）
+                    window.addEventListener('blur', () => {
+                        // 設定で有効な場合のみ自動起動
+                        if (getData('feature_auto_pip') !== 'false') {
+                            // タブ自体は表示されているが、ウィンドウのフォーカスが外れた場合
+                            if (startTime && !isPaused && document.visibilityState === 'visible') {
+                                enterMiniModePiP().catch(err => {
+                                    console.warn('Auto PiP blocked by browser security:', err);
+                                });
+                            }
+                        }
+                    });
+
+                    // ウィンドウにフォーカスが戻った時
+                    window.addEventListener('focus', () => {
+                        // タブが表示されている状態でフォーカスが戻った場合
+                        if (document.visibilityState === 'visible' && document.pictureInPictureElement === pipVideo) {
+                            exitMiniModePiP();
+                        }
+                    });
+
                     (function () {
                         const dropdownArrow = document.getElementById('musicDropdownArrow');
                         const dropdownMenu = document.getElementById('musicDropdownMenu');
@@ -7735,8 +8450,20 @@
                     })();
                     // 初回訪問時のチュートリアル表示
                     setTimeout(() => {
+                        if (shouldShowMigrationNotice()) {
+                            showMigrationNotice();
+                            return;
+                        }
                         showTutorialWelcome();
                     }, 500);
+                    const rawGraphEnabled = getData('graph_enabled');
+                    if (rawGraphEnabled === null) {
+                        saveData('graph_enabled', 'true');
+                        saveData('graph_type', 'bar');
+                        saveData('graph_period', '30');
+                        saveData('graph_location', 'list');
+                    }
+
                     const graphEnabled = getData('graph_enabled') === 'true';
                     if (graphEnabled) {
                         document.getElementById('toggleGraph').classList.add('active');
@@ -7752,14 +8479,9 @@
 
                         setTimeout(() => updateGraphs(), 200);
                     } else {
-                        // グラフが無効の場合はデフォルト設定を適用
-                        setCookie('graph_enabled', 'true');
-                        setCookie('graph_type', 'bar');
-                        setCookie('graph_period', '30');
-                        setCookie('graph_location', 'list');
-                        document.getElementById('toggleGraph').classList.add('active');
-                        document.getElementById('graphSettings').style.display = 'block';
-                        setTimeout(() => updateGraphs(), 200);
+                        document.getElementById('toggleGraph').classList.remove('active');
+                        document.getElementById('graphSettings').style.display = 'none';
+                        hideGraphs();
                     }
 
                     // ショートカットキーの処理
@@ -7832,6 +8554,19 @@
                     } else {
                         toggle.classList.add('active');
                         saveData('feature_loading_anim', 'true');
+                    }
+                }
+
+                function toggleAutoPiP() {
+                    const toggle = document.getElementById('toggleAutoPiP');
+                    const isActive = toggle.classList.contains('active');
+
+                    if (isActive) {
+                        toggle.classList.remove('active');
+                        saveData('feature_auto_pip', 'false');
+                    } else {
+                        toggle.classList.add('active');
+                        saveData('feature_auto_pip', 'true');
                     }
                 }
 
@@ -8078,14 +8813,15 @@
                 }
 
                 const todoInput = document.getElementById("todoInput");
+                if (todoInput) {
+                    todoInput.addEventListener("compositionstart", () => {
+                        todoInput.isComposing = true;
+                    });
 
-                todoInput.addEventListener("compositionstart", () => {
-                    todoInput.isComposing = true;
-                });
-
-                todoInput.addEventListener("compositionend", () => {
-                    todoInput.isComposing = false;
-                });
+                    todoInput.addEventListener("compositionend", () => {
+                        todoInput.isComposing = false;
+                    });
+                }
 
                 // ToDo Ver.2 初期化
                 function initTodoV2() {
