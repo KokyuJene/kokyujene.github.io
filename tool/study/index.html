@@ -2,6 +2,7 @@
 <html lang="ja">
 
 <head>
+    <meta http-equiv="refresh" content="0; url=https://tsumiki.app">
     <link rel="canonical" href="https://tsumiki.app">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3261,11 +3262,11 @@
             <div class="migration-notice-message">
                 このサイトは今後アップデートが適用されません。<br>
                 最新版を使用するには、まず下のボタンから設定をダウンロードしてください。<br>
-                <div class="migration-notice-url">https://tools.super-hiko14.com/study/</div><br>
+                <div class="migration-notice-url">https://tsumiki.app</div><br>
                 にアクセスし、設定からインポートすることでデータを引き継げます。
             </div>
             <div class="migration-notice-actions">
-                <button class="primary" id="migrationGoBtn">最新版 (tools.super-hiko14.com) へ移動</button>
+                <button class="primary" id="migrationGoBtn">最新版 (tsumiki.app) へ移動</button>
                 <div class="migration-notice-actions-row">
                     <button class="secondary" id="migrationExportBtn">データのエクスポート</button>
                     <button class="secondary" id="migrationContinueBtn">このURLで続ける</button>
@@ -4905,11 +4906,11 @@
                 let confirmResolve = null;
 
                 const MIGRATION_NOTICE_KEY = 'migration_notice_hidden';
-                const MIGRATION_TARGET_URL = 'https://tools.super-hiko14.com/study/';
+                const MIGRATION_TARGET_URL = 'https://tsumiki.app';
 
                 function isLegacyStudyUrl() {
                     const host = (window.location.hostname || '').toLowerCase();
-                    return host !== 'tools.super-hiko14.com';
+                    return host !== 'tsumiki.app';
                 }
 
                 function shouldShowMigrationNotice() {
